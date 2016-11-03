@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require gritter
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -27,7 +28,7 @@ $light-light-grey: #FAFAFA;
 /* Typography */
 .welcome_header {
   color: $indigo;
-  font-size: 10em;
+  font-size: 7em;
 }
 .welcome_sub_header {
   color:$indigo;

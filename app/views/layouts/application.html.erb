@@ -8,8 +8,17 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <%= gflash %>
+    <%- flash.each do |name, msg| -%>
+      <%if name == 'alert' %>
+        <%= js add_gritter(msg, :image => "error", :nodom_wrap  => true) %>
+      <% else %>
+          <%= js add_gritter(msg, :image => name, :nodom_wrap  => true) %>
+      <% end %>
+    <% end %>
+
+    <!-- <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p> -->
 
     <%= render 'layouts/header' %>
     <%= yield %>

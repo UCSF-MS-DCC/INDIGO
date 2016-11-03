@@ -31,6 +31,7 @@ gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 gem 'rails_admin'
+gem 'gritter'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
