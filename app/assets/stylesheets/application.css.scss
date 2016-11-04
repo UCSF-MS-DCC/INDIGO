@@ -74,3 +74,13 @@ footer ul li {
   float: left;
   margin-left: 15px;
 }
+
+/* buttons */
+
+.btn-indigo {
+  color:white;
+  background-color: $indigo;
+}
+.btn-indigo:hover {
+  color: white;
+}

@@ -16,5 +16,4 @@
 //= require_tree .
 //= require bootstrap
 //= require gritter
-//= require Chart.bundle
 //= require chartkick
