@@ -7,6 +7,12 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :affiliation
 
+  after_create :send_welcome_message
+
+  def send_welcome_message
+    AdminMailer.new_user_welcome_message(self).deliver
+  end
+
   def active_for_authentication?
     super && approved?
   end

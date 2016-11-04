@@ -32,6 +32,7 @@ gem 'cancancan'
 gem 'rolify'
 gem 'rails_admin'
 gem 'gritter'
+gem 'chartkick'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
