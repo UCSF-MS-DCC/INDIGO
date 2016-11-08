@@ -1,7 +1,21 @@
 <div class="container">
-    <h3>Email: <%= @user.email %></h3>
-    <h3>Affiliation: <%= @user.affiliation %></h3>
-    <h3>Account Created: <%= date_format(@user.created_at) %></h3>
-    <%= link_to "Edit My Profile", edit_user_registration_path, :class => "btn btn-indigo" %>
-
+  <br>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+      <h3 class="profile_key">Email: <%= @user.email %></h3>
+      <br>
+      <h3 class="profile_key">Affiliation: <%= @user.affiliation %></h3>
+      <br>
+      <h3 class="profile_key">Account Created: <%= date_format(@user.created_at) %></h3>
+      <br>
+    </div>
+    <div class="col-md-3"></div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-2"><%= link_to "Edit My Profile", edit_user_registration_path, :class => "btn btn-indigo" %></div>
+  </div>
 </div>

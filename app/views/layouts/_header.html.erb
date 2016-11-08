@@ -15,12 +15,15 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <div class="container">
+        <ul class="nav navbar-nav navbar-left">
+          <li><%= link_to "Home", root_path %></li>
+        </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if !current_user %>
           <li><%= link_to "Sign Up", new_user_registration_path %></li>
           <li><%= link_to "Log In", new_user_session_path %></li>
         <% else %>
-          <li><a href=#>Signed in as <%= current_user.email %></a></li>
+          <li><%= link_to current_user.email, users_profile_path %></li>
           <%if current_user.has_role? :admin %>
             <li><%= link_to "Admin", rails_admin_path %></li>
           <% end %>

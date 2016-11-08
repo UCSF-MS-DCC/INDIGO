@@ -1,6 +1,6 @@
 
 <script type="text/javascript">
-  google.charts.load('current', {packages: ['corechart']});
+  google.charts.load('current', {packages: ['corechart', 'sankey']});
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
@@ -70,7 +70,7 @@
 </script>
 
 <script type="text/javascript">
-  google.charts.load('current', {'packages':['sankey']});
+  google.charts.load('current', {packages:['sankey']});
   google.charts.setOnLoadCallback(drawChart);
 
   function drawChart() {
@@ -93,12 +93,7 @@
     };
 
     // Instantiates and draws our chart, passing in some options.
-    var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
-    chart.draw(data, options);
+    var sankeychart = new google.visualization.Sankey(document.getElementById('sankeybasic'));
+    sankeychart.draw(data, null);
   }
 </script>
-
-<div class="row">
-  <div id="myPieChart" class="col-sm-6"></div>
-  <div id="myPieChart2" class="col-sm-6"></div>
-</div>
