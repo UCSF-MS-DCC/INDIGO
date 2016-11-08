@@ -43,6 +43,9 @@ $light-light-grey: #FAFAFA;
 .common_text {
   font-size: 1.3em;
 }
+.indigo_text {
+  color: $indigo;
+}
 
 /* footer */
 
@@ -75,6 +78,12 @@ footer ul li {
   margin-left: 15px;
 }
 
+/* layout */
+
+.centering-box {
+  margin: 0 auto;
+  border: 1px solid $indigo
+}
 /* buttons */
 
 .btn-indigo {
@@ -84,3 +93,10 @@ footer ul li {
 .btn-indigo:hover {
   color: white;
 }
+
+/* carousel */
+
+.carousel-control {
+  background: none !important;
+  filter: none !important;
+  progid:none !important; }

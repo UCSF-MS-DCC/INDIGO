@@ -1,0 +1,104 @@
+
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    // Define the chart to be drawn.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Element');
+    data.addColumn('number', 'Percentage');
+    data.addRows([
+      ["Parkinson's Disease", 3300],
+      ["Schizophrenia", 5050],
+      ["Neuromyelitis Optica", 1025],
+      ["Myasthenia Gravis", 950],
+      ["Multiple Sclerosis", 2000],
+      ["Healthy Control", 1000]
+    ]);
+
+    var options = {
+      title: "European Study Subjects",
+      is3D: true,
+      pieSliceText: "none",
+      colors:['#EE1289','#2E37FE','#B0171F','#24D330','orange','#993300'],
+      pieStartAngle: '30',
+      chartArea:{left:0,top:50,width:'100%',height:'100%'},
+      height:'350',
+      width:'500',
+      legend: {position:'left', textStyle: {fontSize:16}},
+      titleTextStyle: {fontSize:20}
+    }
+    // Instantiate and draw the chart.
+    var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
+    chart.draw(data, options);
+  }
+</script>
+<script type="text/javascript">
+  google.charts.load('current', {packages: ['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    // Define the chart to be drawn.
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Element');
+    data.addColumn('number', 'Percentage');
+    data.addRows([
+      ["Schizophrenia", 1500],
+      ["Neuromyelitis Optica", 530],
+      ["Multiple Sclerosis", 2300],
+      ["Healthy Control", 1700]
+    ]);
+
+    var options = {
+      title: "Non-European Study Subjects",
+      is3D: true,
+      pieSliceText: "none",
+      pieSliceTextStyle: {color:'black', size:'16'},
+      colors:['#2E37FE','#B0171F','orange','#993300'],
+      pieStartAngle: '30',
+      chartArea:{left:0,top:50,width:'100%',height:'100%'},
+      height:'350',
+      width:'500',
+      legend: {position:'left', textStyle: {fontSize:16, color:'black'}},
+      titleTextStyle: {fontSize:20}
+    }
+    // Instantiate and draw the chart.
+    var chart = new google.visualization.PieChart(document.getElementById('myPieChart2'));
+    chart.draw(data, options);
+  }
+</script>
+
+<script type="text/javascript">
+  google.charts.load('current', {'packages':['sankey']});
+  google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'From');
+    data.addColumn('string', 'To');
+    data.addColumn('number', 'Weight');
+    data.addRows([
+      [ 'A', 'X', 5 ],
+      [ 'A', 'Y', 7 ],
+      [ 'A', 'Z', 6 ],
+      [ 'B', 'X', 2 ],
+      [ 'B', 'Y', 9 ],
+      [ 'B', 'Z', 4 ]
+    ]);
+
+    // Sets chart options.
+    var options = {
+      width: 600,
+    };
+
+    // Instantiates and draws our chart, passing in some options.
+    var chart = new google.visualization.Sankey(document.getElementById('sankey_basic'));
+    chart.draw(data, options);
+  }
+</script>
+
+<div class="row">
+  <div id="myPieChart" class="col-sm-6"></div>
+  <div id="myPieChart2" class="col-sm-6"></div>
+</div>
