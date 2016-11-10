@@ -35,6 +35,8 @@ gem 'gritter'
 gem 'chartkick'
 gem 'mail_form'
 gem 'simple_form'
+gem 'carrierwave'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
