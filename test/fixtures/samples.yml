@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  site: MyString
+  disease: MyString
+  received_date: MyString
+  indigo_id: MyString
+  site_sample_id: MyString
+  batch: MyString
+  sent_date: MyString
+  sex: MyString
+  ethnicity: MyString
+
+two:
+  site: MyString
+  disease: MyString
+  received_date: MyString
+  indigo_id: MyString
+  site_sample_id: MyString
+  batch: MyString
+  sent_date: MyString
+  sex: MyString
+  ethnicity: MyString

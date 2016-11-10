@@ -1,0 +1,4 @@
+Site,Disease,Date_Sample_Received,INDIGO_ID,Site_Sample_ID (Local_ID),Batch,Date_Sent_To_Stanford,Sex,Ethnicity
+UCSF,PD,1/1/16,IND441,GSK333222111,1,1/14/71,F,White Hispanic Origin
+Highlands,MS,4/5/11,IND776,EPIC111222555,2,2/10/73,F,AA
+UCLA,nmo,6/17/99,IND909,GSK777555222,3,4/1/99,M,White non-Hispanic

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'dataview/index'
+
   get 'keys/index'
 
   get 'keys/new'
@@ -23,6 +25,9 @@ Rails.application.routes.draw do
   resources "contacts", only: [:new, :create]
 
   resources 'keys', only: [:index, :new, :create, :destroy]
+
+  match '/dataview',     to: 'dataview#index',            via: 'get'
+  resources 'dataview', only: [:index]
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

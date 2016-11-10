@@ -3,13 +3,30 @@
     <div class="col-sm-4"></div>
     <div class="col-sm-4"><h2 class="text-center">Upload keyfile data</h2></div>
   </div>
+  <hr>
+  <div>
+    <h5 class="text-center">Currently only .csv and .xslx files may be uploaded</h5>
+  </div>
+  <br>
+  <h5 class="text-center">Please be sure that data is formatted as per this example</h5>
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12"><%= image_tag('upload.png', alt: 'Upload example', style: 'display:block;margin-left: auto; margin-right: auto;') %></span></div>
+  </div>
+  <br>
+  <div>
+    <h5 class="text-center">Please use the following abbreviations for the Disease column: PD for Parkinson's Disease, ms for Multiple Sclerosis, mg for Myasthenia Gravis, nmo for Neuromyelitis Optica, schizophrenia, healthy control</h5>
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col-sm-5"></div>
+    <div class="col-sm-2">
      <%= form_for @key, html: { multipart: true } do |f| %>
         <%= f.label :keyfile %>
         <%= f.file_field :keyfile %>
+        <br>
         <%= f.submit "Save", class: "btn btn-indigo" %>
      <% end %>
     </div>
   </div>
+  <hr>
 </div>
