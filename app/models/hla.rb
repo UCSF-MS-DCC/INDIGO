@@ -1,0 +1,2 @@
+class Hla < ApplicationRecord
+end

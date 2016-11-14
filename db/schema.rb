@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161110180304) do
+ActiveRecord::Schema.define(version: 20161114232912) do
 
   create_table "admin_contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -20,8 +20,79 @@ ActiveRecord::Schema.define(version: 20161110180304) do
     t.text     "from"
   end
 
+  create_table "hlas", force: :cascade do |t|
+    t.string   "indigo_id"
+    t.string   "drb1_15_copies_calculated"
+    t.string   "drb1_1"
+    t.string   "drb1_2"
+    t.string   "dqb1_1"
+    t.string   "dqb1_2"
+    t.string   "dpb1_1"
+    t.string   "dpb1_2"
+    t.string   "a_1"
+    t.string   "a_2"
+    t.string   "b_1"
+    t.string   "b_2"
+    t.string   "c_1"
+    t.string   "c_2"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "hlauploads", force: :cascade do |t|
+    t.string   "datafile"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "keys", force: :cascade do |t|
     t.string   "keyfile"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "kirs", force: :cascade do |t|
+    t.string   "indigo_id"
+    t.string   "i2dl1"
+    t.string   "x2dl1_2"
+    t.string   "i2dl2"
+    t.string   "x2dl2_2"
+    t.string   "i2dl3"
+    t.string   "x2dl3_2"
+    t.string   "i2dl4"
+    t.string   "x2dl4_2"
+    t.string   "i2dl5a"
+    t.string   "i2dl5a_2"
+    t.string   "i2dl5b"
+    t.string   "i2dl5b_2"
+    t.string   "i2dp1"
+    t.string   "x2dp1_2"
+    t.string   "i2ds1"
+    t.string   "x2ds1_2"
+    t.string   "i2ds2"
+    t.string   "x2ds2_2"
+    t.string   "i2ds3"
+    t.string   "x2ds3_2"
+    t.string   "i2ds4"
+    t.string   "x2ds4_2"
+    t.string   "i2ds5"
+    t.string   "x2ds5_2"
+    t.string   "i3dl1"
+    t.string   "x3dl1_2"
+    t.string   "i3dl2"
+    t.string   "x3dl2_2"
+    t.string   "i3dl3"
+    t.string   "x3dl3_2"
+    t.string   "i3dp1"
+    t.string   "x3dp1_2"
+    t.string   "i3ds1"
+    t.string   "x3ds1_2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "kiruploads", force: :cascade do |t|
+    t.string   "datafile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

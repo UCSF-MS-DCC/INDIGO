@@ -1,4 +1,28 @@
 Rails.application.routes.draw do
+  get 'kiruploads/index'
+
+  get 'kiruploads/new'
+
+  get 'kiruploads/create'
+
+  get 'kiruploads/destroy'
+
+  get 'hlauploads/index'
+
+  get 'hlauploads/new'
+
+  get 'hlauploads/create'
+
+  get 'hlauploads/destroy'
+
+  get 'hlas/index'
+
+  get 'hlas/new'
+
+  get 'hlas/create'
+
+  get 'hlas/destroy'
+
   get 'dataview/index'
 
   get 'dataview/download_sample_data'
@@ -27,6 +51,10 @@ Rails.application.routes.draw do
   resources "contacts", only: [:new, :create]
 
   resources 'keys', only: [:index, :new, :create, :destroy]
+
+  resources 'hlauploads', only: [:index, :new, :create, :destroy]
+
+  resources 'kiruploads', only: [:index, :new, :create, :destroy]
 
   resources 'dataview', only: [:index]
 

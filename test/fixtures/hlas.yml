@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  indigo_id: MyString
+  drb1_15_copies_calculated: MyString
+  drb1_1: MyString
+  drb1_2: MyString
+  dqb1_1: MyString
+  dqb1_2: MyString
+  dpb1_1: MyString
+  dpb1_2: MyString
+  a_1: MyString
+  a_2: MyString
+  b_1: MyString
+  b_2: MyString
+  c_1: MyString
+  c_2: MyString
+
+two:
+  indigo_id: MyString
+  drb1_15_copies_calculated: MyString
+  drb1_1: MyString
+  drb1_2: MyString
+  dqb1_1: MyString
+  dqb1_2: MyString
+  dpb1_1: MyString
+  dpb1_2: MyString
+  a_1: MyString
+  a_2: MyString
+  b_1: MyString
+  b_2: MyString
+  c_1: MyString
+  c_2: MyString

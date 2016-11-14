@@ -7,13 +7,11 @@ class DataviewController < ApplicationController
   end
 
   def download_sample_data
-
     @samples = Sample.where(site: current_user.affiliation)
 
     respond_to do |format|
       format.csv { send_data @samples.to_csv }
     end
-
   end
 
 

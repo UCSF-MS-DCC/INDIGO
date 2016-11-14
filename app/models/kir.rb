@@ -1,0 +1,2 @@
+class Kir < ApplicationRecord
+end

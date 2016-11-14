@@ -1,0 +1,2 @@
+module HlauploadsHelper
+end

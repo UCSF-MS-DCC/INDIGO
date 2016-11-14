@@ -32,8 +32,15 @@
           <li><%= link_to current_user.email, users_profile_path, :'data-toggle' => "tooltip", :'title' => "View and Edit Your Account Details" %></li>
           <li><%= link_to current_user.affiliation, dataview_index_path, :'data-toggle' => "tooltip", :'title' => "View and Download Your Institution's Indigo Data" %></li>
           <%if current_user.has_role? :admin %>
-            <li><%= link_to "Admin", rails_admin_path %></li>
-            <li><%= link_to "Upload Data", new_key_path, :'data-toggle' => "tooltip", :'title' => "Hooray!"%></li>
+            <li class="dropdown">
+              <%= link_to "Administrator", new_key_path, :class => "dropdown-toggle", :'data-toggle' => "dropdown" %>
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to "Website Admin Panel", rails_admin_path %></li>
+                <li><%= link_to "Upload Sample Data", new_key_path %></li>
+                <li><%= link_to "Upload HLA Data", hlauploads_new_path %></li>
+                <li><%= link_to "Upload KIR Data", new_kirupload_path %></li>
+              </ul>
+            </li>
           <% end %>
           <li><%= link_to "Log Out", destroy_user_session_path, :method => 'delete' %></li>
         <% end %>
