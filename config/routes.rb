@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'dataview/index'
 
+  get 'dataview/download_sample_data'
+
   get 'keys/index'
 
   get 'keys/new'
@@ -26,7 +28,6 @@ Rails.application.routes.draw do
 
   resources 'keys', only: [:index, :new, :create, :destroy]
 
-  match '/dataview',     to: 'dataview#index',            via: 'get'
   resources 'dataview', only: [:index]
 
 

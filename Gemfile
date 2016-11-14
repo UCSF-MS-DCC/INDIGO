@@ -36,6 +36,7 @@ gem 'chartkick'
 gem 'mail_form'
 gem 'simple_form'
 gem 'carrierwave'
+gem 'responders'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

@@ -1,36 +1,40 @@
 <div class="container">
 
   <div class="row">
-    <h4 class="text-center">Samples on file for <%= current_user.affiliation %></h4>
+    <h2 class="text-center">Samples on file for <%= current_user.affiliation %></h2>
   </div>
   <hr>
   <div class="text-justify">
-    <table>
+    <table class="table-bordered">
       <thead>
         <tr>
-          <th class="col-sm-1">Disease</th>
-          <th class="col-sm-2">Date Sample Received</th>
           <th class="col-sm-1">INDIGO_ID</th>
-          <th class="col-sm-2">Site Sample ID</th>
-          <th class="col-sm-1">Batch</th>
-          <th class="col-sm-2">Date Sent To Stanford</th>
+          <th class="col-sm-1">Disease</th>
           <th class="col-sm-1">Sex</th>
-          <th class="col-sm-2">Ethnicity</th>
+          <th class="col-sm-1">Ethnicity</th>
+          <th class="col-sm-1">Site Sample ID</th>
+          <th class="col-sm-1">Batch</th>
+          <th class="col-sm-1">Sample Received</th>
+          <th class="col-sm-1">Sent To Stanford</th>
         </tr>
       </thead>
 
       <% @samples.each do |sample| %>
         <tr>
-          <td class="col-sm-1"><%= sample.disease %></td>
-          <td class="col-sm-2"><%= sample.received_date %></td>
           <td class="col-sm-1"><%= sample.indigo_id %></td>
-          <td class="col-sm-2"><%= sample.site_sample_id %></td>
-          <td class="col-sm-1"><%= sample.batch %></td>
-          <td class="col-sm-2"><%= sample.sent_date %></td>
+          <td class="col-sm-1"><%= sample.disease %></td>
           <td class="col-sm-1"><%= sample.sex %></td>
-          <td class="col-sm-2"><%= sample.ethnicity %></td>
+          <td class="col-sm-1"><%= sample.ethnicity %></td>
+          <td class="col-sm-1"><%= sample.site_sample_id %></td>
+          <td class="col-sm-1"><%= sample.batch %></td>
+          <td class="col-sm-1"><%= sample.received_date %></td>
+          <td class="col-sm-1"><%= sample.sent_date %></td>
         </tr>
       <% end %>
     </table>
+  </div>
+  <hr>
+  <div class="row">
+    <h3> <%= link_to "Download", dataview_download_sample_data_path(format:"csv") %>  <%= current_user.affiliation %>'s Data</h3>
   </div>
 </div>

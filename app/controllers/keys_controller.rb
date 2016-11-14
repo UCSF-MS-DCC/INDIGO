@@ -1,6 +1,6 @@
 class KeysController < ApplicationController
   before_action :set_key, only: [:destroy]
-  
+  before_action :authenticate_user!
   load_and_authorize_resource #Cancancan feature to prevent unauthorized access to these views and methods
 
   def index
@@ -16,6 +16,7 @@ class KeysController < ApplicationController
     @number_samples_added = 0 #counter for keeping track of samples added to db
     @key = Key.new(key_params) #creating key model with imported file as the keyfile attribute value e.g. Key[:keyfile]
     if @key.save
+      flash[:notice] = "File #{@key[:keyfile]} successfully uploaded"
       if @key[:keyfile].split(".")[1] == 'csv' #checks to see if keyfile is a .csv file
         csv_text = File.read("#{Rails.root}/indigo_keys/#{@key.created_at.to_date}/#{@key[:keyfile]}") #reads the contents of the file stored on the server and stores it in a variable. File is a built-in Rails helper class with its own methods
         csv = CSV.parse(csv_text, :headers => true) #parses the text into csv rows. the :headers => true hash means that the first line of the csv_text will be treated as column names. CSV is another built-in Rails helper class
@@ -36,6 +37,9 @@ class KeysController < ApplicationController
           end #ends the if exists? block
         end #ends the csv.each block
       end #ends the if @key[:keyfile].split block
+      if @failed_samples.size > 0
+        flash[:notice] = "#{@failed_samples.size} samples failed to load and were not saved"
+      end
       redirect_to new_key_path
     end #ends the if @key.save block. Temporary. Soon will add in logic to accept .xslx Excel files. Need to get familiar with Roo, a gem that allows Rails to work with those files. CSV does not, apparently
 
