@@ -10,10 +10,10 @@ class KiruploadsController < ApplicationController
   def create #action for uploading keyfiles and parsing individual records then storing them in db.
     @failed_kirs = [] #structure to hold samples that can't be saved for any reason
     @number_kirs_added = 0 #counter for keeping track of samples added to db
-    @kirupload = Kirupload.new(kirupload_params) #creating key model with imported file as the keyfile attribute value e.g. Key[:keyfile]
+    @kirupload = Kirupload.new(kirupload_params) #creating Kirupload model with imported file as the keyfile attribute value e.g. Key[:keyfile]
     if @kirupload.save
       flash[:notice] = "File #{@kirupload[:datafile]} successfully uploaded"
-      if @kirupload[:datafile].split(".")[1] == 'csv' #checks to see if keyfile is a .csv file
+      if @kirupload[:datafile].split(".")[1] == 'csv' #checks to see if datafile is a .csv file
         csv_text = File.read("#{Rails.root}/kirs/#{@kirupload.created_at.to_date}/#{@kirupload[:datafile]}") #reads the contents of the file stored on the server and stores it in a variable. File is a built-in Rails helper class with its own methods
         csv = CSV.parse(csv_text, :headers => true) #parses the text into csv rows. the :headers => true hash means that the first line of the csv_text will be treated as column names. CSV is another built-in Rails helper class
         csv.each do |kir_data|
@@ -37,9 +37,9 @@ class KiruploadsController < ApplicationController
             end #ends the if..else block
           end #ends the if exists? block
         end #ends the csv.each block
-      end #ends the if @key[:keyfile].split block
+      end #ends the if @kirupload[:datafile].split block
       if @failed_kirs.size > 0
-        flash[:notice] = "#{@failed_kirs.size} samples failed to load and were not saved"
+        flash[:notice] = "#{@failed_kirs.size} kirs failed to load and were not saved"
       end
       redirect_to new_kirupload_path
     end #ends the if @kir.save block. Temporary. Soon will add in logic to accept .xslx Excel files. Need to get familiar with Roo, a gem that allows Rails to work with those files. CSV does not, apparently

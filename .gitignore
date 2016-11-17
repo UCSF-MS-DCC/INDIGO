@@ -20,5 +20,7 @@
 # Ignore Byebug command history file.
 .byebug_history
 
-#Ignore Indigo Keys
+#Ignore Indigo Keys, KIR, and HLA folders
 /indigo_keys
+/kirs
+/hlas

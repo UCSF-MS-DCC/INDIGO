@@ -1,10 +1,22 @@
-<div class="container">
+<div class="container" style="margin-bottom:50px;">
 
   <div class="row">
-    <h2 class="text-center">Samples on file for <%= current_user.affiliation %></h2>
+    <div class="col-sm-4">
+      <button class="btn btn-indigo btn-block" data-toggle="collapse" data-target="#Samples" style="padding-left:10px; padding-right:10px;">View Sample Data</button>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-indigo btn-block" data-toggle="collapse" data-target="#HLAs" style="padding-left:10px; padding-right:10px;">View HLA Data</button>
+    </div>
+    <div class="col-sm-4">
+      <button class="btn btn-indigo btn-block" data-toggle="collapse" data-target="#KIRs" style="padding-left:10px; padding-right:10px;">View KIR Data</button>
+    </div>
   </div>
   <hr>
-  <div class="text-justify">
+
+  <div class="text-justify collapse" id="Samples">
+    <div class="row">
+      <h2 class="text-center">Samples available for <%= current_user.affiliation %></h2>
+    </div>
     <table class="table-bordered">
       <thead>
         <tr>
@@ -32,9 +44,61 @@
         </tr>
       <% end %>
     </table>
+    <hr>
+    <div class="row">
+      <%= link_to "Download Sample Data", dataview_download_sample_data_path(format:"csv"), :class => "btn btn-indigo btn-block col-sm-12" %>
+    </div>
   </div>
-  <hr>
-  <div class="row">
-    <h3> <%= link_to "Download", dataview_download_sample_data_path(format:"csv") %>  <%= current_user.affiliation %>'s Sample Data</h3>
+  <div class="text-justify collapse" id="HLAs">
+    <div class="row">
+      <h2 class="text-center">HLAs available for <%= current_user.affiliation %></h2>
+    </div>
+
+    <table class="table-bordered col-md-12">
+      <thead>
+        <tr>
+          <th>INDIGO_ID</th>
+          <th>DRB1_15 Copies Calculated</th>
+          <th>DRB1_1</th>
+          <th>DRB1_2</th>
+          <th>DQB1_1</th>
+          <th>DQB1_2</th>
+          <th>DPB1_1</th>
+          <th>DPB1_2</th>
+          <th>A_1</th>
+          <th>A_2</th>
+          <th>B_1</th>
+          <th>B_2</th>
+          <th>C_1</th>
+          <th>C_2</th>
+        </tr>
+      </thead>
+      <% @hlas.each do |hla| %>
+        <tr>
+          <td><%= hla.indigo_id %></td>
+          <td><%= hla.drb1_15_copies_calculated %></td>
+          <td><%= hla.drb1_1 %></td>
+          <td><%= hla.drb1_2 %></td>
+          <td><%= hla.dqb1_1 %></td>
+          <td><%= hla.dqb1_2 %></td>
+          <td><%= hla.dpb1_1%></td>
+          <td><%= hla.dpb1_2 %></td>
+          <td><%= hla.a_1 %></td>
+          <td><%= hla.a_2 %></td>
+          <td><%= hla.b_1 %></td>
+          <td><%= hla.b_2 %></td>
+          <td><%= hla.c_1 %></td>
+          <td><%= hla.c_2 %></td>
+        </tr>
+      <% end %>
+
+    </table>
+    <br>
+    <div class="row">
+      <%= link_to "Download HLA Data", dataview_download_hla_data_path(format:"csv"), :class => "btn btn-indigo btn-block col-sm-12" %>
+    </div>
   </div>
+
+  <%= render 'dataview/kir_table' %>
+
 </div>

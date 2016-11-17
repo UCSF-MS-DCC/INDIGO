@@ -21,7 +21,7 @@
 /* to use, include as values to CSS properties */
 /* Google material design color palettes : https://material.google.com/style/color.html#color-color-palette */
 
-$indigo: #283593;
+$indigo: #4B0082;
 $light-light-grey: #FAFAFA;
 
 
@@ -89,10 +89,14 @@ footer ul li {
 /* buttons */
 
 .btn-indigo {
-  color:white;
+  color: white;
   background-color: $indigo;
 }
 .btn-indigo:hover {
+  color: white;
+}
+
+.btn-indigo:focus {
   color: white;
 }
 
