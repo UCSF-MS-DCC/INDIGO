@@ -21,7 +21,7 @@
 /* to use, include as values to CSS properties */
 /* Google material design color palettes : https://material.google.com/style/color.html#color-color-palette */
 
-$indigo: #4B0082;
+$indigo: #320b59;
 $light-light-grey: #FAFAFA;
 
 
@@ -98,6 +98,11 @@ footer ul li {
 
 .btn-indigo:focus {
   color: white;
+}
+
+.dataview-collapse-btn {
+  padding-left:10px;
+  padding-right:10px;
 }
 
 .profile_info_card {

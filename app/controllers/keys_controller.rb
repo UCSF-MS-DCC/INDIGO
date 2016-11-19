@@ -9,6 +9,7 @@ class KeysController < ApplicationController
 
   def new
     @key = Key.new
+    @keys = Key.all
   end
 
   def create #action for uploading keyfiles and parsing individual records then storing them in db.
@@ -23,10 +24,9 @@ class KeysController < ApplicationController
         csv.each do |sample_data|
           if Sample.where(indigo_id: sample_data["INDIGO_ID"]).exists? #checks if a Sample with this INDIGO_ID is already in the database. Currently takes no action if sample already exists.
           else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
-            sample = Sample.new(site: sample_data["Site"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
-            received_date: sample_data["Date_Sample_Received"], indigo_id: sample_data["INDIGO_ID"],
-            site_sample_id: sample_data["Site_Sample_ID (Local_ID)"], batch: sample_data["Batch"],
-            sent_date: sample_data["Date_Sent_To_Stanford"], sex: sample_data["Sex"], ethnicity: sample_data["Ethnicity"])
+            sample = Sample.new(sample_source: sample_data["Sample source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
+            indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
+            age_at_sample: sample_data["Age at Sample"])
 
             if sample.save #attempts to save the sample model to the db
               @number_samples_added += 1
@@ -36,12 +36,27 @@ class KeysController < ApplicationController
             end #ends the if..else block
           end #ends the if exists? block
         end #ends the csv.each block
+      elsif @key[:keyfile].split(".")[1] == 'xslx' #checks for excel spreadsheet file type
+        excel_spreadsheet = Roo::Spreadsheet.open("#{Rails.root}/indigo_keys/#{@key.created_at.to_date}/#{@key[:keyfile]}")
+        excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
+          if Sample.where(indigo_id: row[1]).exists?
+          else
+            sample = Sample.new(sample_source: row[2], disease: row[3], indigo_id: row[1], age_at_sample: row[6],
+                                gender: row[7], ethnicity: row[5])
+
+            if sample.save
+              @number_samples_added += 1
+            else
+              @failed_samples.add(row[3])
+            end
+          end
+        end
       end #ends the if @key[:keyfile].split block
       if @failed_samples.size > 0
         flash[:notice] = "#{@failed_samples.size} samples failed to load and were not saved"
       end
       redirect_to new_key_path
-    end #ends the if @key.save block. Temporary. Soon will add in logic to accept .xslx Excel files. Need to get familiar with Roo, a gem that allows Rails to work with those files. CSV does not, apparently
+    end #ends the if @key.save block.
 
   end #ends the create method
 

@@ -45,43 +45,47 @@
     </thead>
     <% @kirs.each do |kir| %>
       <tr>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].indigo_id %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl1 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2dl1_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2dl2_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl3 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2dl3_2%></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl4%></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2dl4_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl5a %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl5a_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl5b %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dl5b_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2dp1 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2dp1_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2ds1 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2ds1_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2ds2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2ds2_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2ds3 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2ds3_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2ds4 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2ds4_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i2ds5 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x2ds5_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i3dl1 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x3dl1_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i3dl2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x3dl2_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i3dl3 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x3dl3_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i3dp1 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x3dp1_2 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].i3ds1 %></td>
-        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir[0].x3ds1_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.indigo_id %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl1 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2dl1_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2dl2_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl3 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2dl3_2%></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl4%></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2dl4_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl5a %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl5a_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl5b %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dl5b_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2dp1 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2dp1_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2ds1 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2ds1_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2ds2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2ds2_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2ds3 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2ds3_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2ds4 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2ds4_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i2ds5 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x2ds5_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i3dl1 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x3dl1_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i3dl2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x3dl2_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i3dl3 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x3dl3_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i3dp1 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x3dp1_2 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.i3ds1 %></td>
+        <td style="word-wrap: break-word;min-width: 0px;max-width: 30px;white-space:normal;"><%= kir.x3ds1_2 %></td>
       </tr>
     <% end %>
 
   </table>
+  <hr>
+  <div class="row">
+    <%= link_to "Download KIR Data", dataview_download_kir_data_path(format:"csv"), :class => "btn btn-indigo btn-block col-sm-12" %>
+  </div>
 </div>

@@ -30,4 +30,12 @@
     </div>
   </div>
   <hr>
+  <div>
+    <ul style="list-style:none; width:400px; margin: 0 auto;">
+      <li><h4>Previous Uploads</h4></li>
+      <% @keys.each do |key| %>
+      <li><%= key.created_at.to_formatted_s(:long_ordinal).split(" ").reverse.drop(1).reverse.join(" ") %>: <%= key.keyfile.to_s.split('/').last %></li>
+      <% end %>
+    </ul>
+  </div>
 </div>

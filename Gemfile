@@ -37,6 +37,7 @@ gem 'mail_form'
 gem 'simple_form'
 gem 'carrierwave'
 gem 'responders'
+gem 'roo', '~> 2.5.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

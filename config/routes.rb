@@ -29,6 +29,8 @@ Rails.application.routes.draw do
 
   get 'dataview/download_hla_data'
 
+  get 'dataview/download_kir_data'
+
   get 'keys/index'
 
   get 'keys/new'

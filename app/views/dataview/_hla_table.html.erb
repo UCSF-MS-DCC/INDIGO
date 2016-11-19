@@ -1,0 +1,50 @@
+<div class="text-justify collapse" id="HLAs">
+  <div class="row">
+    <h2 class="text-center">HLAs available for <%= current_user.affiliation %></h2>
+  </div>
+
+  <table class="table-bordered" style="margin-bottom:20px;">
+    <thead>
+      <tr>
+        <th>INDIGO_ID</th>
+        <th>DRB1_15 Copies Calculated</th>
+        <th>DRB1_1</th>
+        <th>DRB1_2</th>
+        <th>DQB1_1</th>
+        <th>DQB1_2</th>
+        <th>DPB1_1</th>
+        <th>DPB1_2</th>
+        <th>A_1</th>
+        <th>A_2</th>
+        <th>B_1</th>
+        <th>B_2</th>
+        <th>C_1</th>
+        <th>C_2</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @hlas.each do |hla| %>
+        <tr>
+          <td><%= hla.indigo_id %></td>
+          <td><%= hla.drb1_15_copies_calculated %></td>
+          <td><%= hla.drb1_1 %></td>
+          <td><%= hla.drb1_2 %></td>
+          <td><%= hla.dqb1_1 %></td>
+          <td><%= hla.dqb1_2 %></td>
+          <td><%= hla.dpb1_1%></td>
+          <td><%= hla.dpb1_2 %></td>
+          <td><%= hla.a_1 %></td>
+          <td><%= hla.a_2 %></td>
+          <td><%= hla.b_1 %></td>
+          <td><%= hla.b_2 %></td>
+          <td><%= hla.c_1 %></td>
+          <td><%= hla.c_2 %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <hr>
+  <div class="row">
+    <%= link_to "Download HLA Data", dataview_download_hla_data_path(format:"csv"), :class => "btn btn-indigo btn-block col-sm-12" %>
+  </div>
+</div>

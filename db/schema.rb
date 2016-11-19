@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161114232912) do
+ActiveRecord::Schema.define(version: 20161118220915) do
 
   create_table "admin_contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -37,6 +37,8 @@ ActiveRecord::Schema.define(version: 20161114232912) do
     t.string   "c_2"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "sample_id"
+    t.index ["sample_id"], name: "index_hlas_on_sample_id"
   end
 
   create_table "hlauploads", force: :cascade do |t|
@@ -108,17 +110,19 @@ ActiveRecord::Schema.define(version: 20161114232912) do
   end
 
   create_table "samples", force: :cascade do |t|
-    t.string   "site"
+    t.string   "sample_source"
     t.string   "disease"
     t.string   "received_date"
     t.string   "indigo_id"
     t.string   "site_sample_id"
     t.string   "batch"
     t.string   "sent_date"
-    t.string   "sex"
+    t.string   "gender"
     t.string   "ethnicity"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "age_at_sample"
+    t.string   "race"
   end
 
   create_table "users", force: :cascade do |t|

@@ -12,7 +12,7 @@ class HlauploadsController < ApplicationController
 
   def create #action for uploading keyfiles and parsing individual records then storing them in db.
     @failed_hlas = [] #structure to hold samples that can't be saved for any reason
-    @number_hlas_added = 0 #counter for keeping track of samples added to db
+    @number_hlas_added = 0 #counter for keeping track of hlas added to db
     @hlaupload = Hlaupload.new(hlaupload_params) #creating key model with imported file as the keyfile attribute value e.g. Key[:keyfile]
     if @hlaupload.save
       flash[:notice] = "File #{@hlaupload[:datafile]} successfully uploaded"
@@ -25,7 +25,7 @@ class HlauploadsController < ApplicationController
             hla = Hla.new( indigo_id: hla_data["INDIGO_ID"], drb1_15_copies_calculated: hla_data["DRB1_15_Copies_Calculated"],
                           drb1_1: hla_data["DRB1_1"], drb1_2: hla_data["DRB1_2"], dqb1_1: hla_data["DQB1_1"], dqb1_2: hla_data["DQB1_2"],
                           dpb1_1: hla_data["DPB1_1"], dpb1_2: hla_data["DPB1_2"], a_1: hla_data["A_1"], a_2: hla_data["A_2"],
-                          b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"] )
+                          b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"])
 
             if hla.save #attempts to save the sample model to the db
               @number_hlas_added += 1

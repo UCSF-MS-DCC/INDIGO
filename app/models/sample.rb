@@ -1,5 +1,7 @@
 class Sample < ApplicationRecord
   validates :indigo_id, uniqueness: true
+  has_one :hla
+  has_one :kir
 
   def self.to_csv
     CSV.generate do |csv|
