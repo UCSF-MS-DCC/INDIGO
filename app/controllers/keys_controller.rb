@@ -36,7 +36,7 @@ class KeysController < ApplicationController
             end #ends the if..else block
           end #ends the if exists? block
         end #ends the csv.each block
-      elsif @key[:keyfile].split(".")[1] == 'xslx' #checks for excel spreadsheet file type
+      elsif @key[:keyfile].split(".")[1] == 'xlsx' #checks for excel spreadsheet file type
         excel_spreadsheet = Roo::Spreadsheet.open("#{Rails.root}/indigo_keys/#{@key.created_at.to_date}/#{@key[:keyfile]}")
         excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
           if Sample.where(indigo_id: row[1]).exists?

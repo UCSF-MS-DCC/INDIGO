@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161118220915) do
+ActiveRecord::Schema.define(version: 20161121214004) do
 
   create_table "admin_contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -38,6 +38,12 @@ ActiveRecord::Schema.define(version: 20161118220915) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "sample_id"
+    t.string   "dpa1_1"
+    t.string   "dpa1_2"
+    t.string   "dqa1_1"
+    t.string   "dqa1_2"
+    t.string   "drbo_1"
+    t.string   "drbo_2"
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
   end
 

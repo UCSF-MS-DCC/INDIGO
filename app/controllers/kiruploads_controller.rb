@@ -37,13 +37,27 @@ class KiruploadsController < ApplicationController
             end #ends the if..else block
           end #ends the if exists? block
         end #ends the csv.each block
-      end #ends the if @kirupload[:datafile].split block
-      if @failed_kirs.size > 0
-        flash[:notice] = "#{@failed_kirs.size} kirs failed to load and were not saved"
-      end
-      redirect_to new_kirupload_path
-    end #ends the if @kir.save block. Temporary. Soon will add in logic to accept .xslx Excel files. Need to get familiar with Roo, a gem that allows Rails to work with those files. CSV does not, apparently
+      elsif @kirupload[:datafile].split(".")[1] == 'xlsx' #checks for excel spreadsheet file type
+        excel_spreadsheet = Roo::Spreadsheet.open("#{Rails.root}/kirs/#{@kir.created_at.to_date}/#{@kir[:datafile]}")
+        excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
+          if Kir.where(indigo_id: row[4]).exists?
+          else
+            kir = Kir.new()
 
+            if kir.save
+              @number_kirs_added += 1
+            else
+              @failed_kirs.add(row[3])
+            end #ends if else
+          end #ends if Kir.where if else
+        end #ends .each statement
+      end #ends the if @key[:keyfile].split block
+    end #ends the if @kir.save block.
+    if @failed_kirs.size > 0
+      flash[:notice] = "#{@failed_kirs.size} kirs failed to load and were not saved"
+    end
+    redirect_to new_kirupload_path
+    flash[:notice] = "#{@number_kirs_added} added to database:"
   end #ends the create method
 
   def destroy

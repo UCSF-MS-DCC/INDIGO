@@ -35,12 +35,29 @@ class HlauploadsController < ApplicationController
             end #ends the if..else block
           end #ends the if exists? block
         end #ends the csv.each block
-      end #ends the if @key[:keyfile].split block
+      redirect_to new_hlaupload_path
+      elsif @hlaupload[:datafile].split(".")[1] == 'xlsx' #checks for excel spreadsheet file type
+          excel_spreadsheet = Roo::Spreadsheet.open("#{Rails.root}/hlas/#{@hlaupload.created_at.to_date}/#{@hlaupload[:datafile]}")
+          excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
+            if Hla.where(indigo_id: row[4]).exists?
+            else
+              hla = Hla.new(indigo_id: row[4], a_1: row[6], a_2: row[7], b_1: row[8], b_2: row[9], c_1: row[10], c_2: row[11], dpa1_1: row[12], dpa1_2: row[13], dpb1_1: row[14],
+                            dpb1_2: row[15], dqa1_1: row[16], dqa1_2: row[17], dqb1_1: row[18], dqb1_2:row[19], drb1_1: row[20], drb1_2: row[21], drbo_1: row[22], drbo_2: row[23])
+
+              if hla.save
+                @number_hlas_added += 1
+              else
+                @failed_hlas.add(row[4])
+              end
+            end
+          end
+        end #ends the if @hla[:datafile].split block
       if @failed_hlas.size > 0
         flash[:notice] = "#{@failed_hlas.size} samples failed to load and were not saved"
       end
       redirect_to new_hlaupload_path
-    end #ends the if @key.save block. Temporary. Soon will add in logic to accept .xslx Excel files. Need to get familiar with Roo, a gem that allows Rails to work with those files. CSV does not, apparently
+      flash[:notice] = "#{@number_hlas_added} hlas added to database"
+    end #ends the if @hla.save block.
 
   end #ends the create method
 
