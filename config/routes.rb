@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  namespace :api do
+    namespace :v1 do
+      get 'apitests/jsonsamples'
+    end
+  end
+
+
   get 'kiruploads/index'
 
   get 'kiruploads/new'

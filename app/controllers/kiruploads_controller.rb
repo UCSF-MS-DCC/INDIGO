@@ -28,7 +28,7 @@ class KiruploadsController < ApplicationController
                           x2ds5_2: kir_data["x2ds5_2"], i3dl1: kir_data["3DL1"], x3dl1_2: kir_data["x3dl1_2"], i3dl2: kir_data["3DL2"],
                           x3dl2_2: kir_data["x3dl2_2"], i3dl3: kir_data["3DL3"], x3dl3_2: kir_data["x3dl3_2"], i3dp1: kir_data["3DP1"],
                           x3dp1_2: kir_data["x3dp1_2"], i3ds1: kir_data["3DS1"], x3ds1_2: kir_data["x3ds1_2"])
-                          # the i before column names is strictly for db workability, ruby symbols can't start with a number.
+                          # the i before column names is strictly for db workability, since ruby symbols (and thus model "keys") can't start with a number.
             if kir.save #attempts to save the sample model to the db
               @number_kirs_added += 1
             else
@@ -39,10 +39,10 @@ class KiruploadsController < ApplicationController
         end #ends the csv.each block
       elsif @kirupload[:datafile].split(".")[1] == 'xlsx' #checks for excel spreadsheet file type
         excel_spreadsheet = Roo::Spreadsheet.open("#{Rails.root}/kirs/#{@kir.created_at.to_date}/#{@kir[:datafile]}")
-        excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
+        excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed and so are 'dropped', so the .each iteration starts with the second row
           if Kir.where(indigo_id: row[4]).exists?
           else
-            kir = Kir.new()
+            kir = Kir.new()#waiting on the order in which the genes are listed in the Spreadsheet
 
             if kir.save
               @number_kirs_added += 1
