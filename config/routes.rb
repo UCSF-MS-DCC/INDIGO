@@ -12,23 +12,17 @@ Rails.application.routes.draw do
 
   get 'kiruploads/create'
 
-  get 'kiruploads/destroy'
-
   get 'hlauploads/index'
 
   get 'hlauploads/new'
 
   get 'hlauploads/create'
 
-  get 'hlauploads/destroy'
-
   get 'hlas/index'
 
   get 'hlas/new'
 
   get 'hlas/create'
-
-  get 'hlas/destroy'
 
   get 'dataview/index'
 
@@ -43,8 +37,6 @@ Rails.application.routes.draw do
   get 'keys/new'
 
   get 'keys/create'
-
-  get 'keys/destroy'
 
   get 'infographics/show'
 
@@ -61,11 +53,11 @@ Rails.application.routes.draw do
   match '/contacts',     to: 'contacts#new',             via: 'get'
   resources "contacts", only: [:new, :create]
 
-  resources 'keys', only: [:index, :new, :create, :destroy]
+  resources 'keys', only: [:index, :new, :create]
 
-  resources 'hlauploads', only: [:index, :new, :create, :destroy]
+  resources 'hlauploads', only: [:index, :new, :create]
 
-  resources 'kiruploads', only: [:index, :new, :create, :destroy]
+  resources 'kiruploads', only: [:index, :new, :create]
 
   resources 'dataview', only: [:index]
 

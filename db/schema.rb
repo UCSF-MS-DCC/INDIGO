@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161121214004) do
+ActiveRecord::Schema.define(version: 20161123220257) do
 
   create_table "admin_contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -51,6 +51,40 @@ ActiveRecord::Schema.define(version: 20161121214004) do
     t.string   "datafile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "idrs", force: :cascade do |t|
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "indigo_id"
+    t.string   "sample_source"
+    t.string   "disease"
+    t.string   "gender"
+    t.string   "ethnicity"
+    t.string   "batch"
+    t.integer  "age_at_sample"
+    t.string   "race"
+    t.string   "received_date"
+    t.string   "sent_date"
+    t.string   "drb1_15_copies_calculated"
+    t.string   "drb1_1"
+    t.string   "drb1_2"
+    t.string   "dqb1_1"
+    t.string   "dqb1_2"
+    t.string   "dpb1_1"
+    t.string   "dpb1_2"
+    t.string   "a_1"
+    t.string   "a_2"
+    t.string   "b_1"
+    t.string   "b_2"
+    t.string   "c_1"
+    t.string   "c_2"
+    t.string   "dpa1_1"
+    t.string   "dpa1_2"
+    t.string   "dqa1_1"
+    t.string   "dqa1_2"
+    t.string   "drbo_1"
+    t.string   "drbo_2"
   end
 
   create_table "keys", force: :cascade do |t|
@@ -129,6 +163,8 @@ ActiveRecord::Schema.define(version: 20161121214004) do
     t.datetime "updated_at",     null: false
     t.integer  "age_at_sample"
     t.string   "race"
+    t.integer  "idr_id"
+    t.index ["idr_id"], name: "index_samples_on_idr_id"
   end
 
   create_table "users", force: :cascade do |t|
