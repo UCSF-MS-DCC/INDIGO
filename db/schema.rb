@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161123220257) do
+ActiveRecord::Schema.define(version: 20161128235004) do
 
   create_table "admin_contacts", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -131,6 +131,8 @@ ActiveRecord::Schema.define(version: 20161123220257) do
     t.string   "x3ds1_2"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "sample_id"
+    t.index ["sample_id"], name: "index_kirs_on_sample_id"
   end
 
   create_table "kiruploads", force: :cascade do |t|
@@ -164,6 +166,7 @@ ActiveRecord::Schema.define(version: 20161123220257) do
     t.integer  "age_at_sample"
     t.string   "race"
     t.integer  "idr_id"
+    t.string   "short_date"
     t.index ["idr_id"], name: "index_samples_on_idr_id"
   end
 

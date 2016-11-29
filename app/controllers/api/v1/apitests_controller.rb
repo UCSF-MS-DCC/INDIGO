@@ -3,8 +3,9 @@ class Api::V1::ApitestsController < ApplicationController
     @site = params[:site]
     @gender = params[:gender]
     @disease = params[:disease]
-    @sample = Sample.where(gender: @gender)
-    render json: @sample
+    @age = params[:age_at_sample]
+    @idr = IDR.where(age_at_sample: @age)
+    render json: @idr
 
   end
 end

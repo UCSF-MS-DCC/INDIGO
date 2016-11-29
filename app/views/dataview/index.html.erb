@@ -13,6 +13,10 @@
   </div>
   <hr>
 
+  <div class="row">
+    <%= link_to "Download All Indigo Data (#{@idrs.count} records)" , dataview_download_idr_path(format:"csv"), :class => "btn btn-indigo btn-block col-sm-12" %>
+  </div>
+
   <%= render 'dataview/sample_table' %>
 
   <%= render 'dataview/hla_table' %>

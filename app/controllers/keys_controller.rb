@@ -24,19 +24,21 @@ class KeysController < ApplicationController
         csv.each do |sample_data|
           if IDR.where(indigo_id: sample_data["INDIGO_ID"]).exists? #checks if an IDR with this INDIGO_ID is already in the database. Currently takes no action if sample already exists.
           else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
-            idr = IDR.create(sample_source: sample_data["Sample source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
+            @idr = IDR.new(sample_source: sample_data["Sample source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
             indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
             age_at_sample: sample_data["Age at Sample"])
+            if @idr.save
 
-            sample = idr.samples.new(sample_source: sample_data["Sample source"], disease: sample_data["Disease"],
-            indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
-            age_at_sample: sample_data["Age at Sample"])
+              @sample = Samples.new(sample_source: sample_data["Sample source"], disease: sample_data["Disease"],
+              indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
+              age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%d %B %Y'))
 
-            if sample.save #attempts to save the idr model to the db
-              @number_samples_added += 1
-            else# If a sample fails to be saved (for whatever reason) we let the user know.
-              @failed_samples.add(sample_data["INDIGO_ID"])
-            end #ends the if..else block
+              if sample.save #attempts to save the idr model to the db
+                @number_samples_added += 1
+              else# If a sample fails to be saved (for whatever reason) we let the user know.
+                @failed_samples.add(sample_data["INDIGO_ID"])
+              end #ends the if..else block
+            end #ends if @idr.save block
           end #ends the if exists? block
         end #ends the csv.each block
       elsif @key[:keyfile].split(".")[1] == 'xlsx' #checks for excel spreadsheet file type
@@ -44,15 +46,17 @@ class KeysController < ApplicationController
         excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
           if IDR.where(indigo_id: row[1]).exists?
           else
-            @idr = IDR.create(sample_source: row[2], disease: row[3], indigo_id: row[1], age_at_sample: row[6],
+            @idr = IDR.new(sample_source: row[2], disease: row[3], indigo_id: row[1], age_at_sample: row[6],
                                 gender: row[7], ethnicity: row[5])
-            sample = @idr.samples.new(sample_source: row[2], disease: row[3], indigo_id: row[1], age_at_sample: row[6],
-                                gender: row[7], ethnicity: row[5])
+            if @idr.save
+              sample = Sample.new(sample_source: row[2], disease: row[3], indigo_id: row[1], age_at_sample: row[6],
+                                  gender: row[7], ethnicity: row[5], idr_id: @idr.id, short_date: Time.now.strftime('%d %B %Y'))
 
-            if sample.save
-              @number_samples_added += 1
-            else
-              @failed_samples.add(row[1])
+              if sample.save
+                @number_samples_added += 1
+              else
+                @failed_samples.add(row[1])
+              end
             end
           end
         end
