@@ -1,6 +1,7 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  # acts_as_token_authentication_handler_for User
   self.responder = ApplicationResponder
   respond_to :html
 

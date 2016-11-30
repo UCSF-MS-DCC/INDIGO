@@ -42,6 +42,15 @@
       </div>
     </div>
 
+    <div class="item">
+      <div class="container">
+        </br>
+        <div class="row">
+          <div id="world_map"></div>
+        </div>
+      </div>
+    </div>
+
   <!-- Left and right controls -->
   <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
     <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
@@ -56,13 +65,15 @@
 
 <script type="text/javascript">
 
-  google.charts.load('current', {packages: ['corechart', 'sankey']});
+  google.charts.load('current', {packages: ['corechart', 'sankey', 'geochart']});
 
   google.charts.setOnLoadCallback(drawEurPieChart);
 
   google.charts.setOnLoadCallback(drawNonEurPieChart);
 
   google.charts.setOnLoadCallback(drawSankeyChart);
+
+  google.charts.setOnLoadCallback(drawUSMap);
 
   function drawEurPieChart() {
     // Define the chart to be drawn.
@@ -87,7 +98,7 @@
       chartArea:{left:0,top:50,width:'100%',height:'100%'},
       height:'400',
       width:'500',
-      legend: {position:'left', textStyle: {fontSize:16}},
+      legend: {position:'labeled', textStyle: {fontSize:16}},
       titleTextStyle: {fontSize:20}
     }
     // Instantiate and draw the chart.
@@ -119,7 +130,7 @@
       chartArea:{left:0,top:50,width:'100%',height:'100%'},
       height:'400',
       width:'500',
-      legend: {position:'left', textStyle: {fontSize:16, color:'black'}},
+      legend: {position:'labeled', textStyle: {fontSize:16, color:'black'}},
       titleTextStyle: {fontSize:20}
     }
     // Instantiate and draw the chart.
@@ -171,6 +182,33 @@
     // Instantiates and draws our chart, passing in some options.
     var sankeychart = new google.visualization.Sankey(document.getElementById('sankeybasic'));
     sankeychart.draw(data, options);
+  }
+
+  // google.charts.load('upcoming', {packages:['geochart']});
+  // google.charts.setOnLoadCallback(drawUSMap);
+
+  function drawUSMap() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['City', 'Participants'],
+      ['UCSF', 3900],
+      ['Michael J Fox Foundation, New York, NY', 1500],
+      ['University of Miami', 500],
+      ['Guthy-Jackson Foundation, San Diego, CA', 600],
+      ['Mayo Clinic, Rochester, MN', 380],
+      ['National Institute of Mental Health, Rockville, MD', 1500],
+      ['University of Texas-Southwestern, Dallas, TX', 200]
+    ]);
+
+    var options = {
+      region: 'US',
+      displayMode: 'markers',
+      colorAxis: {colors: ['red', 'blue']},
+      height: '400'
+    };
+
+    var usmapchart = new google.visualization.GeoChart(document.getElementById('world_map'));
+    usmapchart.draw(data, options);
   }
 </script>
 </div>

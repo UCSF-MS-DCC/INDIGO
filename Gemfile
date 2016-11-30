@@ -38,6 +38,7 @@ gem 'simple_form'
 gem 'carrierwave'
 gem 'responders'
 gem 'roo', '~> 2.5.0'
+gem 'simple_token_authentication', '~> 1.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

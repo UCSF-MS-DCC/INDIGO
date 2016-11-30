@@ -1,0 +1,31 @@
+
+  <div class="container">
+    </br>
+    <div class="row">
+      <div id="world_map"></div>
+    </div>
+  </div>
+
+<script>
+  google.charts.load('upcoming', {packages:['geochart']});
+  google.charts.setOnLoadCallback(drawMarkersMap);
+
+  function drawMarkersMap() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['City', 'Participants'],
+      ['San Francisco', 2000],
+      ['New York', 1500],
+      ['Miami', 500]
+    ]);
+
+    var options = {
+      region: 'US',
+      displayMode: 'markers',
+      colorAxis: {colors: ['orange', 'blue']}
+    };
+
+    var chart = new google.visualization.GeoChart(document.getElementById('world_map'));
+    chart.draw(data, options);
+  }
+</script>

@@ -1,4 +1,7 @@
 class Api::V1::ApitestsController < ApplicationController
+  acts_as_token_authentication_handler_for User
+  before_action :authenticate_user!
+
   def jsonsamples
     @site = params[:site]
     @gender = params[:gender]

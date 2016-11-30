@@ -34,6 +34,10 @@ Rails.application.routes.draw do
 
   get 'dataview/download_idr'
 
+  get 'dataview/samples_to_json'
+
+  get 'dataview/hlas_to_json'
+
   get 'keys/index'
 
   get 'keys/new'
