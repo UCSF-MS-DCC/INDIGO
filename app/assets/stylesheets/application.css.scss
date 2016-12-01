@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  *= require gritter
+ *= require animate
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
@@ -21,7 +22,7 @@
 /* to use, include as values to CSS properties */
 /* Google material design color palettes : https://material.google.com/style/color.html#color-color-palette */
 
-$indigo: #330099;
+$indigo: #320b59;  /* alternate: #330099 */
 $light-light-grey: #FAFAFA;
 $seashell: #EEE5DE;
 $navbar-grey: #F8F8F8;
@@ -41,7 +42,7 @@ $navbar-grey: #F8F8F8;
   font-size: 1.3em;
 }
 .footer_link {
-  color: $indigo;
+  color: white;
 }
 .common_text {
   font-size: 1.3em;
@@ -49,9 +50,12 @@ $navbar-grey: #F8F8F8;
 .indigo_text {
   color: $indigo;
 }
-
 .navbar .nav > li > a {
-  text-shadow: 0px -1px 0px rgba(0,0,0,.1);
+  text-shadow: 1px 2px 1px rgba(0,0,0,2);
+  color:white;
+}
+p {
+  line-height: 1.5;
 }
 /* footer */
 
@@ -85,7 +89,18 @@ footer ul li {
 }
 
 /* layout */
+.navbar-nav > li > a, .navbar-brand {
+    padding-top:2px !important; padding-bottom:0 !important;
+    height: 22px;
+}
+.navbar {min-height:22px !important; margin-bottom:0px;}
 
+.navbar-default {
+  background-color: #696969;
+  border-color: #696969;
+  border-bottom-color: #2a2a2a;
+  border-radius: 0px;
+}
 .centering-box {
   margin: 0 auto;
   border: 1px solid $indigo
@@ -116,6 +131,16 @@ footer ul li {
   padding-right:10px;
 }
 
+/* animation */
+
+#next-contain {
+  -webkit-animation-duration: 1.2s;
+  -webkit-animation-delay: 1s;
+  -moz-animation-duration: 1.2s;
+  -moz-animation-delay: 1s;
+  -ms-animation-duration: 1.2s;
+  -ms-animation-delay: 1s;
+}
 /* carousel */
 
 .carousel-control {
