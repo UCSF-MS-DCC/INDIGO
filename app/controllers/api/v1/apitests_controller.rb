@@ -3,12 +3,12 @@ class Api::V1::ApitestsController < ApplicationController
   before_action :authenticate_user!
 
   def jsonsamples
-    @site = params[:site]
-    @gender = params[:gender]
-    @disease = params[:disease]
-    @age = params[:age_at_sample]
-    @idr = IDR.where(age_at_sample: @age)
-    render json: @idr
-
+    @user = User.where(authentication_token: params[:user_token])
+    @idr = IDR.where(sample_source: @user[0].affiliation).limit(10)
+    if @idr.count == 0
+      render json: {'message':'there is no data from your institution available'}
+    else
+      render json: @idr
+    end
   end
 end

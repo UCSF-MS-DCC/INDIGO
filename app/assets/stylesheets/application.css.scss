@@ -41,8 +41,8 @@ $navbar-grey: #F8F8F8;
   color: $indigo;
   font-size: 1.3em;
 }
-.footer_link {
-  color: white;
+.footer-link {
+  color: $indigo;
 }
 .common_text {
   font-size: 1.3em;
@@ -112,6 +112,10 @@ footer ul li {
   border-radius: 10px;
 }
 
+.hide-table {
+  display: none;
+}
+
 /* buttons */
 
 .btn-indigo {
@@ -131,15 +135,19 @@ footer ul li {
   padding-right:10px;
 }
 
+.list-group-item-dataview {
+  background-color: $light-light-grey !important;
+}
+
 /* animation */
 
-#next-contain {
-  -webkit-animation-duration: 1.2s;
-  -webkit-animation-delay: 1s;
-  -moz-animation-duration: 1.2s;
-  -moz-animation-delay: 1s;
-  -ms-animation-duration: 1.2s;
-  -ms-animation-delay: 1s;
+.welcome-contain {
+  -webkit-animation-duration: .6s;
+  -webkit-animation-delay: .5s;
+  -moz-animation-duration: .6s;
+  -moz-animation-delay: .5s;
+  -ms-animation-duration: .6s;
+  -ms-animation-delay: .5s;
 }
 /* carousel */
 

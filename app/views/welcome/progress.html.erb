@@ -1,0 +1,89 @@
+<div class="container animated fadeIn welcome-contain">
+
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;border-top:1px solid #696969;">
+      <ul style="list-style:none;padding-top: 5px;padding-bottom:10px;">
+        <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path  %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Progress", welcome_progress_path, :style => "font-weight:bold; color:#320b59;" %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "About", welcome_next_path %></li>
+      </ul>
+      <br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;border-bottom:2px solid #696969">
+      <div id="progress-cols" style="height:500px;border:1px solid #bdbdbd"></div>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+var dataMatrix = [['Disease', 'Multiple Sclerosis', 'Parkinson\'s Disease', 'Neuromyelitis Optica', 'Myasthenia Gravis', 'Schizophrenia', 'Healthy Control']];
+
+$.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %>')
+  .done(function(data) {
+    var dates = {};
+    for (key in data) { // key is a stringified array that needs to be parsed before using data. key[0] contains the disease code, key[1] contains the date
+      var parsedKey = JSON.parse(key)
+      if (!dates[parsedKey[1]]) {
+        dates[parsedKey[1]] = [parsedKey[1], 0, 0, 0, 0, 0, 0];
+      }
+      var d = dates[parsedKey[1]];
+      switch (parsedKey[0]) {
+        case 'ms':
+          d[1] = data[key];
+          break;
+        case 'PD':
+          d[2] = data[key];
+          break;
+        case 'nmo':
+          d[3] = data[key];
+          break;
+        case 'mg':
+          d[4] = data[key];
+          break;
+        case 'scz':
+          d[5] = data[key];
+          break;
+        case 'control':
+          d[6] = data[key];
+          break;
+      }
+    }
+    for (date in dates) {
+      dataMatrix.push(dates[date]);
+    }
+
+  });
+
+google.charts.load('current', {packages:['corechart']});
+
+google.charts.setOnLoadCallback(drawColChart);
+
+function drawColChart() {
+  // var data = google.visualization.arrayToDataTable(dataMatrix) use this to populate data table with actual project data. Below is hard coded for demonstration purposes
+  var data = google.visualization.arrayToDataTable([
+    ['Disease', 'Multiple Sclerosis', 'Parkinson\'s Disease', 'Neuromyelitis Optica', 'Myasthenia Gravis', 'Schizophrenia', 'Healthy Control'],
+    ['10/2016', 75, 110, 130, 140, 45, 150],
+    ['11/2016', 90, 125, 140, 160, 150, 175],
+    ['12/2016', 150, 100, 125, 130, 240, 225]
+  ]);
+
+  var options = {
+    isStacked: true,
+    legend: {position: 'right', maxLines:1},
+    bar: {groupWidth: '75%'},
+    title: "Samples Processed",
+    titleTextStyle: {bold:true, fontSize:16}
+  }
+
+  var chart = new google.visualization.ColumnChart(document.getElementById('progress-cols'));
+  chart.draw(data, options)
+}
+</script>

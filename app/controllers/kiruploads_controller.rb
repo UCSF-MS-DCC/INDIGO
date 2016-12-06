@@ -1,7 +1,7 @@
 class KiruploadsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  
+
   def index
     @kiruploads = Kirupload.all
   end
@@ -57,13 +57,13 @@ class KiruploadsController < ApplicationController
         excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed and so are 'dropped', so the .each iteration starts with the second row
           if Kir.where(indigo_id: row[4]).exists?
           else
-            kir = Kir.new()#waiting on the order in which the genes are listed in the Spreadsheet
-
-            if kir.save
-              @number_kirs_added += 1
-            else
-              @failed_kirs.add(row[3])
-            end #ends if else
+            # kir = Kir.new()#waiting on the order in which the genes are listed in the Spreadsheet
+            #
+            # if kir.save
+            #   @number_kirs_added += 1
+            # else
+            #   @failed_kirs.add(row[3])
+            # end #ends if else
           end #ends if Kir.where if else
         end #ends .each statement
       end #ends the if @key[:keyfile].split block

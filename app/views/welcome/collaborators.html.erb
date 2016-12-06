@@ -1,0 +1,121 @@
+<div class="container animated fadeIn welcome-contain">
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;border-top:1px solid #696969;">
+      <ul style="list-style:none;padding-top: 5px;padding-bottom:10px;">
+        <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path  %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path, :style => "font-weight:bold; color:#320b59;" %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Progress", welcome_progress_path %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "About", welcome_next_path %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;height:20px;"></div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed; border-bottom: 2px solid #696969">
+      <div id="collab-table" style="display:inline; float:right;width:40%"></div>
+      <div id="us-map" style="display:inline;margin-bottom:30px;"></div>
+      <br>
+      <div id="eur-map" style="display:inline;"></div>
+    </div>
+  </div>
+  <!-- </div>
+  <div class="row">
+    <div class="col-sm-6 col-sm-offset-1" style="background-color:#ededed;border-bottom: 1px solid #696969;">
+      <div id="us-map" style="display:inline;margin-bottom:30px;"></div>
+      <br>
+      <div id="eur-map" style="display:inline;"></div>
+    </div>
+    <div class="col-sm-4"  style="background-color:#ededed;border-bottom: 1px solid #696969" ><span id="collab-table"></span></div>
+  </div> -->
+</div>
+
+<script type="text/javascript">
+
+  google.charts.load('upcoming', { packages: ['geochart', 'table'] });
+
+  google.charts.setOnLoadCallback(drawUSMap);
+
+  google.charts.setOnLoadCallback(drawEurMap);
+
+  google.charts.setOnLoadCallback(drawCollaboratorsTable);
+
+  function drawUSMap() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Location', 'Discovery (N)'],
+      ['UCSF', 3900]
+      // ['Michael J Fox Foundation, New York, NY', 1500],
+      // ['University of Miami', 500],
+      // ['Guthy-Jackson Foundation, San Diego, CA', 600],
+      // ['Mayo Clinic, Rochester, MN', 380],
+      // ['National Institute of Mental Health, Rockville, MD', 1500],
+      // ['University of Texas-Southwestern, Dallas, TX', 200]
+    ]);
+
+    var options = {
+      region: 'US',
+      displayMode: 'markers',
+      keepAspectRatio: true
+      // colorAxis: {colors: ['red', 'blue']}
+    }
+
+    var chart = new google.visualization.GeoChart(document.getElementById('us-map'));
+    chart.draw(data, options);
+  }
+
+  function drawEurMap() {
+
+    var data = google.visualization.arrayToDataTable([
+      ['Location', 'Discovery (N)']
+    ]);
+
+    var options = {
+      region: '154',
+      displayMode: 'markers',
+      keepAspectRatio: true
+    }
+
+    var chart = new google.visualization.GeoChart(document.getElementById('eur-map'));
+    chart.draw(data, options);
+  }
+
+  function drawCollaboratorsTable() {
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Population');
+    data.addColumn('string', 'Custodian Group');
+    data.addColumn('number', 'Discovery (N)');
+    data.addRows([
+      ['MS White Americans', 'UCSF', 2000],
+      ['MS Afican Americans', 'UCSF', 1500],
+      ['MS Hispanic Americans', 'University of Miami', 500],
+      ['MS Hispanic Americans', 'UCSF', 300],
+      ['NMO White Americans', 'Guthy-Jackson Foundation', 450],
+      ['NMO White Americans', 'Mayo Clinic', 350],
+      ['NMO White Americans', 'UT Southwestern', 100],
+      ['NMO White UK', 'Oxford University', 100],
+      ['NMO Hispanic Americans', 'Guthy-Jackson Foundation', 90],
+      ['NMO African Americans', 'Guthy-Jackson Foundation', 60],
+      ['NMO African Americans', 'UCSF/Mayo Clinic', 100],
+      ['NMO Asian Americans', 'Mayo Clinic', 30],
+      ['NMO Japan', 'Kyushu University', 150],
+      ['MG Sweden', 'Karolinksa Institute', 600],
+      ['MG Norway', 'Oslo University Hospital', 350],
+      ['PD White Americans', 'NIH/NIA', 2000],
+      ['PD White Americans', 'M.J. Fox Foundation', 1300],
+      ['SCZD Norway', 'Oslo University', 600],
+      ['SCZD Dutch', 'UCLA', 1000],
+      ['SCZD UK', 'University of London', 500],
+      ['SCZD Ireland', 'Virginia Commonwealth University', 950],
+      ['SCZD Scotland', 'Univ. of Highlands and Islands', 500],
+      ['SCZD Scotland', 'Aberdeen University', 500],
+      ['SCZD Germany', 'University of Bonn', 500],
+      ['SCZD Canada', 'University of Toronto', 500],
+      ['SCZD African Americans', 'University of Pittsburgh/NIMH', 1500]
+    ]);
+    var table = new google.visualization.Table(document.getElementById('collab-table'));
+    table.draw(data, {showRowNumber: false, width:'100%'})
+  }
+</script>

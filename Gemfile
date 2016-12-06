@@ -40,6 +40,8 @@ gem 'responders'
 gem 'roo', '~> 2.5.0'
 gem 'simple_token_authentication', '~> 1.0'
 gem 'animate-rails'
+gem 'test-unit'
+gem 'groupdate'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -49,6 +51,12 @@ group :development, :test do
   gem 'byebug', platform: :mri
 end
 
+group :test do
+  gem 'rails-controller-testing', '0.1.1'
+  gem 'minitest-reporters', '1.1.9'
+  gem 'guard', '2.13.0'
+  gem 'guard-minitest', '2.4.4'
+end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console'

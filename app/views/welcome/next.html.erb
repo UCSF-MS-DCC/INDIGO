@@ -1,9 +1,19 @@
 
-<div class="container animated fadeIn" id="next-contain">
+<div class="container animated fadeIn welcome-contain">
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#F6F6F6;height:100%">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;border-top:1px solid #696969;">
+      <ul style="list-style:none;padding-top: 5px;">
+        <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Progress", welcome_progress_path %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "About", welcome_next_path, :style => "font-weight:bold; color:#320b59;" %></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed; border-bottom: 2px solid #696969">
       <br>
-      <div style="display:inline; float:right; margin-left:20px;padding:5px; background-color:white" id="EurPieChart"></div>
+      <div style="display:inline;float:right; margin-left:20px;padding:5px;background-color:white;border:1px solid #bdbdbd" id="EurPieChart"></div>
       <p class='text-justify common_text'>
         The overall goal of the <strong>The Immunogenetics of Neurological DIseases working GrOup (INDIGO)</strong> is to understand the determinants of disease risk in neurological diseases such as multiple sclerosis, Parkinson's disease, schizophrenia, neuromyelitis optica, and myasthenia gravis. We will use next generation sequencing (NGS) along with a massive sample collection to characterize the HLA and KIR genes and alleles that make an individual susceptible to these central nervous system diseases.
       </p>
@@ -11,7 +21,7 @@
       <p class='text-justify common_text'>
         To achieve our goals, we have assembled a multi-disciplinary international team that brings together complementary expertise (immuno- and neuro-genetics, clinical, and computational) and a remarkable track record of productivity to carry out a study of broad scope and depth. Through this collaboration, we will leverage rich and informative datasets exceeding 15,000 study participants (cases) and connect genetics with CNS disease utilizing advanced molecular and bio-informatics tools.
       </p>
-      <div style="display:inline; float:left; margin-right:20px; padding:5px; background-color:white" id="NonEurPieChart"></div>
+      <div style="display:inline;float:left;margin-right:20px;padding:5px; background-color:white;border:1px solid #bdbdbd" id="NonEurPieChart"></div>
       <br>
       <p class='text-justify common_text'>
          We believe the isolation of definite HLA-KIR associations with the risk of neuroinflammation and neurodegeneration could be transformative by revealing fundamental insights about primary disease mechanisms.
@@ -30,10 +40,6 @@
   google.charts.setOnLoadCallback(drawEurPieChart);
 
   google.charts.setOnLoadCallback(drawNonEurPieChart);
-
-  google.charts.setOnLoadCallback(drawSankeyChart);
-
-  google.charts.setOnLoadCallback(drawUSMap);
 
   function drawEurPieChart() {
     // Define the chart to be drawn.
@@ -143,30 +149,4 @@
     sankeychart.draw(data, options);
   }
 
-  // google.charts.load('upcoming', {packages:['geochart']});
-  // google.charts.setOnLoadCallback(drawUSMap);
-
-  function drawUSMap() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['City', 'Participants'],
-      ['UCSF', 3900],
-      ['Michael J Fox Foundation, New York, NY', 1500],
-      ['University of Miami', 500],
-      ['Guthy-Jackson Foundation, San Diego, CA', 600],
-      ['Mayo Clinic, Rochester, MN', 380],
-      ['National Institute of Mental Health, Rockville, MD', 1500],
-      ['University of Texas-Southwestern, Dallas, TX', 200]
-    ]);
-
-    var options = {
-      region: 'US',
-      displayMode: 'markers',
-      colorAxis: {colors: ['red', 'blue']},
-      width:'300'
-    };
-
-    var usmapchart = new google.visualization.GeoChart(document.getElementById('us_map'));
-    usmapchart.draw(data, options);
-  }
 </script>

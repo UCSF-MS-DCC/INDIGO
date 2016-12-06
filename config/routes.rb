@@ -44,17 +44,21 @@ Rails.application.routes.draw do
 
   get 'keys/create'
 
-  get 'infographics/show'
-
-  get 'admin_contact/new'
-
-  get 'users/profile'
+  get 'profiles/show'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   get 'welcome/index'
 
   get 'welcome/next'
+
+  get 'welcome/collaborators'
+
+  get 'welcome/abstract'
+
+  get 'welcome/progress'
+
+  get 'welcome/samples_processed'
 
   root 'welcome#next'
 

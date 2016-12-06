@@ -1,33 +1,33 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  indigo_id: MyString
-  drb1_15_copies_calculated: MyString
-  drb1_1: MyString
-  drb1_2: MyString
-  dqb1_1: MyString
-  dqb1_2: MyString
-  dpb1_1: MyString
-  dpb1_2: MyString
-  a_1: MyString
-  a_2: MyString
-  b_1: MyString
-  b_2: MyString
-  c_1: MyString
-  c_2: MyString
+  indigo_id: "IND000000"
+  drb1_15_copies_calculated: "test_1"
+  drb1_1: "test_1"
+  drb1_2: "test_1"
+  dqb1_1: "test_1"
+  dqb1_2: "test_1"
+  dpb1_1: "test_1"
+  dpb1_2: "test_1"
+  a_1: "test_1"
+  a_2: "test_1"
+  b_1: "test_1"
+  b_2: "test_1"
+  c_1: "test_1"
+  c_2: "test_1"
 
 two:
-  indigo_id: MyString
-  drb1_15_copies_calculated: MyString
-  drb1_1: MyString
-  drb1_2: MyString
-  dqb1_1: MyString
-  dqb1_2: MyString
-  dpb1_1: MyString
-  dpb1_2: MyString
-  a_1: MyString
-  a_2: MyString
-  b_1: MyString
-  b_2: MyString
-  c_1: MyString
-  c_2: MyString
+  indigo_id: "IND9999999"
+  drb1_15_copies_calculated: "test_2"
+  drb1_1: "test_2"
+  drb1_2: "test_2"
+  dqb1_1: "test_2"
+  dqb1_2: "test_2"
+  dpb1_1: "test_2"
+  dpb1_2: "test_2"
+  a_1: "test_2"
+  a_2: "test_2"
+  b_1: "test_2"
+  b_2: "test_2"
+  c_1: "test_2"
+  c_2: "test_2"

@@ -4,7 +4,7 @@ one:
   indigo_id: MyString
   i2dl1: MyString
   x2dl1_2: MyString
-  i2dl2_2: MyString
+  i2dl2: MyString
   x2dl2_2: MyString
   i2dl3: MyString
   x2dl3_2: MyString
@@ -41,7 +41,7 @@ two:
   indigo_id: MyString
   i2dl1: MyString
   x2dl1_2: MyString
-  i2dl2_2: MyString
+  i2dl2: MyString
   x2dl2_2: MyString
   i2dl3: MyString
   x2dl3_2: MyString

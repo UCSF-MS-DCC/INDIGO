@@ -21,8 +21,8 @@
                 <li><%= link_to "Sign Up", new_user_registration_path %></li>
                 <li><%= link_to "Log In", new_user_session_path %></li>
               <% else %>
-                <li><%= link_to "My Account", users_profile_path, :'data-toggle' => "tooltip", :'title' => "View and Edit Your Account Details" %></li>
-                <li><%= link_to current_user.affiliation, dataview_index_path, :'data-toggle' => "tooltip", :'title' => "View and Download Your Institution's Indigo Data" %></li>
+                <li><%= link_to "My Account", profiles_show_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View and Edit Your Account Details" %></li>
+                <li><%= link_to "Data", dataview_index_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View and Download Your Institution's Indigo Data" %></li>
                 <%if current_user.has_role? :admin %>
                   <li class="dropdown">
                     <%= link_to "Administrator", new_key_path, :class => "dropdown-toggle", :'data-toggle' => "dropdown" %>
@@ -46,7 +46,7 @@
     <div class="col-sm-10 col-sm-offset-1" style="height:5px;background-color:#bdbdbd"></div>
   </div>
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#320b59;">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#320b59; border-bottom:5px solid #bdbdbd;">
       <div class="container">
         <div class="row">
           <div class="col-sm-3"><%= link_to image_tag("indigo sans w dna embossed edit 11-29.png", alt: "Logo"), root_path %></div>
