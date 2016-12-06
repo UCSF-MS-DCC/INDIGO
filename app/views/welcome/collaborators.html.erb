@@ -45,20 +45,22 @@
 
     var data = google.visualization.arrayToDataTable([
       ['Location', 'Discovery (N)'],
-      ['UCSF', 3900]
-      // ['Michael J Fox Foundation, New York, NY', 1500],
-      // ['University of Miami', 500],
-      // ['Guthy-Jackson Foundation, San Diego, CA', 600],
-      // ['Mayo Clinic, Rochester, MN', 380],
-      // ['National Institute of Mental Health, Rockville, MD', 1500],
-      // ['University of Texas-Southwestern, Dallas, TX', 200]
+      ['UCSF', 3900],
+      ['Michael J Fox Foundation, New York, NY', 1500],
+      ['University of Miami', 500],
+      ['Guthy-Jackson Foundation, San Diego, CA', 600],
+      ['Mayo Clinic, Rochester, MN', 380],
+      ['National Institute of Mental Health, Rockville, MD', 1500],
+      ['University of Texas-Southwestern, Dallas, TX', 200],
+      ['National Instutute on Aging, Bethesda, MD', 2000],
+      ['University of Pittsburgh, Pittsburgh, PA', 1500]
     ]);
 
     var options = {
       region: 'US',
       displayMode: 'markers',
-      keepAspectRatio: true
-      // colorAxis: {colors: ['red', 'blue']}
+      keepAspectRatio: true,
+      colorAxis: {colors: ['red', 'blue']}
     }
 
     var chart = new google.visualization.GeoChart(document.getElementById('us-map'));
@@ -68,13 +70,24 @@
   function drawEurMap() {
 
     var data = google.visualization.arrayToDataTable([
-      ['Location', 'Discovery (N)']
+      ['Location', 'Discovery (N)'],
+      ['Karolinksa Insitute', 600],
+      ['Oslo University Hospital', 350],
+      ['Oslo University', 600],
+      ['University of London', 500],
+      ['Netherlands', 1000],
+      ['UK', 500],
+      ['Ireland', 950],
+      ['University of the Highlands and Islands, Scotland', 500],
+      ['Aberdeen University, Aberdeen, Scotland', 500],
+      ['Rheinische Friedrich-Wilhelms-Universität Bonn', 500]
     ]);
 
     var options = {
       region: '154',
       displayMode: 'markers',
-      keepAspectRatio: true
+      keepAspectRatio: true,
+      colorAxis: {colors: ['red', 'blue']}
     }
 
     var chart = new google.visualization.GeoChart(document.getElementById('eur-map'));
