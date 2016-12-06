@@ -8,7 +8,7 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :affiliation
 
-  after_create :send_welcome_message
+  after_create :send_welcome_message, :assign_default_role
 
   def send_welcome_message
     AdminMailer.new_user_welcome_message(self).deliver
@@ -26,6 +26,10 @@ class User < ApplicationRecord
     end
   end
 
+  def assign_default_role
+    add_role(:user)
+  end
+  
    def select_affiliations
      return ["Aberdeen University",
        "Guthy-Jackson Foundation",
