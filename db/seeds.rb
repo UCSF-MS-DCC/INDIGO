@@ -6,6 +6,6 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-user = User.create(email: 'adam.renschen@ucsf.edu', password: '321321', password_confirmation: '321321', affiliation: 'UCSF')
+user = User.create(email: 'indigoprojectwebmaster@gmail.com', password: '321321', password_confirmation: '321321', affiliation: 'UCSF')
 user.update_attributes(:approved => true)
 user.add_role "admin"

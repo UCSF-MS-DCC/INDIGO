@@ -1,7 +1,7 @@
 <div class="container animated fadeIn welcome-contain">
 
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;border-top:1px solid #696969;">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-top:1px solid #696969;">
       <ul style="list-style:none;padding-top: 5px;padding-bottom:10px;">
         <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path  %></li>
         <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path %></li>
@@ -13,7 +13,7 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;border-bottom:2px solid #696969">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-bottom:2px solid #696969">
       <div id="progress-cols" style="height:500px;border:1px solid #bdbdbd"></div>
       <br>
       <br>
@@ -28,13 +28,13 @@ var dataMatrix = [['Disease', 'Multiple Sclerosis', 'Parkinson\'s Disease', 'Neu
 
 $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %>')
   .done(function(data) {
-    var dates = {};
-    for (key in data) { // key is a stringified array that needs to be parsed before using data. key[0] contains the disease code, key[1] contains the date
+    var timepoints = {};
+    for (key in data) { // each key is a stringified array that needs to be parsed before using data. key[0] contains the disease code, key[1] contains the date. the value is the number of samples processed. eg. data = {[scz, 05 Dec 2016]: 2500}
       var parsedKey = JSON.parse(key)
-      if (!dates[parsedKey[1]]) {
-        dates[parsedKey[1]] = [parsedKey[1], 0, 0, 0, 0, 0, 0];
+      if (!timepoints[parsedKey[1]]) {
+        timepoints[parsedKey[1]] = [parsedKey[1], 0, 0, 0, 0, 0, 0];
       }
-      var d = dates[parsedKey[1]];
+      var d = timepoints[parsedKey[1]];
       switch (parsedKey[0]) {
         case 'ms':
           d[1] = data[key];
@@ -56,8 +56,8 @@ $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %
           break;
       }
     }
-    for (date in dates) {
-      dataMatrix.push(dates[date]);
+    for (date in timepoints) {
+      dataMatrix.push(timepoints[date]); //creates a 2d matrix formatted to be used by the chart function below
     }
 
   });

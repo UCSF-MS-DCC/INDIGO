@@ -1,7 +1,7 @@
 
 <div class="container animated fadeIn welcome-contain">
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed;border-top:1px solid #696969;">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-top:1px solid #696969;">
       <ul style="list-style:none;padding-top: 5px;">
         <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path %></li>
         <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path %></li>
@@ -11,7 +11,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#ededed; border-bottom: 2px solid #696969">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6; border-bottom: 2px solid #696969">
       <br>
       <div style="display:inline;float:right; margin-left:20px;padding:5px;background-color:white;border:1px solid #bdbdbd" id="EurPieChart"></div>
       <p class='text-justify common_text'>
@@ -102,51 +102,51 @@
     var chart = new google.visualization.PieChart(document.getElementById('NonEurPieChart'));
     chart.draw(data, options);
   }
-
-  function drawSankeyChart() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'From');
-    data.addColumn('string', 'To');
-    data.addColumn('number', 'Weight');
-    data.addRows([
-      [ 'KIR2DL1', 'HLA-C', 5 ],
-      [ 'KIR2DL2/3', 'HLA-C', 5 ],
-      [ 'KIR2DL2/3', 'HLA-B', 5 ],
-      [ 'KIR2DS1', 'HLA-C', 5 ],
-      [ 'KIR2DS2', 'HLA-C', 5 ],
-      [ 'KIR2DS2', 'HLA-B', 5 ],
-      [ 'KIR2DS2', 'HLA-A', 5 ],
-      [ 'KIR3DL1/S1', 'HLA-B', 5 ],
-      [ 'KIR3DL1/S1', 'HLA-A', 5],
-      [ 'KIR2DS4', 'HLA-C', 5],
-      [ 'KIR2DS4', 'HLA-A', 5],
-      [ 'KIR3DL2', 'HLA-A', 5]
-    ]);
-
-    var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
-              '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
-
-    // Sets chart options.
-    var options = {
-      width: '400',
-      height: '400',
-      sankey: {
-        node: {
-          colors: colors,
-          nodePadding: '10',
-          labelPadding: '0'
-        },
-        link: {
-          colorMode: 'gradient',
-          colors: colors
-        }
-      },
-      tooltip:null
-    };
-
-    // Instantiates and draws our chart, passing in some options.
-    var sankeychart = new google.visualization.Sankey(document.getElementById('sankeybasic'));
-    sankeychart.draw(data, options);
-  }
+  // This chart is not currently part of the design. Keeping the code here for possible future use
+  // function drawSankeyChart() {
+  //   var data = new google.visualization.DataTable();
+  //   data.addColumn('string', 'From');
+  //   data.addColumn('string', 'To');
+  //   data.addColumn('number', 'Weight');
+  //   data.addRows([
+  //     [ 'KIR2DL1', 'HLA-C', 5 ],
+  //     [ 'KIR2DL2/3', 'HLA-C', 5 ],
+  //     [ 'KIR2DL2/3', 'HLA-B', 5 ],
+  //     [ 'KIR2DS1', 'HLA-C', 5 ],
+  //     [ 'KIR2DS2', 'HLA-C', 5 ],
+  //     [ 'KIR2DS2', 'HLA-B', 5 ],
+  //     [ 'KIR2DS2', 'HLA-A', 5 ],
+  //     [ 'KIR3DL1/S1', 'HLA-B', 5 ],
+  //     [ 'KIR3DL1/S1', 'HLA-A', 5],
+  //     [ 'KIR2DS4', 'HLA-C', 5],
+  //     [ 'KIR2DS4', 'HLA-A', 5],
+  //     [ 'KIR3DL2', 'HLA-A', 5]
+  //   ]);
+  //
+  //   var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
+  //             '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
+  //
+  //   // Sets chart options.
+  //   var options = {
+  //     width: '400',
+  //     height: '400',
+  //     sankey: {
+  //       node: {
+  //         colors: colors,
+  //         nodePadding: '10',
+  //         labelPadding: '0'
+  //       },
+  //       link: {
+  //         colorMode: 'gradient',
+  //         colors: colors
+  //       }
+  //     },
+  //     tooltip:null
+  //   };
+  //
+  //   // Instantiates and draws our chart, passing in some options.
+  //   var sankeychart = new google.visualization.Sankey(document.getElementById('sankeybasic'));
+  //   sankeychart.draw(data, options);
+  // }
 
 </script>

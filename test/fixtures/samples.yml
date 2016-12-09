@@ -1,23 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  sample_source: MyString
-  disease: MyString
-  received_date: MyString
-  indigo_id: MyString
-  site_sample_id: MyString
-  batch: MyString
-  sent_date: MyString
-  gender: MyString
-  ethnicity: MyString
+  sample_source: 'MyString'
+  disease: 'MyString'
+  received_date: 'MyString'
+  indigo_id: 'MyString'
+  site_sample_id: 'MyString'
+  batch: 'MyString'
+  sent_date: 'MyString'
+  gender: 'MyString'
+  ethnicity: 'MyString'
 
 two:
-  sample_source: MyString
-  disease: MyString
-  received_date: MyString
-  indigo_id: MyString
-  site_sample_id: MyString
-  batch: MyString
-  sent_date: MyString
-  gender: MyString
-  ethnicity: MyString
+  sample_source: 'MyString'
+  disease: 'MyString'
+  received_date: 'MyString'
+  indigo_id: 'MyString'
+  site_sample_id: 'MyString'
+  batch: 'MyString'
+  sent_date: 'MyString'
+  gender: 'MyString'
+  ethnicity: 'MyString'
