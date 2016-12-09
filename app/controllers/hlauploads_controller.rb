@@ -50,8 +50,8 @@ class HlauploadsController < ApplicationController
           excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
             if IDR.where(indigo_id: row[4]).exists?
               @idr = IDR.where(indigo_id: row[4])
-              @idr.update(a_1: row[6], a_2: row[7], b_1: row[8], b_2: row[9], c_1: row[10], c_2: row[11], dpa1_1: row[12], dpa1_2: row[13], dpb1_1: row[14],
-                            dpb1_2: row[15], dqa1_1: row[16], dqa1_2: row[17], dqb1_1: row[18], dqb1_2:row[19], drb1_1: row[20], drb1_2: row[21], drbo_1: row[22], drbo_2: row[23])
+              @idr.update(a_1: row[5], a_2: row[6], b_1: row[7], b_2: row[8], c_1: row[9], c_2: row[10], dpa1_1: row[11], dpa1_2: row[12], dpb1_1: row[13],
+                            dpb1_2: row[14], dqa1_1: row[15], dqa1_2: row[16], dqb1_1: row[17], dqb1_2:row[18], drb1_1: row[19], drb1_2: row[20], drbo_1: row[21], drbo_2: row[22])
               if Hla.where(indigo_id: row[4]).exists?
               else
                 @sample = @idr.sample

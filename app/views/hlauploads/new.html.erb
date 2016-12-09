@@ -1,17 +1,26 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-4"></div>
-    <div class="col-sm-4"><h2 class="text-center">Upload HLA Files</h2></div>
+    <h2 class="text-center">Upload HLA Files</h2>
   </div>
-  <hr>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <hr>
+    </div>
+  </div>
   <div>
     <h5 class="text-center">Currently only .csv and .xlsx files may be uploaded</h5>
   </div>
   <br>
+  <h5 class="text-center">Please be sure that data is formatted with these columns, in this order:</h5>
+  <br>
   <div class="row">
-    <div class="col-sm-12"><%= image_tag('upload.png', alt: 'Upload example', style: 'display:block;margin-left: auto; margin-right: auto;') %></span></div>
+    <div class="col-sm-10 col-sm-offset-1 text-center" id="table"></div>
   </div>
-  <hr>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <hr>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-5"></div>
     <div class="col-sm-2">
@@ -23,5 +32,44 @@
      <% end %>
     </div>
   </div>
-  <hr>
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1">
+      <hr>
+    </div>
+  </div>
 </div>
+<script type="text/javascript">
+  google.charts.load('current', {'packages': ['table']});
+  google.charts.setOnLoadCallback(drawTable);
+
+  function drawTable() {
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', '1');
+    data.addColumn('string', '2');
+    data.addColumn('string', '3');
+    data.addColumn('string', 'INDIGO_ID');
+    data.addColumn('string', 'a_1');
+    data.addColumn('string', 'a_2');
+    data.addColumn('string', 'b_1');
+    data.addColumn('string', 'b_2');
+    data.addColumn('string', 'c_1');
+    data.addColumn('string', 'c_2');
+    data.addColumn('string', 'dpa1_1');
+    data.addColumn('string', 'dpa1_2');
+    data.addColumn('string', 'dpb1_1');
+    data.addColumn('string', 'dpb1_2');
+    data.addColumn('string', 'dqa1_1');
+    data.addColumn('string', 'dqa1_2');
+    data.addColumn('string', 'dqb1_1');
+    data.addColumn('string', 'dqb1_2');
+    data.addColumn('string', 'drb1_1');
+    data.addColumn('string', 'drb1_2');
+    data.addColumn('string', 'drbo_1');
+    data.addColumn('string', 'drbo_2');
+
+    var table = new google.visualization.Table(document.getElementById('table'));
+
+    table.draw(data, {showRowNumber: false});
+
+  }
+</script>
