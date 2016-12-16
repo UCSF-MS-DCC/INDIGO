@@ -36,7 +36,7 @@ Rails.application.configure do
     authentication:       'plain',
     enable_starttls_auto: true  }
   config.action_mailer.perform_deliveries = true
-  config.action_mailer.default_url_options = { host: 'warm-badlands-90928.herokuapp.com' }
+  config.action_mailer.default_url_options = { host: 'indigo.ucsf.edu' }
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
