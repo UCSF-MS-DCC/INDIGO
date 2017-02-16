@@ -6,6 +6,12 @@
 # stripe_api_key: sk_test_2J0l093xOyW72XUYJHE4Dv2r
 # stripe_publishable_key: pk_test_ro9jV5SNwGb1yYlQfzG17LHK
 #
+ development:
+   INDIGO_SECRET_KEY: d27108ebb9fec8f0f48d267997616273fe8ba5d56779b857b7d56ddc34c8d7758ccba5f8a244faebddd5d063d03734be9c30c53b27e2684e05e1483428a1696c
+
+ test:
+   INDIGO_SECRET_KEY: 059779b7b1ea57ee264c25d95f7c159a1ee71bd767b1e01d10a3e0cb92d2691de10816107daa52f9e77131bc2ad312dfa7ad665eba62efbf566bb7469a12f695
+   
  production:
    INDIGO_SECRET_KEY: c7954752783fdbaf7b962ac8e5d0c67e1ecfea8ec3e9b4fd13dea56264f9109776fadb557689c3b5d2b22b7b0f4b2e8c4c7bcc3b8d6e77459eb48e30974f47a7
 #   stripe_api_key: sk_live_EeHnL644i6zo4Iyq4v1KdV9H
