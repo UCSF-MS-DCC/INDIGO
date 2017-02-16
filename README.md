@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Using rails console instructions:
+  -from your local repo run cap production rails:console
+  -follow prompts. You will need to enter the deployment account's password twice. Then you will need to enter your server        account's password. Your server username must be the same as your local username. If you don't have sudo access on your        server account, you will not be able to use the rails console. 
