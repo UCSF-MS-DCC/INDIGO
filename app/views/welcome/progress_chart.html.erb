@@ -1,0 +1,62 @@
+<div class="container">
+
+  <div class="row">
+    <div class="col-md-10 col-md-offset-1" style="border-top:1px solid black;border-bottom:1.5px solid black;background-color:#f6f6f6;">
+      <!-- tabs will allow toggling between charts corresponding to the diseases -->
+      <ul class="nav nav-tabs" style="margin-top:25px;">
+        <li class="active"><a data-toggle="tab" href="#total">Total</a></li>
+        <li><a data-toggle="tab" href="#pd">Parkinson's Disease</a></li>
+        <li><a data-toggle="tab" href="#ms">Mulitple Sclerosis</a></li>
+        <li><a data-toggle="tab" href="#mg">Myasthenia Gravis</a></li>
+        <li><a data-toggle="tab" href="#nmo">Neuromyelitis Optica</a></li>
+        <li><a data-toggle="tab" href="#sczp">Schizophrenia</a></li>
+      </ul>
+
+      <div class="tab-content" style="border-left:1px solid #e9e9e9;border-right:1px solid #e9e9e9;border-bottom:1px solid #e9e9e9; margin-bottom:20px;">
+        <div id="total" class="tab-pane fade in active">
+          <div id="colchart"></div>
+        </div>
+        <div id="pd" class="tab-pane fade">
+          <h3 class="text-center">Parkinson's Disease</h3>
+        </div>
+        <div id="ms" class="tab-pane fade">
+          <h3 class="text-center">Multiple Sclerosis</h3>
+        </div>
+        <div id="mg" class="tab-pane fade">
+          <h3 class="text-center">Myasthenia Gravis</h3>
+        </div>
+        <div id="nmo" class="tab-pane fade">
+          <h3 class="text-center">Neuromyelitis Optica</h3>
+        </div>
+        <div id="sczp" class="tab-pane fade">
+          <h3 class="text-center">Schizophrenia</h3>
+        </div>
+      </div>
+    </div>
+  </div> <!-- close row -->
+
+</div> <!-- close container -->
+
+<script type="text/javascript">
+  google.charts.load("current", {packages:['corechart']});
+  google.charts.setOnLoadCallback(drawChart);
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['Discovery', 'Cases', 'Controls', { role: 'annotation' } ],
+      ['Proposed', 500, 150, ''],
+      ['Samples Received', 300, 80, ''],
+      ['Samples In Process at Stanford', 200, 80, ''],
+      ['Data Available', 50, 50, '']
+    ]);
+
+    var options = {
+      colors: ['purple', 'silver'],
+      title: "Total Samples",
+      isStacked: true,
+      bar: { groupWidth: '75%'},
+      height: '500'
+    };
+    var chart = new google.visualization.ColumnChart(document.getElementById('colchart'));
+    chart.draw(data, options);
+  }
+</script>

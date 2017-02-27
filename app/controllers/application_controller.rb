@@ -8,10 +8,10 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # Issues with configuration with devise.
-  before_filter :configure_sanitized_params, if: :devise_controller?
+  before_action :configure_sanitized_params, if: :devise_controller?
 
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to main_app.root_path, :alert => exception.message
+    redirect_to main_app.root_path, :alert => "Access Denied"
   end
 
 

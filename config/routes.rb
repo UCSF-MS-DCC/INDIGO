@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'welcome/progress_chart'
 
   get 'kiruploads/index'
 

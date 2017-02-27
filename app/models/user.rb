@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   rolify
-  
+
   acts_as_token_authenticatable
 
   # Include default devise modules. Others available are:
@@ -10,14 +10,28 @@ class User < ApplicationRecord
 
   validates_presence_of :email, :affiliation
 
+  before_validation :set_default_sent_approval_email, on: :create
+
   after_create :send_welcome_message, :assign_default_role
+
+  after_update :send_approved_message, if: :approved_and_not_notified?
 
   def send_welcome_message
     AdminMailer.new_user_welcome_message(self).deliver
+    AdminMailer.new_user_admin_alert(self).deliver
+  end
+
+  def send_approved_message
+    AdminMailer.new_user_approved_notification(self).deliver
+    self.update_attributes(sent_approved_email:true)
   end
 
   def active_for_authentication?
     super && approved?
+  end
+
+  def approved_and_not_notified?
+    self.approved == true && self.sent_approved_email == false
   end
 
   def inactive_message
@@ -30,6 +44,10 @@ class User < ApplicationRecord
 
   def assign_default_role
     add_role(:user)
+  end
+
+  def set_default_sent_approval_email
+    self.sent_approved_email = false
   end
 
   def self.send_reset_password_instructions(attributes={})

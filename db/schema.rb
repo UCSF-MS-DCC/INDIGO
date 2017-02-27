@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201234632) do
+ActiveRecord::Schema.define(version: 20170227180230) do
 
   create_table "authentication_tokens", force: :cascade do |t|
     t.string   "body"
@@ -189,6 +189,7 @@ ActiveRecord::Schema.define(version: 20161201234632) do
     t.string   "affiliation"
     t.boolean  "approved",                          default: false
     t.string   "authentication_token",   limit: 30
+    t.boolean  "sent_approved_email"
     t.index ["approved"], name: "index_users_on_approved"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
