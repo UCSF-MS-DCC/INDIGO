@@ -17,7 +17,7 @@ class KeysController < ApplicationController
     @number_samples_added = 0 #counter for keeping track of samples added to db
     @key = Key.new(key_params) #creating key model with imported file as the keyfile attribute value e.g. Key[:keyfile]
     if @key.save
-      flash[:notice] = "File #{@key[:keyfile]} successfully uploaded"
+      # :gflash => {:success => "File #{@key[:keyfile]} successfully uploaded" }
       if @key[:keyfile].split(".")[1] == 'csv' #checks to see if keyfile is a .csv file
         csv_text = File.read("#{Rails.root}/indigo_keys/#{@key.created_at.to_date}/#{@key[:keyfile]}") #reads the contents of the file stored on the server and stores it in a variable. File is a built-in Rails helper class with its own methods
         csv = CSV.parse(csv_text, :headers => true) #parses the text into csv rows. the :headers => true hash means that the first line of the csv_text will be treated as column names. CSV is another built-in Rails helper class
@@ -26,14 +26,15 @@ class KeysController < ApplicationController
           else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
             @idr = IDR.new(sample_source: sample_data["Sample source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
             indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
-            age_at_sample: sample_data["Age at Sample"])
+            age_at_sample: sample_data["Age at Sample"], site_sample_id: sample_data["Sample Source ID"])
             if @idr.save
 
-              @sample = Samples.new(sample_source: sample_data["Sample source"], disease: sample_data["Disease"],
+              @sample = Sample.create(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"],
               indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
-              age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%d %B %Y'))
+              age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%d %B %Y'),
+              site_sample_id: sample_data["Sample Source ID"],idr_id: @idr.id)
 
-              if sample.save #attempts to save the idr model to the db
+              if @sample.save #attempts to save the idr model to the db
                 @number_samples_added += 1
               else# If a sample fails to be saved (for whatever reason) we let the user know.
                 @failed_samples.add(sample_data["INDIGO_ID"])
@@ -62,7 +63,7 @@ class KeysController < ApplicationController
         end
       end #ends the if @key[:keyfile].split block
       if @failed_samples.size > 0
-        flash[:notice] = "#{@failed_samples.size} samples failed to load and were not saved"
+        # :gflash => {:notice => "#{@failed_samples.size} samples failed to load and were not saved"}
       end
       redirect_to new_key_path
     end #ends the if @key.save block.

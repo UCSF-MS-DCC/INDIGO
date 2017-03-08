@@ -40,7 +40,7 @@
 
       var dataMatrix = [];
       samples.forEach(function(sample) {
-        dataMatrix.push([sample['indigo_id'], sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['short_date']])
+        dataMatrix.push([sample['indigo_id'], sample['site_sample_id'],sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['short_date']])
       });
       // console.log(dataMatrix);
       google.charts.load('current', {'packages': ['table']});
@@ -49,6 +49,7 @@
       function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Indigo ID');
+        data.addColumn('string', 'Site Sample ID')
         data.addColumn('string', 'Disease');
         data.addColumn('string', 'Gender');
         data.addColumn('string', 'Ethnicity');

@@ -10,18 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227180230) do
-
-  create_table "authentication_tokens", force: :cascade do |t|
-    t.string   "body"
-    t.integer  "user_id"
-    t.datetime "last_used_at"
-    t.string   "ip_address"
-    t.string   "user_agent"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
-    t.index ["user_id"], name: "index_authentication_tokens_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 20170308221430) do
 
   create_table "hlas", force: :cascade do |t|
     t.string   "indigo_id"
@@ -88,6 +77,7 @@ ActiveRecord::Schema.define(version: 20170227180230) do
     t.string   "dqa1_2"
     t.string   "drbo_1"
     t.string   "drbo_2"
+    t.string   "site_sample_id"
   end
 
   create_table "keys", force: :cascade do |t|

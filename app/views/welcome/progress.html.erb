@@ -24,10 +24,11 @@
 
 <script type="text/javascript">
 
-var dataMatrix = [['Disease', 'Multiple Sclerosis', 'Parkinson\'s Disease', 'Neuromyelitis Optica', 'Myasthenia Gravis', 'Schizophrenia', 'Healthy Control']];
+var dataMatrix = [['Disease', 'Healthy Control', 'Parkinson\'s Disease', 'Parkinson\'s/Healthy Control Mixed', 'Myasthenia Gravis', 'MS trios', 'Multiple Sclerosis', 'MS families']];
 
 $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %>')
   .done(function(data) {
+    console.log(data)
     var timepoints = {};
     for (key in data) { // each key is a stringified array that needs to be parsed before using data. key[0] contains the disease code, key[1] contains the date. the value is the number of samples processed. eg. data = {[scz, 05 Dec 2016]: 2500}
       var parsedKey = JSON.parse(key)
@@ -36,23 +37,26 @@ $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %
       }
       var d = timepoints[parsedKey[1]];
       switch (parsedKey[0]) {
-        case 'ms':
+        case 'HC':
           d[1] = data[key];
           break;
         case 'PD':
           d[2] = data[key];
           break;
-        case 'nmo':
+        case 'PD/HC mixed':
           d[3] = data[key];
           break;
-        case 'mg':
+        case 'MG':
           d[4] = data[key];
           break;
-        case 'scz':
+        case 'MS trios':
           d[5] = data[key];
           break;
-        case 'control':
+        case 'MS':
           d[6] = data[key];
+          break;
+        case 'MS families':
+          d[7] = data[key];
           break;
       }
     }
@@ -67,20 +71,21 @@ google.charts.load('current', {packages:['corechart']});
 google.charts.setOnLoadCallback(drawColChart);
 
 function drawColChart() {
-  // var data = google.visualization.arrayToDataTable(dataMatrix) use this to populate data table with actual project data. Below is hard coded for demonstration purposes
-  var data = google.visualization.arrayToDataTable([
-    ['Disease', 'Multiple Sclerosis', 'Parkinson\'s Disease', 'Neuromyelitis Optica', 'Myasthenia Gravis', 'Schizophrenia', 'Healthy Control'],
-    ['10/2016', 75, 110, 130, 140, 45, 150],
-    ['11/2016', 90, 125, 140, 160, 150, 175],
-    ['12/2016', 150, 100, 125, 130, 240, 225]
-  ]);
+  var data = google.visualization.arrayToDataTable(dataMatrix); //use this to populate data table with actual project data. Below is hard coded for demonstration purposes
+  // var data = google.visualization.arrayToDataTable([
+  //   ['Disease', 'Multiple Sclerosis', 'Parkinson\'s Disease', 'Neuromyelitis Optica', 'Myasthenia Gravis', 'Schizophrenia', 'Healthy Control'],
+  //   ['10/2016', 75, 110, 130, 140, 45, 150],
+  //   ['11/2016', 90, 125, 140, 160, 150, 175],
+  //   ['12/2016', 150, 100, 125, 130, 240, 225]
+  // ]);
 
   var options = {
     isStacked: true,
     legend: {position: 'right', maxLines:1},
     bar: {groupWidth: '75%'},
-    title: "Samples Processed",
-    titleTextStyle: {bold:true, fontSize:16}
+    title: "Samples in process at Stanford",
+    titleTextStyle: {bold:true, fontSize:16},
+    width: '100%'
   }
 
   var chart = new google.visualization.ColumnChart(document.getElementById('progress-cols'));
