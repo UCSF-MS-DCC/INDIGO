@@ -31,7 +31,7 @@ class KeysController < ApplicationController
 
               @sample = Sample.create(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"],
               indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
-              age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%d %B %Y'),
+              age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%B %d %Y'),
               site_sample_id: sample_data["Sample Source ID"],idr_id: @idr.id)
 
               if @sample.save #attempts to save the idr model to the db

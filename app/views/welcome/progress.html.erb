@@ -28,15 +28,15 @@ var dataMatrix = [['Disease', 'Healthy Control', 'Parkinson\'s Disease', 'Parkin
 
 $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %>')
   .done(function(data) {
-    console.log(data)
+    // console.log(data)
     var timepoints = {};
     for (key in data) { // each key is a stringified array that needs to be parsed before using data. key[0] contains the disease code, key[1] contains the date. the value is the number of samples processed. eg. data = {[scz, 05 Dec 2016]: 2500}
-      var parsedKey = JSON.parse(key)
+      var parsedKey = JSON.parse(key) //once key is parsed, it will be an array with two elements. parsedKey[0] is a string containing a disease abbreviation, used by the switch statement below. parsedKey[1] is the date, used by the graph to organize the data into columns.
       if (!timepoints[parsedKey[1]]) {
-        timepoints[parsedKey[1]] = [parsedKey[1], 0, 0, 0, 0, 0, 0];
+        timepoints[parsedKey[1]] = [parsedKey[1], 0, 0, 0, 0, 0, 0, 0];//each element in the dataMatrix is an array containing the date the sample data was uploaded and a series of numbers representing the number of samples of each disease in the uploaded manifests.
       }
       var d = timepoints[parsedKey[1]];
-      switch (parsedKey[0]) {
+      switch (parsedKey[0]) { //the switch statement updates the value of timepoints[date], aka 'd', with the correct # of samples in process for each disease.
         case 'HC':
           d[1] = data[key];
           break;
@@ -61,26 +61,31 @@ $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %
       }
     }
     for (date in timepoints) {
-      dataMatrix.push(timepoints[date]); //creates a 2d matrix formatted to be used by the chart function below
+      dataMatrix.push(timepoints[date]); //adds to a 2d matrix formatted to be used by the chart function below
     }
 
   });
-
+// console.log(dataMatrix)
 google.charts.load('current', {packages:['corechart']});
 
 google.charts.setOnLoadCallback(drawColChart);
 
 function drawColChart() {
-  var data = google.visualization.arrayToDataTable(dataMatrix); //use this to populate data table with actual project data. Below is hard coded for demonstration purposes
-  // var data = google.visualization.arrayToDataTable([
-  //   ['Disease', 'Multiple Sclerosis', 'Parkinson\'s Disease', 'Neuromyelitis Optica', 'Myasthenia Gravis', 'Schizophrenia', 'Healthy Control'],
-  //   ['10/2016', 75, 110, 130, 140, 45, 150],
-  //   ['11/2016', 90, 125, 140, 160, 150, 175],
-  //   ['12/2016', 150, 100, 125, 130, 240, 225]
-  // ]);
+  // var data = google.visualization.arrayToDataTable(dataMatrix);
+
+  var data = new google.visualization.DataTable()
+  data.addColumn('string', 'Date');
+  data.addColumn('number', 'Healthy Control');
+  data.addColumn('number', 'Parkinson\'s Disease');
+  data.addColumn('number', 'Parkinson\'s/Healthy Control Mixed');
+  data.addColumn('number', 'Myasthenia Gravis');
+  data.addColumn('number', 'MS trios');
+  data.addColumn('number', 'Multiple Sclerosis');
+  data.addColumn('number', 'MS families');
+  data.addRow(dataMatrix[1]);
 
   var options = {
-    isStacked: true,
+    isStacked: false,
     legend: {position: 'right', maxLines:1},
     bar: {groupWidth: '75%'},
     title: "Samples in process at Stanford",
