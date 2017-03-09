@@ -24,6 +24,8 @@
 
 <script type="text/javascript">
 
+google.charts.load('current', {packages:['corechart']});
+
 var dataMatrix = [['Disease', 'Healthy Control', 'Parkinson\'s Disease', 'Parkinson\'s/Healthy Control Mixed', 'Myasthenia Gravis', 'MS trios', 'Multiple Sclerosis', 'MS families']];
 
 $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %>')
@@ -64,36 +66,35 @@ $.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %
       dataMatrix.push(timepoints[date]); //adds to a 2d matrix formatted to be used by the chart function below
     }
 
-  });
-// console.log(dataMatrix)
-google.charts.load('current', {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawColChart);
 
-google.charts.setOnLoadCallback(drawColChart);
+    function drawColChart() {
+      // var data = google.visualization.arrayToDataTable(dataMatrix);
 
-function drawColChart() {
-  // var data = google.visualization.arrayToDataTable(dataMatrix);
+      var data = new google.visualization.DataTable()
+      data.addColumn('string', 'Date');
+      data.addColumn('number', 'Healthy Control');
+      data.addColumn('number', 'Parkinson\'s Disease');
+      data.addColumn('number', 'Parkinson\'s/Healthy Control Mixed');
+      data.addColumn('number', 'Myasthenia Gravis');
+      data.addColumn('number', 'MS trios');
+      data.addColumn('number', 'Multiple Sclerosis');
+      data.addColumn('number', 'MS families');
+      data.addRow(dataMatrix[1]);
 
-  var data = new google.visualization.DataTable()
-  data.addColumn('string', 'Date');
-  data.addColumn('number', 'Healthy Control');
-  data.addColumn('number', 'Parkinson\'s Disease');
-  data.addColumn('number', 'Parkinson\'s/Healthy Control Mixed');
-  data.addColumn('number', 'Myasthenia Gravis');
-  data.addColumn('number', 'MS trios');
-  data.addColumn('number', 'Multiple Sclerosis');
-  data.addColumn('number', 'MS families');
-  data.addRow(dataMatrix[1]);
+      var options = {
+        isStacked: false,
+        legend: {position: 'right', maxLines:1},
+        bar: {groupWidth: '75%'},
+        title: "Samples in process at Stanford",
+        titleTextStyle: {bold:true, fontSize:16},
+        width: '100%'
+      }
 
-  var options = {
-    isStacked: false,
-    legend: {position: 'right', maxLines:1},
-    bar: {groupWidth: '75%'},
-    title: "Samples in process at Stanford",
-    titleTextStyle: {bold:true, fontSize:16},
-    width: '100%'
-  }
+      var chart = new google.visualization.ColumnChart(document.getElementById('progress-cols'));
+      chart.draw(data, options)
+    }
+  }); //end .done callback
 
-  var chart = new google.visualization.ColumnChart(document.getElementById('progress-cols'));
-  chart.draw(data, options)
-}
+
 </script>
