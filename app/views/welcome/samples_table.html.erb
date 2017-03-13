@@ -1,0 +1,51 @@
+<div class="container animated fadeIn welcome-contain">
+
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-top:1px solid #696969;">
+      <ul style="list-style:none;padding-top: 5px;padding-bottom:10px;">
+        <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path  %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "Progress", welcome_progress_path, :style => "font-weight:bold; color:#320b59;" %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "About", welcome_next_path %></li>
+      </ul>
+      <br>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-bottom:2px solid #696969">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Site</th>
+            <th>Disease</th>
+            <th>Samples Received by UCSF</th>
+            <th>Samples In Process at Stanford</th>
+            <th>HLA data available</th>
+            <th>KIR data available</th>
+          </tr>
+        </thead>
+        <tbody id="table-body">
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+</div>
+<script>
+  $.get("<%= Rails.application.routes.url_helpers.welcome_samples_summary_data_path %>").done(function(response) {
+    console.log(response);
+    var samples_received_total = 0; var samples_in_process_total = 0;
+    response.forEach(function(array) {
+      samples_received_total += array.samples_received_at_ucsf;
+      samples_in_process_total += array.samples_in_process_at_stanford;
+      var row = "<tr><th>"+array.source+"</th><td>"+array.disease+"</td><td>"+array.samples_received_at_ucsf+"</td><td>"+array.samples_in_process_at_stanford+"</td><td>0</td><td>0</td></tr>";
+      $('#table-body').append(row);
+    });
+
+    $('#table-body').append('<tr><th>Total</th><td></td><td>'+samples_received_total+'</td><td>'+samples_in_process_total+'</td><td></td><td></td></tr>')
+
+  })
+</script>

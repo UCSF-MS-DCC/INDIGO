@@ -24,9 +24,13 @@ class DataviewController < ApplicationController
     render json: @hlas
   end
 
+  def summary_report_to_json
+    
+  end
+
   def download_idr
     @idrs = IDR.where(sample_source: current_user.affiliation)
-    flash[:notice] = "#{@idrs.count} Indigo Data Records from #{current_user.affiliation}"
+    # flash[:notice] = "#{@idrs.count} Indigo Data Records from #{current_user.affiliation}"
     respond_to do |format|
       format.csv { send_data @idrs.to_csv }
     end

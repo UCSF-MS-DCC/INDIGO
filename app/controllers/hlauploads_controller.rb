@@ -25,15 +25,19 @@ class HlauploadsController < ApplicationController
             @idr.update(drb1_15_copies_calculated: hla_data["DRB1_15_Copies_Calculated"],
                           drb1_1: hla_data["DRB1_1"], drb1_2: hla_data["DRB1_2"], dqb1_1: hla_data["DQB1_1"], dqb1_2: hla_data["DQB1_2"],
                           dpb1_1: hla_data["DPB1_1"], dpb1_2: hla_data["DPB1_2"], a_1: hla_data["A_1"], a_2: hla_data["A_2"],
-                          b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"])
+                          b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"],
+                          dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
+                          drbo_1: hla_data["DRBo1_1"], drbo_2: hla_data["DRBo1_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"])
 
-            if Hla.where(indigo_id: hla_data["INDIGO_ID"]).exists? #checks if a Sample with this INDIGO_ID is already in the database. Currently takes no action if sample already exists. Should add to failed hlas.
-            else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
+          if Hla.where(indigo_id: hla_data["INDIGO_ID"]).exists? #checks if a Sample with this INDIGO_ID is already in the database. Currently takes no action if sample already exists. Should add to failed hlas.
+          else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
               @sample = Sample.where(indigo_id: hla_data["INDIGO_ID"])
               @hla = Hla.new( indigo_id: hla_data["INDIGO_ID"], drb1_15_copies_calculated: hla_data["DRB1_15_Copies_Calculated"],
                             drb1_1: hla_data["DRB1_1"], drb1_2: hla_data["DRB1_2"], dqb1_1: hla_data["DQB1_1"], dqb1_2: hla_data["DQB1_2"],
                             dpb1_1: hla_data["DPB1_1"], dpb1_2: hla_data["DPB1_2"], a_1: hla_data["A_1"], a_2: hla_data["A_2"],
-                            b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"], sample_id: @sample[0].id)
+                            b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"], sample_id: @sample[0].id,
+                            dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
+                            drbo_1: hla_data["DRBo1_1"], drbo_2: hla_data["DRBo1_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"])
 
               if @hla.save #attempts to save the sample model to the db
                 @number_hlas_added += 1

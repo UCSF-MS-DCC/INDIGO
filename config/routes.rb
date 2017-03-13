@@ -7,6 +7,10 @@ Rails.application.routes.draw do
 
   get 'welcome/progress_chart'
 
+  get 'welcome/samples_table'
+
+  get 'welcome/samples_summary_data'
+
   get 'kiruploads/index'
 
   get 'kiruploads/new'

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170308221430) do
+ActiveRecord::Schema.define(version: 20170313175942) do
+
+  create_table "datasets", force: :cascade do |t|
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.string   "source"
+    t.string   "disease"
+    t.integer  "samples_received_at_ucsf"
+    t.integer  "samples_in_process_at_stanford"
+    t.integer  "hlas_available"
+    t.integer  "kirs_available"
+  end
 
   create_table "hlas", force: :cascade do |t|
     t.string   "indigo_id"
@@ -36,6 +47,7 @@ ActiveRecord::Schema.define(version: 20170308221430) do
     t.string   "dqa1_2"
     t.string   "drbo_1"
     t.string   "drbo_2"
+    t.string   "dpb1_phase_ambiguities"
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
   end
 
@@ -78,6 +90,7 @@ ActiveRecord::Schema.define(version: 20170308221430) do
     t.string   "drbo_1"
     t.string   "drbo_2"
     t.string   "site_sample_id"
+    t.string   "dpb1_phase_ambiguities"
   end
 
   create_table "keys", force: :cascade do |t|

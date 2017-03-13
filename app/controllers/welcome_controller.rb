@@ -8,11 +8,19 @@ class WelcomeController < ApplicationController
   def progress_chart
   end
 
+  def samples_table
+
+  end
+
   def samples_processed
     # @idrs = IDR.where(sample_source: current_user.affiliation).sort_by{ |i| [i.disease, i.created_at] }
     @Samples = Sample.group(:disease).group(:short_date).count
     render json: @Samples
+  end
 
+  def samples_summary_data
+    @datasets = Dataset.all
+    render json: @datasets
   end
 
 end

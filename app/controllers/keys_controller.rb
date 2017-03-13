@@ -15,6 +15,7 @@ class KeysController < ApplicationController
   def create #action for uploading keyfiles and parsing individual records then storing them in db.
     @failed_samples = [] #structure to hold samples that can't be saved for any reason
     @number_samples_added = 0 #counter for keeping track of samples added to db
+    @stats = {} #this datastructure will be used to update the datasets model for each sample_source
     @key = Key.new(key_params) #creating key model with imported file as the keyfile attribute value e.g. Key[:keyfile]
     if @key.save
       # :gflash => {:success => "File #{@key[:keyfile]} successfully uploaded" }
@@ -24,17 +25,21 @@ class KeysController < ApplicationController
         csv.each do |sample_data|
           if IDR.where(indigo_id: sample_data["INDIGO_ID"]).exists? #checks if an IDR with this INDIGO_ID is already in the database. Currently takes no action if sample already exists.
           else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
-            @idr = IDR.new(sample_source: sample_data["Sample source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
+            @idr = IDR.new(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
             indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
             age_at_sample: sample_data["Age at Sample"], site_sample_id: sample_data["Sample Source ID"])
-            if @idr.save
+            if @idr.save #attempts to save the idr model to the db
 
               @sample = Sample.create(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"],
               indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
               age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%B %d %Y'),
               site_sample_id: sample_data["Sample Source ID"],idr_id: @idr.id)
 
-              if @sample.save #attempts to save the idr model to the db
+              if @sample.save
+                if !@stats[sample_data["Sample Source"]]
+                  @stats[sample_data["Sample Source"]] = {n:0, disease: sample_data["Disease"]}
+                end
+                @stats[sample_data["Sample Source"]][:n] += 1
                 @number_samples_added += 1
               else# If a sample fails to be saved (for whatever reason) we let the user know.
                 @failed_samples.add(sample_data["INDIGO_ID"])
@@ -42,6 +47,14 @@ class KeysController < ApplicationController
             end #ends if @idr.save block
           end #ends the if exists? block
         end #ends the csv.each block
+        puts @stats
+        @stats.each do |k, v|
+          if Dataset.find_by(source: k) !=nil
+            Dataset.find_by(source: k).update_attributes(samples_in_process_at_stanford: v[:n], samples_received_at_ucsf: v[:n])
+          else
+            @d = Dataset.create(source: k, samples_in_process_at_stanford: v[:n], samples_received_at_ucsf: v[:n], disease: v[:disease])
+          end
+        end
       elsif @key[:keyfile].split(".")[1] == 'xlsx' #checks for excel spreadsheet file type
         excel_spreadsheet = Roo::Spreadsheet.open("#{Rails.root}/indigo_keys/#{@key.created_at.to_date}/#{@key[:keyfile]}")
         excel_spreadsheet.drop(1).each do |row| #excel_spreadsheet is an array of arrays. the first array(row) are the header names which are not needed, so the .each iteration starts with the second row
