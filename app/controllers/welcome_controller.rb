@@ -19,8 +19,18 @@ class WelcomeController < ApplicationController
   end
 
   def samples_summary_data
-    @datasets = Dataset.all
-    render json: @datasets
+    result = []
+    @datasets = Dataset.all.pluck(:disease, :source, :id)
+    @datasets.each do |d|
+      @batches = Batch.where(Dataset_id:d[2]).pluck(:hlas_available, :kirs_available, :samples_received_at_ucsf, :samples_sent_to_stanford, :id)
+      @batches.each do |b|
+        sample_count = Sample.where(batch_id:b[4]).count
+        b.push(sample_count)
+      end
+      d.push(@batches)
+      result.push(d)
+    end
+    render json: result
   end
 
 end

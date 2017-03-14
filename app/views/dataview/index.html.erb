@@ -39,7 +39,9 @@
       // console.log(samples)
 
       var dataMatrix = [];
+
       samples.forEach(function(sample) {
+
         dataMatrix.push([sample['indigo_id'], sample['site_sample_id'],sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['short_date']])
       });
       // console.log(dataMatrix);
@@ -63,15 +65,16 @@
       }
     })
     $.get('<%= Rails.application.routes.url_helpers.dataview_hlas_to_json_path %>', function(hlas){
-      console.log(hlas)
+      // console.log(hlas)
 
       var dataMatrix = [];
-      hlas.forEach(function(hla) {
+      hlas.forEach(function(hla){
+
         dataMatrix.push([hla['indigo_id'], hla['drb1_15_copies_calculated'], hla['drb1_1'], hla['drb1_2'], hla['dqb1_1'], hla['dqb1_2'],
                          hla['dpb1_1'], hla['dpb1_2'], hla['a_1'], hla['a_2'], hla['b_1'], hla['b_2'], hla['c_1'], hla['c_2'], hla['dpa1_1'],
                          hla['dpa1_2'], hla['dqa1_1'], hla['dqa1_2'], hla['drbo_1'], hla['drbo_2']])
       });
-      // console.log(dataMatrix);
+      console.log(dataMatrix[0]);
       google.charts.load('current', {'packages': ['table']});
       google.charts.setOnLoadCallback(drawTable);
 

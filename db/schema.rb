@@ -10,17 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170313175942) do
+ActiveRecord::Schema.define(version: 20170314173519) do
 
-  create_table "datasets", force: :cascade do |t|
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+  create_table "batches", force: :cascade do |t|
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.string   "source"
     t.string   "disease"
-    t.integer  "samples_received_at_ucsf"
-    t.integer  "samples_in_process_at_stanford"
+    t.string   "samples_received_at_ucsf"
+    t.string   "samples_sent_to_stanford"
     t.integer  "hlas_available"
     t.integer  "kirs_available"
+    t.integer  "dataset_id"
+    t.index ["dataset_id"], name: "index_batches_on_dataset_id"
+  end
+
+  create_table "datasets", force: :cascade do |t|
+    t.string   "source"
+    t.integer  "expected_discovery"
+    t.string   "disease"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
   end
 
   create_table "hlas", force: :cascade do |t|
@@ -173,6 +183,8 @@ ActiveRecord::Schema.define(version: 20170313175942) do
     t.string   "race"
     t.integer  "idr_id"
     t.string   "short_date"
+    t.integer  "batch_id"
+    t.index ["batch_id"], name: "index_samples_on_batch_id"
     t.index ["idr_id"], name: "index_samples_on_idr_id"
   end
 

@@ -15,9 +15,9 @@
   <div class="row">
     <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-bottom:2px solid #696969">
       <table class="table table-bordered">
-        <thead>
+        <thead style="background-color:skyblue;">
           <tr>
-            <th>Site</th>
+            <th>Source</th>
             <th>Disease</th>
             <th>Samples Received by UCSF</th>
             <th>Samples In Process at Stanford</th>
@@ -25,7 +25,7 @@
             <th>KIR data available</th>
           </tr>
         </thead>
-        <tbody id="table-body">
+        <tbody id="table-body" style="background-color:white;">
         </tbody>
       </table>
       <br>
@@ -37,15 +37,19 @@
 <script>
   $.get("<%= Rails.application.routes.url_helpers.welcome_samples_summary_data_path %>").done(function(response) {
     console.log(response);
-    var samples_received_total = 0; var samples_in_process_total = 0;
+    var samples_received_total = 0; var samples_in_process_total = 0; var hlas_available_total = 0; var kirs_available_total = 0;
     response.forEach(function(array) {
       samples_received_total += array.samples_received_at_ucsf;
       samples_in_process_total += array.samples_in_process_at_stanford;
-      var row = "<tr><th>"+array.source+"</th><td>"+array.disease+"</td><td>"+array.samples_received_at_ucsf+"</td><td>"+array.samples_in_process_at_stanford+"</td><td>0</td><td>0</td></tr>";
+      hlas_available_total += array.hlas_available;
+      kirs_available_total += array.kirs_available;
+      var hla_count = array.hlas_available ? array.hlas_available : 0
+      var kir_count = array.kirs_available ? array.kirs_available : 0
+      var row = "<tr><th>"+array.source+"</th><td>"+array.disease+"</td><td>"+array.samples_received_at_ucsf+"</td><td>"+array.samples_in_process_at_stanford+"</td><td>"+hla_count+"</td><td>"+kir_count+"</td></tr>";
       $('#table-body').append(row);
     });
 
-    $('#table-body').append('<tr><th>Total</th><td></td><td>'+samples_received_total+'</td><td>'+samples_in_process_total+'</td><td></td><td></td></tr>')
+    $('#table-body').append('<tr><th>Total</th><td style="background-color:#f6f6f6";></td><th>'+samples_received_total+'</th><th>'+samples_in_process_total+'</th><th>'+hlas_available_total+'</th><th>'+kirs_available_total+'</th></tr>')
 
   })
 </script>

@@ -3,6 +3,7 @@ class Sample < ApplicationRecord
   has_one :hla
   has_one :kir
   belongs_to :IDR
+  belongs_to :batch
 
   def self.to_csv
     CSV.generate do |csv|
