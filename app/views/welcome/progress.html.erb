@@ -43,7 +43,7 @@
 </div>
 <script>
   $.get("<%= Rails.application.routes.url_helpers.welcome_samples_summary_data_path %>").done(function(response) {
-    console.log(response);
+    console.log("Server response", response);
     var samples_received_total = 0; var samples_in_process_total = 0; var hlas_available_total = 0; var kirs_available_total = 0;
     response.forEach(function(array) {
       array[3].forEach(function(arr) {

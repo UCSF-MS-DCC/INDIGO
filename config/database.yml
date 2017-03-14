@@ -15,7 +15,7 @@ development:
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  
+
 
 production:
     adapter: postgresql
@@ -24,3 +24,4 @@ production:
     username: <%= ENV["POSTGRES_USERNAME"] %>
     password: <%= ENV["POSTGRES_PASSWORD"] %>
     timeout: 5000
+    database: deployment
