@@ -50,8 +50,6 @@ class KeysController < ApplicationController
             if @existingsample.age_at_sample == nil && @idr.age_at_sample != nil
               @existingsample.update_attributes(age_at_sample:@idr.age_at_sample)
             end
-          end
-
 
           else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
 
