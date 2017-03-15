@@ -42,21 +42,19 @@
   </div>
 </div>
 <script>
-  $.get("<%= Rails.application.routes.url_helpers.welcome_samples_summary_data_path %>").done(function(response) {
-    console.log("Server response", response);
-    var samples_received_total = 0; var samples_in_process_total = 0; var hlas_available_total = 0; var kirs_available_total = 0;
-    response.forEach(function(array) {
-      array[3].forEach(function(arr) {
-        console.log(arr[0], typeof arr[0])
-        var received = arr[2] === "in house" ? "N/A" : arr[2]
-        var hla_available = arr[0] == 0 ? "-" : arr[0];
-        var kirs_available = arr[1] == 0 ? "-" : arr[1];
-        $('#table-body').append('<tr><th>'+array[1]+'</th><td>'+array[0]+'</td><td>'+arr[5]+'</td><td>'+received+'</td><td>'+arr[3]+'</td><td>'+hla_available+'</td><td>'+kirs_available+'</td></tr>')
+  $(document).on('turbolinks:load', function() {
+    console.log("Top of script");
+    $.get({url:"<%= Rails.application.routes.url_helpers.welcome_samples_summary_data_path %>", dataType:'json'}).done(function(response) {
+      console.log("Server response", response);
+      response.forEach(function(array) {
+        array[3].forEach(function(arr) {
+          var received = arr[2] === "in house" ? "N/A" : arr[2];
+          var hla_available = arr[0] == 0 ? "-" : arr[0];
+          var kirs_available = arr[1] == 0 ? "-" : arr[1];
+          $('#table-body').append('<tr><th>'+array[1]+'</th><td>'+array[0]+'</td><td>'+arr[5]+'</td><td>'+received+'</td><td>'+arr[3]+'</td><td>'+hla_available+'</td><td>'+kirs_available+'</td></tr>')
+        })
       })
     });
-
-    // $('#table-body').append('<tr><th>Total</th><td style="background-color:#f6f6f6";></td><th>'+samples_received_total+'</th><th>'+samples_in_process_total+'</th><th>'+hlas_available_total+'</th><th>'+kirs_available_total+'</th></tr>')
-
   })
 </script>
 

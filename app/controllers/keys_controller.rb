@@ -63,8 +63,6 @@ class KeysController < ApplicationController
 
               @current_dataset_id = @dataset.id
 
-              puts @dataset.id
-
               @batch = Batch.find_by(dataset_id: @current_dataset_id, samples_received_at_ucsf: sample_data["Date Samples Received"], samples_sent_to_stanford: sample_data["Date to Stanford"])
 
               if @batch == nil
