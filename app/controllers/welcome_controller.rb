@@ -7,13 +7,15 @@ class WelcomeController < ApplicationController
 
   def progress
     @datasets = Dataset.all
+    @collaborators = Collaborator.all
   end
 
   def samples_table
   end
 
   def dataset
-    @dataset = Dataset.find(params[:dataset_id])
+    @collaborator = Collaborator.find(params[:collaborator_id])
+    @datasets = @collaborator.datasets
   end
 
   def samples_processed

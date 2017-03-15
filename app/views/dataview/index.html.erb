@@ -41,7 +41,7 @@
 
       samples.forEach(function(sample) {
 
-        dataMatrix.push([sample['indigo_id'], sample['site_sample_id'],sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['short_date']])
+        dataMatrix.push([sample['indigo_id'], sample['site_sample_id'],sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['age_of_onset'], sample['short_date']])
       });
       // console.log(dataMatrix);
       google.charts.load('current', {'packages': ['table']});
@@ -55,6 +55,7 @@
         data.addColumn('string', 'Gender');
         data.addColumn('string', 'Ethnicity');
         data.addColumn('number', 'Age at Sample');
+        data.addColumn('number', 'Age of Onset')
         data.addColumn('string', 'Date Uploaded');
         data.addRows(dataMatrix);
 

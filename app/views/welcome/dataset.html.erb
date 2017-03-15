@@ -2,43 +2,61 @@
 
   <div class="row">
     <div class="col-md-12">
-      <h2><%= @dataset.source %></h2>
+      <h2><%= @collaborator.name %></h2>
+      <h4>Proposed Cases and Controls: <%= @collaborator.expected_discovery %></h2>
     </div>
   </div>
+  <br>
+  <% if @datasets.count == 0 %>
+    <div class="row">
+      <div class="col-md-12" style="margin-top:100px;">
+        <h2 class="text-center">No Samples for <%= @collaborator.name %> Have Been Received at UCSF</h2>
+      </div>
+    </div>
+  <% else %>
+    <div class="row">
+      <div class="col-md-12">
+        <table class="table table-bordered">
+          <thead style="background-color:#bdbdbd;">
+            <th>Source</th>
+            <th>Number of Samples</th>
+            <th>Date Samples Received at UCSF</th>
+            <th>Samples To Be Sequenced For HLA, KIR, or Both</th>
+            <th>Cases</th>
+            <th>Controls</th>
+            <th>Date Samples Sent to Stanford</th>
+            <th>N of Case & Control Samples Sent to Stanford for Sequencing</th>
+            <th>N of Case & Control Raw Data Received at UCSF For Genotype Calling (KIR only)</th>
+            <th>N of Case & Control Genotypes Finished, with Version Indicated</th>
+            <th>GWAS Dataset Received at UCSF, % of HLA/KIR Samples Covered By GWAS</th>
+          </thead>
+          <tbody>
+            <% @datasets.each do |d| %>
+              <% d.batches.each do |b| %>
+                <tr>
+                  <td><%= d.source %></td>
+                  <td><%= b.samples.count %></td>
+                  <td><%= b.samples_received_at_ucsf %></td>
+                  <td><%= @collaborator.sequence_type %></td>
+                  <td><%= b.cases %></td>
+                  <td><%= b.controls %></td>
+                  <td><%= b.samples_sent_to_stanford %></td>
+                  <% if b.to_stanford %>
+                    <td><%= b.samples.count %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                  <td></td>
+                  <td></td>
+                  <td></td>
 
-  <div class="row">
-    <div class="col-md-12">
-      <table class="table table-bordered">
-        <thead>
-          <th>Proposed Cases and Controls</th>
-          <th>Date Samples Expected To Be Received at UCSF</th>
-          <th>Date Samples Received at UCSF</th>
-          <th>Date Samples Expected To Be Sent to Stanford</th>
-          <th>Date Samples Sent to Stanford</th>
-          <th>Samples To Be Sequenced For HLA, KIR, or Both</th>
-          <th>N of Case & Control Samples Sent to Stanford for Sequencing</th>
-          <th>N of Case & Control Raw Data Received at UCSF For Genotype Calling (KIR only)</th>
-          <th>N of Case & Control Genotypes Finished, with Version Indicated</th>
-          <th>GWAS Dataset Received at UCSF, % of HLA/KIR Samples Covered By GWAS</th>
-        </thead>
-        <tbody>
-          <% @dataset.batches.each do |b| %>
-            <tr>
-              <td></td>
-              <td></td>
-              <td><%= b.samples_received_at_ucsf %></td>
-              <td></td>
-              <td><%= b.samples_sent_to_stanford %></td>
-              <td></td>
-              <td><%= b.samples.count %></td>
-              <td></td>
-              <td></td>
-              <td></td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
-  </div>
+  <% end %>
 
 </div>

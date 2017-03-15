@@ -23,36 +23,55 @@
       <table class="table table-bordered">
         <thead style="background-color:skyblue;">
           <tr>
-            <th>Source <br> click for more information</th>
+            <th>Source <br> (click for information on received samples)</th>
             <th>Disease</th>
+            <th>Proposed Cases and Controls</th>
             <th>Samples Received</th>
-            <th>Date Received by UCSF</th>
-            <th>Date Sent to Stanford</th>
-            <th>HLA data available</th>
-            <th>KIR data available</th>
+            <th>Samples Received/Proposed Cases & Controls</th>
+            <th>Samples Sent to Stanford/Proposed Cases & Controls</th>
+            <th>HLA genotypes available</th>
+            <th>KIR genotypes available</th>
           </tr>
         </thead>
         <tbody id="table-body" style="background-color:white;">
-          <% @datasets.each do |d| %>
-            <% d.batches.each do |b| %>
+          <% @collaborators.each do |c| %>
               <tr>
-                <td><%= link_to d.source, welcome_dataset_path(dataset_id:d.id) %></td>
-                <td><%= d.disease %></td>
-                <td><%= b.samples.count %></td>
-                <td><%= b.samples_received_at_ucsf %></td>
-                <td><%= b.samples_sent_to_stanford %></td>
-                <% if b.hlas_available == 0 %>
-                  <td>-</td>
+                <td><%= link_to c.name, welcome_dataset_path(collaborator_id:c.id) %></td>
+                <td><%= c.disease %></td>
+                <td><%= c.expected_discovery %></td>
+                <% if c.datasets.count > 0 %>
+                  <% sample_count = 0 %>
+                    <% @d = c.datasets %>
+                    <% @d.each do |dset| %>
+                      <% @b = dset.batches %>
+                      <% @b.each do |batch| %>
+                        <% sample_count += batch.samples.count %>
+                      <% end %>
+                    <% end %>
+                  <td><%= sample_count %></td>
                 <% else %>
-                  <td><%= b.hlas_available %></td>
-                <% end %>
-                <% if b.kirs_available == 0 %>
                   <td>-</td>
-                <% else %>
-                  <td><%= b.kirs_available %></td>
                 <% end %>
+                <td></td>
+                <td></td>
+                <% if c.datasets.count > 0 %>
+                  <% hla_count = 0 %>
+                  <% @d = c.datasets %>
+                  <% @d.each do |dset| %>
+                    <% dset.batches.each do |batch| %>
+                      <% hla_count += batch.hlas_available %>
+                    <% end %>
+                  <% end %>
+                  <% if hla_count > 0 %>
+                    <td><%= hla_count %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                <% else %>
+                  <td>-</td>
+                <% end %>
+                <td></td>
               </tr>
-            <% end %>
           <% end %>
         </tbody>
       </table>

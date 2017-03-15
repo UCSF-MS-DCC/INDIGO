@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170314173519) do
+ActiveRecord::Schema.define(version: 20170315224749) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",               null: false
@@ -22,7 +22,21 @@ ActiveRecord::Schema.define(version: 20170314173519) do
     t.integer  "hlas_available"
     t.integer  "kirs_available"
     t.integer  "dataset_id"
+    t.boolean  "to_stanford"
+    t.integer  "cases"
+    t.integer  "controls"
     t.index ["dataset_id"], name: "index_batches_on_dataset_id"
+  end
+
+  create_table "collaborators", force: :cascade do |t|
+    t.string   "name"
+    t.string   "location"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.integer  "expected_discovery"
+    t.string   "demographic"
+    t.string   "disease"
+    t.string   "sequence_type"
   end
 
   create_table "datasets", force: :cascade do |t|
@@ -31,6 +45,9 @@ ActiveRecord::Schema.define(version: 20170314173519) do
     t.string   "disease"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.integer  "collaborator_id"
+    t.string   "population"
+    t.index ["collaborator_id"], name: "index_datasets_on_collaborator_id"
   end
 
   create_table "hlas", force: :cascade do |t|
@@ -101,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170314173519) do
     t.string   "drbo_2"
     t.string   "site_sample_id"
     t.string   "dpb1_phase_ambiguities"
+    t.integer  "age_of_onset"
   end
 
   create_table "keys", force: :cascade do |t|
@@ -184,6 +202,7 @@ ActiveRecord::Schema.define(version: 20170314173519) do
     t.integer  "idr_id"
     t.string   "short_date"
     t.integer  "batch_id"
+    t.integer  "age_of_onset"
     t.index ["batch_id"], name: "index_samples_on_batch_id"
     t.index ["idr_id"], name: "index_samples_on_idr_id"
   end

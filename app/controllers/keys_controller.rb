@@ -27,7 +27,8 @@ class KeysController < ApplicationController
         csv.each do |sample_data|
           @idr = IDR.new(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
           indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
-          age_at_sample: sample_data["Age at Sample"], site_sample_id: sample_data["Sample Source ID"])
+          age_at_sample: sample_data["Age at Sample"], site_sample_id: sample_data["Sample Source ID"],
+          age_of_onset: sample_data["Age Of Onset"])
 
           if IDR.find_by(indigo_id: sample_data["INDIGO_ID"]) != nil #checks if an IDR with this INDIGO_ID is already in the database.
             @existingidr = IDR.find_by(indigo_id: sample_data["INDIGO_ID"])
@@ -41,6 +42,9 @@ class KeysController < ApplicationController
             if @existingidr.age_at_sample == nil && @idr.age_at_sample != nil
               @existingidr.update_attributes(age_at_sample:@idr.age_at_sample)
             end
+            if @existingidr.age_of_onset == nil && @idr.age_of_onset != nil
+              @existingidr.update_attributes(age_of_onset:@idr.age_of_onset)
+            end
             if @existingsample.ethnicity == nil && @idr.ethnicity != nil
               @existingsample.update_attributes(ethnicity:@idr.ethnicity)
             end
@@ -49,6 +53,9 @@ class KeysController < ApplicationController
             end
             if @existingsample.age_at_sample == nil && @idr.age_at_sample != nil
               @existingsample.update_attributes(age_at_sample:@idr.age_at_sample)
+            end
+            if @existingsample.age_of_onset == nil && @idr.age_of_onset != nil
+              @existingsample.update_attributes(age_of_onset:@idr.age_of_onset)
             end
 
           else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
@@ -73,7 +80,8 @@ class KeysController < ApplicationController
               @sample = Sample.new(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"],
               indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
               age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%B %d %Y'),
-              site_sample_id: sample_data["Sample Source ID"],idr_id: @idr.id, batch_id: @current_batch_id)
+              site_sample_id: sample_data["Sample Source ID"],idr_id: @idr.id, batch_id: @current_batch_id,
+              age_of_onset: sample_data["Age of Onset"])
 
               if @sample.save
                 @number_samples_added += 1
