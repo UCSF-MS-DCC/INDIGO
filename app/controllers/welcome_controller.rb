@@ -10,7 +10,10 @@ class WelcomeController < ApplicationController
   end
 
   def samples_table
+  end
 
+  def dataset
+    @dataset = Dataset.find(params[:dataset_id])
   end
 
   def samples_processed

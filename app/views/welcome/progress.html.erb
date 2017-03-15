@@ -1,7 +1,7 @@
-<div class="container animated fadeIn welcome-contain">
+<div class="container welcome-contain">
 
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-top:1px solid #696969;">
+    <div class="col-md-12" style="background-color:#f6f6f6;border-top:1px solid #696969;">
       <ul style="list-style:none;padding-top: 5px;padding-bottom:10px;">
         <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path  %></li>
         <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path %></li>
@@ -12,14 +12,14 @@
   </div>
 
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1"  style="background-color:#f6f6f6;">
+    <div class="col-md-12"  style="background-color:#f6f6f6;">
       <h1>Progress of Sample Processing</h1>
       <br>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-bottom:2px solid #696969">
+    <div class="col-md-12" style="background-color:#f6f6f6;border-bottom:2px solid #696969">
       <table class="table table-bordered">
         <thead style="background-color:skyblue;">
           <tr>
@@ -36,7 +36,7 @@
           <% @datasets.each do |d| %>
             <% d.batches.each do |b| %>
               <tr>
-                <td><%= d.source %></td>
+                <td><%= link_to d.source, welcome_dataset_path(dataset_id:d.id) %></td>
                 <td><%= d.disease %></td>
                 <td><%= b.samples.count %></td>
                 <td><%= b.samples_received_at_ucsf %></td>
@@ -62,121 +62,3 @@
     </div>
   </div>
 </div>
-<!-- <script>
-  $(document).on('turbolinks:load', function() {
-    console.log("Top of script");
-    $.get({url:"<%= Rails.application.routes.url_helpers.welcome_samples_summary_data_path %>", dataType:'json'}).done(function(response) {
-      console.log("Server response", response);
-      response.forEach(function(array) {
-        array[3].forEach(function(arr) {
-          var received = arr[2] === "in house" ? "N/A" : arr[2];
-          var hla_available = arr[0] == 0 ? "-" : arr[0];
-          var kirs_available = arr[1] == 0 ? "-" : arr[1];
-          $('#table-body').append('<tr><th>'+array[1]+'</th><td>'+array[0]+'</td><td>'+arr[5]+'</td><td>'+received+'</td><td>'+arr[3]+'</td><td>'+hla_available+'</td><td>'+kirs_available+'</td></tr>')
-        })
-      })
-    });
-  })
-</script> -->
-
-
-<!-- <div class="container animated fadeIn welcome-contain">
-
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-top:1px solid #696969;">
-      <ul style="list-style:none;padding-top: 5px;padding-bottom:10px;">
-        <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path  %></li>
-        <li style="float:right;padding-left:10px;"><%= link_to "Collaborators", welcome_collaborators_path %></li>
-        <li style="float:right;padding-left:10px;"><%= link_to "Progress", welcome_progress_path, :style => "font-weight:bold; color:#320b59;" %></li>
-        <li style="float:right;padding-left:10px;"><%= link_to "About", welcome_next_path %></li>
-      </ul>
-      <br>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-sm-10 col-sm-offset-1" style="background-color:#f6f6f6;border-bottom:2px solid #696969">
-      <div id="progress-cols" style="height:500px;border:1px solid #bdbdbd"></div>
-      <br>
-      <br>
-      <br>
-    </div>
-  </div>
-</div>
-
-<script type="text/javascript">
-
-google.charts.load('current', {packages:['corechart']});
-
-var dataMatrix = [['Disease', 'Healthy Control', 'Parkinson\'s Disease', 'Parkinson\'s/Healthy Control Mixed', 'Myasthenia Gravis', 'MS trios', 'Multiple Sclerosis', 'MS families']];
-
-$.get('<%= Rails.application.routes.url_helpers.welcome_samples_processed_path %>')
-  .done(function(data) {
-    // console.log(data)
-    var timepoints = {};
-    for (key in data) { // each key is a stringified array that needs to be parsed before using data. key[0] contains the disease code, key[1] contains the date. the value is the number of samples processed. eg. data = {[scz, 05 Dec 2016]: 2500}
-      var parsedKey = JSON.parse(key) //once key is parsed, it will be an array with two elements. parsedKey[0] is a string containing a disease abbreviation, used by the switch statement below. parsedKey[1] is the date, used by the graph to organize the data into columns.
-      if (!timepoints[parsedKey[1]]) {
-        timepoints[parsedKey[1]] = [parsedKey[1], 0, 0, 0, 0, 0, 0, 0];//each element in the dataMatrix is an array containing the date the sample data was uploaded and a series of numbers representing the number of samples of each disease in the uploaded manifests.
-      }
-      var d = timepoints[parsedKey[1]];
-      switch (parsedKey[0]) { //the switch statement updates the value of timepoints[date], aka 'd', with the correct # of samples in process for each disease.
-        case 'HC':
-          d[1] = data[key];
-          break;
-        case 'PD':
-          d[2] = data[key];
-          break;
-        case 'PD/HC mixed':
-          d[3] = data[key];
-          break;
-        case 'MG':
-          d[4] = data[key];
-          break;
-        case 'MS trios':
-          d[5] = data[key];
-          break;
-        case 'MS':
-          d[6] = data[key];
-          break;
-        case 'MS families':
-          d[7] = data[key];
-          break;
-      }
-    }
-    for (date in timepoints) {
-      dataMatrix.push(timepoints[date]); //adds to a 2d matrix formatted to be used by the chart function below
-    }
-
-    google.charts.setOnLoadCallback(drawColChart);
-
-    function drawColChart() {
-      // var data = google.visualization.arrayToDataTable(dataMatrix);
-
-      var data = new google.visualization.DataTable()
-      data.addColumn('string', 'Date');
-      data.addColumn('number', 'Healthy Control');
-      data.addColumn('number', 'Parkinson\'s Disease');
-      data.addColumn('number', 'Parkinson\'s/Healthy Control Mixed');
-      data.addColumn('number', 'Myasthenia Gravis');
-      data.addColumn('number', 'MS trios');
-      data.addColumn('number', 'Multiple Sclerosis');
-      data.addColumn('number', 'MS families');
-      data.addRow(dataMatrix[1]);
-
-      var options = {
-        isStacked: false,
-        legend: {position: 'right', maxLines:1},
-        bar: {groupWidth: '75%'},
-        title: "Samples in process at Stanford",
-        titleTextStyle: {bold:true, fontSize:16},
-        width: '100%'
-      }
-
-      var chart = new google.visualization.ColumnChart(document.getElementById('progress-cols'));
-      chart.draw(data, options)
-    }
-  }); //end .done callback
-
-
-</script> -->
