@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'welcome/progress_chart'
+  get 'welcome/progress'
 
   get 'welcome/samples_table'
 

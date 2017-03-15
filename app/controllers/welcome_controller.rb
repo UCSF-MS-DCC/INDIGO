@@ -5,7 +5,8 @@ class WelcomeController < ApplicationController
   def next
   end
 
-  def progress_chart
+  def progress
+    @datasets = Dataset.all
   end
 
   def samples_table
