@@ -3,9 +3,8 @@
   <div class="row">
     <ul class="list-group col-md-12" style="background-color:#ededed;border-top:1px solid #696969;border-bottom:1px solid #bdbdbd;margin-right:0px;">
       <li class="list-group-item list-group-item-dataview" style="float:left;"><a class="toggle-table" data-table="sample" style="cursor:pointer;">Samples</a></li>
-      <li class="list-group-item list-group-item-dataview" style="float:left;"><a class="toggle-table" data-table="hla" style="cursor:pointer;">HLA Data</a></li>
-      <li class="list-group-item list-group-item-dataview" style="float:left;">KIR Data</li>
-      <li class="list-group-item list-group-item-dataview" style="float:left;">Complete Data Records</li>
+      <li class="list-group-item list-group-item-dataview" style="float:left;"><a class="toggle-table" data-table="hla" style="cursor:pointer;">HLA Genotypes</a></li>
+      <li class="list-group-item list-group-item-dataview" style="float:left;">KIR Genotypes</li>
       <li class="list-group-item list-group-item-dataview" style="float:right;"><%= link_to "Download Indigo Data", dataview_download_idr_path(format:"csv") %></li>
       <!-- <li class="list-group-item list-group-item-dataview"><%= link_to "Download Sample Meta Data", dataview_download_sample_data_path(format:"csv") %></li>
       <li class="list-group-item list-group-item-dataview"><%= link_to "Download HLA Data", dataview_download_hla_data_path(format:"csv") %></li>
@@ -61,7 +60,7 @@
 
         var table = new google.visualization.Table(document.getElementById('sample_table'));
 
-        table.draw(data, {showRowNumber: false, width: '100%', page: 'enable', pageSize: 25});
+        table.draw(data, {showRowNumber: false, width: '100%', page: 'enable', pageSize: 50});
       }
     })
     $.get('<%= Rails.application.routes.url_helpers.dataview_hlas_to_json_path %>', function(hlas){
@@ -104,7 +103,7 @@
 
         var table = new google.visualization.Table(document.getElementById('hla_table'));
 
-        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25});
+        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 50});
       }
     })
   });

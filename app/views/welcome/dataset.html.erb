@@ -16,11 +16,27 @@
           <th>Date Samples Expected To Be Sent to Stanford</th>
           <th>Date Samples Sent to Stanford</th>
           <th>Samples To Be Sequenced For HLA, KIR, or Both</th>
-          <th>N of Case \& Control Samples Sent to Stanford for Sequencing</th>
-          <th>N of Case \& Control Raw Data Received at UCSF For Genotype Calling (KIR only)</th>
-          <th>N of Case \& Control Genotypes Finished, with Version Indicated</th>
-          <th>GWAS Dataset Received at UCSF, % of HLA/KIR Samples Covered By GWAS</th> 
+          <th>N of Case & Control Samples Sent to Stanford for Sequencing</th>
+          <th>N of Case & Control Raw Data Received at UCSF For Genotype Calling (KIR only)</th>
+          <th>N of Case & Control Genotypes Finished, with Version Indicated</th>
+          <th>GWAS Dataset Received at UCSF, % of HLA/KIR Samples Covered By GWAS</th>
         </thead>
+        <tbody>
+          <% @dataset.batches.each do |b| %>
+            <tr>
+              <td></td>
+              <td></td>
+              <td><%= b.samples_received_at_ucsf %></td>
+              <td></td>
+              <td><%= b.samples_sent_to_stanford %></td>
+              <td></td>
+              <td><%= b.samples.count %></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
     </div>
   </div>
