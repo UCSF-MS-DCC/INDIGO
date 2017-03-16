@@ -7,7 +7,7 @@ class WelcomeController < ApplicationController
 
   def progress
     @datasets = Dataset.all
-    @collaborators = Collaborator.all
+    @collaborators = Collaborator.all.order('disease ASC')
   end
 
   def samples_table

@@ -30,7 +30,8 @@
             <th>Samples Sent to Stanford</th>
             <th>HLA genotypes available (controls)</th>
             <th>HLA genotypes available (cases)</th>
-            <th>KIR genotypes available</th>
+            <th>KIR genotypes available (controls)</th>
+            <th>KIR genotypes available (cases)
           </tr>
         </thead>
         <tbody id="table-body" style="background-color:white;">
@@ -52,8 +53,8 @@
                         <% sample_count += batch.samples.count %>
                       <% end %>
                     <% end %>
-                  <% if sample_count > 0 && c.expected_discovery != nil %>
-                    <td><%= sample_count %> <br> <%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>% of proposed</td>
+                  <% if sample_count > 0  %>
+                    <td><%= sample_count %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
@@ -73,8 +74,8 @@
                         <% end %>
                       <% end %>
                     <% end %>
-                  <% if sample_count > 0 && c.expected_discovery != nil %>
-                    <td><%= sample_count %> <br> <%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>% of proposed</td>
+                  <% if sample_count > 0  %>
+                    <td><%= sample_count %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
@@ -115,7 +116,8 @@
                 <% else %>
                   <td>-</td>
                 <% end %>
-                <td></td>
+                <td>-</td>
+                <td>-</td>
               </tr>
           <% end %>
         </tbody>
