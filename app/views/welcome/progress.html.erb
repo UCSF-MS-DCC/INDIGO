@@ -38,8 +38,11 @@
           <% @collaborators.each do |c| %>
               <tr>
                 <td><%= link_to c.name, welcome_dataset_path(collaborator_id:c.id) %></td>
+
                 <td><%= c.disease %></td>
+
                 <td><%= c.expected_discovery %></td>
+
                 <% if c.datasets.count > 0 %>
                   <% sample_count = 0 %>
                     <% @d = c.datasets %>
@@ -53,8 +56,27 @@
                 <% else %>
                   <td>-</td>
                 <% end %>
+
+                <% if c.datasets.count > 0 %>
+                  <% sample_count = 0 %>
+                    <% @d = c.datasets %>
+                    <% @d.each do |dset| %>
+                      <% @b = dset.batches %>
+                      <% @b.each do |batch| %>
+                        <% sample_count += batch.samples.count %>
+                      <% end %>
+                    <% end %>
+                  <% if sample_count > 0 && c.expected_discovery != nil %>
+                    <td><%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>%</td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                <% else %>
+                  <td>-</td>
+                <% end %>
+
                 <td></td>
-                <td></td>
+
                 <% if c.datasets.count > 0 %>
                   <% hla_count = 0 %>
                   <% @d = c.datasets.where(disease:"HC") %>
@@ -71,6 +93,7 @@
                 <% else %>
                   <td>-</td>
                 <% end %>
+                
                 <% if c.datasets.count > 0 %>
                   <% hla_count = 0 %>
                   <% @d = c.datasets.where.not(disease:"HC") %>
