@@ -23,12 +23,12 @@
       <table class="table table-bordered">
         <thead style="background-color:skyblue;">
           <tr>
-            <th>Source <br> (click for information on received samples)</th>
+            <th>Site <br> (click for information on received samples)</th>
             <th>Disease</th>
             <th>Proposed Cases and Controls</th>
             <th>Samples Received</th>
-            <th>Samples Received/Proposed Cases & Controls</th>
-            <th>Samples Sent to Stanford/Proposed Cases & Controls</th>
+            <th>Percentage of Cases & Controls Received at UCSF</th>
+            <th>Percentage of Cases & Controls Sent to Stanford</th>
             <th>HLA genotypes available (controls)</th>
             <th>HLA genotypes available (cases)</th>
             <th>KIR genotypes available</th>
@@ -43,6 +43,7 @@
 
                 <td><%= c.expected_discovery %></td>
 
+        <!-- calculate samples received -->
                 <% if c.datasets.count > 0 %>
                   <% sample_count = 0 %>
                     <% @d = c.datasets %>
@@ -57,6 +58,7 @@
                   <td>-</td>
                 <% end %>
 
+        <!-- calculate percentage of cases and controls received -->
                 <% if c.datasets.count > 0 %>
                   <% sample_count = 0 %>
                     <% @d = c.datasets %>
@@ -75,7 +77,26 @@
                   <td>-</td>
                 <% end %>
 
-                <td></td>
+        <!-- calculate percentage of cases and controls sent to Stanford for processing -->
+                <% if c.datasets.count > 0 %>
+                  <% sample_count = 0 %>
+                    <% @d = c.datasets %>
+                    <% @d.each do |dset| %>
+                      <% @b = dset.batches %>
+                      <% @b.each do |batch| %>
+                        <% if batch.to_stanford %>
+                          <% sample_count += batch.samples.count %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% if sample_count > 0 && c.expected_discovery != nil %>
+                    <td><%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>%</td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                <% else %>
+                  <td>-</td>
+                <% end %>
 
                 <% if c.datasets.count > 0 %>
                   <% hla_count = 0 %>
@@ -93,7 +114,7 @@
                 <% else %>
                   <td>-</td>
                 <% end %>
-                
+
                 <% if c.datasets.count > 0 %>
                   <% hla_count = 0 %>
                   <% @d = c.datasets.where.not(disease:"HC") %>
