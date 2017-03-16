@@ -26,9 +26,8 @@
             <th>Site <br> (click for information on received samples)</th>
             <th>Disease</th>
             <th>Proposed Cases and Controls</th>
-            <th>Samples Received</th>
-            <th>Percentage of Proposed Cases & Controls Received at UCSF</th>
-            <th>Percentage of Proposed Cases & Controls Sent to Stanford</th>
+            <th>Samples Received at UCSF</th>
+            <th>Samples Sent to Stanford</th>
             <th>HLA genotypes available (controls)</th>
             <th>HLA genotypes available (cases)</th>
             <th>KIR genotypes available</th>
@@ -43,21 +42,6 @@
 
                 <td><%= c.expected_discovery %></td>
 
-        <!-- calculate samples received -->
-                <% if c.datasets.count > 0 %>
-                  <% sample_count = 0 %>
-                    <% @d = c.datasets %>
-                    <% @d.each do |dset| %>
-                      <% @b = dset.batches %>
-                      <% @b.each do |batch| %>
-                        <% sample_count += batch.samples.count %>
-                      <% end %>
-                    <% end %>
-                  <td><%= sample_count %></td>
-                <% else %>
-                  <td>-</td>
-                <% end %>
-
         <!-- calculate percentage of cases and controls received -->
                 <% if c.datasets.count > 0 %>
                   <% sample_count = 0 %>
@@ -69,7 +53,7 @@
                       <% end %>
                     <% end %>
                   <% if sample_count > 0 && c.expected_discovery != nil %>
-                    <td><%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>%</td>
+                    <td><%= sample_count %> <br> <%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>% of proposed</td>
                   <% else %>
                     <td>-</td>
                   <% end %>
@@ -90,7 +74,7 @@
                       <% end %>
                     <% end %>
                   <% if sample_count > 0 && c.expected_discovery != nil %>
-                    <td><%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>%</td>
+                    <td><%= sample_count %> <br> <%= ((sample_count.to_f / c.expected_discovery.to_f).round(2) * 100).to_i %>% of proposed</td>
                   <% else %>
                     <td>-</td>
                   <% end %>
