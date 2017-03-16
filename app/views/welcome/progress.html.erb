@@ -29,7 +29,8 @@
             <th>Samples Received</th>
             <th>Samples Received/Proposed Cases & Controls</th>
             <th>Samples Sent to Stanford/Proposed Cases & Controls</th>
-            <th>HLA genotypes available</th>
+            <th>HLA genotypes available (controls)</th>
+            <th>HLA genotypes available (cases)</th>
             <th>KIR genotypes available</th>
           </tr>
         </thead>
@@ -56,7 +57,23 @@
                 <td></td>
                 <% if c.datasets.count > 0 %>
                   <% hla_count = 0 %>
-                  <% @d = c.datasets %>
+                  <% @d = c.datasets.where(disease:"HC") %>
+                  <% @d.each do |dset| %>
+                    <% dset.batches.each do |batch| %>
+                      <% hla_count += batch.hlas_available %>
+                    <% end %>
+                  <% end %>
+                  <% if hla_count > 0 %>
+                    <td><%= hla_count %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                <% else %>
+                  <td>-</td>
+                <% end %>
+                <% if c.datasets.count > 0 %>
+                  <% hla_count = 0 %>
+                  <% @d = c.datasets.where.not(disease:"HC") %>
                   <% @d.each do |dset| %>
                     <% dset.batches.each do |batch| %>
                       <% hla_count += batch.hlas_available %>

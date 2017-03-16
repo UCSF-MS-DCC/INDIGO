@@ -38,8 +38,16 @@
                   <td><%= b.samples.count %></td>
                   <td><%= b.samples_received_at_ucsf %></td>
                   <td><%= @collaborator.sequence_type %></td>
-                  <td><%= b.cases %></td>
-                  <td><%= b.controls %></td>
+                  <% if b.cases != nil %>
+                    <td><%= b.cases %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                  <% if b.controls != nil %>
+                    <td><%= b.controls %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
                   <td><%= b.samples_sent_to_stanford %></td>
                   <% if b.to_stanford %>
                     <td><%= b.samples.count %></td>
