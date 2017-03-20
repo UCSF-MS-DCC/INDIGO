@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170315224749) do
+ActiveRecord::Schema.define(version: 20170320223217) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",               null: false
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20170315224749) do
     t.boolean  "to_stanford"
     t.integer  "cases"
     t.integer  "controls"
+    t.integer  "male_subjects"
+    t.integer  "female_subjects"
     t.index ["dataset_id"], name: "index_batches_on_dataset_id"
   end
 
@@ -43,10 +45,22 @@ ActiveRecord::Schema.define(version: 20170315224749) do
     t.string   "source"
     t.integer  "expected_discovery"
     t.string   "disease"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.integer  "collaborator_id"
     t.string   "population"
+    t.integer  "total_samples_male"
+    t.integer  "total_samples_female"
+    t.integer  "samples_male_cases"
+    t.integer  "samples_female_cases"
+    t.integer  "samples_male_controls"
+    t.integer  "samples_female_controls"
+    t.integer  "hla_available_male_controls"
+    t.integer  "hla_available_female_controls"
+    t.integer  "kir_available_male"
+    t.integer  "kir_available_female"
+    t.integer  "hla_available_male_cases"
+    t.integer  "hla_available_female_cases"
     t.index ["collaborator_id"], name: "index_datasets_on_collaborator_id"
   end
 

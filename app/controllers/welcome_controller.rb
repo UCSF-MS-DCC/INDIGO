@@ -24,6 +24,27 @@ class WelcomeController < ApplicationController
     render json: @Samples
   end
 
+  def dataset_stats
+    @id = params[:collaborator_id].to_i
+    @Collaborator = Collaborator.find(@id)
+    response = {samples_male_cases:0, samples_female_cases: 0, samples_male_controls:0, samples_female_controls:0, hla_available_male_controls:0, hla_available_female_controls:0, hla_available_male_cases:0, hla_available_female_cases:0}
+    if @Collaborator.datasets
+      @Collaborator.datasets.all.each do |d|
+        response[:samples_male_cases] += d.samples_male_cases
+        response[:samples_female_cases] += d.samples_female_cases
+        response[:samples_male_controls] += d.samples_male_controls
+        response[:samples_female_controls] += d.samples_female_controls
+        response[:hla_available_male_controls] += d.hla_available_male_controls
+        response[:hla_available_female_controls] += d.hla_available_female_controls
+        response[:hla_available_male_cases] += d.hla_available_male_cases
+        response[:hla_available_female_cases] += d.hla_available_female_cases
+      end
+    else
+      response = {'message':'no data for this collaborator'}
+    end
+    render json: response
+  end
+
   def samples_summary_data
     respond_to do |format|
       result = []

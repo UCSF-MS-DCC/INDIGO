@@ -11,6 +11,8 @@ Rails.application.routes.draw do
 
   get 'welcome/samples_summary_data'
 
+  get 'welcome/dataset_stats'
+
   get 'welcome/dataset'
 
   get 'kiruploads/index'
