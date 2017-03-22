@@ -14,6 +14,7 @@ class WelcomeController < ApplicationController
   end
 
   def dataset
+    @collaborators = Collaborator.all
     @collaborator = Collaborator.find(params[:collaborator_id])
     @datasets = @collaborator.datasets
   end
