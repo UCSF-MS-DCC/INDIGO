@@ -97,14 +97,12 @@
 </div>
 
 <script>
+
   google.charts.load('current', { 'packages':['corechart']});
 
-
-
-    var collaborator_id = window.location.href.split('=')[1]
+    var collaborator_id = window.location.href.split('=')[1];
 
     $.get('<%= Rails.application.routes.url_helpers.welcome_dataset_stats_path %>', {collaborator_id: collaborator_id}, function(response){
-      console.log(response)
 
       var prettyPrint = {
         samples_male_cases: "male cases",
@@ -179,14 +177,12 @@
         var chart = new google.visualization.PieChart(document.getElementById('pie-chart-2'));
         chart.draw(data, options);
       }
-      google.charts.setOnLoadCallback(drawFirstChart);
-      google.charts.setOnLoadCallback(drawSecondChart);
+
+        google.charts.setOnLoadCallback(drawFirstChart);
+        google.charts.setOnLoadCallback(drawSecondChart);
+
+
+
     })
-
-    function followLink(select) {
-      var url = select.value;
-      $.get(url)
-    }
-
 
 </script>
