@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170320223217) do
+ActiveRecord::Schema.define(version: 20170323171225) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",               null: false
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170320223217) do
     t.string   "drbo_1"
     t.string   "drbo_2"
     t.string   "dpb1_phase_ambiguities"
+    t.string   "version"
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
   end
 
@@ -133,6 +134,8 @@ ActiveRecord::Schema.define(version: 20170320223217) do
     t.string   "site_sample_id"
     t.string   "dpb1_phase_ambiguities"
     t.integer  "age_of_onset"
+    t.string   "hla_version"
+    t.string   "kir_version"
   end
 
   create_table "keys", force: :cascade do |t|
@@ -180,6 +183,7 @@ ActiveRecord::Schema.define(version: 20170320223217) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "sample_id"
+    t.string   "version"
     t.index ["sample_id"], name: "index_kirs_on_sample_id"
   end
 

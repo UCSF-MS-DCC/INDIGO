@@ -1,7 +1,7 @@
 class Sample < ApplicationRecord
   validates :indigo_id, uniqueness: true
-  has_one :hla
-  has_one :kir
+  has_many :hla
+  has_many :kir
   belongs_to :IDR
   belongs_to :batch
 

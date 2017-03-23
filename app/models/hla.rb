@@ -1,5 +1,5 @@
 class Hla < ApplicationRecord
-  validates :indigo_id, uniqueness: true
+  validates :indigo_id, presence: true
   belongs_to :sample
 
   def self.to_csv
