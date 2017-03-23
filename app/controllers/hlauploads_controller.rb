@@ -20,16 +20,17 @@ class HlauploadsController < ApplicationController
         csv_text = File.read("#{Rails.root}/hlas/#{@hlaupload.created_at.to_date}/#{@hlaupload[:datafile]}") #reads the contents of the file stored on the server and stores it in a variable. File is a built-in Rails helper class with its own methods
         csv = CSV.parse(csv_text, :headers => true) #parses the text into csv rows. the :headers => true hash means that the first line of the csv_text will be treated as column names. CSV is another built-in Rails helper class
         csv.each do |hla_data|
-          if IDR.find_by(indigo_id: hla_data["INDIGO_ID"]) != nil
-            @idr = IDR.find_by(indigo_id: hla_data["INDIGO_ID"])
-            @idr.update(drb1_15_copies_calculated: hla_data["DRB1_15_Copies_Calculated"],
+          if IDR.find_by(indigo_id: hla_data["INDIGO_ID"], hla_version:nil) != nil
+            @idr = IDR.find_by(indigo_id: hla_data["INDIGO_ID"], hla_version:nil)
+            @idr.update_attributes(drb1_15_copies_calculated: hla_data["DRB1_15_Copies_Calculated"],
                           drb1_1: hla_data["DRB1_1"], drb1_2: hla_data["DRB1_2"], dqb1_1: hla_data["DQB1_1"], dqb1_2: hla_data["DQB1_2"],
                           dpb1_1: hla_data["DPB1_1"], dpb1_2: hla_data["DPB1_2"], a_1: hla_data["A_1"], a_2: hla_data["A_2"],
                           b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"],
                           dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
-                          drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"])
+                          drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"],
+                          hla_version: @hlaupload[:datafile])
 
-          if Hla.find_by(indigo_id: hla_data["INDIGO_ID"]) != nil #checks if a Sample with this INDIGO_ID is already in the database. Currently takes no action if sample already exists. Should add to failed hlas.
+          if Hla.find_by(indigo_id: hla_data["INDIGO_ID"], version: @hlaupload[:datafile]) != nil #checks if a Sample with this INDIGO_ID and version is already in the database. Currently takes no action if sample already exists. Should add to failed hlas.
           else #if a sample with this INDIGO_ID doesn't exist in the db the code below creates and saves the csv row in the db.
               @sample = Sample.find_by(indigo_id: hla_data["INDIGO_ID"])
               batch_count = @sample.batch.hlas_available
@@ -38,7 +39,8 @@ class HlauploadsController < ApplicationController
                             dpb1_1: hla_data["DPB1_1"], dpb1_2: hla_data["DPB1_2"], a_1: hla_data["A_1"], a_2: hla_data["A_2"],
                             b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"], sample_id: @sample.id,
                             dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
-                            drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"])
+                            drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"],
+                            version: @hlaupload[:datafile])
 
               if @hla.save #attempts to save the sample model to the db
                 @number_hlas_added += 1
