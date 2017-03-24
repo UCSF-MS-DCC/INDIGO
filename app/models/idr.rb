@@ -1,5 +1,4 @@
 class IDR < ApplicationRecord
-  has_one :sample
 
   def self.to_csv
     CSV.generate do |csv|
