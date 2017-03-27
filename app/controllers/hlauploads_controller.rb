@@ -21,8 +21,8 @@ class HlauploadsController < ApplicationController
         csv = CSV.parse(csv_text, :headers => true) #parses the text into csv rows. the :headers => true hash means that the first line of the csv_text will be treated as column names. CSV is another built-in Rails helper class
         csv.each do |hla_data|
 
-          @idr = IDR.find_by(indigo_id:hla_data["INDIGO_ID"], hla_version:@hlaupload.datafile.to_s)
-          @hla = Hla.find_by(indigo_id:hla_data["INDIGO_ID"], version:@hlaupload.datafile.to_s)
+          @idr = IDR.find_by(indigo_id:hla_data["INDIGO_ID"], hla_version:@hlaupload.datafile.to_s) #find an existing IDR with the uploaded indigo id and hla_version, if it exists
+          @hla = Hla.find_by(indigo_id:hla_data["INDIGO_ID"], version:@hlaupload.datafile.to_s) #find an existing Hla with the uploaded indigo id and version, if it exists
 
           if @idr == nil
             if IDR.find_by(indigo_id:hla_data["INDIGO_ID"], hla_version:nil) != nil #if an IDR exists with the indigo id and doesn't have any hla data (ie no version), update the existing idr
@@ -70,7 +70,7 @@ class HlauploadsController < ApplicationController
               # If a sample fails to be saved (for whatever reason) we let the user know.
               @failed_hlas.add(hla_data["INDIGO_ID"])
             end #close the if hla.save block
-            
+
           end #close the if @hla != nil block
         end #close the csv.each block
 

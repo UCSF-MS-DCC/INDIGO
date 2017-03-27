@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="col-md-6">
-        <h4 class="text-center">HLA Available by Gender, Cases and Controls</h4>
+        <h4 class="text-center">HLA Available by Gender, Cases and Controls of Samples Sent to Stanford for Genotyping</h4>
         <div id="pie-chart-2">
         </div>
       </div>
@@ -109,13 +109,15 @@
         samples_female_cases: "female cases",
         samples_male_controls: "male controls",
         samples_female_controls: "female controls",
+        samples_total: "total",
         hla_available_male_cases: "male cases",
         hla_available_female_cases: "female cases",
         hla_available_male_controls: "male controls",
-        hla_available_female_controls: "female controls"
+        hla_available_female_controls: "female controls",
+        hla_samples_to_stanford: "to stanford"
       }
-      var dataMatrix1 = [['Gender/Case or Control', 'Samples'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"]];
-      var dataMatrix2 = [['Gender/Case or Control', 'HLA available'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"]];
+      var dataMatrix1 = [['Gender/Case or Control', 'Samples'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ["not received"]];
+      var dataMatrix2 = [['Gender/Case or Control', 'HLA available'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ['Sample not genotyped']];
       for (key in response) {
         if (key.split('_')[0] === "samples") {
           switch(prettyPrint[key]) {
@@ -130,6 +132,9 @@
               break;
             case 'female controls':
               dataMatrix1[4].push(response[key]);
+              break;
+            case 'total':
+              dataMatrix1[5].push(response[key]);
               break;
           }
         }
@@ -147,16 +152,23 @@
             case 'female controls':
               dataMatrix2[4].push(response[key]);
               break;
+            case 'to stanford':
+              dataMatrix2[5].push(response[key]);
+              break;
           }
         }
+      }
+
+      if (dataMatrix1[5][1] < 0) {
+        dataMatrix1.pop();
       }
 
       function drawFirstChart() {
         var data = google.visualization.arrayToDataTable(dataMatrix1);
         var options = {
-          colors: ['#551a8b','#7647a2','#aa8cc5','#ccbadc'],
+          colors: ['#4c177d','#663096','#7647a2','#aa8cc5','#ccbadc'],
           pieSliceText:'value',
-          legend: { position:'bottom', alignment:'center', textStyle: {fontSize: 14} },
+          legend: { position:'bottom', alignment:'center', textStyle: {fontSize: 12}, maxLines: '2' },
           height: '350',
           chartArea: {width: '100%', height: '90%', top:'5'},
           is3D:true
@@ -167,9 +179,9 @@
       function drawSecondChart() {
         var data = google.visualization.arrayToDataTable(dataMatrix2);
         var options = {
-          colors: ['#551a8b','#7647a2','#aa8cc5','#ccbadc'],
+          colors: ['#4c177d','#663096','#7647a2','#aa8cc5','#ccbadc'],
           pieSliceText:'value',
-          legend: { position:'bottom', alignment:'center', textStyle: {fontSize: 14} },
+          legend: { position:'bottom', alignment:'center', textStyle: {fontSize: 12} },
           height: '350',
           chartArea: {width: '100%', height: '90%', top:'5'},
           is3D:true
