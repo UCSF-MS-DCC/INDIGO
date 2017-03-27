@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327182852) do
+ActiveRecord::Schema.define(version: 20170327211905) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",               null: false
@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 20170327182852) do
     t.integer  "hla_available_male_cases"
     t.integer  "hla_available_female_cases"
     t.integer  "total_samples_sent_to_stanford"
+    t.integer  "total_samples"
     t.index ["collaborator_id"], name: "index_datasets_on_collaborator_id"
   end
 

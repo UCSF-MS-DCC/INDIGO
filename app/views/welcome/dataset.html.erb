@@ -24,6 +24,12 @@
         <h2 class="text-center">No Samples for <%= @collaborator.name %> Have Been Received at UCSF</h2>
       </div>
     </div>
+  <% elsif @collaborator.name == "Michael J Fox Foundation"%>
+      <div class="row">
+        <div class="col-md-12" style="margin-top:20px;">
+          <h4 class="text-center">Phenotype data is unavailable for Michael J Fox Foundation Samples</h4>
+        </div>
+      </div>
   <% else %>
     <div class="row">
       <hr>
@@ -38,7 +44,9 @@
         </div>
       </div>
     </div>
+  <% end %>
 
+  <%if @datasets.count > 0 %>
     <hr>
 
     <div class="row">
