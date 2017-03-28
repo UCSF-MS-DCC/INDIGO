@@ -1,41 +1,53 @@
 <div class="container">
 
-  <div class="row">
+  <!-- <div class="row">
     <ul class="list-group col-md-12" style="background-color:#ededed;border-top:1px solid #696969;border-bottom:1px solid #bdbdbd;margin-right:0px;">
       <li class="list-group-item list-group-item-dataview" style="float:left;"><a class="toggle-table" data-table="sample" style="cursor:pointer;">Samples</a></li>
       <li class="list-group-item list-group-item-dataview" style="float:left;"><a class="toggle-table" data-table="hla" style="cursor:pointer;">HLA Genotypes</a></li>
       <li class="list-group-item list-group-item-dataview" style="float:left;">KIR Genotypes</li>
       <li class="list-group-item list-group-item-dataview" style="float:right;"><%= link_to "Download Indigo Data", dataview_download_idr_path(format:"csv") %></li>
-      <!-- <li class="list-group-item list-group-item-dataview"><%= link_to "Download Sample Meta Data", dataview_download_sample_data_path(format:"csv") %></li>
+      <li class="list-group-item list-group-item-dataview"><%= link_to "Download Sample Meta Data", dataview_download_sample_data_path(format:"csv") %></li>
       <li class="list-group-item list-group-item-dataview"><%= link_to "Download HLA Data", dataview_download_hla_data_path(format:"csv") %></li>
       <li class="list-group-item list-group-item-dataview"><%= link_to "Download KIR Data", dataview_download_kir_data_path(format:"csv") %></li>
-      <li class="list-group-item list-group-item-dataview"><%= link_to "Download Complete Data Records", dataview_download_idr_path(format:"csv") %><span class="badge"><%= @idrs.count %></span></li> -->
+      <li class="list-group-item list-group-item-dataview"><%= link_to "Download Complete Data Records", dataview_download_idr_path(format:"csv") %><span class="badge"><%= @idrs.count %></span></li>
     </ul>
+  </div> -->
+  <div class="row" style="background-color:#ededed;border-top:1px solid #696969;border-bottom:1px solid #ededed;">
+    <div class="col-md-12">
+      <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#sample">Samples</a></li>
+        <li><a data-toggle="tab" href="#hla">HLA</a></li>
+        <li><a data-toggle="tab" href="#kir" disabled>KIR</a></li>
+      </ul>
+    </div>
   </div>
 
-  <div class="row">
-    <div class="col-md-12 table-graph" style="background-color:#ededed;margin-top:-20px;border-top:20px solid #ededed" id="sample"><div id="sample_table"></div></div>
-    <div class="col-md-12 table-graph hide-table" style="background-color: #ededed;margin-top:-20px;border-top:20px solid #ededed" id="hla"><div id="hla_table"></div></div>
-    <div class="col-md-12 table-graph hide-table" style="background-color: #ededed;margin-top:-20px;border-top:20px solid #ededed" id="kir"><div id="kir_table"></div></div>
+  <div class="row" style="border: 1px solid #ededed; border-top:none;">
+    <div class="col-md-12 tab-content">
+      <div class="tab-pane fade in active" id="sample">
+        <h3>&nbsp;&nbsp;<%= @samples.count %> Samples for <%= current_user.affiliation %></h3>
+        <br>
+        <div id="sample_table"></div>
+      </div>
+      <div class="tab-pane fade hide-table" id="hla">
+        <h3>&nbsp;&nbsp;<%= @hlas.count %> HLA for <%= current_user.affiliation %></h3>
+        <br>
+        <div id="hla_table"></div>
+      </div>
+      <div class="tab-pane fade hide-table" id="kir">
+        <h3>&nbsp;&nbsp;<%= @kirs.count %> KIR for <%= current_user.affiliation %></h3>
+        <br>
+        <div id="kir_table"></div>
+      </div>
+    </div>
   </div>
+
 </div>
+
 <script type="text/javascript">
   $(document).ready(function(){
 
-    $('.toggle-table').on('click', function() {
-      var $clicked = $(this);
-      $('.table-graph').each(function(index, element){
-        if (element.id !== $clicked.attr("data-table")) {
-          $(element).addClass("hide-table");
-        }
-        else {
-          $(element).removeClass("hide-table");
-        }
-      });
-    })
-
     $.get('<%= Rails.application.routes.url_helpers.dataview_samples_to_json_path %>', function(samples){
-      // console.log(samples)
 
       var dataMatrix = [];
 
@@ -61,7 +73,7 @@
 
         var table = new google.visualization.Table(document.getElementById('sample_table'));
 
-        table.draw(data, {showRowNumber: false, width: '100%', page: 'enable', pageSize: 50});
+        table.draw(data, {showRowNumber: false, width: '100%', page: 'enable', pageSize: 25});
       }
     })
     $.get('<%= Rails.application.routes.url_helpers.dataview_hlas_to_json_path %>', function(hlas){
@@ -70,7 +82,7 @@
       var dataMatrix = [];
       hlas.forEach(function(hla){
 
-        dataMatrix.push([hla['indigo_id'], hla['drb1_15_copies_calculated'], hla['drb1_1'], hla['drb1_2'], hla['dqb1_1'], hla['dqb1_2'],
+        dataMatrix.push([hla['indigo_id'], hla['drb1_1'], hla['drb1_2'], hla['dqb1_1'], hla['dqb1_2'],
                          hla['dpb1_1'], hla['dpb1_2'], hla['a_1'], hla['a_2'], hla['b_1'], hla['b_2'], hla['c_1'], hla['c_2'], hla['dpa1_1'],
                          hla['dpa1_2'], hla['dqa1_1'], hla['dqa1_2'], hla['drbo_1'], hla['drbo_2']])
       });
@@ -81,7 +93,6 @@
       function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Indigo ID');
-        data.addColumn('string', 'DRB1_15 Copies Calculated');
         data.addColumn('string', 'DRB1/1');
         data.addColumn('string', 'DRB1/2');
         data.addColumn('string', 'DQB1/1');
@@ -104,7 +115,7 @@
 
         var table = new google.visualization.Table(document.getElementById('hla_table'));
 
-        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 50});
+        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25});
       }
     })
   });

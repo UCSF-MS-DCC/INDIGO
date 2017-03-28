@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170327211905) do
+ActiveRecord::Schema.define(version: 20170328183842) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",               null: false
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20170327211905) do
     t.string   "datafile"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "version"
   end
 
   create_table "idrs", force: :cascade do |t|

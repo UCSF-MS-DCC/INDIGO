@@ -15,14 +15,16 @@ class HlauploadsController < ApplicationController
     @number_hlas_added = 0 #counter for keeping track of hlas added to db
     @number_hlas_failed = 0
     @hlaupload = Hlaupload.new(hlaupload_params)
+    @hla_upload_version = @hlaupload.datafile.to_s.split('/').last
+    @hlaupload[:version] = @hla_upload_version
     if @hlaupload.save #Only try to parse the uploaded file if it was successfully uploaded!
       if @hlaupload[:datafile].split(".")[1] == 'csv' #Check to see if keyfile is a .csv file
         csv_text = File.read("#{Rails.root}/hlas/#{@hlaupload.created_at.to_date}/#{@hlaupload[:datafile]}") #Read the contents of the file stored on the server and stores it in a variable. File is a built-in Rails helper class with its own methods
         csv = CSV.parse(csv_text, :headers => true) #parses the text into csv rows. the :headers => true hash means that the first line of the csv_text will be treated as column names. CSV is another built-in Rails helper class
         csv.each do |hla_data|
 
-          @idr = IDR.find_by(indigo_id:hla_data["INDIGO_ID"], hla_version:@hlaupload.datafile.to_s) #find an existing IDR with the uploaded indigo id and hla_version, if it exists
-          @hla = Hla.find_by(indigo_id:hla_data["INDIGO_ID"], version:@hlaupload.datafile.to_s) #find an existing Hla with the uploaded indigo id and version, if it exists
+          @idr = IDR.find_by(indigo_id:hla_data["INDIGO_ID"], hla_version:@hlaupload_upload_version) #find an existing IDR with the uploaded indigo id and hla_version, if it exists
+          @hla = Hla.find_by(indigo_id:hla_data["INDIGO_ID"], version:@hlaupload_upload_version) #find an existing Hla with the uploaded indigo id and version, if it exists
 
           if @idr == nil
             if IDR.find_by(indigo_id:hla_data["INDIGO_ID"], hla_version:nil) != nil #if an IDR exists with the indigo id and doesn't have any hla data (ie no version), update the existing idr
@@ -33,7 +35,7 @@ class HlauploadsController < ApplicationController
                             b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"],
                             dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
                             drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"],
-                            hla_version: @hlaupload[:datafile.to_s])
+                            hla_version: @hlaupload_version)
 
             elsif IDR.where(indigo_id:hla_data["INDIGO_ID"]).count > 0 #if there is an IDR with the same indigo id, create a new one with the uploaded hla data
               @existing_idr = IDR.find_by(indigo_id:hla_data["INDIGO_ID"])
@@ -47,7 +49,7 @@ class HlauploadsController < ApplicationController
                             b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"],
                             dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
                             drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"],
-                            hla_version: @hlaupload[:datafile.to_s])
+                            hla_version: @hlaupload_version)
             else #no action here
             end
           end #close if @idr == nil block
@@ -95,14 +97,16 @@ class HlauploadsController < ApplicationController
               end
             end
           end
-        end #ends the if @hla[:datafile].split block
+        end #close the if @hla[:datafile].split block
       if @failed_hlas.size > 0
         flash[:notice] = "#{@failed_hlas.size} samples failed to load and were not saved"
       end
       flash[:notice] = "#{@number_hlas_added} hlas added to database"
-    end #ends the if @hla.save block.
+    else
+      flash[:error] = "This spreadsheet has already been uploaded"
+    end #close the if @hla.save block.
     redirect_to new_hlaupload_path
-  end #ends the create method
+  end #close the create method
 
   def destroy
   end

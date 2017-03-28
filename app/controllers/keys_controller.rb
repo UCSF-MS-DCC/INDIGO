@@ -29,10 +29,11 @@ class KeysController < ApplicationController
           indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
           age_at_sample: sample_data["Age at Sample"], site_sample_id: sample_data["Sample Source ID"],
           age_of_onset: sample_data["Age Of Onset"])
-
+          
+          #this section is concerned with updating existing IDR and Sample records that have missing data.
           if IDR.find_by(indigo_id: sample_data["INDIGO_ID"]) != nil #checks if an IDR with this INDIGO_ID is already in the database.
             @existingidr = IDR.find_by(indigo_id: sample_data["INDIGO_ID"])
-            @existingsample = @existingidr.sample
+            @existingsample = Sample.find_by(indigo_id: sample_data["INDIGO_ID"])
             if @existingidr.ethnicity == nil && @idr.ethnicity != nil
               @existingidr.update_attributes(ethnicity:@idr.ethnicity)
             end
