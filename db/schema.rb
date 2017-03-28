@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328183842) do
+ActiveRecord::Schema.define(version: 20170328225814) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",               null: false
@@ -226,6 +226,18 @@ ActiveRecord::Schema.define(version: 20170328183842) do
     t.integer  "age_of_onset"
     t.index ["batch_id"], name: "index_samples_on_batch_id"
     t.index ["idr_id"], name: "index_samples_on_idr_id"
+  end
+
+  create_table "upload_reports", force: :cascade do |t|
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "file"
+    t.integer  "uploads"
+    t.integer  "failed_uploads"
+    t.string   "upload_type"
+    t.integer  "uploaded_by"
+    t.integer  "duplicate_hlas"
+    t.boolean  "duplicate_upload"
   end
 
   create_table "users", force: :cascade do |t|

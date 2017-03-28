@@ -1,0 +1,2 @@
+class UploadReport < ApplicationRecord
+end

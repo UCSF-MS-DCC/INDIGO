@@ -55,6 +55,8 @@ Rails.application.routes.draw do
 
   get 'profiles/show'
 
+  get 'upload_reports/display'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   get 'welcome/index'

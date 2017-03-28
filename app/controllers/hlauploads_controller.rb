@@ -11,12 +11,16 @@ class HlauploadsController < ApplicationController
   end
 
   def create #action for uploading keyfiles and parsing individual records then storing them in db.
-    @failed_hlas = [] #structure to hold samples that can't be saved for any reason
-    @number_hlas_added = 0 #counter for keeping track of hlas added to db
-    @number_hlas_failed = 0
+
     @hlaupload = Hlaupload.new(hlaupload_params)
     @hla_upload_version = @hlaupload.datafile.to_s.split('/').last
     @hlaupload[:version] = @hla_upload_version
+    @failed_hlas = [] #structure to hold samples that can't be saved for any reason
+    @number_hlas_added = 0 #counter for keeping track of hlas added to db
+    @number_hlas_failed = 0
+    @number_duplicate_hlas = 0
+    @attempted_duplicate_upload = false
+
     if @hlaupload.save #Only try to parse the uploaded file if it was successfully uploaded!
       if @hlaupload[:datafile].split(".")[1] == 'csv' #Check to see if keyfile is a .csv file
         csv_text = File.read("#{Rails.root}/hlas/#{@hlaupload.created_at.to_date}/#{@hlaupload[:datafile]}") #Read the contents of the file stored on the server and stores it in a variable. File is a built-in Rails helper class with its own methods
@@ -55,7 +59,8 @@ class HlauploadsController < ApplicationController
           end #close if @idr == nil block
 
           if @hla != nil
-            @number_hlas_failed += 1 #add to failed counter if an hla exists with the same indigo id and version as the uploaded hla
+            @number_hlas_failed += 1 #increment failed counter if an hla exists with the same indigo id and version as the uploaded hla
+            @number_duplicate_hlas += 1
 
           else #if the hla with indigo id and version doesn't exist, create it and set a fk connection to the sample
             @sample = Sample.find_by(indigo_id: hla_data["INDIGO_ID"])
@@ -70,7 +75,8 @@ class HlauploadsController < ApplicationController
               @number_hlas_added += 1
             else
               # If a sample fails to be saved (for whatever reason) we let the user know.
-              @failed_hlas.add(hla_data["INDIGO_ID"])
+              @number_hlas_failed += 1
+              @failed_hlas.push(hla_data["INDIGO_ID"])
             end #close the if hla.save block
 
           end #close the if @hla != nil block
@@ -104,8 +110,19 @@ class HlauploadsController < ApplicationController
       flash[:notice] = "#{@number_hlas_added} hlas added to database"
     else
       flash[:error] = "This spreadsheet has already been uploaded"
+      @attempted_duplicate_upload = true
     end #close the if @hla.save block.
-    redirect_to new_hlaupload_path
+    @report = UploadReport.new
+    @results = {}
+    @results[:file] = @hla_upload_version
+    @results[:uploads] = @number_hlas_added
+    @results[:failed_uploads] = @number_hlas_failed
+    @results[:upload_type] = "hla"
+    @results[:uploaded_by] = current_user.id
+    @results[:duplicate_hlas] = @number_duplicate_hlas
+    @results[:duplicate_upload] = @attempted_duplicate_upload
+
+    redirect_to controller: 'upload_reports', action: 'display', id: @report.id, data:@results
   end #close the create method
 
   def destroy

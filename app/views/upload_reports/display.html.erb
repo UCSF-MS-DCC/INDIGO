@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="col-md-12">
+    <table class="table table-bordered" style="margin-top:50px;">
+      <tr>
+        <th>File</th>
+        <td><%= @u.file %></td>
+      </tr>
+      <tr>
+        <th>Upload type</th>
+        <td><%= @u.upload_type %></td>
+      </tr>
+      <tr>
+        <th>Duplicate Upload?</th>
+        <td><%= @u.duplicate_upload %></td>
+      <tr>
+        <th># Successful Uploads</th>
+        <td><%= @u.uploads %></td>
+      </tr>
+      <tr>
+        <th># Failed Uploads</th>
+        <td><%= @u.failed_uploads %></td>
+      </tr>
+      <tr>
+        <th>Duplicate HLAs</th>
+        <td><%= @u.duplicate_hlas %></td>
+      </tr>
+      <tr>
+        <th>Uploaded by</th>
+        <td><%= User.find(@u.uploaded_by).email %></td>
+      </tr>
+    </table>
+  </div>
+</div>
