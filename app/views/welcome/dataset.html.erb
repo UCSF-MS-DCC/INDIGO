@@ -59,6 +59,7 @@
             <th>Samples To Be Sequenced For HLA, KIR, or Both</th>
             <th>Cases</th>
             <th>Controls</th>
+            <th>Mixed Cases and Controls</th>
             <th>Date Samples Sent to Stanford</th>
             <th>N of Case & Control Samples Sent to Stanford for Sequencing</th>
             <th>N of Case & Control Raw Data Received at UCSF For Genotype Calling (KIR only)</th>
@@ -71,15 +72,20 @@
                 <tr>
                   <td><%= d.source %></td>
                   <td><%= b.samples.count %></td>
-                  <td><%= b.samples_received_at_ucsf %></td>
+                  <td><%= b.date_received_from_source %></td>
                   <td><%= @collaborator.sequence_type %></td>
-                  <% if b.cases != nil %>
-                    <td><%= b.cases %></td>
+                  <% if (b.samples_case_male + b.samples_case_female + b.samples_case_gender_unknown).to_i > 0 %>
+                    <td><%= (b.samples_case_male + b.samples_case_female + b.samples_case_gender_unknown).to_i %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
-                  <% if b.controls != nil %>
-                    <td><%= b.controls %></td>
+                  <% if b.samples_control_male + b.samples_control_female + b.samples_control_gender_unknown > 0 %>
+                    <td><%= (b.samples_control_male + b.samples_control_female + b.samples_control_gender_unknown).to_i %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                  <% if b.samples_unknown_disease_male + b.samples_unknown_disease_female + b.samples_unknown_disease_unknown_gender > 0 %>
+                    <td><%= (b.samples_unknown_disease_male + b.samples_unknown_disease_female + b.samples_unknown_disease_unknown_gender).to_i %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>

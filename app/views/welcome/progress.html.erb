@@ -87,7 +87,7 @@
                   <% @d = c.datasets.where(disease:"HC") %>
                   <% @d.each do |dset| %>
                     <% dset.batches.each do |batch| %>
-                      <% hla_count += batch.hlas_available %>
+                      <% hla_count += batch.hlas_control_male + batch.hlas_control_female + batch.hlas_control_gender_unknown %>
                     <% end %>
                   <% end %>
                   <% if hla_count > 0 %>
@@ -104,7 +104,7 @@
                   <% @d = c.datasets.where.not(disease:"HC") %>
                   <% @d.each do |dset| %>
                     <% dset.batches.each do |batch| %>
-                      <% hla_count += batch.hlas_available %>
+                      <% hla_count += batch.hlas_case_male + batch.hlas_case_female + batch.hlas_case_gender_unknown  %>
                     <% end %>
                   <% end %>
                   <% if hla_count > 0 %>

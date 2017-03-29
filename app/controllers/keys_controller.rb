@@ -27,9 +27,9 @@ class KeysController < ApplicationController
         csv.each do |sample_data|
           @idr = IDR.new(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"], #creates an in-memory Sample object using the parsed csv data
           indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
-          age_at_sample: sample_data["Age at Sample"], site_sample_id: sample_data["Sample Source ID"],
+          age_at_sample: sample_data["Age at Sample"], sample_source_identifier: sample_data["Sample Source ID"],
           age_of_onset: sample_data["Age Of Onset"])
-          
+
           #this section is concerned with updating existing IDR and Sample records that have missing data.
           if IDR.find_by(indigo_id: sample_data["INDIGO_ID"]) != nil #checks if an IDR with this INDIGO_ID is already in the database.
             @existingidr = IDR.find_by(indigo_id: sample_data["INDIGO_ID"])
@@ -80,8 +80,7 @@ class KeysController < ApplicationController
 
               @sample = Sample.new(sample_source: sample_data["Sample Source"], disease: sample_data["Disease"],
               indigo_id: sample_data["INDIGO_ID"], gender: sample_data["Gender"], ethnicity: sample_data["Ethnicity"],
-              age_at_sample: sample_data["Age at Sample"], short_date: Time.now.strftime('%B %d %Y'),
-              site_sample_id: sample_data["Sample Source ID"],idr_id: @idr.id, batch_id: @current_batch_id,
+              age_at_sample: sample_data["Age at Sample"],site_sample_id: sample_data["Sample Source ID"], batch_id: @current_batch_id,
               age_of_onset: sample_data["Age of Onset"])
 
               if @sample.save
@@ -101,7 +100,7 @@ class KeysController < ApplicationController
                                 gender: row[7], ethnicity: row[5])
             if @idr.save
               sample = Sample.new(sample_source: row[2], disease: row[3], indigo_id: row[1], age_at_sample: row[6],
-                                  gender: row[7], ethnicity: row[5], idr_id: @idr.id, short_date: Time.now.strftime('%d %B %Y'))
+                                  gender: row[7], ethnicity: row[5])
 
               if sample.save
                 @number_samples_added += 1

@@ -10,23 +10,43 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328225814) do
+ActiveRecord::Schema.define(version: 20170329211125) do
 
   create_table "batches", force: :cascade do |t|
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "source"
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.string   "disease"
-    t.string   "samples_received_at_ucsf"
+    t.string   "date_received_from_source"
     t.string   "samples_sent_to_stanford"
-    t.integer  "hlas_available"
-    t.integer  "kirs_available"
     t.integer  "dataset_id"
     t.boolean  "to_stanford"
-    t.integer  "cases"
-    t.integer  "controls"
-    t.integer  "male_subjects"
-    t.integer  "female_subjects"
+    t.integer  "samples_control_male"
+    t.integer  "samples_control_female"
+    t.integer  "samples_control_gender_unknown"
+    t.integer  "samples_case_male"
+    t.integer  "samples_case_female"
+    t.integer  "samples_case_gender_unknown"
+    t.integer  "hlas_control_male"
+    t.integer  "hlas_control_female"
+    t.integer  "hlas_control_gender_unknown"
+    t.integer  "hlas_case_male"
+    t.integer  "hlas_case_female"
+    t.integer  "hlas_case_gender_unknown"
+    t.integer  "kirs_case_male"
+    t.integer  "kirs_case_female"
+    t.integer  "kirs_case_gender_unknown"
+    t.integer  "kirs_control_male"
+    t.integer  "kirs_control_female"
+    t.integer  "kirs_control_gender_unknown"
+    t.integer  "samples_unknown_disease_male"
+    t.integer  "samples_unknown_disease_female"
+    t.integer  "samples_unknown_disease_unknown_gender"
+    t.integer  "hlas_unknown_disease_male"
+    t.integer  "hlas_unknown_disease_female"
+    t.integer  "hlas_unknown_disease_unknown_gender"
+    t.integer  "kirs_unknown_disease_male"
+    t.integer  "kirs_unknown_disease_female"
+    t.integer  "kirs_unknown_disease_unknown_gender"
     t.index ["dataset_id"], name: "index_batches_on_dataset_id"
   end
 
@@ -211,21 +231,16 @@ ActiveRecord::Schema.define(version: 20170328225814) do
     t.string   "disease"
     t.string   "received_date"
     t.string   "indigo_id"
-    t.string   "site_sample_id"
-    t.string   "batch"
-    t.string   "sent_date"
+    t.string   "sample_source_identifier"
     t.string   "gender"
     t.string   "ethnicity"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "age_at_sample"
     t.string   "race"
-    t.integer  "idr_id"
-    t.string   "short_date"
     t.integer  "batch_id"
     t.integer  "age_of_onset"
     t.index ["batch_id"], name: "index_samples_on_batch_id"
-    t.index ["idr_id"], name: "index_samples_on_idr_id"
   end
 
   create_table "upload_reports", force: :cascade do |t|
