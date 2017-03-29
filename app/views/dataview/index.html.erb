@@ -28,6 +28,24 @@
         <h3>&nbsp;&nbsp;<%= @samples.count %> Samples for <%= current_user.affiliation %></h3>
         <br>
         <div id="sample_table"></div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="sk-circle spinner">
+              <div class="sk-circle1 sk-child"></div>
+              <div class="sk-circle2 sk-child"></div>
+              <div class="sk-circle3 sk-child"></div>
+              <div class="sk-circle4 sk-child"></div>
+              <div class="sk-circle5 sk-child"></div>
+              <div class="sk-circle6 sk-child"></div>
+              <div class="sk-circle7 sk-child"></div>
+              <div class="sk-circle8 sk-child"></div>
+              <div class="sk-circle9 sk-child"></div>
+              <div class="sk-circle10 sk-child"></div>
+              <div class="sk-circle11 sk-child"></div>
+              <div class="sk-circle12 sk-child"></div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="tab-pane fade hide-table" id="hla">
         <h3>&nbsp;&nbsp;<%= @hlas.count %> HLA for <%= current_user.affiliation %></h3>
@@ -46,6 +64,16 @@
 
 <script type="text/javascript">
   $(document).ready(function(){
+
+    $(".spinner").hide();
+
+    $(document).ajaxStart(function(){
+      $(".spinner").show();
+    });
+
+    $(document).ajaxStop(function() {
+      $(".spinner").hide();
+    });
 
     $.get('<%= Rails.application.routes.url_helpers.dataview_samples_to_json_path %>', function(samples){
 
