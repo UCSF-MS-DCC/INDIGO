@@ -21,13 +21,27 @@
         <td><%= @u.failed_uploads %></td>
       </tr>
       <tr>
-        <th>Duplicate HLAs</th>
-        <td><%= @u.duplicate_hlas %></td>
+        <th>Duplicates</th>
+        <td><%= @u.duplicates %></td>
       </tr>
       <tr>
         <th>Uploaded by</th>
         <td><%= User.find(@u.uploaded_by).email %></td>
       </tr>
+      <tr>
+        <th>Uploaded on</th>
+        <td><%= @u.created_at.strftime('%B %d, %Y') %></td>
+      </tr>
+      <tr>
+        <% if @u.error_message %>
+        <th>Error Messages</th>
+        <td>
+          <% @u.error_message.split(';').each do |m| %>
+                <%= m %><br>
+                <% end %>
+        </td>
+      </tr>
+      <% end %>
     </table>
   </div>
 </div>

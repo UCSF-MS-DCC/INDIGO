@@ -20,6 +20,7 @@ class HlauploadsController < ApplicationController
     @number_hlas_failed = 0
     @number_duplicate_hlas = 0
     @attempted_duplicate_upload = false
+    @error_message = ""
 
     if @hlaupload.save #Only try to parse the uploaded file if it was successfully uploaded!
       if @hlaupload[:datafile].split(".")[1] == 'csv' #Check to see if keyfile is a .csv file
@@ -61,23 +62,29 @@ class HlauploadsController < ApplicationController
           if @hla != nil
             @number_hlas_failed += 1 #increment failed counter if an hla exists with the same indigo id and version as the uploaded hla
             @number_duplicate_hlas += 1
+            @error_message += "#{hla_data["INDIGO_ID"]} not saved: An HLA with this INDIGO ID and Version already exists;"
 
           else #if the hla with indigo id and version doesn't exist, create it and set a fk connection to the sample
             @sample = Sample.find_by(indigo_id: hla_data["INDIGO_ID"])
-            @hla = Hla.new( indigo_id: hla_data["INDIGO_ID"], drb1_15_copies_calculated: hla_data["DRB1_15_Copies_Calculated"],
-                          drb1_1: hla_data["DRB1_1"], drb1_2: hla_data["DRB1_2"], dqb1_1: hla_data["DQB1_1"], dqb1_2: hla_data["DQB1_2"],
-                          dpb1_1: hla_data["DPB1_1"], dpb1_2: hla_data["DPB1_2"], a_1: hla_data["A_1"], a_2: hla_data["A_2"],
-                          b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"], sample_id: @sample.id,
-                          dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
-                          drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"],
-                          version: @hlaupload[:datafile.to_s])
-            if @hla.save
-              @number_hlas_added += 1
+            if @sample != nil
+              @hla = Hla.new( indigo_id: hla_data["INDIGO_ID"], drb1_15_copies_calculated: hla_data["DRB1_15_Copies_Calculated"],
+                            drb1_1: hla_data["DRB1_1"], drb1_2: hla_data["DRB1_2"], dqb1_1: hla_data["DQB1_1"], dqb1_2: hla_data["DQB1_2"],
+                            dpb1_1: hla_data["DPB1_1"], dpb1_2: hla_data["DPB1_2"], a_1: hla_data["A_1"], a_2: hla_data["A_2"],
+                            b_1: hla_data["B_1"], b_2: hla_data["B_2"], c_1: hla_data["C_1"], c_2: hla_data["C_2"], sample_id: @sample.id,
+                            dpa1_1: hla_data["DPA1_1"], dpa1_2: hla_data["DPA1_2"], dqa1_1: hla_data["DQA1_1"], dqa1_2: hla_data["DQA1_2"],
+                            drbo_1: hla_data["DRBo_1"], drbo_2: hla_data["DRBo_2"], dpb1_phase_ambiguities: hla_data["DPB1 phase ambiguities"],
+                            version: @hlaupload[:datafile.to_s])
+              if @hla.save
+                @number_hlas_added += 1
+              else
+                # If a sample fails to be saved (for whatever reason) we let the user know.
+                @number_hlas_failed += 1
+                @error_message += "#{hla_data["INDIGO_ID"]} not saved: Has failed to save. Check application error logs;"
+              end #close the if hla.save block
             else
-              # If a sample fails to be saved (for whatever reason) we let the user know.
               @number_hlas_failed += 1
-              @failed_hlas.push(hla_data["INDIGO_ID"])
-            end #close the if hla.save block
+              @error_message += "#{hla_data["INDIGO_ID"]} not saved: There is no sample matching this INDIGO ID. Samples must be uploaded before HLA can be added;"
+            end # close if @sample != nil block
 
           end #close the if @hla != nil block
         end #close the csv.each block
@@ -111,6 +118,7 @@ class HlauploadsController < ApplicationController
     else
       flash[:error] = "This spreadsheet has already been uploaded"
       @attempted_duplicate_upload = true
+      @error_message += "#{@hla_upload_version} has already been uploaded;"
     end #close the if @hla.save block.
     @report = UploadReport.new
     @results = {}
@@ -119,8 +127,9 @@ class HlauploadsController < ApplicationController
     @results[:failed_uploads] = @number_hlas_failed
     @results[:upload_type] = "hla"
     @results[:uploaded_by] = current_user.id
-    @results[:duplicate_hlas] = @number_duplicate_hlas
+    @results[:duplicates] = @number_duplicate_hlas
     @results[:duplicate_upload] = @attempted_duplicate_upload
+    @results[:error_message] = @error_message
 
     redirect_to controller: 'upload_reports', action: 'display', id: @report.id, data:@results
   end #close the create method

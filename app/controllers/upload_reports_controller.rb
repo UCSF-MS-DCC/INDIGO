@@ -39,8 +39,9 @@ class UploadReportsController < ApplicationController
     @u.uploads = params[:data][:uploads]
     @u.failed_uploads = params[:data][:failed_uploads]
     @u.upload_type = params[:data][:upload_type]
-    @u.duplicate_hlas = params[:data][:duplicate_hlas]
+    @u.duplicates = params[:data][:duplicates]
     @u.duplicate_upload = params[:data][:duplicate_upload]
+    @u.error_message = params[:data][:error_message]
 
     if @u.save
       flash[:notice] = "Upload Report saved"
