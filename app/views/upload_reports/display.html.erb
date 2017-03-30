@@ -30,7 +30,7 @@
       </tr>
       <tr>
         <th>Uploaded on</th>
-        <td><%= @u.created_at.strftime('%B %d, %Y') %></td>
+        <td><%= @u.upload_datetime %></td>
       </tr>
       <tr>
         <% if @u.error_message %>

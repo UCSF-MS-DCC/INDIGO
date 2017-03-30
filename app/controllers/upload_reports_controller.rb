@@ -5,11 +5,15 @@ class UploadReportsController < ApplicationController
   respond_to :html
 
   def index
-    @upload_reports = UploadReport.all
-    respond_with(@upload_reports)
+
   end
 
   def show
+
+    @upload_reports = UploadReport.all.order('created_at DESC')
+    @report = params[:id] ? UploadReport.find(params[:id]) : @upload_reports.first
+    @new_report = UploadReport.new
+
   end
 
   def new
@@ -27,8 +31,13 @@ class UploadReportsController < ApplicationController
   end
 
   def update
-    @upload_report.update(upload_report_params)
-    respond_with(@upload_report)
+
+    puts params[:upload_report][:upload_datetime]
+    @upload_report = UploadReport.find_by(upload_datetime: params[:upload_report][:upload_datetime])
+
+    respond_to do |format|
+      format.html { redirect_to upload_reports_show_path(:id => @upload_report.id)}
+    end
   end
 
   def display
@@ -44,8 +53,8 @@ class UploadReportsController < ApplicationController
     @u.error_message = params[:data][:error_message]
 
     if @u.save
-      flash[:notice] = "Upload Report saved"
     end
+
   end
 
   def destroy
