@@ -1,0 +1,1 @@
+json.partial! "consensus_fastqs/consensus_fastq", consensus_fastq: @consensus_fastq

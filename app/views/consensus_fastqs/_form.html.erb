@@ -1,0 +1,32 @@
+<%= form_for(consensus_fastq) do |f| %>
+  <% if consensus_fastq.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(consensus_fastq.errors.count, "error") %> prohibited this consensus_fastq from being saved:</h2>
+
+      <ul>
+      <% consensus_fastq.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :INDIGO_ID %>
+    <%= f.text_field :INDIGO_ID %>
+  </div>
+
+  <div class="field">
+    <%= f.label :gene %>
+    <%= f.text_field :gene %>
+  </div>
+
+  <div class="field">
+    <%= f.label :fastq %>
+    <%= f.text_area :fastq %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

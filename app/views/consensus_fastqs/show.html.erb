@@ -1,0 +1,25 @@
+<div class="container">
+
+
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Indigo id:</strong>
+  <%= @consensus_fastq.INDIGO_ID %>
+</p>
+
+<p>
+  <strong>Gene:</strong>
+  <%= @consensus_fastq.gene %>
+</p>
+
+<p>
+  <strong>Fastq:</strong>
+  <%= @consensus_fastq.fastq %>
+</p>
+
+<%= link_to 'Edit', edit_consensus_fastq_path(@consensus_fastq) %> |
+<%= link_to 'Back', consensus_fastqs_path %>
+
+</div>

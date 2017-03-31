@@ -129,6 +129,8 @@ GEM
       minitest (>= 3.0)
     haml (4.0.7)
       tilt
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
@@ -167,6 +169,7 @@ GEM
       minitest (>= 5.0)
       ruby-progressbar
     multi_json (1.12.1)
+    multi_xml (0.6.0)
     nenv (0.3.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -326,6 +329,7 @@ DEPENDENCIES
   groupdate
   guard (= 2.13.0)
   guard-minitest (= 2.4.4)
+  httparty
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
@@ -355,4 +359,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.13.4
+   1.14.6

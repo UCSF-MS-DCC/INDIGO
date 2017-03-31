@@ -1,0 +1,15 @@
+<div class="container">
+
+Test GFE results:
+<hr>
+
+<% require 'json' %>
+<%= JSON.pretty_generate(@result) %>
+
+<%
+  @result.each do |post|
+    puts post
+  end
+%>
+
+</div>

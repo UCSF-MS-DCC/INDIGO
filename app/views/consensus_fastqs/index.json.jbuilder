@@ -1,0 +1,1 @@
+json.array! @consensus_fastqs, partial: 'consensus_fastqs/consensus_fastq', as: :consensus_fastq
