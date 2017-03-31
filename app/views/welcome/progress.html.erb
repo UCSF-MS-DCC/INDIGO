@@ -40,7 +40,7 @@
 
                 <td><%= c.disease %></td>
 
-                <td><%= c.expected_discovery %></td>
+                <td><%= number_with_delimiter(c.expected_discovery, :delimiter => ',') %></td>
 
         <!-- calculate percentage of cases and controls received -->
                 <% if c.datasets.count > 0 %>
@@ -53,7 +53,7 @@
                       <% end %>
                     <% end %>
                   <% if sample_count > 0  %>
-                    <td><%= sample_count %></td>
+                    <td><%= number_with_delimiter(sample_count, :delimiter => ',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
@@ -74,7 +74,7 @@
                       <% end %>
                     <% end %>
                   <% if sample_count > 0  %>
-                    <td><%= sample_count %></td>
+                    <td><%= number_with_delimiter(sample_count, :delimiter =>',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
@@ -91,7 +91,7 @@
                     <% end %>
                   <% end %>
                   <% if hla_count > 0 %>
-                    <td><%= hla_count %></td>
+                    <td><%= number_with_delimiter(hla_count, :delimiter => ',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
@@ -108,7 +108,7 @@
                     <% end %>
                   <% end %>
                   <% if hla_count > 0 %>
-                    <td><%= hla_count %></td>
+                    <td><%= number_with_delimiter(hla_count, :delimiter => ',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
@@ -119,6 +119,28 @@
                 <td>-</td>
               </tr>
           <% end %>
+          <!-- summary of all quantities -->
+          <tr>
+            <th>
+              Total
+            </th>
+            <td>-</td>
+            <td><%= number_with_delimiter(@total_proposed, :delimiter => ",") %></td>
+            <td><%= number_with_delimiter(@total_received, :delimiter => ',') %></td>
+            <td><%= number_with_delimiter(@total_to_stanford, :delimiter => ',') %></td>
+            <td><%= number_with_delimiter(@total_hla_controls, :delimiter => ',') %></td>
+            <td><%= @total_hla_cases %></td>
+            <% if @total_kir_controls > 0 %>
+              <td><%= number_with_delimiter(@total_kir_controls, :delimiter => ',') %></td>
+            <% else %>
+              <td>-</td>
+            <% end %>
+            <% if @total_kir_cases > 0 %>
+              <td><%= number_with_delimiter(@total_kir_cases, :delimiter => ',') %></td>
+            <% else %>
+              <td>-</td>
+            <% end %>
+          </tr>
         </tbody>
       </table>
       <br>

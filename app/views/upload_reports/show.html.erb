@@ -5,9 +5,12 @@
 
       <div class="row">
         <div class="col-sm-3">
-          <%= form_for(@new_report, :url => {:controller => "upload_reports", :action => "update"}, :html => {:style => "margin-top:40px;"}) do |f| %>
-            <% f.select :upload_datetime, options_for_select(@new_report.report_times, selected: @report.upload_datetime), {}, onchange:"$(this.closest('form')).submit()" %>
-          <% end %>
+          <div style="margin-top:40px;">
+            <h5>Select Report</h5>
+            <%= form_for(@new_report, :url => {:controller => "upload_reports", :action => "update"}) do |f| %>
+              <% f.select :upload_datetime, options_for_select(@new_report.report_times, selected: @report.upload_datetime), {}, onchange:"$(this.closest('form')).submit()" %>
+            <% end %>
+          </div>
         </div>
         <div class="col-sm-8">
           <table class="table table-bordered" style="margin-top:50px;">

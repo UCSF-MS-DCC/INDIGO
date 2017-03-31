@@ -71,27 +71,27 @@
               <% d.batches.each do |b| %>
                 <tr>
                   <td><%= d.source %></td>
-                  <td><%= b.samples.count %></td>
+                  <td><%= number_with_delimiter(b.samples.count, :delimiter => ',') %></td>
                   <td><%= b.date_received_from_source %></td>
                   <td><%= @collaborator.sequence_type %></td>
                   <% if (b.samples_case_male + b.samples_case_female + b.samples_case_gender_unknown).to_i > 0 %>
-                    <td><%= (b.samples_case_male + b.samples_case_female + b.samples_case_gender_unknown).to_i %></td>
+                    <td><%= number_with_delimiter((b.samples_case_male + b.samples_case_female + b.samples_case_gender_unknown).to_i, :delimiter => ',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
                   <% if b.samples_control_male + b.samples_control_female + b.samples_control_gender_unknown > 0 %>
-                    <td><%= (b.samples_control_male + b.samples_control_female + b.samples_control_gender_unknown).to_i %></td>
+                    <td><%= number_with_delimiter((b.samples_control_male + b.samples_control_female + b.samples_control_gender_unknown).to_i, :delimiter => ',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
                   <% if b.samples_unknown_disease_male + b.samples_unknown_disease_female + b.samples_unknown_disease_unknown_gender > 0 %>
-                    <td><%= (b.samples_unknown_disease_male + b.samples_unknown_disease_female + b.samples_unknown_disease_unknown_gender).to_i %></td>
+                    <td><%= number_with_delimiter((b.samples_unknown_disease_male + b.samples_unknown_disease_female + b.samples_unknown_disease_unknown_gender).to_i, :delimiter => ',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>
                   <td><%= b.samples_sent_to_stanford %></td>
                   <% if b.to_stanford %>
-                    <td><%= b.samples.count %></td>
+                    <td><%= number_with_delimiter(b.samples.count, :delimiter => ',') %></td>
                   <% else %>
                     <td>-</td>
                   <% end %>

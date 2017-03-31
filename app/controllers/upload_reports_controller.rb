@@ -51,6 +51,8 @@ class UploadReportsController < ApplicationController
     @u.duplicates = params[:data][:duplicates]
     @u.duplicate_upload = params[:data][:duplicate_upload]
     @u.error_message = params[:data][:error_message]
+    @u.added = params[:data][:added]
+    @u.failed = params[:data][:failed]
 
     if @u.save
     end

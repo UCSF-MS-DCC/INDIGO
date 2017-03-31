@@ -21,6 +21,8 @@ class HlauploadsController < ApplicationController
     @number_duplicate_hlas = 0
     @attempted_duplicate_upload = false
     @error_message = ""
+    @hla_added = ""
+    @hla_failed = ""
 
     if @hlaupload.save #Only try to parse the uploaded file if it was successfully uploaded!
       if @hlaupload[:datafile].split(".")[1] == 'csv' #Check to see if keyfile is a .csv file
@@ -76,13 +78,16 @@ class HlauploadsController < ApplicationController
                             version: @hlaupload[:datafile.to_s])
               if @hla.save
                 @number_hlas_added += 1
+                @samples_added += "#{@hla[:indigo_id]};"
               else
                 # If a sample fails to be saved (for whatever reason) we let the user know.
                 @number_hlas_failed += 1
+                @samples_failed += "#{@hla[:indigo_id]};"
                 @error_message += "#{hla_data["INDIGO_ID"]} not saved: Has failed to save. Check application error logs;"
               end #close the if hla.save block
             else
               @number_hlas_failed += 1
+              @samples_failed += "#{@hla[:indigo_id]};"
               @error_message += "#{hla_data["INDIGO_ID"]} not saved: There is no sample matching this INDIGO ID. Samples must be uploaded before HLA can be added;"
             end # close if @sample != nil block
 
@@ -130,6 +135,8 @@ class HlauploadsController < ApplicationController
     @results[:duplicates] = @number_duplicate_hlas
     @results[:duplicate_upload] = @attempted_duplicate_upload
     @results[:error_message] = @error_message
+    @results[:added] = @hla_added
+    @results[:failed] = @hla_failed
 
     redirect_to controller: 'upload_reports', action: 'display', id: @report.id, data:@results
   end #close the create method

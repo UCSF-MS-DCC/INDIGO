@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330171814) do
+ActiveRecord::Schema.define(version: 20170330233444) do
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",                             null: false
@@ -256,6 +256,8 @@ ActiveRecord::Schema.define(version: 20170330171814) do
     t.boolean  "duplicate_upload"
     t.text     "error_message"
     t.string   "upload_datetime"
+    t.integer  "added"
+    t.integer  "failed"
   end
 
   create_table "users", force: :cascade do |t|
