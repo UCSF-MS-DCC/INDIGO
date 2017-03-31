@@ -1,0 +1,27 @@
+<div class="container">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Activity:</strong>
+  <%= @activity.activity %>
+</p>
+
+<p>
+  <strong>Person:</strong>
+  <%= @activity.person %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @activity.date %>
+</p>
+
+<p>
+  <strong>Updated by:</strong>
+  <%= @activity.updated_by %>
+</p>
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>
+
+</div>

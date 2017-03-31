@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :activities
   namespace :api do
     namespace :v1 do
       get 'apitests/jsonsamples'
@@ -87,6 +88,8 @@ Rails.application.routes.draw do
   resources 'kiruploads', only: [:index, :new, :create]
 
   resources 'dataview', only: [:index]
+
+
 
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
