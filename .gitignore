@@ -31,3 +31,6 @@
 
 .DS_Store
 config/application.yml
+
+# Ignore Rubymine files
+.idea
