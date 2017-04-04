@@ -2,6 +2,8 @@ class Sample < ApplicationRecord
   validates :indigo_id, uniqueness: true
   has_many :hla
   has_many :kir
+  has_many :gwas_samples
+  has_many :gwas, through: :gwas_samples
   belongs_to :batch
 
   def self.to_csv

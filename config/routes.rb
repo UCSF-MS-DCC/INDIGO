@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :gwas
+  resources :consensus_fastqs
   namespace :api do
     namespace :v1 do
       get 'apitests/jsonsamples'
@@ -88,6 +90,7 @@ Rails.application.routes.draw do
 
   resources 'dataview', only: [:index]
 
+  get 'nmdp_apis/test_gfe'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

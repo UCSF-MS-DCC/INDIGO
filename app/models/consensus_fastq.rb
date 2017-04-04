@@ -1,0 +1,2 @@
+class ConsensusFastq < ApplicationRecord
+end

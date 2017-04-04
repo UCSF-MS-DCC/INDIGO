@@ -1,0 +1,1 @@
+json.partial! "gwas/gwa", gwa: @gwa

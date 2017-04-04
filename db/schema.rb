@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170330233444) do
+ActiveRecord::Schema.define(version: 20170404002211) do
+
+  create_table "batch_gwas", force: :cascade do |t|
+    t.integer  "batch_id"
+    t.integer  "gwas_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "batches", force: :cascade do |t|
     t.datetime "created_at",                             null: false
@@ -47,6 +54,7 @@ ActiveRecord::Schema.define(version: 20170330233444) do
     t.integer  "kirs_unknown_disease_male"
     t.integer  "kirs_unknown_disease_female"
     t.integer  "kirs_unknown_disease_unknown_gender"
+    t.integer  "gwas_samples_count"
     t.index ["dataset_id"], name: "index_batches_on_dataset_id"
   end
 
@@ -59,6 +67,14 @@ ActiveRecord::Schema.define(version: 20170330233444) do
     t.string   "demographic"
     t.string   "disease"
     t.string   "sequence_type"
+  end
+
+  create_table "consensus_fastqs", force: :cascade do |t|
+    t.string   "INDIGO_ID"
+    t.string   "gene"
+    t.text     "fastq"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "datasets", force: :cascade do |t|
@@ -84,6 +100,20 @@ ActiveRecord::Schema.define(version: 20170330233444) do
     t.integer  "total_samples_sent_to_stanford"
     t.integer  "total_samples"
     t.index ["collaborator_id"], name: "index_datasets_on_collaborator_id"
+  end
+
+  create_table "gwas", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "name"
+    t.string   "url"
+  end
+
+  create_table "gwas_samples", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "sample_id"
+    t.integer  "gwas_id"
   end
 
   create_table "hlas", force: :cascade do |t|
@@ -170,45 +200,11 @@ ActiveRecord::Schema.define(version: 20170330233444) do
 
   create_table "kirs", force: :cascade do |t|
     t.string   "indigo_id"
-    t.string   "i2dl1"
-    t.string   "x2dl1_2"
-    t.string   "i2dl2"
-    t.string   "x2dl2_2"
-    t.string   "i2dl3"
-    t.string   "x2dl3_2"
-    t.string   "i2dl4"
-    t.string   "x2dl4_2"
-    t.string   "i2dl5a"
-    t.string   "i2dl5a_2"
-    t.string   "i2dl5b"
-    t.string   "i2dl5b_2"
-    t.string   "i2dp1"
-    t.string   "x2dp1_2"
-    t.string   "i2ds1"
-    t.string   "x2ds1_2"
-    t.string   "i2ds2"
-    t.string   "x2ds2_2"
-    t.string   "i2ds3"
-    t.string   "x2ds3_2"
-    t.string   "i2ds4"
-    t.string   "x2ds4_2"
-    t.string   "i2ds5"
-    t.string   "x2ds5_2"
-    t.string   "i3dl1"
-    t.string   "x3dl1_2"
-    t.string   "i3dl2"
-    t.string   "x3dl2_2"
-    t.string   "i3dl3"
-    t.string   "x3dl3_2"
-    t.string   "i3dp1"
-    t.string   "x3dp1_2"
-    t.string   "i3ds1"
-    t.string   "x3ds1_2"
+    t.string   "KIR3DL2"
+    t.string   "KIR2DS5"
+    t.string   "KIR2DL4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "sample_id"
-    t.string   "version"
-    t.index ["sample_id"], name: "index_kirs_on_sample_id"
   end
 
   create_table "kiruploads", force: :cascade do |t|

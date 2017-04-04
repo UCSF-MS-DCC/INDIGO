@@ -1,0 +1,50 @@
+<div class="container">
+
+
+  <p id="notice"><%= notice %></p>
+
+  <h1>KIR Informatics</h1>
+
+  To be added:
+  <ul>
+  <li>Load/search our KIR consensus fastq, w/ PING metadata</li>
+  <li>Send an individual KIR fastq to locally hosted GFE and view results in place</li>
+  <li>Assemble a bach of KIR fastq and send to GFE service</li>
+  <li>Send an individual KIR gl string to NMDP GL string service and store UUID in database</li>
+  </ul>
+
+
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Indigo id</th>
+        <th>Gene</th>
+        <th>Fastq</th>
+        <th colspan="5"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @consensus_fastqs.each do |consensus_fastq| %>
+        <tr>
+          <td><%= consensus_fastq.INDIGO_ID %></td>
+          <td><%= consensus_fastq.gene %></td>
+          <td><textarea rows="10" cols="100"><%= consensus_fastq.fastq %></textarea></td>
+          <td><%= link_to 'Show', consensus_fastq %></td>
+
+          <% if current_user.has_role? :admin %>
+          <td><%= link_to 'Edit', edit_consensus_fastq_path(consensus_fastq) %></td>
+          <td><%= link_to 'Destroy', consensus_fastq, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+              <% end %>
+
+          <td><%= link_to 'test_gfe', nmdp_apis_test_gfe_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "Send this sequence to the  UCSF GFE service" %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br>
+
+  <%= link_to 'New Consensus Fastq', new_consensus_fastq_path %>
+
+</div>

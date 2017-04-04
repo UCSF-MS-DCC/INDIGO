@@ -1,0 +1,1 @@
+json.array! @gwas, partial: 'gwas/gwa', as: :gwa

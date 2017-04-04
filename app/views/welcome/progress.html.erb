@@ -126,17 +126,17 @@
             </th>
             <td>-</td>
             <td><%= number_with_delimiter(@total_proposed, :delimiter => ",") %></td>
-            <td><%= number_with_delimiter(@total_received, :delimiter => ',') %></td>
-            <td><%= number_with_delimiter(@total_to_stanford, :delimiter => ',') %></td>
-            <td><%= number_with_delimiter(@total_hla_controls, :delimiter => ',') %></td>
-            <td><%= @total_hla_cases %></td>
+            <td><%= number_with_delimiter(@total_received, :delimiter => ',') %> / <%= ((@total_received.to_f/@total_proposed.to_f) * 100).round %>%</td>
+            <td><%= number_with_delimiter(@total_to_stanford, :delimiter => ',') %> / <%= ((@total_to_stanford.to_f/@total_proposed.to_f) * 100).round %>%</td>
+            <td><%= number_with_delimiter(@total_hla_controls, :delimiter => ',') %> / <%= ((@total_hla_controls.to_f/@total_proposed.to_f) * 100).round %>%</td>
+            <td><%= number_with_delimiter(@total_hla_cases, :delimiter => ',') %> / <%= ((@total_hla_cases.to_f/@total_proposed.to_f) * 100).round %>%</td>
             <% if @total_kir_controls > 0 %>
-              <td><%= number_with_delimiter(@total_kir_controls, :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(@total_kir_controls, :delimiter => ',') %> / <%= ((@total_kir_controls.to_f/@total_proposed.to_f) * 100).round %>%</td>
             <% else %>
               <td>-</td>
             <% end %>
             <% if @total_kir_cases > 0 %>
-              <td><%= number_with_delimiter(@total_kir_cases, :delimiter => ',') %></td>
+              <td><%= number_with_delimiter(@total_kir_cases, :delimiter => ',') %> / <%= ((@total_kir_cases.to_f/@total_proposed.to_f) * 100).round %>%</td>
             <% else %>
               <td>-</td>
             <% end %>

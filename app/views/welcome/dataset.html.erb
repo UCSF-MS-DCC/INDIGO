@@ -9,6 +9,7 @@
       <div class="dropdown" style="margin-top:20px;">
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%"><%= @collaborator.name %>&nbsp;<span class="caret"></span></button>
         <ul class="dropdown-menu">
+          <li><%= link_to "All Collaborators", welcome_progress_path %></li>
           <% @collaborators.each do |c| %>
             <li><%= link_to c.name, welcome_dataset_path(collaborator_id: c.id) %></li>
           <% end %>
@@ -47,6 +48,10 @@
   <% end %>
 
   <%if @datasets.count > 0 %>
+    <% gwas_supers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'] %>
+    <% gwas_supers_counter = 0 %>
+    <% gwas_footnote = "" %>
+    <% gwas_hash = {} %>
     <hr>
 
     <div class="row">
@@ -64,7 +69,7 @@
             <th>N of Case & Control Samples Sent to Stanford for Sequencing</th>
             <th>N of Case & Control Raw Data Received at UCSF For Genotype Calling (KIR only)</th>
             <th>N of Case & Control Genotypes Finished, with Version Indicated</th>
-            <th>GWAS Dataset Received at UCSF, % of HLA/KIR Samples Covered By GWAS</th>
+            <th>N of Samples Covered By GWAS</th>
           </thead>
           <tbody>
             <% @datasets.each do |d| %>
@@ -97,13 +102,33 @@
                   <% end %>
                   <td></td>
                   <td></td>
-                  <td></td>
-
+                  <% if b.gwas_samples_count > 0 %>
+                    <td><%= b.gwas_samples_count %>
+                      <% b.gwas.each do |g| %>
+                        <% if gwas_hash[g.name] %>
+                          <sup><%= gwas_hash[g.name] %></sup>
+                        <% else %>
+                        <sup><%= gwas_supers[gwas_supers_counter] %></sup>
+                          <!-- <% gwas_footnote += "#{gwas_supers[gwas_supers_counter]}: #{g.name}; " %> -->
+                          <% gwas_hash[g.name] = gwas_supers[gwas_supers_counter] %>
+                          <% gwas_supers_counter += 1 %>
+                        <% end %>
+                      <% end %>
+                    </td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
                 </tr>
               <% end %>
             <% end %>
           </tbody>
         </table>
+        <h6 class="text-right">
+          <% gwas_hash.each do |k, v| %>
+            <% url = Gwas.find_by(name:k).url %>
+            <%= v %>: <%= link_to k, url %>;
+          <% end %>
+        </h6>
       </div>
     </div>
   <% end %>
@@ -131,7 +156,7 @@
         hla_samples_to_stanford: "to stanford"
       }
       var dataMatrix1 = [['Gender/Case or Control', 'Samples'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ["not received"]];
-      var dataMatrix2 = [['Gender/Case or Control', 'HLA available'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ['Sample not genotyped']];
+      var dataMatrix2 = [['Gender/Case or Control', 'HLA available'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ['sample not genotyped']];
       for (key in response) {
         if (key.split('_')[0] === "samples") {
           switch(prettyPrint[key]) {
