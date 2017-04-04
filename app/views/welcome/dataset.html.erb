@@ -48,7 +48,7 @@
   <% end %>
 
   <%if @datasets.count > 0 %>
-    <% gwas_supers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k'] %>
+    <% gwas_supers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'] %>
     <% gwas_supers_counter = 0 %>
     <% gwas_footnote = "" %>
     <% gwas_hash = {} %>
@@ -123,10 +123,10 @@
             <% end %>
           </tbody>
         </table>
-        <h6 class="text-right">
+        <h6 class="text-right" style="font-weight:bold;">
           <% gwas_hash.each do |k, v| %>
             <% url = Gwas.find_by(name:k).url %>
-            <%= v %>: <%= link_to k, url %>;
+            <%= v %>: <%= link_to k, url, :style =>"text-decoration:underline;" %>;
           <% end %>
         </h6>
       </div>
@@ -155,7 +155,7 @@
         hla_available_female_controls: "female controls",
         hla_samples_to_stanford: "to stanford"
       }
-      var dataMatrix1 = [['Gender/Case or Control', 'Samples'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ["not received"]];
+      var dataMatrix1 = [['Gender/Case or Control', 'Samples'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ["not received or case/control not indicated"]];
       var dataMatrix2 = [['Gender/Case or Control', 'HLA available'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ['sample not genotyped']];
       for (key in response) {
         if (key.split('_')[0] === "samples") {
