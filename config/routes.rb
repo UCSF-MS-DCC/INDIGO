@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :consensus_fastqs
   namespace :api do
     namespace :v1 do
-      get 'apitests/jsonsamples'
+      get 'apitests/endpoint'
     end
   end
 
