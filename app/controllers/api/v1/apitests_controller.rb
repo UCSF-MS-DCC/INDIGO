@@ -120,7 +120,6 @@ class Api::V1::ApitestsController < ApplicationController
     end
     puts results.first
     if hla == "true"
-      puts "Hla == true"
       results.each do |r|
         if Hla.where(indigo_id: r[:indigo_id]).count > 0
           @h = Hla.find_by(indigo_id: r[:indigo_id])
