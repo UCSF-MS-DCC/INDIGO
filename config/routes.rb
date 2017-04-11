@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       get 'apitests/endpoint'
+      get 'apitests/datafetch'
     end
   end
 
