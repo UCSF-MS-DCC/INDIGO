@@ -43,6 +43,7 @@ gem 'animate-rails'
 gem 'test-unit'
 gem 'groupdate'
 gem 'figaro'
+gem 'rspec-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
