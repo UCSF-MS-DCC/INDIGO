@@ -44,6 +44,7 @@ gem 'test-unit'
 gem 'groupdate'
 gem 'figaro'
 gem 'rspec-rails'
+gem 'rspec_api_documentation'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

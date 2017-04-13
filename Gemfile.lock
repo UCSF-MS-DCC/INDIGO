@@ -171,6 +171,7 @@ GEM
       ruby-progressbar
     multi_json (1.12.1)
     multi_xml (0.6.0)
+    mustache (1.0.5)
     nenv (0.3.0)
     nested_form (0.3.2)
     net-scp (1.2.1)
@@ -247,6 +248,10 @@ GEM
     roo (2.5.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
+    rspec (3.5.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -264,6 +269,10 @@ GEM
       rspec-mocks (~> 3.5.0)
       rspec-support (~> 3.5.0)
     rspec-support (3.5.0)
+    rspec_api_documentation (4.9.0)
+      activesupport (>= 3.0.0)
+      mustache (~> 1.0, >= 0.99.4)
+      rspec (~> 3.0)
     ruby-progressbar (1.8.1)
     rubyzip (1.2.0)
     sass (3.4.22)
@@ -362,6 +371,7 @@ DEPENDENCIES
   rolify
   roo (~> 2.5.0)
   rspec-rails
+  rspec_api_documentation
   sass-rails (~> 5.0)
   simple_form
   simple_token_authentication (~> 1.0)

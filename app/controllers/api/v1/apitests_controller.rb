@@ -1,4 +1,4 @@
-class Api::V1Controller < ApplicationController
+class Api::V1::ApitestsController < ApplicationController
   acts_as_token_authentication_handler_for User
   before_action :authenticate_user!
 
@@ -8,11 +8,6 @@ class Api::V1Controller < ApplicationController
     hla_genes = {}
     kir_genes = {}
     early_exit_flag = false
-
-    if !@user
-      early_exit_flag = true
-      render json status: :forbidden
-    end
 
     vars = request.query_parameters
 
@@ -34,7 +29,7 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"invalid query value for sex. Acceptable parameters are: F or M"}, status: :unprocessable_entity
+          render json: {"error":"invalid query value for sex. Acceptable parameters are: F or M"}
         end
       end
     end
@@ -200,21 +195,7 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"invalid query value for sex. Acceptable parameters are: F or M"}, status: :unprocessable_entity
-        end
-      end
-    end
-
-    if hla != nil
-      case hla
-      when "true", "True", "TRUE", "T", "t"
-        hla = true
-      when "false" "False", "FALSE", "F", "f"
-        hla = false
-      else
-        if early_exit_flag == false
-          early_exit_flag = true
-          render json: {"error":"invalid query value for hla. Acceptable values are T or F"}, status: :unprocessable_entity
+          render json: {"error":"invalid query value for sex. Acceptable parameters are: F or M"}
         end
       end
     end
@@ -238,20 +219,20 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"invalid query value for ethnicity. See site documentation for acceptable ethnicity parameters"}, status: :unprocessable_entity
+          render json: {"error":"invalid query value for ethnicity. See site documentation for acceptable ethnicity parameters"}
         end
       end
     end
 
     if disease != nil
-      case disease.upcase
-      when "PD", "MG", "MS", "HC", "SCZD", "NMO"
-        sample_phenotypes[:disease] = disease.upcase
+      case disease
+      when "PD", "MG", "MS", "HC"
+        sample_phenotypes[:disease] = disease
       else
         if early_exit_flag == false
           acceptable_diseases = Sample.where(sample_source:@user.affiliation).pluck(:disease).uniq
           early_exit_flag = true
-          render json: {"error. invalid query value for disease. Acceptable parameters are": acceptable_diseases}, status: :unprocessable_entity
+          render json: {"error. invalid query value for disease. Acceptable parameters are": acceptable_diseases}
         end
       end
     end
@@ -264,7 +245,7 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"please enter a valid number for the minage parameter value"}, status: :unprocessable_entity
+          render json: {"error":"please enter a valid number for the minage parameter value"}
         end
       end
     end
@@ -277,7 +258,7 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"please enter a valid number for the maxage parameter value"}, status: :unprocessable_entity
+          render json: {"error":"please enter a valid number for the maxage parameter value"}
         end
       end
     end
@@ -334,7 +315,7 @@ class Api::V1Controller < ApplicationController
       end
     end #close samples.each block
 
-    if hla == true
+    if hla == "true"
       hla_hash = {
         drb1_1:[],
         drb1_2:[],
@@ -474,7 +455,7 @@ class Api::V1Controller < ApplicationController
     end #close if hla == "true block"
 
     if early_exit_flag == false
-      render json: results, status: :ok
+      render json: results
     end
   end #close def datafetch action block
 end
