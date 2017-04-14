@@ -2,7 +2,7 @@ class Api::V1Controller < ApplicationController
   acts_as_token_authentication_handler_for User
   before_action :authenticate_user!
 
-  def endpoint
+  def jsondata #rename this to something like samples
     @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
     sample_phenotypes = {sample_source: @user.affiliation}
     hla_genes = {}
@@ -58,7 +58,7 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"invalid query value for ethnicity. See site documentation for acceptable ethnicity parameters"}
+          render json: {"error":"invalid query value for ethnicity. See site documentation for acceptable ethnicity parameters"}, status: :unprocessable_entity
         end
       end
     end
@@ -71,7 +71,7 @@ class Api::V1Controller < ApplicationController
         if early_exit_flag == false
           acceptable_diseases = Sample.where(sample_source:@user.affiliation).pluck(:disease).uniq
           early_exit_flag = true
-          render json: {"error. invalid query value for disease. Acceptable parameters are": acceptable_diseases}
+          render json: {"error. invalid query value for disease. Acceptable parameters are": acceptable_diseases}, status: :unprocessable_entity
         end
       end
     end
@@ -84,7 +84,7 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"please enter a valid number for the minage parameter value"}
+          render json: {"error":"please enter a valid number for the minage parameter value"}, status: :unprocessable_entity
         end
       end
     end
@@ -97,14 +97,14 @@ class Api::V1Controller < ApplicationController
       else
         if early_exit_flag == false
           early_exit_flag = true
-          render json: {"error":"please enter a valid number for the maxage parameter value"}
+          render json: {"error":"please enter a valid number for the maxage parameter value"}, status: :unprocessable_entity
         end
       end
     end
 
     #build the results for the api call based on user supplied parameters
 
-    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source, gender, disease, age_of_onset")
+    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source, gender, disease, age_of_onset, sample_source_identifier, ethnicity")
 
     if minagenum
       samples = samples.where("age_of_onset >= ?", minagenum)
@@ -117,11 +117,12 @@ class Api::V1Controller < ApplicationController
 
     samples.each do |s|
       hash = {
-        indigo_id:s.indigo_id,
-        sample_source: s.sample_source,
-        gender: s.gender,
+        indigo_id: s.indigo_id,
+        id:s.sample_source_identifier,
+        sex: s.gender,
         disease: s.disease,
-        age_of_onset: s.age_of_onset
+        age_of_onset: s.age_of_onset,
+        ethnicity: s.ethnicity
       }
       results.push(hash)
     end
@@ -148,34 +149,34 @@ class Api::V1Controller < ApplicationController
           r[:drbo_1] = @h[:drbo_1]
           r[:drbo_2] = @h[:drbo_2]
         else
-          r[:drb1_1] = "-"
-          r[:drb1_2] = "-"
-          r[:dqb1_1] = "-"
-          r[:dqb1_2] = "-"
-          r[:dpb1_1] = "-"
-          r[:dpb1_2] = "-"
-          r[:a_1] = "-"
-          r[:a_2] = "-"
-          r[:b_1] = "-"
-          r[:b_2] = "-"
-          r[:c_1] = "-"
-          r[:c_2] = "-"
-          r[:dpa1_1] = "-"
-          r[:dpa1_2] = "-"
-          r[:dqa1_1] = "-"
-          r[:dqa1_2] = "-"
-          r[:drbo_1] = "-"
-          r[:drbo_2] = "-"
+          r[:drb1_1] = "NA"
+          r[:drb1_2] = "NA"
+          r[:dqb1_1] = "NA"
+          r[:dqb1_2] = "NA"
+          r[:dpb1_1] = "NA"
+          r[:dpb1_2] = "NA"
+          r[:a_1] = "NA"
+          r[:a_2] = "NA"
+          r[:b_1] = "NA"
+          r[:b_2] = "NA"
+          r[:c_1] = "NA"
+          r[:c_2] = "NA"
+          r[:dpa1_1] = "NA"
+          r[:dpa1_2] = "NA"
+          r[:dqa1_1] = "NA"
+          r[:dqa1_2] = "NA"
+          r[:drbo_1] = "NA"
+          r[:drbo_2] = "NA"
         end
       end
     end
 
     if early_exit_flag == false
-      render json: { "search parameters": vars, "results": results }
+      render json: results, status: :ok
     end
   end #close def endpoint action block
 
-  def datafetch
+  def rstudiodata  #rename this to something like samplesrstudioformat
     @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
     sample_phenotypes = {sample_source: @user.affiliation}
     hla_genes = {}
@@ -286,7 +287,6 @@ class Api::V1Controller < ApplicationController
 
     samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source_identifier, gender, disease, age_of_onset, ethnicity")
 
-
     #filter for minimum and/or maximum age of onset, if required
 
     if minagenum
@@ -304,9 +304,10 @@ class Api::V1Controller < ApplicationController
     end
 
 
-    results = { id: [], sex: [], disease:[], age_of_onset: [], ethnicity: [] }
+    results = { indigo_id: [], id: [], sex: [], disease:[], age_of_onset: [], ethnicity: [] }
 
     hla_samples.each do |s|
+      results[:indigo_id].push(s.indigo_id)
       if s.sample_source_identifier != nil
         results[:id].push(s.sample_source_identifier)
       else

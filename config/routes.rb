@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   resources :gwas
   resources :consensus_fastqs
   namespace :api do
-    get 'v1/endpoint'
-    get 'v1/datafetch'
+    get 'v1/jsondata'
+    get 'v1/rstudiodata'
   end
 
   get 'welcome/progress'

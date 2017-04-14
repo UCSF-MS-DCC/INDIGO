@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Credentials API</title>
+    <title>Standard JSON format: indigo.ucsf.edu/api/v1/jsondata API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,14 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>Credentials API</h1>
+      <h1>Standard JSON format: indigo.ucsf.edu/api/v1/jsondata API</h1>
 
       <div class="article">
-        <h2>Redirect to sign up on request with missing credentials</h2>
-        <h3>GET /api/v1/jsondata</h3>
+        <h2>Querying dataset, filtered by sex</h2>
+        <h3>GET /api/v1/jsondata?sex=F</h3>
+          <p class="explanation">
+            Adding sex= or sex= to the query string filters results by sex. Acceptable values are F or M. Only one sex= may be added to the query string. To receive data for all sexes, omit the sex= parameter.
+          </p>
 
 
 
@@ -118,13 +121,15 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">X-User-Email: user@test.com
-X-User-Token: abc123
+X-User-Token: sYuAd9zgidcJrM6KgDCq
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/v1/jsondata</pre>
+          <pre class="request route highlight">GET /api/v1/jsondata?sex=F</pre>
 
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">sex: F</pre>
 
 
 
@@ -133,17 +138,33 @@ Cookie: </pre>
               <pre class="response headers">X-Frame-Options: SAMEORIGIN
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
-Location: http://example.org/users/sign_in
-Content-Type: text/html; charset=utf-8
-Cache-Control: no-cache
-Set-Cookie: _indigo_session=VDQyeFFDOXJyVnNFNTc3c254dzBZOU50cDVQTTV0dDkxbUV1amJrWGVGMVBMUVd1NW01a2RCNUp5bndtNXZoVW8yWXBWWFRIUTZXNkNGTVFDcVNiVkpSMllOalcxTE4xNzhPNThsL1lwT3poMU84c3VjRUN3L1U5QnhBM2pjOC9wQnZDWE50YnpKWGpIL2tETVJPazBucGVxN1ZseDhyZjRFK1FMellTRFBSUlZEMFkrazFUVU5ISGQ2QS9VMWxzT0twZUhBRzRnWlhXcExFWFdCS2pDNnduSklOVTd6R1BodkhJTE5WMW84cDkyb3lPajBXU1Y1R2E5M2ZhM2xUNi0tUUxSeHBIU2dGZHJLaGQwTGkzUGF5UT09--1b1894dad701ac2404bac6c9beeb65b30e09fd85; path=/; HttpOnly
-X-Request-Id: 429feae6-67aa-4646-aaf6-382a0d4fedc1
-X-Runtime: 0.024835
-Content-Length: 98</pre>
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;51a8ebfff1ae86df2437f138a2d9a87c&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 056acddd-91b0-4b9e-a65f-374dc9737c61
+X-Runtime: 0.045421
+Content-Length: 223</pre>
             <h4>Status</h4>
-            <pre class="response status">302 Found</pre>
+            <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">&lt;html&gt;&lt;body&gt;You are being &lt;a href=&quot;http://example.org/users/sign_in&quot;&gt;redirected&lt;/a&gt;.&lt;/body&gt;&lt;/html&gt;</pre>
+              <pre class="response body">[
+  {
+    &quot;indigo_id&quot;: &quot;INDa0001&quot;,
+    &quot;id&quot;: &quot;MS974331&quot;,
+    &quot;sex&quot;: &quot;F&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;age_of_onset&quot;: 40,
+    &quot;ethnicity&quot;: &quot;White, Not Hispanic&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDa0003&quot;,
+    &quot;id&quot;: &quot;MS029014&quot;,
+    &quot;sex&quot;: &quot;F&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;age_of_onset&quot;: 36,
+    &quot;ethnicity&quot;: &quot;Asian&quot;
+  }
+]</pre>
       </div>
     </div>
   </body>

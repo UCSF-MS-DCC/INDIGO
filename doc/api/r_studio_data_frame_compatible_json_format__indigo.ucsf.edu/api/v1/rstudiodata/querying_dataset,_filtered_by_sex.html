@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>indigo.ucsf.edu/api/v1/datafetch API</title>
+    <title>R Studio data frame compatible JSON format: indigo.ucsf.edu/api/v1/rstudiodata API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,11 +106,14 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>indigo.ucsf.edu/api/v1/datafetch API</h1>
+      <h1>R Studio data frame compatible JSON format: indigo.ucsf.edu/api/v1/rstudiodata API</h1>
 
       <div class="article">
-        <h2>Querying dataset, filtered by maximum age of onset</h2>
-        <h3>GET /api/v1/datafetch?maxage=80</h3>
+        <h2>Querying dataset, filtered by sex</h2>
+        <h3>GET /api/v1/rstudiodata?sex=F</h3>
+          <p class="explanation">
+            Adding sex= or sex= to the query string filters results by sex. Acceptable values are F or M. Only one sex= may be added to the query string. To receive data for all sexes, omit the sex= parameter.
+          </p>
 
 
 
@@ -118,15 +121,15 @@ table th, table td {
 
             <h4>Headers</h4>
             <pre class="request headers">X-User-Email: user@test.com
-X-User-Token: 82s6W_3_WVfUM4hgRrhE
+X-User-Token: sYuAd9zgidcJrM6KgDCq
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/v1/datafetch?maxage=80</pre>
+          <pre class="request route highlight">GET /api/v1/rstudiodata?sex=F</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">maxage: 80</pre>
+            <pre class="request query_parameters highlight">sex: F</pre>
 
 
 
@@ -136,29 +139,38 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;15b8a42c5685ec720bd745c83deb55da&quot;
+ETag: W/&quot;b79bd4bc16000a7c984082d1b3d08f15&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 88ebc231-eb06-4c90-bc18-8a1eeb7d82e8
-X-Runtime: 0.038443
-Content-Length: 64</pre>
+X-Request-Id: 513c9fb8-9482-47ca-955d-975299832672
+X-Runtime: 0.028732
+Content-Length: 171</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
               <pre class="response body">{
+  &quot;indigo_id&quot;: [
+    &quot;INDa0001&quot;,
+    &quot;INDa0003&quot;
+  ],
   &quot;id&quot;: [
-
+    &quot;MS974331&quot;,
+    &quot;MS029014&quot;
   ],
   &quot;sex&quot;: [
-
+    &quot;F&quot;,
+    &quot;F&quot;
   ],
   &quot;disease&quot;: [
-
+    &quot;MS&quot;,
+    &quot;MS&quot;
   ],
   &quot;age_of_onset&quot;: [
-
+    40,
+    36
   ],
   &quot;ethnicity&quot;: [
-
+    &quot;White, Not Hispanic&quot;,
+    &quot;Asian&quot;
   ]
 }</pre>
       </div>
