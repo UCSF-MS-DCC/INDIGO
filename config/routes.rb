@@ -36,6 +36,8 @@ Rails.application.routes.draw do
 
   get 'dataview/index'
 
+  get 'dataview/superindex'
+
   get 'dataview/download_sample_data'
 
   get 'dataview/download_hla_data'
@@ -47,6 +49,10 @@ Rails.application.routes.draw do
   get 'dataview/samples_to_json'
 
   get 'dataview/hlas_to_json'
+
+  get 'dataview/superindex_samples_to_json'
+
+  get 'dataview/superindex_hlas_to_json'
 
   get 'keys/index'
 

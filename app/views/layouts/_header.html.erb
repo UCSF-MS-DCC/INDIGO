@@ -22,7 +22,10 @@
                 <li><%= link_to "Log In", new_user_session_path %></li>
               <% else %>
                 <li><%= link_to "My Account", profiles_show_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View and Edit Your Account Details" %></li>
-                <li><%= link_to "Data", dataview_index_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View and Download Your Institution's Indigo Data" %></li>
+                <li><%= link_to "#{current_user.affiliation} Data", dataview_index_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View Your Institution's Indigo Data" %></li>
+                <% if current_user.has_role? :superuser %>
+                  <li><%= link_to "All Data", dataview_superindex_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View All INDIGO Data" %></li>
+                <% end %>
                 <li><%= link_to "API Documentation", "/docs/index.html", :target => '_blank' %></li>
                 <li class="dropdown">
                   <%= link_to "Informatics", new_key_path, :class => "dropdown-toggle", :'data-toggle' => "dropdown" %>

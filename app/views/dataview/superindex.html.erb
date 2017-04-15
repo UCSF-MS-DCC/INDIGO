@@ -16,7 +16,7 @@
       <div class="tab-pane fade hide-table" id="summary">
       </div>
       <div class="tab-pane fade in active" id="sample">
-        <h3>&nbsp;&nbsp;<%= @samples.count %> Samples for <%= current_user.affiliation %></h3>
+        <h3>&nbsp;&nbsp;<%= @samples.count %> INDIGO Samples</h3>
         <br>
         <div id="sample_table"></div>
         <div class="row">
@@ -39,12 +39,12 @@
         </div>
       </div>
       <div class="tab-pane fade hide-table" id="hla">
-        <h3>&nbsp;&nbsp;<%= @hlas.count %> HLA for <%= current_user.affiliation %></h3>
+        <h3>&nbsp;&nbsp;<%= @hlas.count %> INDIGO HLA</h3>
         <br>
         <div id="hla_table"></div>
       </div>
       <div class="tab-pane fade hide-table" id="kir">
-        <h3>&nbsp;&nbsp;<%= @kirs.count %> KIR for <%= current_user.affiliation %></h3>
+        <h3>&nbsp;&nbsp;<%= @kirs.count %> INDIGO KIR</h3>
         <br>
         <div id="kir_table"></div>
       </div>
@@ -67,13 +67,13 @@
       $(".spinner").hide();
     });
 
-    $.get('<%= Rails.application.routes.url_helpers.dataview_samples_to_json_path %>', function(samples){
+    $.get('<%= Rails.application.routes.url_helpers.dataview_superindex_samples_to_json_path %>', function(samples){
 
       var dataMatrix = [];
 
       samples.forEach(function(sample) {
 
-        dataMatrix.push([sample['indigo_id'], sample['sample_source_identifier'], sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['age_of_onset'], sample['created_at'].split("T")[0]])
+        dataMatrix.push([sample['indigo_id'], sample['sample_source'], sample['sample_source_identifier'],sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['age_of_onset'], sample['created_at'].split("T")[0]])
       });
       google.charts.load('current', {'packages': ['table']});
       google.charts.setOnLoadCallback(drawTable);
@@ -81,6 +81,7 @@
       function drawTable() {
         var data = new google.visualization.DataTable();
         data.addColumn('string', 'Indigo ID');
+        data.addColumn('string', 'Sample Source')
         data.addColumn('string', 'Site Sample ID')
         data.addColumn('string', 'Disease');
         data.addColumn('string', 'Gender');
@@ -95,7 +96,7 @@
         table.draw(data, {showRowNumber: false, width: '100%', page: 'enable', pageSize: 25});
       }
     })
-    $.get('<%= Rails.application.routes.url_helpers.dataview_hlas_to_json_path %>', function(hlas){
+    $.get('<%= Rails.application.routes.url_helpers.dataview_superindex_hlas_to_json_path %>', function(hlas){
       // console.log(hlas)
 
       var dataMatrix = [];

@@ -4,7 +4,13 @@ class Api::V1Controller < ApplicationController
 
   def jsondata #rename this to something like samples
     @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
-    sample_phenotypes = {sample_source: @user.affiliation}
+    sample_phenotypes = {}
+    if @user.has_role? :superuser
+      sample_phenotypes ={}
+    else
+      sample_phenotypes = {sample_source: @user.affiliation}
+    end
+
     hla_genes = {}
     kir_genes = {}
     early_exit_flag = false
@@ -178,10 +184,16 @@ class Api::V1Controller < ApplicationController
 
   def rstudiodata  #rename this to something like samplesrstudioformat
     @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
-    sample_phenotypes = {sample_source: @user.affiliation}
     hla_genes = {}
     kir_genes = {}
     early_exit_flag = false
+    
+    sample_phenotypes = {}
+    if @user.has_role? :superuser
+      sample_phenotypes ={}
+    else
+      sample_phenotypes = {sample_source: @user.affiliation}
+    end
 
     #store query string parameter values
     sex = params[:sex]

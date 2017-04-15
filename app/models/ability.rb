@@ -8,6 +8,9 @@ class Ability
       can :manage, :all
       can :access, :rails_admin
       # can :dashboard
+    elsif user.has_role?(:superuser)
+      can :read, :all
+      cannot :manage, :rails_admin
     else
       can :read, :all
       cannot :manage, :rails_admin

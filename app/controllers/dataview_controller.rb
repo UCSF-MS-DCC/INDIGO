@@ -11,21 +11,39 @@ class DataviewController < ApplicationController
     @idrs = IDR.where(sample_source: current_user.affiliation)
   end
 
+  def superindex
+    if !current_user.has_role? :superuser
+      redirect_to '/dataview#index'
+    else
+      @samples = Sample.all
+      @hlas = Hla.all
+      @kirs = Kir.all
+    end
+  end
+
   def samples_to_json
     @samples = Sample.where(sample_source: current_user.affiliation)
+    render json: @samples
+  end
 
+  def superindex_samples_to_json
+    @samples = Sample.all
     render json: @samples
   end
 
   def hlas_to_json
     @indigo_ids = Sample.where(sample_source: current_user.affiliation).distinct.pluck(:indigo_id)
     @hlas = Hla.where(indigo_id: @indigo_ids)
+    render json: @hlas
+  end
 
+  def superindex_hlas_to_json
+    @hlas = Hla.all
     render json: @hlas
   end
 
   def summary_report_to_json
-    
+
   end
 
   def download_idr
