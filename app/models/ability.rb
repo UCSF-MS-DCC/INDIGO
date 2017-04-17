@@ -10,9 +10,11 @@ class Ability
       # can :dashboard
     elsif user.has_role?(:superuser)
       can :read, :all
+      cannot :access, :rails_admin
       cannot :manage, :rails_admin
     else
       can :read, :all
+      cannot :access, :rails_admin
       cannot :manage, :rails_admin
     end
 

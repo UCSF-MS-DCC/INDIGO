@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Using the INDIGO API</title>
+    <meta charset="utf-8">
+    <style>
+
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Getting Started</h1>
+
+      <div class="article">
+        <h2>Authorization</h2>
+
+          <p class="explanation">
+            Access to the data contained in the INDIGO database is restricted to users who are approved by INDIGO project data administrators. To create an account, go to <a href="https://indigo.ucsf.edu/users/sign_up" style="text-decoration:underline;">the INDIGO sign up page</a>. Once your account has been approved, you may retrieve your API key under the "My Account" section
+             after signing in. You will need this key, as well as the email address used to sign up for your account, for all API transactions.
+          </p>
+
+        </div>
+
+        <div class="article">
+
+          <h2>Data: What is Available</h2>
+
+          <p class="explanation">
+            One of the goals of the INDIGO project is to make the phenotypic and HLA and KIR genetic data derived from samples submitted to UCSF available to researchers. To find out the status of your institution's samples, visit the "Progress" section, accessable
+            through the menu bar (only when signed in).
+          </p>
+
+        </div>
+
+        <div class="article">
+
+          <h2>Using the API</h2>
+
+          <h3>API endpoints</h3>
+
+          <p class="explanation">
+            The INDIGO API currently serves data from two url endpoints. Both deliver data in JSON format.
+            <ul>
+              <li><b>indigo.ucsf.edu/api/v1/jsondata</b>: returns data in standard json format</li>
+              <li><b>indigo.ucsf.edu/api/v1/rstudiodata</b>: returns data in a format specifically designed to be easily configured into a R Studio data frame</li>
+            </ul>
+          </p>
+
+          <h3>curl</h3>
+
+          <p class="explanation">
+            curl is a tool used in command lines or in scripts to transfer data. For documentation and tutorials, visit <a href="https://curl.haxx.se/" style="text-decoration:underline;">the curl homepage.</a>
+          </p>
+
+          <p class="explanation">
+            To use curl to query the INDIGO database, you must include the all of the following in each request:
+            <ul>
+              <li>a header "X-User-Email:<i>your email address</i>"</li>
+              <li>a header "X-User-Token:<i>your api key</i>"</li>
+              <li>"https://indigo.ucsf.edu/api/v1/<i>api endpoint</i>"</li>
+            </ul>
+          </p>
+
+          <h4>Example:</h4>
+          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v1/jsondata"</pre>
+
+          <br>
+
+          <h3>R Studio with the httr package</h3>
+
+          <p class="explanation">
+            INDIGO data may be piped directly into the R Studio console by using the httr package (see documentation <a href="https://github.com/hadley/httr" style="text-decoration:underline;">here</a> and <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" style="text-decoration:underline;">here</a>)
+          </p>
+
+           <h4>Recommended workflow for using the INDIGO API with R Studio:</h4>
+
+           <pre>
+# install and load the httr and rjson packages
+&gt; install.package("httr")
+&gt; install.package("rjson")
+&gt; library("httr")
+&gt; library("rjson")
+<br>
+# create a named vector containing your INDIGO credentials and required header names. replace italicized text with your email address and api key
+&gt; h &lt;- c("<i>your email address</i>", "<i>your api key</i>")
+&gt; names(h) &lt;- c("X-User-Email", "X-User-Token")
+<br>
+# make a get request to the INDIGO API endpoint, assigning the server response to a variable
+&gt; response &lt;- GET("https://indigo.ucsf.edu/api/v1/rstudiodata", add_headers(.headers = h))
+<br>
+# the data returned will be in the response body. to access it
+&gt; body &lt;- content(response, "text")
+<br>
+# the data is in JSON format. parse it with rjson
+&gt; data &lt;- fromJSON(body)
+<br>
+# create a data frame from the parsed data
+&gt; data_frame &lt;- as.data.frame(data)
+</pre>
+
+        </div>
+
+        <div class="article">
+          <h2>Filtering API call results with query strings</h2>
+
+          <p class="explanation">
+            By default, the INDIGO API returns all available phenotypic and catalog data for all samples. Users can restrict data received by phenotypes such as sex, minimum or maximum age of onset, and disease/control, and request hla and kir genetic data
+            by adding <b>a query string</b> to the url of the API request.
+          </p>
+
+          <h4>Example:</h4>
+          <pre>
+curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v1/jsondata<b>?disease=MS&amp;sex=F&amp;minage=30</b>"
+</pre>
+        <p class="explanation">
+          To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the filtering criteria in this format: category=value. Multiple filters may be added, separated by an ampersand <b>&amp;</b>.
+        </p>
+        <p class="explanation">
+          A category may only be used once in a query string. An API call that uses a category more than once, such as:
+          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v1/jsondata?disease=MS&disease=PD"</pre>
+          will produce an error.
+        </p>
+        <p class="explanation" style="text-decoration:underline;">
+          <i><b>Only data for samples that meet ALL filtering criteria will be returned</b></i>.
+        </p>
+
+        <h4>Valid query string categories and values</h4>
+
+        <table class="table-bordered">
+          <tr><th>disease</th><th>sex</th><th>minage<sup> 1</sup></th><th>maxage<sup> 1</sup></th><th>hla<sup> 2</sup></th><th>kir<sup> 2</sup></th></tr>
+          <tr><td>PD, MS, MG, NMO, SCZD, HC</td><td>F, M</td><td>any whole number</td><td>any whole number</td><td>true, false</td><td>true, false</td></tr>
+        </table>
+        <sup>1</sup> Sets the minimum/maximum age of onset for returned samples.<br>
+        <sup>2</sup> Must set these to <i>true</i> to receive hla/kir data, otherwise only phenotypic and catalog data will be returned.
+
+        </div>
+
+        <h2>API Output</h2>
+        <p class="explanation">
+          Refer to <a href="/docs/index.html" style="text-decoration:underline;">Endpoint Documentation</a> for futher information and examples of output.
+        </p>
+        <br><br><br>
+
+  </body>
+</html>
