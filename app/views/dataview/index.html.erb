@@ -7,6 +7,9 @@
         <li class="active"><a data-toggle="tab" href="#sample">Samples</a></li>
         <li><a data-toggle="tab" href="#hla">HLA</a></li>
         <li><a data-toggle="tab" href="#kir" disabled>KIR</a></li>
+        <!-- <li><a data-toggle="tab" href="#jd-sample">JS-Samples</a></li>  JQuery datatables on hold while formatting gets figured out. Side Scrolling causes columns to not match up with their headers.
+        <li><a data-toggle="tab" href="#jd-hla">JS-HLA</a></li>
+        <li><a data-toggle="tab" href="#jd-kir">JS-KIR</a></li> -->
       </ul>
     </div>
   </div>
@@ -48,6 +51,54 @@
         <br>
         <div id="kir_table"></div>
       </div>
+      <div class="tab-pane fade hide-table" id="jd-sample">
+        <!-- <h3>&nbsp;&nbsp;<%= @kirs.count %> KIR for <%= current_user.affiliation %></h3>  -->
+        <br>
+        <table id="jd-sample-table" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Indigo ID</th>
+              <th>Site Identifier</th>
+              <th>Sex</th>
+              <th>Disease</th>
+              <th>Age of Onset</th>
+              <th>Age at Sample</th>
+              <th>Ethnicity</th>
+              <th>Uploaded on</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade hide-table" id="jd-hla">
+        <br>
+        <table id="jd-hla-table" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Indigo ID</th>
+              <th>DRB1/1</th>
+              <th>DRB1/2</th>
+              <th>DQB1/1</th>
+              <th>DQB1/2</th>
+              <th>DPB1/1</th>
+              <th>DPB1/2</th>
+              <th>A/1</th>
+              <th>A/2</th>
+              <th>B/1</th>
+              <th>B/2</th>
+              <th>C/1</th>
+              <th>C/2</th>
+              <th>DPA1/1</th>
+              <th>DPA1/2</th>
+              <th>DQA1/1</th>
+              <th>DQA1/2</th>
+              <th>DRBo1/1</th>
+              <th>DRBo1/2</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
     </div>
   </div>
 
@@ -66,13 +117,60 @@
     $(document).ajaxStop(function() {
       $(".spinner").hide();
     });
+    // JQuery DataTables are on hold until formatting gets figured out. Side scrolling, needed for hla and kir tables, causes data columns to not line up under headers.
+    // $('#jd-sample-table').DataTable( {
+    //   ajax: {
+    //     url:'/dataview/samples_to_json',
+    //     dataSrc:''
+    //   },
+    //   columns: [
+    //     { "data": "indigo_id"},
+    //     { "data": 'sample_source_identifier'},
+    //     { "data": "gender"},
+    //     { "data": "disease"},
+    //     { "data": "age_of_onset"},
+    //     { "data": "age_at_sample"},
+    //     { "data": "ethnicity"},
+    //     { "data": "received_date"}
+    //   ]
+    // })
+    //
+    // $('#jd-hla-table').DataTable( {
+    //   scrollX: true,
+    //   ajax: {
+    //     url:'/dataview/hlas_to_json',
+    //     dataSrc:''
+    //   },
+    //   columns: [
+    //     { "data": "indigo_id"},
+    //     { "data": "drb1_1"},
+    //     { "data": "drb1_2"},
+    //     { "data": "dqb1_1"},
+    //     { "data": "dqb1_2"},
+    //     { "data": "dpb1_1"},
+    //     { "data": "dpb1_2"},
+    //     { "data": "a_1"},
+    //     { "data": "a_2"},
+    //     { "data": "b_1"},
+    //     { "data": "b_2"},
+    //     { "data": "c_1"},
+    //     { "data": "c_2"},
+    //     { "data": "dpa1_1"},
+    //     { "data": "dpa1_2"},
+    //     { "data": "dqa1_1"},
+    //     { "data": "dqa1_2"},
+    //     { "data": "drbo_1"},
+    //     { "data": "drbo_2"}
+    //   ]
+    // })
 
     $.get('<%= Rails.application.routes.url_helpers.dataview_samples_to_json_path %>', function(samples){
+
+      // console.log(samples)
 
       var dataMatrix = [];
 
       samples.forEach(function(sample) {
-
         dataMatrix.push([sample['indigo_id'], sample['sample_source_identifier'], sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['age_of_onset'], sample['created_at'].split("T")[0]])
       });
       google.charts.load('current', {'packages': ['table']});
@@ -105,7 +203,6 @@
                          hla['dpb1_1'], hla['dpb1_2'], hla['a_1'], hla['a_2'], hla['b_1'], hla['b_2'], hla['c_1'], hla['c_2'], hla['dpa1_1'],
                          hla['dpa1_2'], hla['dqa1_1'], hla['dqa1_2'], hla['drbo_1'], hla['drbo_2']])
       });
-      console.log(dataMatrix[0]);
       google.charts.load('current', {'packages': ['table']});
       google.charts.setOnLoadCallback(drawTable);
 
@@ -135,6 +232,44 @@
         var table = new google.visualization.Table(document.getElementById('hla_table'));
 
         table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25});
+      }
+    })
+    $.get('<%= Rails.application.routes.url_helpers.dataview_kirs_to_json_path %>', function(kirs){
+      console.log(kirs)
+
+      var dataMatrix = [];
+      kirs.forEach(function(kir){
+
+        dataMatrix.push([kir['indigo_id'], kir['KIR2DL1'], kir['KIR2DL2'], kir['KIR2DL3'], kir['KIR2DL4'], kir['KIR2DL5A'], kir['KIR2DL5B'], kir['KIR2DP1'], kir['KIR2DS1'], kir['KIR2DS2'],
+                          kir['KIR2DS3'], kir['KIR2DS4'], kir['KIR2DS5'], kir['KIR3DL1'], kir['KIR3DL2'], kir['KIR3DL3'], kir['KIR3DS1']])
+      });
+      google.charts.load('current', {'packages': ['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Indigo ID');
+        data.addColumn('string', 'KIR2DL1');
+        data.addColumn('string', 'KIR2DL2');
+        data.addColumn('string', 'KIR2DL3');
+        data.addColumn('string', 'KIR2DL4');
+        data.addColumn('string', 'KIR2DL5A');
+        data.addColumn('string', 'KIR2DL5B');
+        data.addColumn('string', 'KIR2DP1');
+        data.addColumn('string', 'KIR2DS1');
+        data.addColumn('string', 'KIR2DS2');
+        data.addColumn('string', 'KIR2DS3');
+        data.addColumn('string', 'KIR2DS4');
+        data.addColumn('string', 'KIR2DS5');
+        data.addColumn('string', 'KIR3DL1');
+        data.addColumn('string', 'KIR3DL2');
+        data.addColumn('string', 'KIR3DL3');
+        data.addColumn('string', 'KIR3DS1');
+        data.addRows(dataMatrix);
+
+        var table = new google.visualization.Table(document.getElementById('kir_table'));
+
+        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25})
       }
     })
   });

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170404002211) do
+ActiveRecord::Schema.define(version: 20170418212623) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -205,6 +205,20 @@ ActiveRecord::Schema.define(version: 20170404002211) do
     t.string   "KIR2DL4"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "KIR3DL1"
+    t.text     "KIR3DS1"
+    t.integer  "sample_id"
+    t.text     "KIR2DL1"
+    t.text     "KIR2DL2"
+    t.text     "KIR2DL3"
+    t.text     "KIR2DL5A"
+    t.text     "KIR2DL5B"
+    t.text     "KIR2DS1"
+    t.text     "KIR2DS2"
+    t.text     "KIR2DS3"
+    t.text     "KIR2DS4"
+    t.text     "KIR2DP1"
+    t.text     "KIR3DL3"
   end
 
   create_table "kiruploads", force: :cascade do |t|

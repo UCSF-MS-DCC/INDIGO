@@ -50,9 +50,13 @@ Rails.application.routes.draw do
 
   get 'dataview/hlas_to_json'
 
+  get 'dataview/kirs_to_json'
+
   get 'dataview/superindex_samples_to_json'
 
   get 'dataview/superindex_hlas_to_json'
+
+  get 'dataview/superindex_kirs_to_json'
 
   get 'keys/index'
 

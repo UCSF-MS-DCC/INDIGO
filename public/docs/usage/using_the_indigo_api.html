@@ -139,7 +139,7 @@ table th, table td {
             The INDIGO API currently serves data from two url endpoints. Both deliver data in JSON format.
             <ul>
               <li><b>indigo.ucsf.edu/api/v1/jsondata</b>: returns data in standard json format</li>
-              <li><b>indigo.ucsf.edu/api/v1/rstudiodata</b>: returns data in a format specifically designed to be easily configured into a R Studio data frame</li>
+              <li><b>indigo.ucsf.edu/api/v1/rstudiodata</b>: returns data in a format that is easily configured into a R Studio data frame</li>
             </ul>
           </p>
 
@@ -163,7 +163,7 @@ table th, table td {
 
           <br>
 
-          <h3>R Studio with the httr package</h3>
+          <h3>R Studio with the httr and rjson packages</h3>
 
           <p class="explanation">
             INDIGO data may be piped directly into the R Studio console by using the httr package (see documentation <a href="https://github.com/hadley/httr" style="text-decoration:underline;">here</a> and <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" style="text-decoration:underline;">here</a>)
@@ -213,9 +213,9 @@ curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKy
           To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the filtering criteria in this format: category=value. Multiple filters may be added, separated by an ampersand <b>&amp;</b>.
         </p>
         <p class="explanation">
-          A category may only be used once in a query string. An API call that uses a category more than once, such as:
+          A category should only be used once in a query string. An API call that uses a category more than once, such as:
           <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v1/jsondata?disease=MS&disease=PD"</pre>
-          will produce an error.
+          will return sample data where the disease code equals PD. The first parameter of disease=MS is overwritten.
         </p>
         <p class="explanation" style="text-decoration:underline;">
           <i><b>Only data for samples that meet ALL filtering criteria will be returned</b></i>.

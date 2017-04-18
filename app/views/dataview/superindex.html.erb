@@ -138,5 +138,43 @@
         table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25});
       }
     })
+    $.get('<%= Rails.application.routes.url_helpers.dataview_kirs_to_json_path %>', function(kirs){
+      console.log(kirs)
+
+      var dataMatrix = [];
+      kirs.forEach(function(kir){
+
+        dataMatrix.push([kir['indigo_id'], kir['KIR2DL1'], kir['KIR2DL2'], kir['KIR2DL3'], kir['KIR2DL4'], kir['KIR2DL5A'], kir['KIR2DL5B'], kir['KIR2DP1'], kir['KIR2DS1'], kir['KIR2DS2'],
+                          kir['KIR2DS3'], kir['KIR2DS4'], kir['KIR2DS5'], kir['KIR3DL1'], kir['KIR3DL2'], kir['KIR3DL3'], kir['KIR3DS1']])
+      });
+      google.charts.load('current', {'packages': ['table']});
+      google.charts.setOnLoadCallback(drawTable);
+
+      function drawTable() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Indigo ID');
+        data.addColumn('string', 'KIR2DL1');
+        data.addColumn('string', 'KIR2DL2');
+        data.addColumn('string', 'KIR2DL3');
+        data.addColumn('string', 'KIR2DL4');
+        data.addColumn('string', 'KIR2DL5A');
+        data.addColumn('string', 'KIR2DL5B');
+        data.addColumn('string', 'KIR2DP1');
+        data.addColumn('string', 'KIR2DS1');
+        data.addColumn('string', 'KIR2DS2');
+        data.addColumn('string', 'KIR2DS3');
+        data.addColumn('string', 'KIR2DS4');
+        data.addColumn('string', 'KIR2DS5');
+        data.addColumn('string', 'KIR3DL1');
+        data.addColumn('string', 'KIR3DL2');
+        data.addColumn('string', 'KIR3DL3');
+        data.addColumn('string', 'KIR3DS1');
+        data.addRows(dataMatrix);
+
+        var table = new google.visualization.Table(document.getElementById('kir_table'));
+
+        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25})
+      }
+    })
   });
   </script>

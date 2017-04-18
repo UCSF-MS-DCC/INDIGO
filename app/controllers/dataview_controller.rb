@@ -42,6 +42,17 @@ class DataviewController < ApplicationController
     render json: @hlas
   end
 
+  def kirs_to_json
+    @indigo_ids = Sample.where(sample_source: current_user.affiliation).distinct.pluck(:indigo_id)
+    @kirs = Kir.where(indigo_id: @indigo_ids)
+    render json: @kirs
+  end
+
+  def superindex_kirs_to_json
+    @kirs = Kir.all
+    render json: @kirs
+  end
+
   def summary_report_to_json
 
   end

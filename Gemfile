@@ -45,6 +45,7 @@ gem 'groupdate'
 gem 'figaro'
 gem 'rspec-rails'
 gem 'rspec_api_documentation'
+gem 'jquery-datatables-rails', '~> 3.4.0'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
