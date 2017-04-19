@@ -45,7 +45,11 @@ gem 'groupdate'
 gem 'figaro'
 gem 'rspec-rails'
 gem 'rspec_api_documentation'
+<<<<<<< HEAD
 gem 'jquery-datatables-rails', '~> 3.4.0'
+=======
+gem 'whenever', :require => false
+>>>>>>> wheneverize
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
