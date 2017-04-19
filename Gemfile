@@ -45,6 +45,7 @@ gem 'groupdate'
 gem 'figaro'
 gem 'rspec-rails'
 gem 'rspec_api_documentation'
+gem 'whenever', :require => false
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

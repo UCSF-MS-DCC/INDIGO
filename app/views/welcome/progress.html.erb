@@ -105,8 +105,40 @@
                 <% else %>
                   <td>-</td>
                 <% end %>
-                <td>-</td>
-                <td>-</td>
+
+                <% if c.datasets.count > 0 %>
+                  <% kir_count = 0 %>
+                  <% @d = c.datasets.where(disease:"HC") %>
+                  <% @d.each do |dset| %>
+                    <% dset.batches.each do |batch| %>
+                      <% kir_count += batch.kirs_control_male + batch.kirs_control_female + batch.kirs_control_gender_unknown %>
+                    <% end %>
+                  <% end %>
+                  <% if kir_count > 0 %>
+                    <td><%= number_with_delimiter(kir_count, :delimiter => ',') %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                <% else %>
+                  <td>-</td>
+                <% end %>
+
+                <% if c.datasets.count > 0 %>
+                  <% kir_count = 0 %>
+                  <% @d = c.datasets.where.not(disease:"HC") %>
+                  <% @d.each do |dset| %>
+                    <% dset.batches.each do |batch| %>
+                      <% kir_count += batch.kirs_case_male + batch.kirs_case_female + batch.kirs_case_gender_unknown  %>
+                    <% end %>
+                  <% end %>
+                  <% if kir_count > 0 %>
+                    <td><%= number_with_delimiter(kir_count, :delimiter => ',') %></td>
+                  <% else %>
+                    <td>-</td>
+                  <% end %>
+                <% else %>
+                  <td>-</td>
+                <% end %>
               </tr>
           <% end %>
           <!-- summary of all quantities -->
