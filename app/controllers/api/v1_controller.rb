@@ -174,8 +174,48 @@ class Api::V1Controller < ApplicationController
           r[:drbo_1] = "NA"
           r[:drbo_2] = "NA"
         end
-      end
-    end
+      end #close results.each block
+    end #close if hla == "true" block
+    if kir == "true"
+      results.each do |r|
+        if Kir.where(indigo_id: r[:indigo_id]).count > 0
+          @k = Kir.find_by(indigo_id: r[:indigo_id])
+          r[:KIR2DL1] = @k[:KIR2DL1]
+          r[:KIR2DL2] = @k[:KIR2DL2]
+          r[:KIR2DL3] = @k[:KIR2DL3]
+          r[:KIR2DL4] = @k[:KIR2DL4]
+          r[:KIR2DL5A] = @k[:KIR2DL5A]
+          r[:KIR2DL5B] = @k[:KIR2DL5B]
+          r[:KIR2DP1] = @k[:KIR2DP1]
+          r[:KIR2DS1] = @k[:KIR2DS1]
+          r[:KIR2DS2] = @k[:KIR2DS2]
+          r[:KIR2DS3] = @k[:KIR2DS3]
+          r[:KIR2DS4] = @k[:KIR2DS4]
+          r[:KIR2DS5] = @k[:KIR2DS5]
+          r[:KIR3DL1] = @k[:KIR3DL1]
+          r[:KIR3DL2] = @k[:KIR3DL2]
+          r[:KIR3DL3] = @k[:KIR3DL3]
+          r[:KIR3DS1] = @k[:KIR3DS1]
+        else
+          r[:KIR2DL1] = "NA"
+          r[:KIR2DL2] = "NA"
+          r[:KIR2DL3] = "NA"
+          r[:KIR2DL4] = "NA"
+          r[:KIR2DL5A] = "NA"
+          r[:KIR2DL5B] = "NA"
+          r[:KIR2DP1] = "NA"
+          r[:KIR2DS1] = "NA"
+          r[:KIR2DS2] = "NA"
+          r[:KIR2DS3] = "NA"
+          r[:KIR2DS4] = "NA"
+          r[:KIR2DS5] = "NA"
+          r[:KIR3DL1] = "NA"
+          r[:KIR3DL2] = "NA"
+          r[:KIR3DL3] = "NA"
+          r[:KIR3DS1] = "NA"
+        end #close if Kir.where ... block
+      end #close results.each block
+    end #close if kir == "true" block
 
     if early_exit_flag == false
       render json: results, status: :ok
@@ -187,7 +227,7 @@ class Api::V1Controller < ApplicationController
     hla_genes = {}
     kir_genes = {}
     early_exit_flag = false
-    
+
     sample_phenotypes = {}
     if @user.has_role? :superuser
       sample_phenotypes ={}
@@ -228,6 +268,20 @@ class Api::V1Controller < ApplicationController
         if early_exit_flag == false
           early_exit_flag = true
           render json: {"error":"invalid query value for hla. Acceptable values are T or F"}, status: :unprocessable_entity
+        end
+      end
+    end
+
+    if kir != nil
+      case kir
+      when "true", "True", "TRUE", "T", "t"
+        kir = true
+      when "false" "False", "FALSE", "F", "f"
+        kir = false
+      else
+        if early_exit_flag == false
+          early_exit_flag = true
+          render json: {"error":"invalid query value for kir. Acceptable values are T or F"}, status: :unprocessable_entity
         end
       end
     end
@@ -307,18 +361,10 @@ class Api::V1Controller < ApplicationController
     if maxagenum
       samples = samples.where("age_of_onset <= ?", maxagenum)
     end
-    #only return samples with HLA data
-    hla_samples = []
-    samples.each do |s|
-      if Hla.where(indigo_id:s.indigo_id).count > 0
-        hla_samples.push(s)
-      end
-    end
-
 
     results = { indigo_id: [], id: [], sex: [], disease:[], age_of_onset: [], ethnicity: [] }
 
-    hla_samples.each do |s|
+    samples.each do |s|
       results[:indigo_id].push(s.indigo_id)
       if s.sample_source_identifier != nil
         results[:id].push(s.sample_source_identifier)
@@ -368,7 +414,7 @@ class Api::V1Controller < ApplicationController
         drbo_1:[],
         drbo_2:[]
       }
-      hla_samples.each do |s|
+      samples.each do |s|
         if Hla.where(indigo_id:s.indigo_id).count > 0
           # still need to have a value in the return array if there is no hla gene for the sample. Push "NA" into all hla_hash fields
           @hla = Hla.find_by(indigo_id:s.indigo_id)
@@ -484,7 +530,132 @@ class Api::V1Controller < ApplicationController
         end #close if Hla.where(indigo_id:s.indigo_id)...  block
       end #close samples.each... block
       results = results.merge(hla_hash)
-    end #close if hla == "true block"
+    end #close if hla == "true" block
+
+    if kir == true
+      kir_hash = {
+        KIR2DL1:[],
+        KIR2DL2:[],
+        KIR2DL3:[],
+        KIR2DL4:[],
+        KIR2DL5A:[],
+        KIR2DL5B:[],
+        KIR2DP1:[],
+        KIR2DS1:[],
+        KIR2DS2:[],
+        KIR2DS3:[],
+        KIR2DS4:[],
+        KIR2DS5:[],
+        KIR3DL1:[],
+        KIR3DL2:[],
+        KIR3DL3:[],
+        KIR3DS1:[]
+      }
+      samples.each do |s|
+        if Kir.where(indigo_id:s.indigo_id).count > 0
+          # still need to have a value in the return array if there is no kir gene for the sample so push "NA" into all hla_hash fields
+          @kir = Kir.find_by(indigo_id:s.indigo_id)
+          if @kir[:KIR2DL1] == nil || @kir[:KIR2DL1] == "-"
+            kir_hash[:KIR2DL1].push("NA")
+          else
+            kir_hash[:KIR2DL1].push(@kir[:KIR2DL1])
+          end
+          if @kir[:KIR2DL2] == nil || @kir[:KIR2DL2] == "-"
+            kir_hash[:KIR2DL2].push("NA")
+          else
+            kir_hash[:KIR2DL2].push(@kir[:KIR2DL2])
+          end
+          if @kir[:KIR2DL3] == nil || @kir[:KIR2DL3] == "-"
+            kir_hash[:KIR2DL3].push("NA")
+          else
+            kir_hash[:KIR2DL3].push(@kir[:KIR2DL3])
+          end
+          if @kir[:KIR2DL4] == nil || @kir[:KIR2DL4] == "-"
+            kir_hash[:KIR2DL4].push("NA")
+          else
+            kir_hash[:KIR2DL4].push(@kir[:KIR2DL4])
+          end
+          if @kir[:KIR2DL5A] == nil || @kir[:KIR2DL5A] == "-"
+            kir_hash[:KIR2DL5A].push("NA")
+          else
+            kir_hash[:KIR2DL5A].push(@kir[:KIR2DL5A])
+          end
+          if @kir[:KIR2DL5B] == nil || @kir[:KIR2DL5B] == "-"
+            kir_hash[:KIR2DL5B].push("NA")
+          else
+            kir_hash[:KIR2DL5B].push(@kir[:KIR2DL5B])
+          end
+          if @kir[:KIR2DP1] == nil || @kir[:KIR2DP1] == "-"
+            kir_hash[:KIR2DP1].push("NA")
+          else
+            kir_hash[:KIR2DP1].push(@kir[:KIR2DP1])
+          end
+          if @kir[:KIR2DS1] == nil || @kir[:KIR2DS1] == "-"
+            kir_hash[:KIR2DS1].push("NA")
+          else
+            kir_hash[:KIR2DS1].push(@kir[:KIR2DS1])
+          end
+          if @kir[:KIR2DS2] == nil || @kir[:KIR2DS2] == "-"
+            kir_hash[:KIR2DS2].push("NA")
+          else
+            kir_hash[:KIR2DS2].push(@kir[:KIR2DS2])
+          end
+          if @kir[:KIR2DS3] == nil || @kir[:KIR2DS3] == "-"
+            kir_hash[:KIR2DS3].push("NA")
+          else
+            kir_hash[:KIR2DS3].push(@kir[:KIR2DS3])
+          end
+          if @kir[:KIR2DS4] == nil || @kir[:KIR2DS4] == "-"
+            kir_hash[:KIR2DS4].push("NA")
+          else
+            kir_hash[:KIR2DS4].push(@kir[:KIR2DS4])
+          end
+          if @kir[:KIR2DS5] == nil || @kir[:KIR2DS5] == "-"
+            kir_hash[:KIR2DS5].push("NA")
+          else
+            kir_hash[:KIR2DS5].push(@kir[:KIR2DS5])
+          end
+          if @kir[:KIR3DL1] == nil || @kir[:KIR3DL1] == "-"
+            kir_hash[:KIR3DL1].push("NA")
+          else
+            kir_hash[:KIR3DL1].push(@kir[:KIR3DL1])
+          end
+          if @kir[:KIR3DL2] == nil || @kir[:KIR3DL2] == "-"
+            kir_hash[:KIR3DL2].push("NA")
+          else
+            kir_hash[:KIR3DL2].push(@kir[:KIR3DL2])
+          end
+          if @kir[:KIR3DL3] == nil || @kir[:KIR3DL3] == '-'
+            kir_hash[:KIR3DL3].push("NA")
+          else
+            kir_hash[:KIR3DL3].push(@kir[:KIR3DL3])
+          end
+          if @kir[:KIR3DS1] == nil || @kir[:KIR3DS1] == "-"
+            kir_hash[:KIR3DS1].push("NA")
+          else
+            kir_hash[:KIR3DS1].push(@kir[:KIR3DS1])
+          end
+        else
+          kir_hash[:KIR2DL1].push("NA")
+          kir_hash[:KIR2DL2].push("NA")
+          kir_hash[:KIR2DL3].push("NA")
+          kir_hash[:KIR2DL4].push("NA")
+          kir_hash[:KIR2DL5A].push("NA")
+          kir_hash[:KIR2DL5B].push("NA")
+          kir_hash[:KIR2DP1].push("NA")
+          kir_hash[:KIR2DS1].push("NA")
+          kir_hash[:KIR2DS2].push("NA")
+          kir_hash[:KIR2DS3].push("NA")
+          kir_hash[:KIR2DS4].push("NA")
+          kir_hash[:KIR2DS5].push("NA")
+          kir_hash[:KIR3DL1].push("NA")
+          kir_hash[:KIR3DL2].push("NA")
+          kir_hash[:KIR3DL3].push("NA")
+          kir_hash[:KIR3DS1].push("NA")
+        end #close if Kir.where(indigo_id:s.indigo_id)...  block
+      end #close samples.each... block
+      results = results.merge(kir_hash)
+    end #close if kir == "true" block
 
     if early_exit_flag == false
       render json: results, status: :ok
