@@ -1,11 +1,13 @@
 Rails.application.routes.draw do
+  resources :notes
   resources :gwas
   resources :consensus_fastqs
   namespace :api do
     get 'v1/jsondata'
     get 'v1/rstudiodata'
   end
-
+  get 'topics/index'
+  
   get 'welcome/progress'
 
   get 'welcome/samples_table'

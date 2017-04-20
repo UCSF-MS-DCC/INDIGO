@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   after_update :send_approved_message, if: :approved_and_not_notified?
 
+  has_many :notes
+
   def send_welcome_message
     AdminMailer.new_user_welcome_message(self).deliver
     AdminMailer.new_user_admin_alert(self).deliver

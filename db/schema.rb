@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170418212623) do
+ActiveRecord::Schema.define(version: 20170419214354) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -227,6 +227,16 @@ ActiveRecord::Schema.define(version: 20170418212623) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "notes", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "tagsline"
+    t.index ["user_id"], name: "index_notes_on_user_id"
+  end
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.string   "resource_type"
@@ -252,6 +262,21 @@ ActiveRecord::Schema.define(version: 20170418212623) do
     t.integer  "batch_id"
     t.integer  "age_of_onset"
     t.index ["batch_id"], name: "index_samples_on_batch_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.integer  "note_id"
+    t.integer  "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["note_id"], name: "index_tags_on_note_id"
+    t.index ["topic_id"], name: "index_tags_on_topic_id"
+  end
+
+  create_table "topics", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "upload_reports", force: :cascade do |t|

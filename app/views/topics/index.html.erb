@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <ul style="list-style-type:none;margin-left:0px;padding-left:0px;">
+        <% @notes.each do |note| %>
+          <li><h4><%= link_to note.created_at.strftime('%m/%d/%Y')+" - "+note.title, note_path(id:note.id) %></h4></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
