@@ -74,20 +74,16 @@ class DataviewController < ApplicationController
   end
 
   def download_hla_data
-    @samples = Sample.where(sample_source: current_user.affiliation).distinct.pluck(:indigo_id)
-    @hlas = Hla.where(indigo_id: @samples)
-
+    @samples = Sample.where(sample_source: current_user.affiliation)
     respond_to do |format|
-      format.csv { send_data @hlas.to_csv }
+      format.csv { send_data @samples.to_csv_with_hla }
     end
   end
 
-  def dataview_download_kir_data
-    @samples = Sample.where(sample_source: current_user.affiliation).distinct.pluck(:indigo_id)
-    @kirs = Kir.where(indigo_id: @samples)
-
+  def download_kir_data
+    @samples = Sample.where(sample_source: current_user.affiliation)
     respond_to do |format|
-      format.csv { send_data @kirs.to_csv }
+      format.csv { send_data @samples.to_csv_with_kir }
     end
   end
 
