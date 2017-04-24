@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     get 'v1/rstudiodata'
   end
   get 'topics/index'
-  
+
   get 'welcome/progress'
 
   get 'welcome/samples_table'
@@ -45,6 +45,10 @@ Rails.application.routes.draw do
   get 'dataview/download_hla_data'
 
   get 'dataview/download_kir_data'
+
+  get 'dataview/download_hla_data_superuser'
+
+  get 'dataview/download_kir_data_superuser'
 
   get 'dataview/download_idr'
 

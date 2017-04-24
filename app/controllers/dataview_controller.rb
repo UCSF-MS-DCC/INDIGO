@@ -87,4 +87,18 @@ class DataviewController < ApplicationController
     end
   end
 
+  def download_hla_data_superuser
+    @samples = Sample.all
+    respond_to do |format|
+      format.csv { send_data @samples.to_csv_with_hla }
+    end
+  end
+
+  def download_kir_data_superuser
+    @samples = Sample.all
+    respond_to do |format|
+      format.csv { send_data @samples.to_csv_with_kir }
+    end
+  end
+
 end
