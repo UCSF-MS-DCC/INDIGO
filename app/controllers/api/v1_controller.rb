@@ -660,5 +660,152 @@ class Api::V1Controller < ApplicationController
     if early_exit_flag == false
       render json: results, status: :ok
     end
-  end #close def datafetch action block
+  end #close def rstudiodata action block
+
+  def genesdata
+    @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
+    sample_phenotypes = {}
+
+    if @user.has_role? :superuser
+      sample_phenotypes ={}
+    else
+      sample_phenotypes = {sample_source: @user.affiliation}
+    end
+
+    early_exit_flag = false
+
+    if !@user
+      early_exit_flag = true
+      render json status: :forbidden
+    end
+
+    sex = params[:sex]
+    ethnicity = params[:ethnicity]
+    disease = params[:disease]
+    minage = params[:minage]
+    maxage = params[:maxage]
+    region = params[:region]
+    hla_gene_list = params[:hla_gene]
+    kir_gene_list = params[:kir_gene]
+
+    if sex != nil
+      case sex
+      when "F", "M"
+        sample_phenotypes[:gender] = sex
+      when "all", "All", "ALL"
+
+      else
+        if early_exit_flag == false
+          early_exit_flag = true
+          render json: {"error":"invalid query value for sex. Acceptable parameters are: F or M"}, status: :unprocessable_entity
+        end
+      end
+    end
+
+    if ethnicity != nil
+      case ethnicity
+      when "White-not Hispanic Origin"
+        sample_phenotypes[:ethnicity] = ethnicity
+      when "White-not Hispanic Origin, White-Hispanic Origin"
+        sample_phenotypes[:ethnicity] = ethnicity
+      when "White-not Hispanic Origin, Asian-Japanese"
+        sample_phenotypes[:ethnicity] = ethnicity
+      when "White-not Hispanic Origin, Asian-Chinese"
+        sample_phenotypes[:ethnicity] = ethnicity
+      when "Not Hispanic/Latino"
+        sample_phenotypes[:ethnicity] = ethnicity
+      when "Hispanic/Latino"
+        sample_phenotypes[:ethnicity] = ethnicity
+      when "All", "all", "ALL"
+        #no action
+      else
+        if early_exit_flag == false
+          early_exit_flag = true
+          render json: {"error":"invalid query value for ethnicity. See site documentation for acceptable ethnicity parameters"}, status: :unprocessable_entity
+        end
+      end
+    end
+
+    if disease != nil
+      case disease.upcase
+      when "PD", "MG", "MS", "HC", "SCZD", "NMO"
+        sample_phenotypes[:disease] = disease.upcase
+      else
+        if early_exit_flag == false
+          acceptable_diseases = Sample.where(sample_source:@user.affiliation).pluck(:disease).uniq
+          early_exit_flag = true
+          render json: {"error. invalid query value for disease. Acceptable parameters are": acceptable_diseases}, status: :unprocessable_entity
+        end
+      end
+    end
+
+    if minage != nil
+      minagenum = minage.to_i
+      case minagenum > 0
+      when true
+        minage = minagenum
+      else
+        if early_exit_flag == false
+          early_exit_flag = true
+          render json: {"error":"please enter a valid number for the minage parameter value"}, status: :unprocessable_entity
+        end
+      end
+    end
+
+    if maxage != nil
+      maxagenum = maxage.to_i
+      case maxagenum > 0
+      when true
+        maxage = maxagenum
+      else
+        if early_exit_flag == false
+          early_exit_flag = true
+          render json: {"error":"please enter a valid number for the maxage parameter value"}, status: :unprocessable_entity
+        end
+      end
+    end
+
+    #build the results for the api call based on user supplied parameters
+
+    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source_identifier, gender, disease, age_of_onset, ethnicity").limit(30)
+    sample_indigo_ids = samples.pluck(:indigo_id)
+    hla_results = []
+    kir_results = []
+
+    #filter for minimum and/or maximum age of onset, if required
+
+    if minagenum
+      samples = samples.where("age_of_onset >= ?", minagenum)
+    end
+    if maxagenum
+      samples = samples.where("age_of_onset <= ?", maxagenum)
+    end
+
+    if hla_gene_list.length > 0
+      hla_results = Hla.where(indigo_id:sample_indigo_ids).select("indigo_id", hla_gene_list.join(", "))
+    end
+    # if kir_gene_list.length > 0
+    #   kir_results = Kir.where(indigo_id:sample_indigo_ids).select("indigo_id", kir_gene_list.join(", "))
+    # end
+
+    results = []
+
+    samples.each do |s|
+      result = { indigo_id: s.indigo_id, sample_source_identifier: s.sample_source_identifier, sex: s.gender, disease: s.disease, age_of_onset: s.age_of_onset, ethnicity: s.ethnicity }
+      if hla_results.length > 0
+        hla = Hla.find_by(indigo_id: s.indigo_id).select(hla_gene_list.join(", "))
+        result.merge(hla)
+      end
+      if kir_results.length > 0
+        result.merge(kir_results.find_by(indigo_id: result.indigo_id))
+      end
+      results.push(result)
+    end
+
+    if early_exit_flag == false
+      early_exit_flag = true
+      render json: results, status: :ok
+    end
+
+  end #close def singlegenedata block/action
 end
