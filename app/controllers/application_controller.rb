@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html
 
+  before_action :set_paper_trail_whodunnit
   protect_from_forgery with: :exception
 
   # Issues with configuration with devise.

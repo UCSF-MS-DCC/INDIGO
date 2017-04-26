@@ -5,6 +5,7 @@ class Sample < ApplicationRecord
   has_many :gwas_samples
   has_many :gwas, through: :gwas_samples
   belongs_to :batch
+  has_paper_trail
 
   def self.to_csv
     CSV.generate do |csv|

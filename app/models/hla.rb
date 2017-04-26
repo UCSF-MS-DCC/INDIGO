@@ -1,6 +1,7 @@
 class Hla < ApplicationRecord
   validates :indigo_id, presence: true
   belongs_to :sample
+  has_paper_trail
 
   def self.to_csv
     CSV.generate do |csv|
