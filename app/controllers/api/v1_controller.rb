@@ -1,6 +1,7 @@
 class Api::V1Controller < ApplicationController
   acts_as_token_authentication_handler_for User
   before_action :authenticate_user!
+  protect_from_forgery with: :null_session, if: Proc.new {|c| c.request.format.json? }
 
   def jsondata #rename this to something like samples
     @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])

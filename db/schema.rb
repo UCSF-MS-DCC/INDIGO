@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170426185415) do
+ActiveRecord::Schema.define(version: 20170619214449) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -150,45 +150,6 @@ ActiveRecord::Schema.define(version: 20170426185415) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string   "version"
-  end
-
-  create_table "idrs", force: :cascade do |t|
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.string   "indigo_id"
-    t.string   "sample_source"
-    t.string   "disease"
-    t.string   "gender"
-    t.string   "ethnicity"
-    t.string   "batch"
-    t.integer  "age_at_sample"
-    t.string   "race"
-    t.string   "received_date"
-    t.string   "sent_date"
-    t.string   "drb1_15_copies_calculated"
-    t.string   "drb1_1"
-    t.string   "drb1_2"
-    t.string   "dqb1_1"
-    t.string   "dqb1_2"
-    t.string   "dpb1_1"
-    t.string   "dpb1_2"
-    t.string   "a_1"
-    t.string   "a_2"
-    t.string   "b_1"
-    t.string   "b_2"
-    t.string   "c_1"
-    t.string   "c_2"
-    t.string   "dpa1_1"
-    t.string   "dpa1_2"
-    t.string   "dqa1_1"
-    t.string   "dqa1_2"
-    t.string   "drbo_1"
-    t.string   "drbo_2"
-    t.string   "site_sample_id"
-    t.string   "dpb1_phase_ambiguities"
-    t.integer  "age_of_onset"
-    t.string   "hla_version"
-    t.string   "kir_version"
   end
 
   create_table "keys", force: :cascade do |t|
