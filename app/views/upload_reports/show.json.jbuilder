@@ -1,1 +1,0 @@
-json.partial! "upload_reports/upload_report", upload_report: @upload_report

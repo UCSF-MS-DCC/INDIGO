@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619214449) do
+ActiveRecord::Schema.define(version: 20170619220041) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -145,20 +145,6 @@ ActiveRecord::Schema.define(version: 20170619214449) do
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
   end
 
-  create_table "hlauploads", force: :cascade do |t|
-    t.string   "datafile"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "version"
-  end
-
-  create_table "keys", force: :cascade do |t|
-    t.string   "keyfile"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "upload_file"
-  end
-
   create_table "kirs", force: :cascade do |t|
     t.string   "indigo_id"
     t.string   "KIR3DL2"
@@ -180,12 +166,6 @@ ActiveRecord::Schema.define(version: 20170619214449) do
     t.text     "KIR2DS4"
     t.text     "KIR2DP1"
     t.text     "KIR3DL3"
-  end
-
-  create_table "kiruploads", force: :cascade do |t|
-    t.string   "datafile"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "notes", force: :cascade do |t|
@@ -238,22 +218,6 @@ ActiveRecord::Schema.define(version: 20170619214449) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "upload_reports", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
-    t.string   "file"
-    t.integer  "uploads"
-    t.integer  "failed_uploads"
-    t.string   "upload_type"
-    t.integer  "uploaded_by"
-    t.integer  "duplicates"
-    t.boolean  "duplicate_upload"
-    t.text     "error_message"
-    t.string   "upload_datetime"
-    t.integer  "added"
-    t.integer  "failed"
   end
 
   create_table "users", force: :cascade do |t|

@@ -1,1 +1,0 @@
-json.array! @upload_reports, partial: 'upload_reports/upload_report', as: :upload_report
