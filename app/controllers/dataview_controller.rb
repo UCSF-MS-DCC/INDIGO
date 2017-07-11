@@ -1,23 +1,21 @@
 class DataviewController < ApplicationController
   before_action :authenticate_user! #Devise authentication. Resource should only be available to logged in users
   load_and_authorize_resource :class => Sample #Cancancan enforces access on the model level. This hash prevents unauthorized users from accessing this resource by blocking this route.
-  load_and_authorize_resource :class => IDR
 
   def index
-    @samples = Sample.where(sample_source: current_user.affiliation)
+    @samples = Sample.where(sample_source: current_user.affiliation).order("indigo_id ASC")
     @indigo_ids = Sample.where(sample_source: current_user.affiliation).distinct.pluck(:indigo_id)
-    @hlas = Hla.where(indigo_id: @indigo_ids)
-    @kirs = Kir.where(indigo_id: @indigo_ids)
-    @idrs = IDR.where(sample_source: current_user.affiliation)
+    @hlas = Hla.where(indigo_id: @indigo_ids).order("indigo_id ASC")
+    @kirs = Kir.where(indigo_id: @indigo_ids).order("indigo_id ASC")
   end
 
   def superindex
     if !current_user.has_role? :superuser
       redirect_to '/dataview#index'
     else
-      @samples = Sample.all
-      @hlas = Hla.all
-      @kirs = Kir.all
+      @samples = Sample.all.order("indigo_id ASC")
+      @hlas = Hla.all.order("indigo_id ASC")
+      @kirs = Kir.all.order("indigo_id ASC")
     end
   end
 
@@ -51,18 +49,6 @@ class DataviewController < ApplicationController
   def superindex_kirs_to_json
     @kirs = Kir.all
     render json: @kirs
-  end
-
-  def summary_report_to_json
-
-  end
-
-  def download_idr
-    @idrs = IDR.where(sample_source: current_user.affiliation)
-    # flash[:notice] = "#{@idrs.count} Indigo Data Records from #{current_user.affiliation}"
-    respond_to do |format|
-      format.csv { send_data @idrs.to_csv }
-    end
   end
 
   def download_sample_data

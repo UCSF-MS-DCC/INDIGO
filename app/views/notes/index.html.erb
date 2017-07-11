@@ -1,58 +1,29 @@
 <div class="container">
   <div class="row">
-    <div class="col-sm-3">
-      <h4>Topics</h4>
-      <ul style="list-style-type:none;margin-left:0px;padding-left:0px;">
-        <% @topics.each do |topic| %>
-          <!-- <li><%= topic.name %>: <%= Tag.where(id:topic.id).count %></li> -->
-          <li><%= link_to topic.name+" : "+Tag.where(topic_id:topic.id).count.to_s, topics_index_path(id:topic.id) %></li>
-        <% end %>
-      </ul>
-      <h4>Log</h4>
-      <ul style="list-style-type:none;margin-left:0px;padding-left:0px;">
-        <% @notes.each do |n| %>
-          <li><%= link_to n.created_at.strftime('%m/%d/%y')+" : "+n.title, note_path(id: n.id) %></li>
-        <% end %>
-      </ul>
-    </div>
-    <div class="col-sm-9">
-      <%= form_for(@note, :controller => "notes", :action => :create, :remote => true) do |f| %>
-        <div class="row" style="margin-top:10px;">
-          <div class="col-sm-9 form-group">
-            <%= f.label :title %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 form-group">
-            <%= f.text_field :title, :class => "form-control" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 form-group">
-            <%= f.label :tagsline, "Tags" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 form-group">
-            <%= f.text_field :tagsline, :class => "form-control", :placeholder => "separate each tag with a semi-colon, no spaces" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 form-group">
-            <%= f.label :body %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12 form-group">
-            <%= f.text_area :body, :class => "form-control", :rows => 8 %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-1 col-sm-offset-5">
-            <%= f.submit "Enter", :class => "btn btn-indigo btn-sm" %>
-          </div>
-        </div>
-      <% end %>
-    </div>
+    <h2 class="text-center">Indigo Data Management Log</h2>
   </div>
+  <div class="row">
+    <%= link_to "Add New Entry", new_note_path, :class => "btn btn-md btn-indigo" %>
+  </div>
+    <% @notes.each do |note| %>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <h3 class="text-center"><%= note.created_at.strftime('%B %d, %Y') %> - <%= note.title %></h3>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <%= note.body %>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+          <% note.tags.each do |tag| %>
+            <%= link_to tag.topic.name, topics_index_path(id:tag.topic.id), :style => {"text-decoration" => "underline"} %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
 </div>

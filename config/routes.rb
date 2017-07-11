@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :notes
   resources :gwas
   resources :consensus_fastqs
@@ -18,18 +19,6 @@ Rails.application.routes.draw do
   get 'welcome/dataset_stats'
 
   get 'welcome/dataset'
-
-  get 'kiruploads/index'
-
-  get 'kiruploads/new'
-
-  get 'kiruploads/create'
-
-  get 'hlauploads/index'
-
-  get 'hlauploads/new'
-
-  get 'hlauploads/create'
 
   get 'hlas/index'
 
@@ -65,22 +54,10 @@ Rails.application.routes.draw do
 
   get 'dataview/superindex_kirs_to_json'
 
-  get 'keys/index'
-
-  get 'keys/new'
-
-  get 'keys/create'
-
   get 'profiles/show'
 
-  get 'upload_reports/display'
-
-  get 'upload_reports/show'
-
-  post 'upload_reports/update'
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  devise_for :users
+
   get 'welcome/index'
 
   get 'welcome/next'
@@ -94,15 +71,6 @@ Rails.application.routes.draw do
   get 'welcome/samples_processed'
 
   root 'welcome#next'
-
-  match '/contacts',     to: 'contacts#new',             via: 'get'
-  resources "contacts", only: [:new, :create]
-
-  resources 'keys', only: [:index, :new, :create]
-
-  resources 'hlauploads', only: [:index, :new, :create]
-
-  resources 'kiruploads', only: [:index, :new, :create]
 
   resources 'dataview', only: [:index]
 

@@ -4,7 +4,7 @@ class NotesController < ApplicationController
 
 
   def index
-    @notes = Note.all
+    @notes = Note.all.order("created_at DESC")
     @topics = Topic.all
     @note = Note.new
     respond_with(@notes)

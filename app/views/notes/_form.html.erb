@@ -10,23 +10,39 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
+  <div class="row" style="margin-top:10px;">
+    <div class="col-sm-9 form-group">
+      <%= f.label :title %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :tagsline, "Tags" %>
-    <%= f.string :tagsline, :placeholder => "separate each tag with a semi-colon, no spaces"
+  <div class="row">
+    <div class="col-sm-12 form-group">
+      <%= f.text_field :title, :class => "form-control" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :body %>
-    <%= f.text_area :body %>
+  <div class="row">
+    <div class="col-sm-12 form-group">
+      <%= f.label :tagsline, "Tags" %>
+    </div>
   </div>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div class="row">
+    <div class="col-sm-12 form-group">
+      <%= f.text_field :tagsline, :class => "form-control", :placeholder => "separate each tag with a semi-colon, no spaces" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 form-group">
+      <%= f.label :body %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 form-group">
+      <%= f.text_area :body, :class => "form-control", :rows => 8 %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-1 col-sm-offset-5">
+      <%= f.submit "Enter", :class => "btn btn-indigo btn-sm" %>
+    </div>
   </div>
 <% end %>
