@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
   get 'dataview/download_kir_data_superuser'
 
+  get 'dataview/download_all_data_superuser'
+
   get 'dataview/download_idr'
 
   get 'dataview/samples_to_json'
