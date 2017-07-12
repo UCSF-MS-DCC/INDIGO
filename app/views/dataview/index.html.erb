@@ -3,44 +3,57 @@
   <div class="row" style="background-color:#ededed;border-top:1px solid #696969;border-bottom:1px solid #ededed;">
     <div class="col-md-12">
       <ul class="nav nav-tabs" style="margin-left:0px;">
-        <!-- <li><a data-toggle="tab" href="#summary">Summary</a></li> -->
         <li class="active"><a data-toggle="tab" href="#sample">Samples</a></li>
         <li><a data-toggle="tab" href="#hla">HLA</a></li>
         <li><a data-toggle="tab" href="#kir" disabled>KIR</a></li>
-        <!-- <li><a data-toggle="tab" href="#jd-sample">JS-Samples</a></li>  JQuery datatables on hold while formatting gets figured out. Side Scrolling causes columns to not match up with their headers.
-        <li><a data-toggle="tab" href="#jd-hla">JS-HLA</a></li>
-        <li><a data-toggle="tab" href="#jd-kir">JS-KIR</a></li> -->
       </ul>
     </div>
   </div>
   <!-- spinner and table header/tab contents -->
   <div class="row" style="border: 1px solid #ededed; border-top:none; background-color:#fdfdfd;padding-bottom:10px;">
     <div class="col-md-12 tab-content">
-      <div class="tab-pane fade hide-table" id="summary">
-      </div>
       <div class="tab-pane fade in active" id="sample">
         <h3>&nbsp;&nbsp;<%= @samples.count %> Samples for <%= current_user.affiliation %></h3>
-        <br>
-        <div id="sample_table"></div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="sk-circle spinner">
-              <div class="sk-circle1 sk-child"></div>
-              <div class="sk-circle2 sk-child"></div>
-              <div class="sk-circle3 sk-child"></div>
-              <div class="sk-circle4 sk-child"></div>
-              <div class="sk-circle5 sk-child"></div>
-              <div class="sk-circle6 sk-child"></div>
-              <div class="sk-circle7 sk-child"></div>
-              <div class="sk-circle8 sk-child"></div>
-              <div class="sk-circle9 sk-child"></div>
-              <div class="sk-circle10 sk-child"></div>
-              <div class="sk-circle11 sk-child"></div>
-              <div class="sk-circle12 sk-child"></div>
-            </div>
-          </div>
+        <div id="sample_table">
+          <table data-toggle="table"
+            data-classes="table table-hover"
+            data-page-size="30"
+            data-pagination=true
+            data-search=true
+            data-show-columns=true
+            data-show-toggle=true
+            data-show-pagination-switch=true
+            data-striped=true>
+            <thead>
+              <tr>
+                <th data-sortable=true data-align='center'>INDIGO ID</th>
+                <th data-sortable=true>Site Identifier</th>
+                <th data-sortable=true>Sex</th>
+                <th data-sortable=true>Diagnosis</th>
+                <th data-sortable=true>Age of Onset</th>
+                <th data-sortable=true data-visible=false>Age at Sample</th>
+                <th data-sortable=true>Ethnicity</th>
+                <th data-sortable=true data-visible=false>Uploaded on</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @samples.each do |sample| %>
+                <tr>
+                  <td><%= sample.indigo_id %></td>
+                  <td><%= sample.sample_source_identifier %></td>
+                  <td><%= sample.gender %></td>
+                  <td><%= sample.disease %></td>
+                  <td><%= sample.age_of_onset %></td>
+                  <td><%= sample.age_at_sample %></td>
+                  <td><%= sample.ethnicity %></td>
+                  <td><%= sample.created_at.strftime('%B-%d-%Y') %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
         </div>
-      </div>
+      </div> <!-- closes id='sample -->
+
       <div class="tab-pane fade hide-table" id="hla">
         <div class="row">
           <div class="col-sm-10">
@@ -50,47 +63,18 @@
             <%= link_to "Download HLA Table", dataview_download_hla_data_path(format:"csv"), :class => "btn btn-indigo btn-md", :style => "margin-top:10px; color:white;" %>
           </div>
         </div>
-        <br>
-        <div id="hla_table"></div>
-      </div>
-      <div class="tab-pane fade hide-table" id="kir">
-        <div class="row">
-          <div class="col-sm-10">
-            <h3>&nbsp;&nbsp;<%= @kirs.count %> KIR for <%= current_user.affiliation %></h3>
-          </div>
-          <div class="col-sm-2">
-            <%= link_to "Download KIR Table", dataview_download_kir_data_path(format:"csv"), :class => "btn btn-indigo btn-md", :style => "margin-top:10px; color:white;" %>
-          </div>
-        </div>
-        <br>
-        <div id="kir_table"></div>
-      </div>
-      <div class="tab-pane fade hide-table" id="jd-sample">
-        <!-- <h3>&nbsp;&nbsp;<%= @kirs.count %> KIR for <%= current_user.affiliation %></h3>  -->
-        <br>
-        <table id="jd-sample-table" class="table table-striped">
-          <thead>
-            <tr>
-              <th>Indigo ID</th>
-              <th>Site Identifier</th>
-              <th>Sex</th>
-              <th>Disease</th>
-              <th>Age of Onset</th>
-              <th>Age at Sample</th>
-              <th>Ethnicity</th>
-              <th>Uploaded on</th>
-            </tr>
-          </thead>
-          <tbody>
-          </tbody>
-        </table>
-      </div>
-      <div class="tab-pane fade hide-table" id="jd-hla">
-        <br>
-        <table id="jd-hla-table" class="table table-striped">
-          <thead>
-            <tr>
-              <th>Indigo ID</th>
+        <div id="hla_table">
+          <table data-toggle="table"
+            data-classes="table table-hover"
+            data-page-size="30"
+            data-pagination=true
+            data-search=true
+            data-show-columns=true
+            data-show-toggle=true
+            data-show-pagination-switch=true
+            data-striped=true>
+            <thead>
+              <th>INDIGO ID</th>
               <th>DRB1/1</th>
               <th>DRB1/2</th>
               <th>DQB1/1</th>
@@ -107,184 +91,110 @@
               <th>DPA1/2</th>
               <th>DQA1/1</th>
               <th>DQA1/2</th>
-              <th>DRBo1/1</th>
-              <th>DRBo1/2</th>
-            </tr>
-          </thead>
-        </table>
-      </div>
+              <th>DRBo1</th>
+              <th>DRBo2</th>
+              <th>DPB1 phase ambiguities</th>
+              <th data-visible=false>Uploaded on</th>
+              <th data-visible=false>Manifest Version</th>
+            </thead>
+            <tbody>
+              <% @hlas.each do |hla| %>
+                <tr>
+                  <td><%= hla.indigo_id %></td>
+                  <td><%= hla.drb1_1 %></td>
+                  <td><%= hla.drb1_2 %></td>
+                  <td><%= hla.dqb1_1 %></td>
+                  <td><%= hla.dqb1_2 %></td>
+                  <td><%= hla.dpb1_1 %></td>
+                  <td><%= hla.dpb1_2 %></td>
+                  <td><%= hla.a_1 %></td>
+                  <td><%= hla.a_2 %></td>
+                  <td><%= hla.b_1 %></td>
+                  <td><%= hla.b_2 %></td>
+                  <td><%= hla.c_1 %></td>
+                  <td><%= hla.c_2 %></td>
+                  <td><%= hla.dpa1_1 %></td>
+                  <td><%= hla.dpa1_2 %></td>
+                  <td><%= hla.dqa1_1 %></td>
+                  <td><%= hla.dqa1_2 %></td>
+                  <td><%= hla.drbo_1 %></td>
+                  <td><%= hla.drbo_2 %></td>
+                  <td><%= hla.dpb1_phase_ambiguities %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div><!--  closes id="hla" -->
+
+      <div class="tab-pane fade hide-table" id="kir">
+        <div class="row">
+          <div class="col-sm-10">
+            <h3>&nbsp;&nbsp;<%= @kirs.count %> KIR for <%= current_user.affiliation %></h3>
+          </div>
+          <div class="col-sm-2">
+            <%= link_to "Download KIR Table", dataview_download_kir_data_path(format:"csv"), :class => "btn btn-indigo btn-md", :style => "margin-top:10px; color:white;" %>
+          </div>
+        </div>
+        <br>
+        <div id="kir_table">
+          <table data-toggle="table"
+            data-classes="table table-hover"
+            data-page-size="30"
+            data-pagination=true
+            data-search=true
+            data-show-columns=true
+            data-show-toggle=true
+            data-show-pagination-switch=true
+            data-striped=true>
+            <thead>
+              <th>INDIGO ID</th>
+              <th>KIR2DL1</th>
+              <th>KIR2DL2</th>
+              <th>KIR2DL3</th>
+              <th>KIR2DL4</th>
+              <th>KIR2DL5A</th>
+              <th>KIR2DL5B</th>
+              <th>KIR2DP1</th>
+              <th>KIR2DS1</th>
+              <th>KIR2DS2</th>
+              <th>KIR2DS3</th>
+              <th>KIR2DS4</th>
+              <th>KIR2DS5</th>
+              <th>KIR3DL1</th>
+              <th>KIR3DL2</th>
+              <th>KIR3DL3</th>
+              <th>KIR3DS1</th>
+              <th data-visible=false>Uploaded on</th>
+              <th data-visible=false>Updated on</th>
+            </thead>
+            <tbody>
+              <% @kirs.each do |kir| %>
+                <tr>
+                  <td><%= kir.indigo_id %></td>
+                  <td><%= kir.KIR2DL1 %></td>
+                  <td><%= kir.KIR2DL2 %></td>
+                  <td><%= kir.KIR2DL3 %></td>
+                  <td><%= kir.KIR2DL4 %></td>
+                  <td><%= kir.KIR2DL5A %></td>
+                  <td><%= kir.KIR2DL5B %></td>
+                  <td><%= kir.KIR2DP1 %></td>
+                  <td><%= kir.KIR2DS1 %></td>
+                  <td><%= kir.KIR2DS2 %></td>
+                  <td><%= kir.KIR2DS3 %></td>
+                  <td><%= kir.KIR2DS4 %></td>
+                  <td><%= kir.KIR2DS5 %></td>
+                  <td><%= kir.KIR3DL1 %></td>
+                  <td><%= kir.KIR3DL2 %></td>
+                  <td><%= kir.KIR3DL3 %></td>
+                  <td><%= kir.KIR3DS1 %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div> <!-- closes id="kir" -->
+      
     </div>
   </div>
-
 </div>
-
-<script type="text/javascript">
-
-  $(document).ready(function(){
-
-    $(".spinner").hide();
-
-    $(document).ajaxStart(function(){
-      $(".spinner").show();
-    });
-
-    $(document).ajaxStop(function() {
-      $(".spinner").hide();
-    });
-    // JQuery DataTables are on hold until formatting gets figured out. Side scrolling, needed for hla and kir tables, causes data columns to not line up under headers.
-    // $('#jd-sample-table').DataTable( {
-    //   ajax: {
-    //     url:'/dataview/samples_to_json',
-    //     dataSrc:''
-    //   },
-    //   columns: [
-    //     { "data": "indigo_id"},
-    //     { "data": 'sample_source_identifier'},
-    //     { "data": "gender"},
-    //     { "data": "disease"},
-    //     { "data": "age_of_onset"},
-    //     { "data": "age_at_sample"},
-    //     { "data": "ethnicity"},
-    //     { "data": "received_date"}
-    //   ]
-    // })
-    //
-    // $('#jd-hla-table').DataTable( {
-    //   scrollX: true,
-    //   ajax: {
-    //     url:'/dataview/hlas_to_json',
-    //     dataSrc:''
-    //   },
-    //   columns: [
-    //     { "data": "indigo_id"},
-    //     { "data": "drb1_1"},
-    //     { "data": "drb1_2"},
-    //     { "data": "dqb1_1"},
-    //     { "data": "dqb1_2"},
-    //     { "data": "dpb1_1"},
-    //     { "data": "dpb1_2"},
-    //     { "data": "a_1"},
-    //     { "data": "a_2"},
-    //     { "data": "b_1"},
-    //     { "data": "b_2"},
-    //     { "data": "c_1"},
-    //     { "data": "c_2"},
-    //     { "data": "dpa1_1"},
-    //     { "data": "dpa1_2"},
-    //     { "data": "dqa1_1"},
-    //     { "data": "dqa1_2"},
-    //     { "data": "drbo_1"},
-    //     { "data": "drbo_2"}
-    //   ]
-    // })
-
-    $.get('<%= Rails.application.routes.url_helpers.dataview_samples_to_json_path %>', function(samples){
-
-      // console.log(samples)
-
-      var dataMatrix = [];
-
-      samples.forEach(function(sample) {
-        dataMatrix.push([sample['indigo_id'], sample['sample_source_identifier'], sample['disease'], sample['gender'], sample['ethnicity'], sample['age_at_sample'], sample['age_of_onset'], sample['created_at'].split("T")[0]])
-      });
-      google.charts.load('current', {'packages': ['table']});
-      google.charts.setOnLoadCallback(drawTable);
-
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Indigo ID');
-        data.addColumn('string', 'Site Sample ID')
-        data.addColumn('string', 'Disease');
-        data.addColumn('string', 'Gender');
-        data.addColumn('string', 'Ethnicity');
-        data.addColumn('number', 'Age at Sample');
-        data.addColumn('number', 'Age of Onset')
-        data.addColumn('string', 'Date Uploaded');
-        data.addRows(dataMatrix);
-
-        var table = new google.visualization.Table(document.getElementById('sample_table'));
-
-        table.draw(data, {showRowNumber: false, width: '100%', page: 'enable', pageSize: 25});
-      }
-    })
-    $.get('<%= Rails.application.routes.url_helpers.dataview_hlas_to_json_path %>', function(hlas){
-      // console.log(hlas)
-
-      var dataMatrix = [];
-      hlas.forEach(function(hla){
-
-        dataMatrix.push([hla['indigo_id'], hla['drb1_1'], hla['drb1_2'], hla['dqb1_1'], hla['dqb1_2'],
-                         hla['dpb1_1'], hla['dpb1_2'], hla['a_1'], hla['a_2'], hla['b_1'], hla['b_2'], hla['c_1'], hla['c_2'], hla['dpa1_1'],
-                         hla['dpa1_2'], hla['dqa1_1'], hla['dqa1_2'], hla['drbo_1'], hla['drbo_2']])
-      });
-      google.charts.load('current', {'packages': ['table']});
-      google.charts.setOnLoadCallback(drawTable);
-
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Indigo ID');
-        data.addColumn('string', 'DRB1/1');
-        data.addColumn('string', 'DRB1/2');
-        data.addColumn('string', 'DQB1/1');
-        data.addColumn('string', 'DQB1/2');
-        data.addColumn('string', 'DPB1/1');
-        data.addColumn('string', 'DPB1/2');
-        data.addColumn('string', 'A/1');
-        data.addColumn('string', 'A/2');
-        data.addColumn('string', 'B/1');
-        data.addColumn('string', 'B/2');
-        data.addColumn('string', 'C/1');
-        data.addColumn('string', 'C/2');
-        data.addColumn('string', 'DPA1/1');
-        data.addColumn('string', 'DPA1/2');
-        data.addColumn('string', 'DQA1/1');
-        data.addColumn('string', 'DQA1/2');
-        data.addColumn('string', 'DRBo/1');
-        data.addColumn('string', 'DRBo/2');
-        data.addRows(dataMatrix);
-
-        var table = new google.visualization.Table(document.getElementById('hla_table'));
-
-        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25});
-      }
-    })
-    $.get('<%= Rails.application.routes.url_helpers.dataview_kirs_to_json_path %>', function(kirs){
-      console.log(kirs)
-
-      var dataMatrix = [];
-      kirs.forEach(function(kir){
-
-        dataMatrix.push([kir['indigo_id'], kir['KIR2DL1'], kir['KIR2DL2'], kir['KIR2DL3'], kir['KIR2DL4'], kir['KIR2DL5A'], kir['KIR2DL5B'], kir['KIR2DP1'], kir['KIR2DS1'], kir['KIR2DS2'],
-                          kir['KIR2DS3'], kir['KIR2DS4'], kir['KIR2DS5'], kir['KIR3DL1'], kir['KIR3DL2'], kir['KIR3DL3'], kir['KIR3DS1']])
-      });
-      google.charts.load('current', {'packages': ['table']});
-      google.charts.setOnLoadCallback(drawTable);
-
-      function drawTable() {
-        var data = new google.visualization.DataTable();
-        data.addColumn('string', 'Indigo ID');
-        data.addColumn('string', 'KIR2DL1');
-        data.addColumn('string', 'KIR2DL2');
-        data.addColumn('string', 'KIR2DL3');
-        data.addColumn('string', 'KIR2DL4');
-        data.addColumn('string', 'KIR2DL5A');
-        data.addColumn('string', 'KIR2DL5B');
-        data.addColumn('string', 'KIR2DP1');
-        data.addColumn('string', 'KIR2DS1');
-        data.addColumn('string', 'KIR2DS2');
-        data.addColumn('string', 'KIR2DS3');
-        data.addColumn('string', 'KIR2DS4');
-        data.addColumn('string', 'KIR2DS5');
-        data.addColumn('string', 'KIR3DL1');
-        data.addColumn('string', 'KIR3DL2');
-        data.addColumn('string', 'KIR3DL3');
-        data.addColumn('string', 'KIR3DS1');
-        data.addRows(dataMatrix);
-
-        var table = new google.visualization.Table(document.getElementById('kir_table'));
-
-        table.draw(data, {showRowNumber: false, frozenColumns: 1, page: 'enable', pageSize: 25})
-      }
-    })
-  });
-  </script>

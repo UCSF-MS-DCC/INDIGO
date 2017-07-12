@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170619220041) do
+ActiveRecord::Schema.define(version: 20170711211549) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -150,8 +150,8 @@ ActiveRecord::Schema.define(version: 20170619220041) do
     t.string   "KIR3DL2"
     t.string   "KIR2DS5"
     t.string   "KIR2DL4"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.text     "KIR3DL1"
     t.text     "KIR3DS1"
     t.integer  "sample_id"
@@ -166,6 +166,7 @@ ActiveRecord::Schema.define(version: 20170619220041) do
     t.text     "KIR2DS4"
     t.text     "KIR2DP1"
     t.text     "KIR3DL3"
+    t.date     "raw_data_at_ucsf"
   end
 
   create_table "notes", force: :cascade do |t|
