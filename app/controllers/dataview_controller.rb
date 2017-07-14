@@ -5,8 +5,8 @@ class DataviewController < ApplicationController
   def index
     @samples = Sample.where(sample_source: current_user.affiliation).order("indigo_id ASC")
     @indigo_ids = Sample.where(sample_source: current_user.affiliation).distinct.pluck(:indigo_id)
-    @hlas = Hla.where(indigo_id: @indigo_ids).order("indigo_id ASC")
-    @kirs = Kir.where(indigo_id: @indigo_ids).order("indigo_id ASC")
+    @hlas = Hla.where(indigo_id:@indigo_ids).order("indigo_id ASC")
+    @kirs = Kir.where(indigo_id:@indigo_ids).order("indigo_id ASC")
   end
 
   def superindex
