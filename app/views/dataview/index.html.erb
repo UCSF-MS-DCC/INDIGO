@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div class="col-md-12 tab-content">
+    <div class="col-md-12 tab-content hide-element">
       <div class="tab-pane fade in active" id="sample">
         <div class="row">
           <div class="col-sm-9">
@@ -32,7 +32,6 @@
         </div>
         <div id="sample_table">
           <div class="row">
-            <div class="col-sm-12">
               <label class="checkbox-inline"><input type="checkbox" value="" class="master-switch" data-switch-set="samples-switch" data-table-name="samples_table" checked=true>Show All Columns</label>
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=0 data-table-name="samples_table" checked=true>INDIGO ID</label>
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=1 data-table-name="samples_table" checked=true>Site Indentifier</label>
@@ -42,7 +41,6 @@
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=5 data-table-name="samples_table" checked=true>Age at Sample</label>
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=6 data-table-name="samples_table" checked=true>Ethnicity</label>
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=7 data-table-name="samples_table" checked=true>Uploaded on</label>
-            </div>
           </div>
           <hr>
             <table id="samples_table" class="indigo_table table-bordered">
@@ -163,8 +161,8 @@
                   <td><%= hla.drbo_1 %></td>
                   <td><%= hla.drbo_2 %></td>
                   <td><%= hla.dpb1_phase_ambiguities %></td>
-                  <td></td>
-                  <td></td>
+                  <td><%= hla.updated_at.strftime('%B %d, %Y') %></td>
+                  <td><%= hla.version %></td>
                 </tr>
               <% end %>
             </tbody>
@@ -262,9 +260,10 @@
 
 </div>
 <script>
+
 $(document).on("turbolinks:load", function() {
   $('.spinner').addClass("hide-element");
-  $('#contents').removeClass("hide-element");
+  $('.tab-content').removeClass("hide-element");
 });
 
 
