@@ -41,7 +41,8 @@
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=4 data-table-name="samples_table" checked=true>Age of Onset</label>
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=5 data-table-name="samples_table" checked=true>Age at Sample</label>
               <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=6 data-table-name="samples_table" checked=true>Ethnicity</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=7 data-table-name="samples_table" checked=true>Uploaded on</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=7 data-table-name="samples_table" checked=true>Race</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=8 data-table-name="samples_table" checked=true>Uploaded on</label>
             </div>
           </div>
           <hr>
@@ -55,6 +56,7 @@
                   <th class="sam-aoo" data-sortable=true data-visible=true>Age of Onset</th>
                   <th class="sam-aas" data-sortable=true data-visible=true>Age at Sample</th>
                   <th class="sam-eth" data-sortable=true data-visible=true>Ethnicity</th>
+                  <th class="sam-aas" data-sortable=true data-visible=true>Race</th>
                   <th class="sam-cre" data-sortable=true data-visible=true>Uploaded on</th>
                 </tr>
               </thead>
@@ -68,6 +70,7 @@
                     <td class="sam-aoo"><%= sample.age_of_onset %></td>
                     <td class="sam-aas"><%= sample.age_at_sample %></td>
                     <td class="sam-eth"><%= sample.ethnicity %></td>
+                    <td class="sam-eth"><%= sample.race %></td>
                     <td class="sam-cre"><%= sample.created_at.strftime('%B-%d-%Y') %></td>
                   </tr>
                 <% end %>

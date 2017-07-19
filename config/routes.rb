@@ -30,6 +30,8 @@ Rails.application.routes.draw do
 
   get 'dataview/superindex'
 
+  get 'dataview/modal_content'
+
   get 'dataview/download_sample_data'
 
   get 'dataview/download_hla_data'

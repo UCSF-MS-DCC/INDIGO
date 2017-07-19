@@ -19,6 +19,11 @@ class DataviewController < ApplicationController
     end
   end
 
+  def modal_content
+    @modal_sample = Sample.find(params[:sample_id])
+    render json: @modal_sample
+  end
+
   def samples_to_json
     @samples = Sample.where(sample_source: current_user.affiliation)
     render json: @samples
@@ -93,5 +98,8 @@ class DataviewController < ApplicationController
       format.csv { send_data @samples.to_csv_with_hla_and_kir }
     end
   end
+
+  private
+  
 
 end
