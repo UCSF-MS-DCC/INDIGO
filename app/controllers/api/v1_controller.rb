@@ -125,7 +125,7 @@ class Api::V1Controller < ApplicationController
     samples.each do |s|
       hash = {
         indigo_id: s.indigo_id,
-        id:s.sample_source_identifier,
+        source:s.sample_source,
         sex: s.gender,
         disease: s.disease,
         age_of_onset: s.age_of_onset,
@@ -354,7 +354,7 @@ class Api::V1Controller < ApplicationController
 
     #build the results for the api call based on user supplied parameters
 
-    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source_identifier, gender, disease, age_of_onset, ethnicity, race, age_at_sample")
+    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source_identifier, gender, disease, age_of_onset, ethnicity, race, age_at_sample, sample_source")
 
     #filter for minimum and/or maximum age of onset, if required
 
@@ -365,15 +365,10 @@ class Api::V1Controller < ApplicationController
       samples = samples.where("age_of_onset <= ?", maxagenum)
     end
 
-    results = { indigo_id: [], id: [], sex: [], disease:[], age_of_onset: [], ethnicity: [], race: [] }
+    results = { indigo_id: [], sample_source: [], sex: [], disease:[], age_of_onset: [], ethnicity: [], race: [] }
 
     samples.each do |s|
       results[:indigo_id].push(s.indigo_id)
-      if s.sample_source_identifier != nil
-        results[:id].push(s.sample_source_identifier)
-      else
-        results[:id].push("NA")
-      end
       if s.gender != nil
         results[:sex].push(s.gender)
       else
@@ -403,6 +398,11 @@ class Api::V1Controller < ApplicationController
         results[:age_at_sample].push(s.age_at_sample)
       else
         results[:age_at_sample].push("NA")
+      end
+      if s.sample_source != nil
+        results[:sample_source].push(s.sample_source)
+      else
+        results[:sample_source].push("NA")
       end
     end #close samples.each block
 

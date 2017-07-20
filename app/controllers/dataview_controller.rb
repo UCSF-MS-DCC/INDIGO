@@ -13,9 +13,11 @@ class DataviewController < ApplicationController
     if !current_user.has_role? :superuser
       redirect_to '/dataview#index'
     else
-      @samples = Sample.all.order("indigo_id ASC")
-      @hlas = Hla.all.order("indigo_id ASC")
-      @kirs = Kir.all.order("indigo_id ASC")
+      disease = dataview_params[:disease]
+      @samples = Sample.where(disease:disease).order("indigo_id ASC")
+      ids = @samples.pluck(:id)
+      @hlas = Hla.where(sample_id:ids).order("indigo_id ASC")
+      @kirs = Kir.where(sample_id:ids).order("indigo_id ASC")
     end
   end
 
@@ -100,6 +102,10 @@ class DataviewController < ApplicationController
   end
 
   private
-  
+
+    def dataview_params
+      params.permit(:disease)
+    end
+
 
 end
