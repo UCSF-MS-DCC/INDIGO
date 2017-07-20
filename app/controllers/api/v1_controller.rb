@@ -130,7 +130,8 @@ class Api::V1Controller < ApplicationController
         disease: s.disease,
         age_of_onset: s.age_of_onset,
         ethnicity: s.ethnicity,
-        race: s.race
+        race: s.race,
+        age_at_sample: s.age_at_sample
       }
       results.push(hash)
     end
@@ -353,7 +354,7 @@ class Api::V1Controller < ApplicationController
 
     #build the results for the api call based on user supplied parameters
 
-    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source_identifier, gender, disease, age_of_onset, ethnicity")
+    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source_identifier, gender, disease, age_of_onset, ethnicity, race, age_at_sample")
 
     #filter for minimum and/or maximum age of onset, if required
 
@@ -397,6 +398,11 @@ class Api::V1Controller < ApplicationController
         results[:race].push(s.race)
       else
         results[:race].push("NA")
+      end
+      if s.age_at_sample != nil
+        results[:age_at_sample].push(s.age_at_sample)
+      else
+        results[:age_at_sample].push("NA")
       end
     end #close samples.each block
 
