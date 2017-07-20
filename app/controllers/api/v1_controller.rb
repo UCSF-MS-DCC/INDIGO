@@ -72,7 +72,17 @@ class Api::V1Controller < ApplicationController
 
     if disease != nil
       case disease
-      when "PD", "MG", "MS", "HC"
+      when "PD"
+        sample_phenotypes[:disease] = disease
+      when "MG"
+        sample_phenotypes[:disease] = disease
+      when "MS"
+        sample_phenotypes[:disease] = disease
+      when "HC"
+        sample_phenotypes[:disease] = disease
+      when "NMO"
+        sample_phenotypes[:disease] = disease
+      when "SCZD"
         sample_phenotypes[:disease] = disease
       else
         if early_exit_flag == false
@@ -314,12 +324,27 @@ class Api::V1Controller < ApplicationController
     end
 
     if disease != nil
-      case disease.upcase
-      when "PD", "MG", "MS", "HC", "SCZD", "NMO"
-        sample_phenotypes[:disease] = disease.upcase
+      case disease
+      when "PD"
+        sample_phenotypes[:disease] = disease
+      when "MG"
+        sample_phenotypes[:disease] = disease
+      when "MS"
+        sample_phenotypes[:disease] = disease
+      when "HC"
+        sample_phenotypes[:disease] = disease
+      when "NMO"
+        sample_phenotypes[:disease] = disease
+      when "SCZD"
+        sample_phenotypes[:disease] = disease
       else
         if early_exit_flag == false
-          acceptable_diseases = Sample.where(sample_source:@user.affiliation).pluck(:disease).uniq
+          acceptable_diseases = nil
+          if @user.has_role? :superuser
+            acceptable_diseases = Sample.pluck(:disease).uniq
+          else
+            acceptable_diseases = Sample.where(sample_source:@user.affiliation).pluck(:disease).uniq
+          end
           early_exit_flag = true
           render json: {"error. invalid query value for disease. Acceptable parameters are": acceptable_diseases}, status: :unprocessable_entity
         end
