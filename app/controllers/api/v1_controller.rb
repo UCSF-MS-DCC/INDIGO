@@ -111,7 +111,7 @@ class Api::V1Controller < ApplicationController
 
     #build the results for the api call based on user supplied parameters
 
-    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source, gender, disease, age_of_onset, sample_source_identifier, ethnicity, race")
+    samples = Sample.where(sample_phenotypes).select("indigo_id, sample_source, gender, disease, age_of_onset, sample_source_identifier, ethnicity, race, age_at_sample")
 
     if minagenum
       samples = samples.where("age_of_onset >= ?", minagenum)
@@ -365,7 +365,7 @@ class Api::V1Controller < ApplicationController
       samples = samples.where("age_of_onset <= ?", maxagenum)
     end
 
-    results = { indigo_id: [], sample_source: [], sex: [], disease:[], age_of_onset: [], ethnicity: [], race: [] }
+    results = { indigo_id: [], sample_source: [], sex: [], disease:[], age_of_onset: [], ethnicity: [], race: [], age_at_sample: [] }
 
     samples.each do |s|
       results[:indigo_id].push(s.indigo_id)
