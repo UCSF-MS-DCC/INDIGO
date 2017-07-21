@@ -20,6 +20,7 @@
 //= require gritter
 //= require chartkick
 //= require bootstrap-table
+//= require trix
 
 
 (function ($) {

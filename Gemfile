@@ -46,6 +46,7 @@ gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'whenever', :require => false
 gem 'paper_trail'
 gem 'bootstrap-table-rails'
+gem 'trix'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
