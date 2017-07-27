@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API v2 sample endpoint API</title>
+    <meta charset="utf-8">
+    <style>
+      
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>API v2 sample endpoint API</h1>
+
+      <div class="article">
+        <h2>Superusers receive data for any/all institutions</h2>
+        <h3>GET /api/v2/sample</h3>
+
+
+
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">X-User-Email: user@test.com
+X-User-Token: jQQTG9CYmLJKitJsN9my
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">GET /api/v2/sample</pre>
+
+
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;01ab86b1d31e1b2b6eb60fa80b491dc3&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 8545bf23-2d4b-4f48-9b1e-5ee485a46286
+X-Runtime: 0.058828
+Content-Length: 1315</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">[
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO003&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Hispanic&quot;,
+    &quot;age_at_sample&quot;: 75,
+    &quot;age_of_onset&quot;: 75,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO008&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 38,
+    &quot;age_of_onset&quot;: 64,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO002&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Asian&quot;,
+    &quot;age_at_sample&quot;: 29,
+    &quot;age_of_onset&quot;: 57,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO008&quot;,
+    &quot;sample_source&quot;: &quot;NIH&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Hispanic&quot;,
+    &quot;age_at_sample&quot;: 55,
+    &quot;age_of_onset&quot;: 39,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO008&quot;,
+    &quot;sample_source&quot;: &quot;NIH&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 49,
+    &quot;age_of_onset&quot;: 37,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO002&quot;,
+    &quot;sample_source&quot;: &quot;NIH&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Black&quot;,
+    &quot;age_at_sample&quot;: 76,
+    &quot;age_of_onset&quot;: 54,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO005&quot;,
+    &quot;sample_source&quot;: &quot;NIA&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 79,
+    &quot;age_of_onset&quot;: 25,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO003&quot;,
+    &quot;sample_source&quot;: &quot;NIA&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 46,
+    &quot;age_of_onset&quot;: 65,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO007&quot;,
+    &quot;sample_source&quot;: &quot;NIA&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 31,
+    &quot;age_of_onset&quot;: 52,
+    &quot;race&quot;: null
+  }
+]</pre>
+      </div>
+    </div>
+  </body>
+</html>

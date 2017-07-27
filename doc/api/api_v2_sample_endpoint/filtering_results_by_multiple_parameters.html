@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>R Studio data frame compatible JSON format: indigo.ucsf.edu/api/v1/rstudiodata API</title>
+    <title>API v2 sample endpoint API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,14 +106,11 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>R Studio data frame compatible JSON format: indigo.ucsf.edu/api/v1/rstudiodata API</h1>
+      <h1>API v2 sample endpoint API</h1>
 
       <div class="article">
-        <h2>Querying dataset, filtered by maximum age of onset</h2>
-        <h3>GET /api/v1/rstudiodata?maxage=30</h3>
-          <p class="explanation">
-            Adding maxage= to the query string filters results by maximum age of onset. Acceptable values are any whole number (eg. 25). Do not use word values (eg. twentyfive).
-          </p>
+        <h2>Filtering results by multiple parameters</h2>
+        <h3>GET /api/v2/sample?sex=m&amp;diagnosis=MS&amp;controls=t&amp;source=UCSF</h3>
 
 
 
@@ -126,10 +123,13 @@ Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">GET /api/v1/rstudiodata?maxage=30</pre>
+          <pre class="request route highlight">GET /api/v2/sample?sex=m&amp;diagnosis=MS&amp;controls=t&amp;source=UCSF</pre>
 
             <h4>Query Parameters</h4>
-            <pre class="request query_parameters highlight">maxage: 30</pre>
+            <pre class="request query_parameters highlight">sex: m
+diagnosis: MS
+controls: t
+source: UCSF</pre>
 
 
 
@@ -139,40 +139,36 @@ Cookie: </pre>
 X-XSS-Protection: 1; mode=block
 X-Content-Type-Options: nosniff
 Content-Type: application/json; charset=utf-8
-ETag: W/&quot;fed47e6ca2074442524b084f2f19f00d&quot;
+ETag: W/&quot;1e5372ead0426bd0bda2aed4e04df634&quot;
 Cache-Control: max-age=0, private, must-revalidate
-X-Request-Id: 4b2d3388-60db-4a9f-b31a-ee502e571cbd
-X-Runtime: 0.033765
-Content-Length: 119</pre>
+X-Request-Id: 7b9eb9e5-a415-4550-97ef-b935529d2daf
+X-Runtime: 0.056459
+Content-Length: 296</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
               <h4>Body</h4>
-              <pre class="response body">{
-  &quot;indigo_id&quot;: [
-
-  ],
-  &quot;sample_source&quot;: [
-
-  ],
-  &quot;sex&quot;: [
-
-  ],
-  &quot;disease&quot;: [
-
-  ],
-  &quot;age_of_onset&quot;: [
-
-  ],
-  &quot;ethnicity&quot;: [
-
-  ],
-  &quot;race&quot;: [
-
-  ],
-  &quot;age_at_sample&quot;: [
-
-  ]
-}</pre>
+              <pre class="response body">[
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO001&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 65,
+    &quot;age_of_onset&quot;: 77,
+    &quot;race&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO006&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Hispanic&quot;,
+    &quot;age_at_sample&quot;: 34,
+    &quot;age_of_onset&quot;: 43,
+    &quot;race&quot;: null
+  }
+]</pre>
       </div>
     </div>
   </body>

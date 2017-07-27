@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     get 'v1/jsondata'
     get 'v1/rstudiodata'
     get 'v1/genesdata'
+    get 'v2/sample'
+    get 'v2/hla'
+    get 'v2/kir'
   end
   get 'topics/index'
 

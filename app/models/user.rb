@@ -18,6 +18,12 @@ class User < ApplicationRecord
 
   has_many :notes
 
+
+  def is_super?
+    self.has_role? "superuser"
+  end
+
+
   def send_welcome_message
     AdminMailer.new_user_welcome_message(self).deliver
     AdminMailer.new_user_admin_alert(self).deliver
