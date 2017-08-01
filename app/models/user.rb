@@ -70,11 +70,12 @@ class User < ApplicationRecord
 
    def select_affiliations
      return ["Aberdeen University",
+       "Besta Institute",
        "Guthy-Jackson Foundation",
        "Kyushu University",
-       "M.J. Fox Foundation",
+       "MJ Fox Foundation",
        "Mayo Clinic",
-       "NIA/NIH",
+       "NIH",
        "NIMH",
        "Oslo University Hospital",
        "Oxford University",

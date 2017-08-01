@@ -62,12 +62,9 @@
               </thead>
               <tbody>
                 <% @samples.each do |sample| %>
-                  <% @dataset_key = {"UCSF" => "UCSF", "ASingleton (NIH) via Coriell GWASdataset" => "NIH/GWAS", "ASingleton (NIH) via Coriell NeuroX dataset" => "NIH/NeuroX", "MJFF via Coriell BioFIND dataset" => "MJFF/BioFIND",
-                    "MJFF via Indiana University DATATOP dataset" => "MJFF/DATATOP", "UCSF MS trios" => "UCSF/MS trios", "UCSF MS families" => "UCSF/MS families", "RMantegazza (Milan-Istituto Besta)-MG dataset" => "Besta/MG dataset",
-                    "HHarbo (University of Oslo) - MG dataset" => "Oslo/MG dataset"} %>
                   <tr>
                     <td class="sam-ind-id"><%= sample.indigo_id %></td>
-                    <td class="sam-src-id"><%= @dataset_key[sample.sample_source]%></td>
+                    <td class="sam-src-id"><%= sample.sample_source %></td>
                     <td class="sam-sex"><%= sample.gender %></td>
                     <td class="sam-dis"><%= sample.disease %></td>
                     <td class="sam-aoo"><%= sample.age_of_onset %></td>

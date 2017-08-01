@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API v2 hla endpoint API</title>
+    <meta charset="utf-8">
+    <style>
+      
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>API v2 hla endpoint API</h1>
+
+      <div class="article">
+        <h2>Returns all sample phenotypes and hla gene loci</h2>
+        <h3>GET api/v2/hla</h3>
+
+
+
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">X-User-Email: user@test.com
+X-User-Token: tJJYPh-2QE2KaXNfcVZk
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">GET api/v2/hla</pre>
+
+
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;8d9d142d21b66d9ed17af3638041b4fb&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 26abcc2a-41c2-496a-9450-c01a7f57098a
+X-Runtime: 0.064784
+Content-Length: 1762</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">[
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO005&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Black&quot;,
+    &quot;age_at_sample&quot;: 77,
+    &quot;age_of_onset&quot;: 41,
+    &quot;race&quot;: null,
+    &quot;a_1&quot;: &quot;A*02:48:02&quot;,
+    &quot;a_2&quot;: &quot;A*15:57:13&quot;,
+    &quot;b_1&quot;: &quot;B*09:33:05&quot;,
+    &quot;b_2&quot;: &quot;B*12:24:05&quot;,
+    &quot;c_1&quot;: &quot;C*19:48:05&quot;,
+    &quot;c_2&quot;: &quot;C*01:09:03&quot;,
+    &quot;dpa1_1&quot;: &quot;DPA1*08:19:05&quot;,
+    &quot;dpa1_2&quot;: &quot;DPA1*05:08:03&quot;,
+    &quot;dqa1_1&quot;: &quot;DQA1*17:48:15&quot;,
+    &quot;dqa1_2&quot;: &quot;DQA1*04:38:03&quot;,
+    &quot;drb1_1&quot;: &quot;DRB1*12:24:13&quot;,
+    &quot;drb1_2&quot;: &quot;DRB1*16:03:01&quot;,
+    &quot;dqb1_1&quot;: &quot;DQB*07:24:15&quot;,
+    &quot;dqb1_2&quot;: &quot;DQB*15:46:03&quot;,
+    &quot;dpb1_1&quot;: &quot;DPB*01:18:01&quot;,
+    &quot;dpb1_2&quot;: &quot;DPB1*13:09:12&quot;,
+    &quot;drbo_1&quot;: &quot;DRB3*08:02:03&quot;,
+    &quot;drbo_2&quot;: &quot;DRB3*12:49:01&quot;,
+    &quot;dpb1_phase_ambiguities&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO006&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Black&quot;,
+    &quot;age_at_sample&quot;: 61,
+    &quot;age_of_onset&quot;: 54,
+    &quot;race&quot;: null,
+    &quot;a_1&quot;: &quot;A*09:13:02&quot;,
+    &quot;a_2&quot;: &quot;A*16:32:05&quot;,
+    &quot;b_1&quot;: &quot;B*02:03:14&quot;,
+    &quot;b_2&quot;: &quot;B*14:59:13&quot;,
+    &quot;c_1&quot;: &quot;C*19:04:04&quot;,
+    &quot;c_2&quot;: &quot;C*04:47:05&quot;,
+    &quot;dpa1_1&quot;: &quot;DPA1*09:56:12&quot;,
+    &quot;dpa1_2&quot;: &quot;DPA1*16:43:05&quot;,
+    &quot;dqa1_1&quot;: &quot;DQA1*03:54:05&quot;,
+    &quot;dqa1_2&quot;: &quot;DQA1*12:46:12&quot;,
+    &quot;drb1_1&quot;: &quot;DRB1*14:51:03&quot;,
+    &quot;drb1_2&quot;: &quot;DRB1*05:32:11&quot;,
+    &quot;dqb1_1&quot;: &quot;DQB*16:13:13&quot;,
+    &quot;dqb1_2&quot;: &quot;DQB*19:31:12&quot;,
+    &quot;dpb1_1&quot;: &quot;DPB*06:11:13&quot;,
+    &quot;dpb1_2&quot;: &quot;DPB1*06:02:15&quot;,
+    &quot;drbo_1&quot;: &quot;DRB3*16:22:02&quot;,
+    &quot;drbo_2&quot;: &quot;DRB3*12:36:14&quot;,
+    &quot;dpb1_phase_ambiguities&quot;: null
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO005&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Asian&quot;,
+    &quot;age_at_sample&quot;: 71,
+    &quot;age_of_onset&quot;: 62,
+    &quot;race&quot;: null,
+    &quot;a_1&quot;: &quot;A*01:17:05&quot;,
+    &quot;a_2&quot;: &quot;A*09:49:05&quot;,
+    &quot;b_1&quot;: &quot;B*08:24:03&quot;,
+    &quot;b_2&quot;: &quot;B*19:08:15&quot;,
+    &quot;c_1&quot;: &quot;C*11:32:12&quot;,
+    &quot;c_2&quot;: &quot;C*13:53:14&quot;,
+    &quot;dpa1_1&quot;: &quot;DPA1*16:16:05&quot;,
+    &quot;dpa1_2&quot;: &quot;DPA1*03:24:04&quot;,
+    &quot;dqa1_1&quot;: &quot;DQA1*03:31:01&quot;,
+    &quot;dqa1_2&quot;: &quot;DQA1*06:34:04&quot;,
+    &quot;drb1_1&quot;: &quot;DRB1*18:05:13&quot;,
+    &quot;drb1_2&quot;: &quot;DRB1*12:13:11&quot;,
+    &quot;dqb1_1&quot;: &quot;DQB*07:39:05&quot;,
+    &quot;dqb1_2&quot;: &quot;DQB*03:59:02&quot;,
+    &quot;dpb1_1&quot;: &quot;DPB*08:57:05&quot;,
+    &quot;dpb1_2&quot;: &quot;DPB1*09:39:01&quot;,
+    &quot;drbo_1&quot;: &quot;DRB3*14:55:02&quot;,
+    &quot;drbo_2&quot;: &quot;DRB3*07:35:11&quot;,
+    &quot;dpb1_phase_ambiguities&quot;: null
+  }
+]</pre>
+      </div>
+    </div>
+  </body>
+</html>

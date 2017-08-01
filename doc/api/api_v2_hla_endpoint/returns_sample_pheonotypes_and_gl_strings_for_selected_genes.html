@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API v2 hla endpoint API</title>
+    <meta charset="utf-8">
+    <style>
+      
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>API v2 hla endpoint API</h1>
+
+      <div class="article">
+        <h2>Returns sample pheonotypes and gl strings for selected genes</h2>
+        <h3>GET api/v2/hla?gene[]=drb1&amp;gene[]=dqb1&amp;gene[]=dpa1</h3>
+
+
+
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">X-User-Email: user@test.com
+X-User-Token: tJJYPh-2QE2KaXNfcVZk
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">GET api/v2/hla?gene[]=drb1&amp;gene[]=dqb1&amp;gene[]=dpa1</pre>
+
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">gene: [&quot;drb1&quot;, &quot;dqb1&quot;, &quot;dpa1&quot;]</pre>
+
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;e91b948910a724a8e314882c71c8132b&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 34435309-9255-4c2e-b237-6fdc8fa193b2
+X-Runtime: 0.061289
+Content-Length: 883</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">[
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO007&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Asian&quot;,
+    &quot;age_at_sample&quot;: 55,
+    &quot;age_of_onset&quot;: 78,
+    &quot;race&quot;: null,
+    &quot;dpa1_1&quot;: &quot;DPA1*15:18:01&quot;,
+    &quot;dpa1_2&quot;: &quot;DPA1*19:22:14&quot;,
+    &quot;drb1_1&quot;: &quot;DRB1*09:32:02&quot;,
+    &quot;drb1_2&quot;: &quot;DRB1*07:07:04&quot;,
+    &quot;dqb1_1&quot;: &quot;DQB*09:03:14&quot;,
+    &quot;dqb1_2&quot;: &quot;DQB*05:21:04&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO003&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Asian&quot;,
+    &quot;age_at_sample&quot;: 80,
+    &quot;age_of_onset&quot;: 46,
+    &quot;race&quot;: null,
+    &quot;dpa1_1&quot;: &quot;DPA1*13:57:05&quot;,
+    &quot;dpa1_2&quot;: &quot;DPA1*05:09:12&quot;,
+    &quot;drb1_1&quot;: &quot;DRB1*09:17:04&quot;,
+    &quot;drb1_2&quot;: &quot;DRB1*17:06:15&quot;,
+    &quot;dqb1_1&quot;: &quot;DQB*13:53:01&quot;,
+    &quot;dqb1_2&quot;: &quot;DQB*16:58:12&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO005&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 34,
+    &quot;age_of_onset&quot;: 65,
+    &quot;race&quot;: null,
+    &quot;dpa1_1&quot;: &quot;DPA1*16:43:02&quot;,
+    &quot;dpa1_2&quot;: &quot;DPA1*14:49:11&quot;,
+    &quot;drb1_1&quot;: &quot;DRB1*16:02:14&quot;,
+    &quot;drb1_2&quot;: &quot;DRB1*14:49:14&quot;,
+    &quot;dqb1_1&quot;: &quot;DQB*14:41:11&quot;,
+    &quot;dqb1_2&quot;: &quot;DQB*03:27:15&quot;
+  }
+]</pre>
+      </div>
+    </div>
+  </body>
+</html>

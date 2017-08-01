@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API v2 kir endpoint API</title>
+    <meta charset="utf-8">
+    <style>
+      
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>API v2 kir endpoint API</h1>
+
+      <div class="article">
+        <h2>Returns data for valid loci names and no data for invalid loci names</h2>
+        <h3>GET api/v2/kir?gene[]=2dd5&amp;gene[]=2dl3&amp;gene[]=2dl5a&amp;gene[]=2dl5b</h3>
+
+
+
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">X-User-Email: user@test.com
+X-User-Token: tJJYPh-2QE2KaXNfcVZk
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">GET api/v2/kir?gene[]=2dd5&amp;gene[]=2dl3&amp;gene[]=2dl5a&amp;gene[]=2dl5b</pre>
+
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">gene: [&quot;2dd5&quot;, &quot;2dl3&quot;, &quot;2dl5a&quot;, &quot;2dl5b&quot;]</pre>
+
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;2fe1408292314ae844ec9a361ce93f23&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: eaf96957-f69c-4200-8cc3-1db7e8df8ed0
+X-Runtime: 0.068003
+Content-Length: 2563</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">[
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO003&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Hispanic&quot;,
+    &quot;age_at_sample&quot;: 53,
+    &quot;age_of_onset&quot;: 32,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0190212+KIR2DL3_0084705&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0160501+KIR2DL5A_0162412&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0125115+KIR2DL5B_0070205&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO004&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 56,
+    &quot;age_of_onset&quot;: 36,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0135602+KIR2DL3_0180905&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0180115+KIR2DL5A_0021313&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0020205+KIR2DL5B_0191301&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO003&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Hispanic&quot;,
+    &quot;age_at_sample&quot;: 49,
+    &quot;age_of_onset&quot;: 22,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0090613+KIR2DL3_0164603&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0052211+KIR2DL5A_0130204&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0120612+KIR2DL5B_0111404&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO002&quot;,
+    &quot;sample_source&quot;: &quot;NIH&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Asian&quot;,
+    &quot;age_at_sample&quot;: 32,
+    &quot;age_of_onset&quot;: 36,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0191104+KIR2DL3_0181513&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0092111+KIR2DL5A_0075613&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0033303+KIR2DL5B_0075413&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO003&quot;,
+    &quot;sample_source&quot;: &quot;NIH&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;Hispanic&quot;,
+    &quot;age_at_sample&quot;: 78,
+    &quot;age_of_onset&quot;: 50,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0121901+KIR2DL3_0194303&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0155314+KIR2DL5A_0054411&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0174412+KIR2DL5B_0091205&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO001&quot;,
+    &quot;sample_source&quot;: &quot;NIH&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 59,
+    &quot;age_of_onset&quot;: 65,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0112912+KIR2DL3_0183414&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0170404+KIR2DL5A_0110715&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0151312+KIR2DL5B_0021912&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO002&quot;,
+    &quot;sample_source&quot;: &quot;NIA&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Asian&quot;,
+    &quot;age_at_sample&quot;: 84,
+    &quot;age_of_onset&quot;: 29,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0083114+KIR2DL3_0134502&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0155715+KIR2DL5A_0190213&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0194115+KIR2DL5B_0114814&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO008&quot;,
+    &quot;sample_source&quot;: &quot;NIA&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Hispanic&quot;,
+    &quot;age_at_sample&quot;: 62,
+    &quot;age_of_onset&quot;: 23,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0113505+KIR2DL3_0143605&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0125411+KIR2DL5A_0141201&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0152602+KIR2DL5B_0010911&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO007&quot;,
+    &quot;sample_source&quot;: &quot;NIA&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;M&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 36,
+    &quot;age_of_onset&quot;: 44,
+    &quot;race&quot;: null,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0144301+KIR2DL3_0152704&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0095515+KIR2DL5A_0034115&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0023405+KIR2DL5B_0181615&quot;
+  }
+]</pre>
+      </div>
+    </div>
+  </body>
+</html>

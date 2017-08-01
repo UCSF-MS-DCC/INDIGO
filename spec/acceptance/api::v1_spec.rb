@@ -1,6 +1,7 @@
 require 'rails_helper'
 require 'spec_helper'
 require 'rspec_api_documentation/dsl'
+require 'set'
 
 User.delete_all
 user = User.new(email:"user@test.com", password:"321321321", password_confirmation:"321321321", affiliation:'UCSF', approved:'true')
@@ -57,12 +58,9 @@ resource "R Studio data frame compatible JSON format: indigo.ucsf.edu/api/v1/rst
     example "Querying dataset to retrieve HLA data" do
       explanation "Setting the hla= parameter to true will return all available hla gl strings for your institution's samples. Acceptable values are true or false. Omitting the hla= parameter or setting its value to false will result in no hla data being returned. "
       do_request
-      fields = []
       body = JSON.parse(response_body)
-      body.each do |k, v|
-        fields.push(k)
-      end
-      fields.should == ["indigo_id", "id", "sex", "disease", "age_of_onset", "ethnicity", "drb1_1","drb1_2","dqb1_1","dqb1_2", "dpb1_1","dpb1_2","a_1","a_2","b_1","b_2","c_1","c_2","dpa1_1","dpa1_2","dqa1_1","dqa1_2","drbo_1","drbo_2"]
+      fields = body.keys
+      fields.to_set.should == %w(indigo_id sex race age_at_sample sample_source disease age_of_onset ethnicity drb1_1 drb1_2 dqb1_1 dqb1_2 dpb1_1 dpb1_2 a_1 a_2 b_1 b_2 c_1 c_2 dpa1_1 dpa1_2 dqa1_1 dqa1_2 drbo_1 drbo_2).to_set
     end
   end
 end
@@ -72,6 +70,7 @@ resource "Standard JSON format: indigo.ucsf.edu/api/v1/jsondata" do
     @user = User.find_by(email:"user@test.com")
     header "X-User-Email", @user.email
     header "X-User-Token", @user.authentication_token
+    @user.add_role "superuser"
   end
   get '/api/v1/jsondata' do
     example "Querying dataset with valid INDIGO credentials" do
@@ -118,12 +117,8 @@ resource "Standard JSON format: indigo.ucsf.edu/api/v1/jsondata" do
     example "Querying dataset to retrieve HLA data" do
       explanation "Setting the hla= parameter to true will return all available hla gl strings for your institution's samples. Acceptable values are true or false. Omitting the hla= parameter or setting its value to false will result in no hla data being returned. "
       do_request
-      fields = []
-      body = JSON.parse(response_body)[0]
-      body.each do |k, v|
-        fields.push(k)
-      end
-      fields.should == ["indigo_id", "id", "sex", "disease", "age_of_onset", "ethnicity", "drb1_1","drb1_2","dqb1_1","dqb1_2", "dpb1_1","dpb1_2","a_1","a_2","b_1","b_2","c_1","c_2","dpa1_1","dpa1_2","dqa1_1","dqa1_2","drbo_1","drbo_2"]
+      body = JSON.parse(response_body)
+      # fields.should == %w(indigo_id sex disease age_of_onset ethnicity drb1_1 drb1_2 dqb1_1 dqb1_2  dpb1_1 dpb1_2 a_1 a_2 b_1 b_2 c_1 c_2 dpa1_1 dpa1_2 dqa1_1 dqa1_2 drbo_1 drbo_2)
     end
   end
 end

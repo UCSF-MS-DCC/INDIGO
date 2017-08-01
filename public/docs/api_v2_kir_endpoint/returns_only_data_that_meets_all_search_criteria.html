@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>API v2 kir endpoint API</title>
+    <meta charset="utf-8">
+    <style>
+      
+body {
+  font-family: Helvetica,Arial,sans-serif;
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  color: #404040;
+}
+
+.container {
+  width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+  zoom: 1;
+}
+
+pre {
+  background-color: #f5f5f5;
+  display: block;
+  padding: 8.5px;
+  margin: 0 0 18px;
+  line-height: 18px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  white-space: pre;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+td.required .name:after {
+  float: right;
+  content: "required";
+  font-weight: normal;
+  color: #F08080;
+}
+
+a{
+  color: #0069d6;
+  text-decoration: none;
+  line-height: inherit;
+  font-weight: inherit;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+  color: #404040;
+}
+
+h1 {
+  margin-bottom: 18px;
+  font-size: 30px;
+  line-height: 36px;
+}
+h2 {
+  font-size: 24px;
+  line-height: 36px;
+}
+h3{
+  font-size: 18px;
+  line-height: 36px;
+}
+h4 {
+  font-size: 16px;
+  line-height: 36px;
+}
+
+table{
+  width: 100%;
+  margin-bottom: 18px;
+  padding: 0;
+  border-collapse: separate;
+  font-size: 13px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  border-spacing: 0;
+  border: 1px solid #ddd;
+}
+
+table th {
+  padding-top: 9px;
+  font-weight: bold;
+  vertical-align: middle;
+  border-bottom: 1px solid #ddd;
+}
+table th+th, table td+td {
+  border-left: 1px solid #ddd;
+}
+table th, table td {
+  padding: 10px 10px 9px;
+  line-height: 18px;
+  text-align: left;
+}
+
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>API v2 kir endpoint API</h1>
+
+      <div class="article">
+        <h2>Returns only data that meets all search criteria</h2>
+        <h3>GET api/v2/kir?sex=f&amp;source=UCSF</h3>
+
+
+
+          <h3>Request</h3>
+
+            <h4>Headers</h4>
+            <pre class="request headers">X-User-Email: user@test.com
+X-User-Token: tJJYPh-2QE2KaXNfcVZk
+Host: example.org
+Cookie: </pre>
+
+          <h4>Route</h4>
+          <pre class="request route highlight">GET api/v2/kir?sex=f&amp;source=UCSF</pre>
+
+            <h4>Query Parameters</h4>
+            <pre class="request query_parameters highlight">sex: f
+source: UCSF</pre>
+
+
+
+            <h3>Response</h3>
+              <h4>Headers</h4>
+              <pre class="response headers">X-Frame-Options: SAMEORIGIN
+X-XSS-Protection: 1; mode=block
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+ETag: W/&quot;e998fa7b54c6f23775e08eea83dbf05d&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 24194660-7a8e-4029-959d-a842e52fb371
+X-Runtime: 0.069233
+Content-Length: 2569</pre>
+            <h4>Status</h4>
+            <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">[
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO007&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;MS&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 53,
+    &quot;age_of_onset&quot;: 23,
+    &quot;race&quot;: null,
+    &quot;KIR2DL1&quot;: &quot;KIR2DL1_0145303+KIR2DL1_0132101&quot;,
+    &quot;KIR2DL2&quot;: &quot;KIR2DL2_0054204+KIR2DL2_0063614&quot;,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0151902+KIR2DL3_0161305&quot;,
+    &quot;KIR2DL4&quot;: &quot;KIR2DL4_0071815+KIR2DL4_0073515&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0045412+KIR2DL5A_0051602&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0182303+KIR2DL5B_0175705&quot;,
+    &quot;KIR2DP1&quot;: &quot;KIR2DP1_0044611+KIR2DP1_0050504&quot;,
+    &quot;KIR2DS1&quot;: &quot;KIR2DS1_0184812+KIR2DS1_0031312&quot;,
+    &quot;KIR2DS2&quot;: &quot;KIR2DS2_0115215+KIR2DS2_0155204&quot;,
+    &quot;KIR2DS3&quot;: &quot;KIR2DS3_0133601+KIR2DS3_0193312&quot;,
+    &quot;KIR2DS4&quot;: &quot;KIR2DS4_0160814+KIR2DS4_0175502&quot;,
+    &quot;KIR2DS5&quot;: &quot;KIR2DS5_0074505+KIR2DS5_0124602&quot;,
+    &quot;KIR3DL1&quot;: &quot;KIR3DL1_0022701+KIR3DL1_0165701&quot;,
+    &quot;KIR3DL2&quot;: &quot;KIR3DL2_0032703+KIR3DL2_0110804&quot;,
+    &quot;KIR3DL3&quot;: &quot;KIR3DL3_0151105+KIR3DL3_0093212&quot;,
+    &quot;KIR3DS1&quot;: &quot;KIR3DS1_0152612+KIR3DS1_0033203&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO004&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;Asian&quot;,
+    &quot;age_at_sample&quot;: 75,
+    &quot;age_of_onset&quot;: 62,
+    &quot;race&quot;: null,
+    &quot;KIR2DL1&quot;: &quot;KIR2DL1_0090504+KIR2DL1_0081405&quot;,
+    &quot;KIR2DL2&quot;: &quot;KIR2DL2_0034311+KIR2DL2_0050903&quot;,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0022111+KIR2DL3_0012204&quot;,
+    &quot;KIR2DL4&quot;: &quot;KIR2DL4_0061111+KIR2DL4_0151304&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0161714+KIR2DL5A_0161114&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0164712+KIR2DL5B_0022713&quot;,
+    &quot;KIR2DP1&quot;: &quot;KIR2DP1_0153905+KIR2DP1_0093813&quot;,
+    &quot;KIR2DS1&quot;: &quot;KIR2DS1_0040701+KIR2DS1_0151611&quot;,
+    &quot;KIR2DS2&quot;: &quot;KIR2DS2_0025305+KIR2DS2_0113402&quot;,
+    &quot;KIR2DS3&quot;: &quot;KIR2DS3_0190403+KIR2DS3_0141114&quot;,
+    &quot;KIR2DS4&quot;: &quot;KIR2DS4_0133714+KIR2DS4_0082213&quot;,
+    &quot;KIR2DS5&quot;: &quot;KIR2DS5_0082305+KIR2DS5_0064104&quot;,
+    &quot;KIR3DL1&quot;: &quot;KIR3DL1_0182401+KIR3DL1_0173705&quot;,
+    &quot;KIR3DL2&quot;: &quot;KIR3DL2_0173205+KIR3DL2_0074405&quot;,
+    &quot;KIR3DL3&quot;: &quot;KIR3DL3_0094911+KIR3DL3_0141503&quot;,
+    &quot;KIR3DS1&quot;: &quot;KIR3DS1_0181314+KIR3DS1_0172213&quot;
+  },
+  {
+    &quot;indigo_id&quot;: &quot;INDIGO003&quot;,
+    &quot;sample_source&quot;: &quot;UCSF&quot;,
+    &quot;disease&quot;: &quot;HC&quot;,
+    &quot;gender&quot;: &quot;F&quot;,
+    &quot;ethnicity&quot;: &quot;White&quot;,
+    &quot;age_at_sample&quot;: 51,
+    &quot;age_of_onset&quot;: 25,
+    &quot;race&quot;: null,
+    &quot;KIR2DL1&quot;: &quot;KIR2DL1_0052211+KIR2DL1_0022913&quot;,
+    &quot;KIR2DL2&quot;: &quot;KIR2DL2_0063802+KIR2DL2_0090915&quot;,
+    &quot;KIR2DL3&quot;: &quot;KIR2DL3_0092712+KIR2DL3_0060513&quot;,
+    &quot;KIR2DL4&quot;: &quot;KIR2DL4_0033713+KIR2DL4_0051213&quot;,
+    &quot;KIR2DL5A&quot;: &quot;KIR2DL5A_0153804+KIR2DL5A_0053611&quot;,
+    &quot;KIR2DL5B&quot;: &quot;KIR2DL5B_0124703+KIR2DL5B_0034414&quot;,
+    &quot;KIR2DP1&quot;: &quot;KIR2DP1_0031111+KIR2DP1_0121815&quot;,
+    &quot;KIR2DS1&quot;: &quot;KIR2DS1_0120615+KIR2DS1_0150801&quot;,
+    &quot;KIR2DS2&quot;: &quot;KIR2DS2_0143501+KIR2DS2_0020901&quot;,
+    &quot;KIR2DS3&quot;: &quot;KIR2DS3_0142702+KIR2DS3_0160601&quot;,
+    &quot;KIR2DS4&quot;: &quot;KIR2DS4_0131811+KIR2DS4_0175304&quot;,
+    &quot;KIR2DS5&quot;: &quot;KIR2DS5_0092702+KIR2DS5_0061102&quot;,
+    &quot;KIR3DL1&quot;: &quot;KIR3DL1_0122604+KIR3DL1_0062804&quot;,
+    &quot;KIR3DL2&quot;: &quot;KIR3DL2_0131404+KIR3DL2_0120902&quot;,
+    &quot;KIR3DL3&quot;: &quot;KIR3DL3_0031612+KIR3DL3_0193305&quot;,
+    &quot;KIR3DS1&quot;: &quot;KIR3DS1_0012704+KIR3DS1_0130314&quot;
+  }
+]</pre>
+      </div>
+    </div>
+  </body>
+</html>
