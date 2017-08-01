@@ -135,18 +135,23 @@ table th, table td {
 
           <h3>API endpoints</h3>
 
+          <i>NOTE: version 1 (v1) of the api is officially deprecated. It's highly recommended to use version 2 (v2) endpoints</i>
+
           <p class="explanation">
-            The INDIGO API currently serves data from two url endpoints. Both deliver data in JSON format.
+            The INDIGO API v2 serves JSON-formatted data from three url endpoints.
             <ul>
-              <li><b>indigo.ucsf.edu/api/v1/jsondata</b>: returns data in standard json format</li>
-              <li><b>indigo.ucsf.edu/api/v1/rstudiodata</b>: returns data in a format that is easily configured into a R Studio data frame</li>
+              <li><b>indigo.ucsf.edu/api/v2/sample</b>: phenotypic data (age, race, ethnicity), diagnosis, and sample identifiers</li>
+              <li><b>indigo.ucsf.edu/api/v2/hla</b>: sample data and genetic data in gl string format for HLA loci</li>
+              <li><b>indigo.ucsf.edu/api/v2/kir</b>: sample data and genetic data for KIR loci</li>
             </ul>
           </p>
+
+          <h2>Tools for accessing the INDIGO API</h2>
 
           <h3>curl</h3>
 
           <p class="explanation">
-            curl is a tool used in command lines or in scripts to transfer data. For documentation and tutorials, visit <a href="https://curl.haxx.se/" style="text-decoration:underline;">the curl homepage.</a>
+            curl is a tool used in command line terminals or in scripts to transfer data via api. For documentation and tutorials, visit <a href="https://curl.haxx.se/" style="text-decoration:underline;">the curl homepage.</a>
           </p>
 
           <p class="explanation">
@@ -154,16 +159,16 @@ table th, table td {
             <ul>
               <li>a header "X-User-Email:<i>your email address</i>"</li>
               <li>a header "X-User-Token:<i>your api key</i>"</li>
-              <li>"https://indigo.ucsf.edu/api/v1/<i>api endpoint</i>"</li>
+              <li>"https://indigo.ucsf.edu/api/v2/<i>api endpoint</i>"</li>
             </ul>
           </p>
 
           <h4>Example:</h4>
-          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v1/jsondata"</pre>
+          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample"</pre>
 
           <br>
 
-          <h3>R Studio with the httr and rjson packages</h3>
+          <h3>R Studio with the httr and jsonlite packages</h3>
 
           <p class="explanation">
             INDIGO data may be piped directly into the R Studio console by using the httr package (see documentation <a href="https://github.com/hadley/httr" style="text-decoration:underline;">here</a> and <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" style="text-decoration:underline;">here</a>)
@@ -172,27 +177,24 @@ table th, table td {
            <h4>Recommended workflow for using the INDIGO API with R Studio:</h4>
 
            <pre>
-# install and load the httr and rjson packages
+# install and load the httr and jsonlite packages
 &gt; install.package("httr")
-&gt; install.package("rjson")
+&gt; install.package("jsonlite")
 &gt; library("httr")
-&gt; library("rjson")
+&gt; library("jsonlite")
 <br>
 # create a named vector containing your INDIGO credentials and required header names. replace italicized text with your email address and api key
 &gt; h &lt;- c("<i>your email address</i>", "<i>your api key</i>")
 &gt; names(h) &lt;- c("X-User-Email", "X-User-Token")
 <br>
 # make a get request to the INDIGO API endpoint, assigning the server response to a variable
-&gt; response &lt;- GET("https://indigo.ucsf.edu/api/v1/rstudiodata", add_headers(.headers = h))
+&gt; response &lt;- GET("https://indigo.ucsf.edu/api/v2/sample", add_headers(.headers = h))
 <br>
 # the data returned will be in the response body. to access it
 &gt; body &lt;- content(response, "text")
 <br>
-# the data is in JSON format. parse it with rjson
-&gt; data &lt;- fromJSON(body)
-<br>
-# create a data frame from the parsed data
-&gt; data_frame &lt;- as.data.frame(data)
+# create a data frame using jsonlite
+&gt; indigo_df &lt;- jsonlite::fromJSON(body)
 </pre>
 
         </div>
@@ -207,21 +209,32 @@ table th, table td {
 
           <h4>Example:</h4>
           <pre>
-curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v1/jsondata<b>?disease=MS&amp;sex=F&amp;minage=30</b>"
+curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample<b>?disease=MS&amp;sex=f</b>"
 </pre>
         <p class="explanation">
           To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the filtering criteria in this format: category=value. Multiple filters may be added, separated by an ampersand <b>&amp;</b>.
         </p>
         <p class="explanation">
           A category should only be used once in a query string. An API call that uses a category more than once, such as:
-          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v1/jsondata?disease=MS&disease=PD"</pre>
+          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample?disease=MS&disease=PD"</pre>
           will return sample data where the disease code equals PD. The first parameter of disease=MS is overwritten.
         </p>
         <p class="explanation" style="text-decoration:underline;">
           <i><b>Only data for samples that meet ALL filtering criteria will be returned</b></i>.
         </p>
 
-        <h4>Valid query string categories and values</h4>
+        <h4>Valid query string categories and values (v2)</h4>
+        <table class-"table-bordered">
+          <tr><th>endpoint</th><th>diagnosis</th><th>sex</th><th>controls<sup> 1</sup></th><th>gene[]<sup> 2</sup></th><th>sample_source<sup> 3</sup></th></tr>
+          <tr><td>api/v2/sample</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td><i>not available for this endpoint</i></td><td><i>Special: see below<i></td></tr>
+          <tr><td>api/v2/hla</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>a, b, c, dpa1, dqa1, drb1, dpb1, dqb1, drbo</td><td><i>Special: see below<i></td></tr>
+          <tr><td>api/v2/kir</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>2dl1, 2dl2, 2dl3, 2dl4, 2dl5a, 2dl5b, 2dp1, 2ds1, 2ds2, 2ds3,<br> 2ds4, 2ds5, 3dl1, 3dl2, 3dl3, 3ds1</td><td><i>Special: see below<i></td></tr>
+        </table>
+        <sup>1</sup> Includes data from healthy control subjects alongside data from disease-affected subjects. Default behavior is to not include controls.<br>
+        <sup>2</sup> Returns data points for only this gene. This key may be repeated within a query string to retrieve data for multiple genes. See hla and kir endpoint documentation for details. Default behavior is to include data from all genes. <br>
+        <sup>3</sup> Returns data only for samples from a single named INDIGO contributor site. Default behavior is to return data from all sites the user is authorized for.
+
+        <h4>Valid query string categories and values (v1)</h4>
 
         <table class="table-bordered">
           <tr><th>disease</th><th>sex</th><th>minage<sup> 1</sup></th><th>maxage<sup> 1</sup></th><th>hla<sup> 2</sup></th><th>kir<sup> 2</sup></th></tr>
