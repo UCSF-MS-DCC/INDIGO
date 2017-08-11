@@ -1,7 +1,7 @@
 // // # Place all the behaviors and hooks related to the matching controller here.
 // // # All this logic will automatically be available in application.js.
 // // # You can use CoffeeScript in this file: http://coffeescript.org/
-$(function() {
+$(document).on("turbolinks:load", function() {
 //   var table_filters = [];
 //   function catFilters() {
 //     var filter_string = table_filters.join(', ')
@@ -158,4 +158,4 @@ $(function() {
 //     table_filters.push("UCSF");
 //     catFilters();
 //   });
-})
+});

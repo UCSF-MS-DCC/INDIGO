@@ -22,14 +22,6 @@ class DataviewController < ApplicationController
   end
 
   def stacy
-    unless !params[:search]
-      params[:search].each do |k, v|
-        puts "#{k}, #{v}"
-      end
-    end
-    params.each do |p, v|
-      puts "PARAM #{p}::::#{v}"
-    end
     unless current_user.has_role? :admin
       redirect_to root_path
     end
