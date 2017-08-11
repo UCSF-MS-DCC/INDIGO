@@ -21,9 +21,45 @@ class DataviewController < ApplicationController
     end
   end
 
+  def stacy
+    unless !params[:search]
+      params[:search].each do |k, v|
+        puts "#{k}, #{v}"
+      end
+    end
+    params.each do |p, v|
+      puts "PARAM #{p}::::#{v}"
+    end
+    unless current_user.has_role? :admin
+      redirect_to root_path
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: SampleDatatable.new(view_context) }
+    end
+  end
+
+  def sample_status
+    puts "sample_status pinged"
+    respond_to do |format|
+      format json: SampleDatatable.new(view_context)
+    end
+  end
+
   def modal_content
-    @modal_sample = Sample.find(params[:sample_id])
-    render json: @modal_sample
+    params.each do |k, v|
+      puts "#{k}>>#{v}"
+      if v.respond_to? :each
+        v.each do |a, b|
+          puts "#{a}>>>>#{b}"
+          if b.respond_to? :each
+            b.each do |c, d|
+              puts "#{c}::#{d}"
+            end
+          end
+        end
+      end
+    end
   end
 
   def samples_to_json

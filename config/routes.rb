@@ -33,6 +33,10 @@ Rails.application.routes.draw do
 
   get 'dataview/superindex'
 
+  get 'dataview/stacy'
+
+  get 'dataview/sample_status'
+
   get 'dataview/modal_content'
 
   get 'dataview/download_sample_data'

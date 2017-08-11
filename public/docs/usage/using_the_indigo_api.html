@@ -203,24 +203,25 @@ table th, table td {
           <h2>Filtering API call results with query strings</h2>
 
           <p class="explanation">
-            By default, the INDIGO API returns all available phenotypic and catalog data for all samples. Users can restrict data received by phenotypes such as sex, minimum or maximum age of onset, and disease/control, and request hla and kir genetic data
-            by adding <b>a query string</b> to the url of the API request.
+            By default, the INDIGO API returns all available phenotypic and catalog data for all samples a user is authorized to access. Users can receive data more specific to their interests by appending <b>a query string</b> to the url of the API request.
           </p>
 
           <h4>Example:</h4>
+          <p class="explanation">
+            To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the filtering criteria in this format: category=value. Multiple filters may be added, separated by an ampersand <b>&amp;</b>.
+          </p>
+          <p class="explanation">To retrieve sample data pertaining only to females with a diagnosis of multiple sclerosis, a curl request to the API would look like this:</p>
           <pre>
-curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample<b>?disease=MS&amp;sex=f</b>"
+curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample<b>?diagnosis=MS&amp;sex=f</b>"
 </pre>
-        <p class="explanation">
-          To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the filtering criteria in this format: category=value. Multiple filters may be added, separated by an ampersand <b>&amp;</b>.
-        </p>
+
         <p class="explanation">
           A category should only be used once in a query string. An API call that uses a category more than once, such as:
           <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample?disease=MS&disease=PD"</pre>
           will return sample data where the disease code equals PD. The first parameter of disease=MS is overwritten.
         </p>
         <p class="explanation" style="text-decoration:underline;">
-          <i><b>Only data for samples that meet ALL filtering criteria will be returned</b></i>.
+          <i><b>Only data for samples that meet ALL filtering criteria will be returned. If no samples meet the query string criteria, no data will be returned.</b></i>.
         </p>
 
         <h4>Valid query string categories and values (v2)</h4>
@@ -230,8 +231,8 @@ curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKy
           <tr><td>api/v2/hla</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>a, b, c, dpa1, dqa1, drb1, dpb1, dqb1, drbo</td><td><i>Special: see below<i></td></tr>
           <tr><td>api/v2/kir</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>2dl1, 2dl2, 2dl3, 2dl4, 2dl5a, 2dl5b, 2dp1, 2ds1, 2ds2, 2ds3,<br> 2ds4, 2ds5, 3dl1, 3dl2, 3dl3, 3ds1</td><td><i>Special: see below<i></td></tr>
         </table>
-        <sup>1</sup> Includes data from healthy control subjects alongside data from disease-affected subjects. Default behavior is to not include controls.<br>
-        <sup>2</sup> Returns data points for only this gene. This key may be repeated within a query string to retrieve data for multiple genes. See hla and kir endpoint documentation for details. Default behavior is to include data from all genes. <br>
+        <sup>1</sup> Setting this key to 't' will cause the API to return data from healthy control subjects alongside data from disease-affected subjects. Default behavior is to not include controls.<br>
+        <sup>2</sup> Setting the gene[]= key to a valid parameter (see table above) will cause the API to return data points for only this gene. Default behavior is to include data from all genes.<b>This key may be reused with different values within a query string to retrieve data for multiple genes (i.e. it is not overwritten as other query string categories are). See hla and kir endpoint documentation for examples.</b> <br>
         <sup>3</sup> Returns data only for samples from a single named INDIGO contributor site. Default behavior is to return data from all sites the user is authorized for.
 
         <h4>Valid query string categories and values (v1)</h4>

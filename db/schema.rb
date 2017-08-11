@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731213135) do
+ActiveRecord::Schema.define(version: 20170808175418) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -207,6 +207,8 @@ ActiveRecord::Schema.define(version: 20170731213135) do
     t.boolean  "kir_geno"
     t.boolean  "kir_raw"
     t.string   "sample_source"
+    t.string   "date_to_stanford"
+    t.string   "ngs_dataset"
     t.index ["batch_id"], name: "index_samples_on_batch_id"
   end
 
