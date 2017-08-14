@@ -32,26 +32,13 @@ class DataviewController < ApplicationController
   end
 
   def sample_status
-    puts "sample_status pinged"
     respond_to do |format|
-      format json: SampleDatatable.new(view_context)
+      format.json { render json: SampleDatatable.new(view_context) }
     end
   end
 
   def modal_content
-    params.each do |k, v|
-      puts "#{k}>>#{v}"
-      if v.respond_to? :each
-        v.each do |a, b|
-          puts "#{a}>>>>#{b}"
-          if b.respond_to? :each
-            b.each do |c, d|
-              puts "#{c}::#{d}"
-            end
-          end
-        end
-      end
-    end
+
   end
 
   def samples_to_json

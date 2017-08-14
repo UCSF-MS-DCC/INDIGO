@@ -2,38 +2,50 @@
 // // # All this logic will automatically be available in application.js.
 // // # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on("turbolinks:load", function() {
-//   var table_filters = [];
-//   function catFilters() {
-//     var filter_string = table_filters.join(', ')
-//     $('#filter-list').html(filter_string);
-//   }
+
   var table = $('#stacy-samples-table').DataTable({
     "autoWidth":false,
     "pageLength":100,
     "bServerSide":true,
     "bProcessing":true,
     "bPaginate":true,
-    "sAjaxSource":$('stacy-samples-table').data("source"),
+    "ajax":'/dataview/sample_status.json',
     "pagingType":"full_numbers",
     "paging":true,
-    "lengthMenu":[10,25,50,100,250]
+    "lengthMenu":[10,25,50,100,250,1000]
   });
-//   $('#back-btn').click(function(){
-//     $.fn.dataTable.ext.search.pop();
-//     table.draw();
-//     table_filters.pop();
-//     catFilters();
-//   });
-//   $('#has-hla-btn').click(function() {
-//     $.fn.dataTable.ext.search.push(
-//       function(settings, data, dataIndex) {
-//         return $(table.row(dataIndex).node()).attr('data-has-hla') === "true";
-//       }
-//     );
-//     table.draw();
-//     table_filters.push("Has HLA");
-//     catFilters();
-//   });
+
+  // var table_filters = [];
+  //
+  // var col_idx = 8;
+  //
+  // console.log(table.rows().eq(0).count())
+  //
+  // // console.log("welp "+table.columns(col_idx).search('true', true, false).count())
+  //
+  // function catFilters() {
+  //   var filter_string = table_filters.join(', ');
+  //   $('#filter-list').html(filter_string);
+  // }
+  //
+  // $('#back-btn').on('click',function(){
+  //   $.fn.dataTable.ext.search.pop();
+  //   table.draw();
+  //   table_filters.pop();
+  //   catFilters();
+  // });
+  // $('#has-hla-btn').on('click',function() {
+  //   console.log(table.row(21).data())
+  //   $.fn.dataTable.ext.search.push(
+  //     function(settings, data, dataIndex) {
+  //       console.log( $(table.row(dataIndex).node()).data()[8] === "true")
+  //       // console.log(data, dataIndex)
+  //     }
+  //   );
+  //   table.draw();
+  //   table_filters.push("Samples with HLA genotypes");
+  //   catFilters();
+  // });
 //   $('#no-hla-btn').click(function() {
 //     $.fn.dataTable.ext.search.push(
 //       function(settings, data, dataIndex) {
