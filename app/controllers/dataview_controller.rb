@@ -22,7 +22,7 @@ class DataviewController < ApplicationController
   end
 
   def stacy
-    unless current_user.has_role? :admin
+    unless current_user.has_role? :superuser
       redirect_to root_path
     end
     respond_to do |format|

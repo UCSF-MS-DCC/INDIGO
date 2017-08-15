@@ -225,6 +225,33 @@ class Api::V2Controller < ApplicationController
 
   end
 
+  def raw_kir
+
+    @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
+    if !@user
+      render json: {"error":"no such registered user"}, status: :forbidden
+      return
+    end
+
+
+    raw_kir_indigo_id = params[:sample]
+
+    @sample = Sample.find_by(indigo_id:raw_kir_indigo_id)
+
+    if @sample
+      if @sample.kir_raw == false || @sample.kir_raw == nil
+        @sample.update_attributes(kir_raw:true)
+        render json: @sample, each_serializer: SampleSerializer, status: :accepted
+      else
+        render json: @sample, each_serializer: SampleSerializer, status: :not_modified
+      end
+    else
+      render json: { "error":"no such sample" }, status: :not_found
+    end
+
+
+
+  end #close def raw_kir block
 
 
 

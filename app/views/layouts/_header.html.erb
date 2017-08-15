@@ -21,7 +21,11 @@
                 <li><%= link_to "Sign Up", new_user_registration_path %></li>
                 <li><%= link_to "Log In", new_user_session_path %></li>
               <% else %>
-                <li><%= link_to "Progress", welcome_progress_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View Progress on Sample Acquisition and Processing" %></li>
+                <% if current_user.has_role? :superuser %>
+                  <li><%= link_to "Progress", dataview_stacy_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View Progress on Sample Acquisition and Processing" %></li>
+                <% else %>
+                  <li><%= link_to "Progress", welcome_progress_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View Progress on Sample Acquisition and Processing" %></li>
+                <% end %>
                 <li><%= link_to "My Account", profiles_show_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View and Edit Your Account Details" %></li>
                 <li><%= link_to "#{current_user.affiliation} Data", dataview_index_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View Your Institution's Indigo Data" %></li>
                 <% if current_user.has_role? :superuser %>

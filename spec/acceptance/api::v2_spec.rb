@@ -374,4 +374,8 @@ RSpec.describe Api::V2Controller, type: :request do
       end
     end
   end #closes resource API v2 kir endpoint block
+
+  resource 'API v2 raw_kir endpoint' do
+
+  end #closes resource API v2 raw_kir endpoint block
 end

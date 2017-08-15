@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     get 'v2/sample'
     get 'v2/hla'
     get 'v2/kir'
+    put 'v2/raw_kir'
   end
   get 'topics/index'
 
