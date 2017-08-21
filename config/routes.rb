@@ -38,6 +38,18 @@ Rails.application.routes.draw do
 
   get 'dataview/sample_status'
 
+  get 'dataview/samples_index'
+
+  get 'dataview/hla_index'
+
+  get 'dataview/kir_index'
+
+  get 'dataview/samples_superindex'
+
+  get 'dataview/hla_superindex'
+
+  get 'dataview/kir_superindex'
+
   get 'dataview/modal_content'
 
   get 'dataview/download_sample_data'

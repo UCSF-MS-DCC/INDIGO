@@ -13,8 +13,8 @@ class DataviewController < ApplicationController
     if !current_user.has_role? :superuser
       redirect_to '/dataview#index'
     else
-      disease = dataview_params[:disease]
-      @samples = Sample.where(disease:disease).order("indigo_id ASC")
+      @disease = dataview_params[:disease]
+      @samples = Sample.where(disease:@disease).order("indigo_id ASC")
       ids = @samples.pluck(:id)
       @hlas = Hla.where(sample_id:ids).order("indigo_id ASC")
       @kirs = Kir.where(sample_id:ids).order("indigo_id ASC")
@@ -34,6 +34,45 @@ class DataviewController < ApplicationController
   def sample_status
     respond_to do |format|
       format.json { render json: SampleDatatable.new(view_context) }
+    end
+  end
+
+  def samples_index
+    respond_to do |format|
+      format.json { render json: SampleIndexDatatable.new(view_context, current_user.affiliation) }
+    end
+  end
+
+  def hla_index
+    respond_to do |format|
+      format.json { render json: HlaIndexDatatable.new(view_context, current_user.affiliation) }
+    end
+  end
+
+  def kir_index
+    respond_to do |format|
+      format.json { render json: KirIndexDatatable.new(view_context, current_user.affiliation) }
+    end
+  end
+
+  def samples_superindex
+    disease = params[:disease]
+    respond_to do |format|
+      format.json { render json: SampleSuperindexDatatable.new(view_context, disease) }
+    end
+  end
+
+  def hla_superindex
+    disease = params[:disease]
+    respond_to do |format|
+      format.json { render json: HlaSuperindexDatatable.new(view_context, disease) }
+    end
+  end
+
+  def kir_superindex
+    disease = params[:disease]
+    respond_to do |format|
+      format.json { render json: KirSuperindexDatatable.new(view_context, disease) }
     end
   end
 

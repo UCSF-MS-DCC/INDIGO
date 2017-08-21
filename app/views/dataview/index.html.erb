@@ -9,354 +9,166 @@
       </ul>
     </div>
   </div>
-  <!-- spinner and table header/tab contents -->
-  <div class="row" style="border: 1px solid #ededed; border-top:none; background-color:#fdfdfd;padding-bottom:10px;">
-    <div class="col-md-12 spinner">
-      <div class="sk-folding-cube">
-        <div class="sk-cube1 sk-cube"></div>
-        <div class="sk-cube2 sk-cube"></div>
-        <div class="sk-cube4 sk-cube"></div>
-        <div class="sk-cube3 sk-cube"></div>
+
+  <div class="tab-content">
+
+    <div class="tab-pane fade in active" id="sample">
+      <div class="row" style="border:1px solid #ededed;border-top:none;background-color:#fdfdfd;padding-bottom:10px;">
+        <div class="col-sm-12">
+          <br>
+          <div class="row">
+            <div class="col-sm-12">
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="samples-index-table" checked=true>INDIGO ID</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="samples-index-table" checked=true>Source</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="samples-index-table" checked=true>Source Study</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="samples-index-table" checked=true>Site ID</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="samples-index-table" checked=true>Disease</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="samples-index-table" checked=true>Sex</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="samples-index-table" checked=true>Ethnicity</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="samples-index-table" checked=true>Race</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=8 data-table-id="samples-index-table" checked=true>Age of Onset</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=9 data-table-id="samples-index-table" checked=true>Age at Sample</label>
+            </div>
+          </div>
+          <br>
+          <table id="samples-index-table" class="table table-striped table-bordered" data-source="<%= dataview_samples_index_url(format:"json") %>" >
+            <thead>
+              <tr>
+                <th>INDIGO ID</th>
+                <th>Source</th>
+                <th>Source Study</th>
+                <th>Site ID</th>
+                <th>Disease</th>
+                <th>Sex</th>
+                <th>Ethnicity</th>
+                <th>Race</th>
+                <th>Age of Onset</th>
+                <th>Age at Sample</th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
 
-    <div class="col-md-12 tab-content hide-element">
-      <div class="tab-pane fade in active" id="sample">
-        <div class="row">
-          <div class="col-sm-9">
-            <h3>&nbsp;&nbsp;<%= @samples.count %> INDIGO Samples</h3>
-          </div>
-          <div class="col-sm-2 col-sm-offset-1">
-            <%= link_to "Download Samples", dataview_download_sample_data_path(format:"csv"), :'data-toggle' => "tooltip", :'data-placement' => 'top', :'title' => "This can take ten seconds or longer.", :class => "btn btn-indigo btn-md", :style => "margin-top:15px; color:white;" %>
-          </div>
-        </div>
-        <div id="sample_table">
+    <div class="tab-pane fade" id="hla">
+      <div class="row" style="border:1px solid #ededed;border-top:none;background-color:#fdfdfd;padding-bottom:10px;overflow-x:scroll;">
+        <div class="col-sm-12">
+          <br>
           <div class="row">
             <div class="col-sm-12">
-              <label class="checkbox-inline"><input type="checkbox" value="" class="master-switch" data-switch-set="samples-switch" data-table-name="samples_table" checked=true>Show All Columns</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=0 data-table-name="samples_table" checked=true>INDIGO ID</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=1 data-table-name="samples_table" checked=true>Site Indentifier</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=2 data-table-name="samples_table" checked=true>Sex</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=3 data-table-name="samples_table" checked=true>Diagnosis</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=4 data-table-name="samples_table" checked=true>Age of Onset</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=5 data-table-name="samples_table" checked=true>Age at Sample</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=6 data-table-name="samples_table" checked=true>Ethnicity</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check samples-switch" data-filter-column=7 data-table-name="samples_table" checked=true>Uploaded on</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="hlas-index-table" checked=true>INDIGO ID</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="hlas-index-table" checked=true>DRB1/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="hlas-index-table" checked=true>DRB1/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="hlas-index-table" checked=true>DQB1/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="hlas-index-table" checked=true>DQB1/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="hlas-index-table" checked=true>DPB1/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="hlas-index-table" checked=true>DPB1/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="hlas-index-table" checked=true>A/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=8 data-table-id="hlas-index-table" checked=true>A/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=9 data-table-id="hlas-index-table" checked=true>B/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=10 data-table-id="hlas-index-table" checked=true>B/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=11 data-table-id="hlas-index-table" checked=true>C/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=12 data-table-id="hlas-index-table" checked=true>C/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=13 data-table-id="hlas-index-table" checked=true>DPA1/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=14 data-table-id="hlas-index-table" checked=true>DPA1/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=15 data-table-id="hlas-index-table" checked=true>DQA1/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=16 data-table-id="hlas-index-table" checked=true>DQA1/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=17 data-table-id="hlas-index-table" checked=true>DRBo/1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=18 data-table-id="hlas-index-table" checked=true>DRBo/2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=19 data-table-id="hlas-index-table" checked=true>DPB1 phase ambiguities</label>
             </div>
           </div>
-          <hr>
-            <table id="samples_table" class="indigo_table table-bordered">
-              <thead>
-                <tr>
-                  <th class="sam-ind-id" data-sortable=true data-visible=true>INDIGO ID</th>
-                  <th class="sam-src-id" data-sortable=true data-visible=true>Site Indentifier</th>
-                  <th class="sam-sex" data-sortable=true data-visible=true>Sex</th>
-                  <th class="sam-dis" data-sortable=true data-visible=true>Diagnosis</th>
-                  <th class="sam-aoo" data-sortable=true data-visible=true>Age of Onset</th>
-                  <th class="sam-aas" data-sortable=true data-visible=true>Age at Sample</th>
-                  <th class="sam-eth" data-sortable=true data-visible=true>Ethnicity</th>
-                  <th class="sam-cre" data-sortable=true data-visible=true>Uploaded on</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% @samples.each do |sample| %>
-                  <tr>
-                    <td class="sam-ind-id"><%= sample.indigo_id %></td>
-                    <td class="sam-src-id"><%= sample.sample_source_identifier %></td>
-                    <td class="sam-sex"><%= sample.gender %></td>
-                    <td class="sam-dis"><%= sample.disease %></td>
-                    <td class="sam-aoo"><%= sample.age_of_onset %></td>
-                    <td class="sam-aas"><%= sample.age_at_sample %></td>
-                    <td class="sam-eth"><%= sample.ethnicity %></td>
-                    <td class="sam-cre"><%= sample.created_at.strftime('%B-%d-%Y') %></td>
-                  </tr>
-                <% end %>
-              </tbody>
-            </table>
-
-            <!-- modal markup -->
-            <div id="sample-modal" class="modal fade" role="dialog">
-              <div class="modal-dialog modal-lg">
-
-                <%= render 'dataview/modal_content' %>
-
-              </div>
-            </div>
-
-        </div> <!-- closes id="sample_table" -->
-
-      </div> <!-- closes id="sample_table" -->
-      <div class="tab-pane fade hide-table" id="hla">
-        <div class="row">
-          <div class="col-sm-10">
-            <h3>&nbsp;&nbsp;<%= @hlas.count %> HLA </h3>
-          </div>
-          <div class="col-sm-2">
-            <%= link_to "Download HLA Table", dataview_download_hla_data_path(format:"csv"), :class => "btn btn-indigo btn-md", :style => "margin-top:10px; color:white;" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <label class="checkbox-inline"><input type="checkbox" value="" class="master-switch" data-switch-set="hlas-switch" data-table-name="hlas_table" checked=true>Show All Columns</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=0 data-table-name="hlas_table" checked=true>INDIGO ID</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=1 data-table-name="hlas_table" checked=true>DRB1/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=2 data-table-name="hlas_table" checked=true>DRB1/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=3 data-table-name="hlas_table" checked=true>DQB1/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=4 data-table-name="hlas_table" checked=true>DQB1/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=5 data-table-name="hlas_table" checked=true>DPB1/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=6 data-table-name="hlas_table" checked=true>DPB1/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=7 data-table-name="hlas_table" checked=true>A/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=8 data-table-name="hlas_table" checked=true>A/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=9 data-table-name="hlas_table" checked=true>B/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=10 data-table-name="hlas_table" checked=true>B/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=11 data-table-name="hlas_table" checked=true>C/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=12 data-table-name="hlas_table" checked=true>C/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=13 data-table-name="hlas_table" checked=true>DPA1/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=14 data-table-name="hlas_table" checked=true>DPA1/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=15 data-table-name="hlas_table" checked=true>DQA1/1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=16 data-table-name="hlas_table" checked=true>DQA1/2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=17 data-table-name="hlas_table" checked=true>DRBo1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=18 data-table-name="hlas_table" checked=true>DRBo2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=19 data-table-name="hlas_table" checked=true>DPB1 phase ambiguities</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=20 data-table-name="hlas_table" checked=true>Uploaded on</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check hlas-switch" data-filter-column=21 data-table-name="hlas_table" checked=true>Manifest Version</label>
-          </div>
-        </div>
-        <hr>
-        <div id="hla_table">
-          <table id="hlas_table" class="indigo_table table-bordered">
+          <br>
+          <table id="hlas-index-table" class="table table-striped table-bordered" data-source="<%= dataview_hla_index_url(format:"json") %>" >
             <thead>
-              <th>INDIGO ID</th>
-              <th>DRB1/1</th>
-              <th>DRB1/2</th>
-              <th>DQB1/1</th>
-              <th>DQB1/2</th>
-              <th>DPB1/1</th>
-              <th>DPB1/2</th>
-              <th>A/1</th>
-              <th>A/2</th>
-              <th>B/1</th>
-              <th>B/2</th>
-              <th>C/1</th>
-              <th>C/2</th>
-              <th>DPA1/1</th>
-              <th>DPA1/2</th>
-              <th>DQA1/1</th>
-              <th>DQA1/2</th>
-              <th>DRBo1</th>
-              <th>DRBo2</th>
-              <th>DPB1 phase ambiguities</th>
-              <th>Uploaded on</th>
-              <th>Manifest Version</th>
+              <tr>
+                <th>INDIGO ID</th>
+                <th>DRB1/1</th>
+                <th>DRB1/2</th>
+                <th>DQB1/1</th>
+                <th>DQB1/2</th>
+                <th>DPB1/1</th>
+                <th>DPB1/2</th>
+                <th>A/1</th>
+                <th>A/2</th>
+                <th>B/1</th>
+                <th>B/2</th>
+                <th>C/1</th>
+                <th>C/2</th>
+                <th>DPA1/1</th>
+                <th>DPA1/2</th>
+                <th>DQA1/1</th>
+                <th>DQA1/2</th>
+                <th>DRBo/1</th>
+                <th>DRBo/2</th>
+                <th>DPB1 phase ambiguities</th>
+              </tr>
             </thead>
             <tbody>
-              <% @hlas.each do |hla| %>
-                <tr>
-                  <td><%= hla.indigo_id %></td>
-                  <td><%= hla.drb1_1 %></td>
-                  <td><%= hla.drb1_2 %></td>
-                  <td><%= hla.dqb1_1 %></td>
-                  <td><%= hla.dqb1_2 %></td>
-                  <td><%= hla.dpb1_1 %></td>
-                  <td><%= hla.dpb1_2 %></td>
-                  <td><%= hla.a_1 %></td>
-                  <td><%= hla.a_2 %></td>
-                  <td><%= hla.b_1 %></td>
-                  <td><%= hla.b_2 %></td>
-                  <td><%= hla.c_1 %></td>
-                  <td><%= hla.c_2 %></td>
-                  <td><%= hla.dpa1_1 %></td>
-                  <td><%= hla.dpa1_2 %></td>
-                  <td><%= hla.dqa1_1 %></td>
-                  <td><%= hla.dqa1_2 %></td>
-                  <td><%= hla.drbo_1 %></td>
-                  <td><%= hla.drbo_2 %></td>
-                  <td><%= hla.dpb1_phase_ambiguities %></td>
-                  <td><%= hla.updated_at.strftime('%B %d, %Y') %></td>
-                  <td><%= hla.version %></td>
-                </tr>
-              <% end %>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="tab-pane fade hide-table" id="kir">
-        <div class="row">
-          <div class="col-sm-10">
-            <h3>&nbsp;&nbsp;<%= @kirs.count %> KIR</h3>
+    </div>
+
+    <div class="tab-pane fade" id="kir">
+      <div class="row" style="border:1px solid #ededed;border-top:none;background-color:#fdfdfd;padding-bottom:10px;overflow-x:scroll;">
+        <div class="col-sm-12">
+          <br>
+          <div class="row">
+            <div class="col-sm-12">
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="kirs-index-table" checked=true>INDIGO ID</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="kirs-index-table" checked=true>2DL1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="kirs-index-table" checked=true>2DL2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="kirs-index-table" checked=true>2DL3</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="kirs-index-table" checked=true>2DL4</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="kirs-index-table" checked=true>2DL5A</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="kirs-index-table" checked=true>2DL5B</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="kirs-index-table" checked=true>2DP1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=8 data-table-id="kirs-index-table" checked=true>2DS1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=9 data-table-id="kirs-index-table" checked=true>2DS2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=10 data-table-id="kirs-index-table" checked=true>2DS3</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=11 data-table-id="kirs-index-table" checked=true>2DS4</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=12 data-table-id="kirs-index-table" checked=true>2DS5</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=13 data-table-id="kirs-index-table" checked=true>3DL1</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=14 data-table-id="kirs-index-table" checked=true>3DL2</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=15 data-table-id="kirs-index-table" checked=true>3DL3</label>
+              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=16 data-table-id="kirs-index-table" checked=true>3DS1</label>
+            </div>
           </div>
-          <div class="col-sm-2">
-            <%= link_to "Download KIR Table", dataview_download_kir_data_path(format:"csv"), :class => "btn btn-indigo btn-md", :style => "margin-top:10px; color:white;" %>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-12">
-            <label class="checkbox-inline"><input type="checkbox" value="" class="master-switch" data-switch-set="kirs-switch" data-table-name="kirs_table" checked=true>Show All Columns</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=0 data-table-name="kirs_table" checked=true>INDIGO ID</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=1 data-table-name="kirs_table" checked=true>KIR2DL1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=2 data-table-name="kirs_table" checked=true>KIR2DL2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=3 data-table-name="kirs_table" checked=true>KIR2DL3</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=4 data-table-name="kirs_table" checked=true>KIR2DL4</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=5 data-table-name="kirs_table" checked=true>KIR2DL5A</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=6 data-table-name="kirs_table" checked=true>KIR2DL5B</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=7 data-table-name="kirs_table" checked=true>KIR2DP1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=8 data-table-name="kirs_table" checked=true>KIR2DS1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=9 data-table-name="kirs_table" checked=true>KIR2DS2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=10 data-table-name="kirs_table" checked=true>KIR2DS3</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=11 data-table-name="kirs_table" checked=true>KIR2DS4</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=12 data-table-name="kirs_table" checked=true>KIR2DS5</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=13 data-table-name="kirs_table" checked=true>KIR3DL1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=14 data-table-name="kirs_table" checked=true>KIR3DL2</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=15 data-table-name="kirs_table" checked=true>KIR3DL3</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=16 data-table-name="kirs_table" checked=true>KIR3DS1</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=17 data-table-name="kirs_table" checked=true>Uploaded on</label>
-            <label class="checkbox-inline"><input type="checkbox" value="" class="filter-check kirs-switch" data-filter-column=18 data-table-name="kirs_table" checked=true>Updated on</label>
-          </div>
-        </div>
-        <hr>
-        <div id="kir_table">
-          <table id="kirs_table" class="indigo_table table-bordered">
+          <br>
+          <table id="kirs-index-table" class="table table-striped table-bordered" data-source="<%= dataview_kir_index_url(format:"json") %>" >
             <thead>
-              <th>INDIGO ID</th>
-              <th>KIR2DL1</th>
-              <th>KIR2DL2</th>
-              <th>KIR2DL3</th>
-              <th>KIR2DL4</th>
-              <th>KIR2DL5A</th>
-              <th>KIR2DL5B</th>
-              <th>KIR2DP1</th>
-              <th>KIR2DS1</th>
-              <th>KIR2DS2</th>
-              <th>KIR2DS3</th>
-              <th>KIR2DS4</th>
-              <th>KIR2DS5</th>
-              <th>KIR3DL1</th>
-              <th>KIR3DL2</th>
-              <th>KIR3DL3</th>
-              <th>KIR3DS1</th>
-              <th>Uploaded on</th>
-              <th>Updated on</th>
+              <tr>
+                <th>INDIGO ID</th>
+                <th>KIR2DL1</th>
+                <th>KIR2DL2</th>
+                <th>KIR2DL3</th>
+                <th>KIR2DL4</th>
+                <th>KIR2DL5A</th>
+                <th>KIR2DL5B</th>
+                <th>KIR2DP1</th>
+                <th>KIR2DS1</th>
+                <th>KIR2DS2</th>
+                <th>KIR2DS3</th>
+                <th>KIR2DS4</th>
+                <th>KIR2DS5</th>
+                <th>KIR3DL1</th>
+                <th>KIR3DL2</th>
+                <th>KIR3DL3</th>
+                <th>KIR3DS1</th>
+              </tr>
             </thead>
             <tbody>
-              <% @kirs.each do |kir| %>
-                <tr>
-                  <td><%= kir.indigo_id %></td>
-                  <td><%= kir.KIR2DL1 %></td>
-                  <td><%= kir.KIR2DL2 %></td>
-                  <td><%= kir.KIR2DL3 %></td>
-                  <td><%= kir.KIR2DL4 %></td>
-                  <td><%= kir.KIR2DL5A %></td>
-                  <td><%= kir.KIR2DL5B %></td>
-                  <td><%= kir.KIR2DP1 %></td>
-                  <td><%= kir.KIR2DS1 %></td>
-                  <td><%= kir.KIR2DS2 %></td>
-                  <td><%= kir.KIR2DS3 %></td>
-                  <td><%= kir.KIR2DS4 %></td>
-                  <td><%= kir.KIR2DS5 %></td>
-                  <td><%= kir.KIR3DL1 %></td>
-                  <td><%= kir.KIR3DL2 %></td>
-                  <td><%= kir.KIR3DL3 %></td>
-                  <td><%= kir.KIR3DS1 %></td>
-                  <td></td>
-                  <td></td>
-                </tr>
-              <% end %>
             </tbody>
           </table>
-        </div> <!-- closes id="kir_table" -->
-      </div> <!-- closes tab-pane id="kir" -->
+        </div>
+      </div>
+    </div>
 
-    </div> <!-- closes id="contents" -->
-  </div> <!-- closes row -->
+  </div> <!-- closes tab-content -->
 
-</div>
-<script>
-
-$(document).on("turbolinks:load", function() {
-  $('.spinner').addClass("hide-element");
-  $('.tab-content').removeClass("hide-element");
-});
-
-
-$(function() {
-  // Draw the tables
-  var sam = $('#samples_table').DataTable({
-    "pageLength":25,
-    "autoWidth":false
-  });
-  var hla = $('#hlas_table').DataTable({
-    "pageLength":25,
-    "autoWidth":false
-  });
-  var kir = $('#kirs_table').DataTable({
-    "pageLength":25,
-    "autoWidth":false
-  });
-  // HLA and KIR tables are very wide. Set to scroll on x axis
-  $('#hla_table').css('overflow-x', 'scroll');
-  $('#kir_table').css('overflow-x', 'scroll');
-  // Add filter behavior to column checkboxes
-  $('.filter-check').on('change', function(e) {
-    e.preventDefault();
-    var table_name = $(this).attr("data-table-name")
-    var col_id = $(this).attr("data-filter-column")
-    var table;
-    if ( table_name === "samples_table" ) {
-      table = sam;
-    } else if ( table_name === "hlas_table" ) {
-      table = hla;
-    } else {
-      table = kir;
-    }
-    var column = table.column( col_id )
-    if (!$(this).prop("checked")) {
-      column.visible(false);
-    }
-    else {
-      column.visible(true);
-    }
-    table.columns.adjust().draw();
-  })
-  // Add 'hide all columns' on unchecking master-switch
-  $('.master-switch').on('change', function(e) {
-    e.preventDefault();
-    var switches = "." + $(this).attr('data-switch-set');
-    if (!$(this).prop("checked")){
-      $(switches).each(function(index) {
-        $(this).prop("checked", false);
-        var table_name = $(this).attr("data-table-name")
-        var col_id = index;
-        var table;
-        if ( table_name === "samples_table" ) {
-          table = sam;
-        } else if ( table_name === "hlas_table" ) {
-          table = hla;
-        } else {
-          table = kir;
-        }
-        var column = table.column( col_id )
-        column.visible(false)
-      })
-    }
-    else {
-      $(switches).prop("checked", true)
-      $(switches).each(function(index) {
-        var table_name = $(this).attr("data-table-name")
-        var col_id = index;
-        var table;
-        if ( table_name === "samples_table" ) {
-          table = sam;
-        } else if ( table_name === "hlas_table" ) {
-          table = hla;
-        } else {
-          table = kir;
-        }
-        var column = table.column( col_id )
-        column.visible(true)
-        table.columns.adjust().draw();
-      })
-    }
-  })
-
-});
-</script>
+</div> <!-- closes container -->

@@ -1,8 +1,10 @@
-class SampleDatatable
+class SampleSuperindexDatatable
   delegate :params, :h, to: :@view
 
-  def initialize(view)
+  def initialize(view, disease)
     @view = view
+    @disease = disease
+
   end
 
   def as_json(options = {})
@@ -25,12 +27,11 @@ class SampleDatatable
           sample.sample_source_study,
           sample.sample_source_identifier,
           sample.disease,
-          sample.received_date,
-          sample.date_to_stanford,
-          sample.ngs_dataset,
-          sample.hla_geno,
-          sample.kir_geno,
-          sample.kir_raw
+          sample.gender,
+          sample.ethnicity,
+          sample.race,
+          sample.age_of_onset,
+          sample.age_at_sample
         ]
       end
     end
@@ -40,7 +41,7 @@ class SampleDatatable
     end
 
     def fetch_samples
-      samples = Sample.order("#{sort_column} #{sort_direction}")
+      samples = Sample.where(disease:@disease).order("#{sort_column} #{sort_direction}")
       samples = samples.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
       if params[:search][:value].present?
         samples = samples.where("sample_source like :search or disease like :search or indigo_id like :search or gender like :search or ethnicity like :search or sample_source_identifier like :search or race like :search", search:"%#{params[:search][:value]}%")
@@ -57,7 +58,7 @@ class SampleDatatable
     end
 
     def sort_column
-      columns = %w(indigo_id sample_source sample_source_study sample_source_identifier disease received_date date_to_stanford ngs_dataset hla_geno kir_geno kir_raw)
+      columns = %w(indigo_id sample_source sample_source_study sample_source_identifier disease gender ethnicity race age_of_onset age_at_sample)
       columns[params[:iSortCol_0].to_i]
     end
 
