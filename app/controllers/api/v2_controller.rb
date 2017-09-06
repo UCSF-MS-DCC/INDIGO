@@ -6,6 +6,45 @@ class Api::V2Controller < ApplicationController
   load_and_authorize_resource :hla, through: :sample
   load_and_authorize_resource :kir, through: :sample
 
+  # helper method to determine what samples the user has access to and if the user can access data from other institutions
+  def determine_source(user, requested_source)
+    requested_source = requested_source.gsub(/[^a-zA-Z]/,"").downcase
+    source_key = {"ucsf" => "UCSF", "mjff" => "MJ Fox Foundation", "nih" => "NIH", "besta" => "Besta Institute", "oslo" => "Oslo University Hospital"}
+    if !user
+      return "none"
+    elsif !user.is_super?
+      return user.affiliation
+    elsif user.is_super? && !requested_source
+      return false
+    else
+      return source_key[requested_source]
+    end
+  end
+
+  def can_access_study(user, requested_study)
+    requested_study = requested_study.gsub(/[^a-zA-Z]/,"").downcase
+    study_key = {"ucsfmstrios" => "UCSF MS trios", "ucsfmsfamilies" => "UCSF MS families", "mjffbiofind" => "MJFF via Coriell BioFIND dataset", "mjffdatatop" => "MJFF via Indiana University DATATOP dataset", "ucsf" => "UCSF", "nihcoriell" => "ASingleton (NIH) via Coriell GWASdataset",
+                  "nihneurox" => "ASingleton (NIH) via Coriell NeuroX dataset", "ucsfepic" => "UCSF EPIC cases", "oslo" => "HHarbo (University of Oslo) - MG dataset", "besta1" => "RMantegazza (Milan-Istituto Besta)-MG dataset",
+                  "besta2" => "RMantegazza (Milan-Istituto Besta)-MG dataset2"}
+    if !user
+      return "none"
+    elsif !user.is_super?
+      sample = Sample.where(sample_source_study:study_key[requested_study]).first
+      if sample.sample_source != user.affiliation || !sample
+        return false
+      else
+        return study_key[requested_study]
+      end
+    else
+      sample = Sample.where(sample_source_study:study_key[requested_study]).first
+      if !sample || !study_key[requested_study]
+        return false
+      else
+        return study_key[requested_study]
+      end
+    end
+  end
+
   def sample
     # Todo: filtering on ages is problematic because some models have age_of_onset, some have age_at_sample. maybe have maxageonset and maxagesample for query params
     # Todo: need a way to access samples by source institution. currently the sample_source column in samples contains the dataset name (ie MJFF BioFIND)
@@ -17,25 +56,13 @@ class Api::V2Controller < ApplicationController
       return
     end
 
-    # helper method to determine what samples the user has access to and if the user can access data from other institutions
-    def determine_source(user, requested_source)
-      if !user
-        return "none"
-      elsif !user.is_super?
-        return user.affiliation
-      elsif user.is_super? && !requested_source
-        return false
-      else
-        return requested_source.gsub(/[^a-zA-Z]/,"")
-      end
-    end
-
     search_params = {}
 
     query_params = {
       :disease => params[:diagnosis] ? params[:diagnosis].gsub(/[^a-zA-Z]/,"").upcase : false,
-      :sample_source => determine_source(@user, params[:source]),
-      :gender => params[:sex] && (params[:sex].downcase == "m" || params[:sex].downcase == "f") ? params[:sex].upcase : false
+      :sample_source => params[:source] ? determine_source(@user, params[:source]) : false,
+      :gender => params[:sex] && (params[:sex].downcase == "m" || params[:sex].downcase == "f") ? params[:sex].upcase : false,
+      :sample_source_study => params[:study] ? can_access_study(@user, params[:study]) : false
     }
     # controls is not a sample model attribute name, but an accepted value for the sample.disease attribute, so including controls with the rendered data requires adding "HC" to the disease params
     controls = params[:controls] && (params[:controls].downcase == "true" || params[:controls].downcase == "t") ? true : false
@@ -99,8 +126,9 @@ class Api::V2Controller < ApplicationController
 
     query_params = {
       :disease => params[:diagnosis] ? params[:diagnosis].gsub(/[^a-zA-Z]/,"").upcase : false,
-      :sample_source => determine_source(@user, params[:source]),
-      :gender => params[:sex] && (params[:sex].downcase == "m" || params[:sex].downcase == "f") ? params[:sex].upcase : false
+      :sample_source => params[:source] ? determine_source(@user, params[:source]) : false,
+      :gender => params[:sex] && (params[:sex].downcase == "m" || params[:sex].downcase == "f") ? params[:sex].upcase : false,
+      :sample_source_study => params[:study] ? can_access_study(@user, params[:study]) : false
     }
 
     #create a hash of params to use in the ActiveRecord query below
@@ -176,8 +204,9 @@ class Api::V2Controller < ApplicationController
 
     query_params = {
       :disease => params[:diagnosis] ? params[:diagnosis].gsub(/[^a-zA-Z]/,"").upcase : false,
-      :sample_source => determine_source(@user, params[:source]),
-      :gender => params[:sex] && (params[:sex].downcase == "m" || params[:sex].downcase == "f") ? params[:sex].upcase : false
+      :sample_source => params[:source] ? determine_source(@user, params[:source]) : false,
+      :gender => params[:sex] && (params[:sex].downcase == "m" || params[:sex].downcase == "f") ? params[:sex].upcase : false,
+      :sample_source_study => params[:study] ? can_access_study(@user, params[:study]) : false
     }
 
     #create a hash of params to use in the ActiveRecord query below
@@ -253,6 +282,9 @@ class Api::V2Controller < ApplicationController
 
   end #close def raw_kir block
 
+  private
 
+    def api_params
+    end
 
 end

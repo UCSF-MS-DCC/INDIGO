@@ -1,5 +1,5 @@
 class KirSerializer < ActiveModel::Serializer
-  attributes :indigo_id, :sample_source, :disease, :gender, :ethnicity, :age_at_sample, :age_of_onset, :race
+  attributes :indigo_id, :sample_source, :sample_source_study, :disease, :gender, :ethnicity, :age_at_sample, :age_of_onset, :race
 
   attribute :KIR2DL1, if: :include_2DL1?
   attribute :KIR2DL2, if: :include_2DL2?

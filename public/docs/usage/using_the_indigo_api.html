@@ -164,14 +164,14 @@ table th, table td {
           </p>
 
           <h4>Example:</h4>
-          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample"</pre>
+          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/sample"</pre>
 
           <br>
 
           <h3>R Studio with the httr and jsonlite packages</h3>
 
           <p class="explanation">
-            INDIGO data may be piped directly into the R Studio console by using the httr package (see documentation <a href="https://github.com/hadley/httr" style="text-decoration:underline;">here</a> and <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" style="text-decoration:underline;">here</a>)
+            The INDIGO API is compatible with R Studio using the httr package (see documentation <a href="https://github.com/hadley/httr" style="text-decoration:underline;">here</a> and <a href="https://cran.r-project.org/web/packages/httr/vignettes/quickstart.html" style="text-decoration:underline;">here</a>)
           </p>
 
            <h4>Recommended workflow for using the INDIGO API with R Studio:</h4>
@@ -203,38 +203,55 @@ table th, table td {
           <h2>Filtering API call results with query strings</h2>
 
           <p class="explanation">
-            By default, the INDIGO API returns all available phenotypic and catalog data for all samples a user is authorized to access. Users can receive data more specific to their interests by appending <b>a query string</b> to the url of the API request.
+            By default, the INDIGO API returns all available phenotypic and catalog data for all samples a user is authorized to access. Users can receive records more specific to their interests by appending <b>a query string</b> to the url of the API request.
+            The query string functions as a filter: The INDIGO API server will respond to requests with query strings with records that match the parameters supplied by the user. Query strings also allow users to select specific gene loci instead of complete
+            genotypes, which can reduce the time needed to complete user requests.
           </p>
 
-          <h4>Example:</h4>
           <p class="explanation">
-            To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the filtering criteria in this format: category=value. Multiple filters may be added, separated by an ampersand <b>&amp;</b>.
+            To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the query parameters in this format: category=value. Multiple parameters may be added, separated by an ampersand <b>&amp;</b>.
           </p>
+          <h4>Example:</h4>
+          <p class="explanation">To retrieve sample data pertaining only to females, a curl request to the API would look like this:</p>
+          <pre>
+curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/sample<b>?sex=f</b>"
+</pre>
           <p class="explanation">To retrieve sample data pertaining only to females with a diagnosis of multiple sclerosis, a curl request to the API would look like this:</p>
           <pre>
-curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample<b>?diagnosis=MS&amp;sex=f</b>"
+curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/sample<b>?diagnosis=MS&amp;sex=f</b>"
 </pre>
 
         <p class="explanation">
           A category should only be used once in a query string. An API call that uses a category more than once, such as:
-          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/sample?disease=MS&disease=PD"</pre>
-          will return sample data where the disease code equals PD. The first parameter of disease=MS is overwritten.
+          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/sample?diagnosis=MS&diagnosis=PD"</pre>
+          will return sample data where the diagnosis code equals PD. The first parameter of diagnosis=MS is overwritten.
         </p>
         <p class="explanation" style="text-decoration:underline;">
-          <i><b>Only data for samples that meet ALL filtering criteria will be returned. If no samples meet the query string criteria, no data will be returned.</b></i>.
+          <i><b>Only records for samples that meet ALL filtering criteria will be returned. If no records meet the query string criteria, no data will be returned.</b></i>.
         </p>
 
-        <h4>Valid query string categories and values (v2)</h4>
+        <h4>Valid query string categories and values (api v2 endpoints)</h4>
         <table class-"table-bordered">
-          <tr><th>endpoint</th><th>diagnosis</th><th>sex</th><th>controls<sup> 1</sup></th><th>gene[]<sup> 2</sup></th><th>sample_source<sup> 3</sup></th></tr>
-          <tr><td>api/v2/sample</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td><i>not available for this endpoint</i></td><td><i>Special: see below<i></td></tr>
-          <tr><td>api/v2/hla</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>a, b, c, dpa1, dqa1, drb1, dpb1, dqb1, drbo</td><td><i>Special: see below<i></td></tr>
-          <tr><td>api/v2/kir</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>2dl1, 2dl2, 2dl3, 2dl4, 2dl5a, 2dl5b, 2dp1, 2ds1, 2ds2, 2ds3,<br> 2ds4, 2ds5, 3dl1, 3dl2, 3dl3, 3ds1</td><td><i>Special: see below<i></td></tr>
+          <thead>
+            <tr><th>endpoint</th><th>diagnosis</th><th>sex</th><th>controls<sup>1</sup></th><th>gene[]<sup>2</sup></th><th>sample_source<sup>3</sup></th><th>study<sup>4</sup></th></tr>
+          </thead>
+          <tbody>
+            <tr><td>api/v2/sample</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td><i>not available for this endpoint</i></td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
+            <tr><td>api/v2/hla</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>a, b, c, dpa1, dqa1, drb1, dpb1, dqb1, drbo</td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
+            <tr><td>api/v2/kir</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>2dl1, 2dl2, 2dl3, 2dl4, 2dl5a, 2dl5b, 2dp1, 2ds1, 2ds2, 2ds3, 2ds4, 2ds5, 3dl1, 3dl2, 3dl3, 3ds1</td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
+          </tbody>
         </table>
-        <sup>1</sup> Setting this key to 't' will cause the API to return data from healthy control subjects alongside data from disease-affected subjects. Default behavior is to not include controls.<br>
-        <sup>2</sup> Setting the gene[]= key to a valid parameter (see table above) will cause the API to return data points for only this gene. Default behavior is to include data from all genes.<b>This key may be reused with different values within a query string to retrieve data for multiple genes (i.e. it is not overwritten as other query string categories are). See hla and kir endpoint documentation for examples.</b> <br>
-        <sup>3</sup> Returns data only for samples from a single named INDIGO contributor site. Default behavior is to return data from all sites the user is authorized for.
-
+        <sup>1</sup><b>controls</b>: Setting this key to 't' will cause the API to return data from healthy control subjects alongside data from disease-affected subjects. Default behavior is to not include controls.<br>
+        <sup>2</sup><b>gene[]</b>: Setting gene[]= to a valid parameter (see table above) will cause the API to return data points for only this gene. Default behavior is to include data from all genes.<b> This parameter may be reused with different values within a query string to retrieve data for multiple genes (it is not overwritten as other query string parameters are). See hla and kir endpoint documentation for examples.</b><br>
+        <i>If you are using curl to query the API, you must include the -g flag if using this query parameter</i><br>
+        example:
+        <pre>curl -g -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/hla?disease=MS&gene[]=drb1&gene[]=dqb1"</pre>
+        <sup>3</sup><b>sample_source</b>: Returns data only for samples from a single named INDIGO contributor site. Default behavior is to return data from all sites the user is authorized for.<br>
+        <sup>4</sup><b>study</b>: To receive records <b>only</b> from a specific study (e.g UCSF MS trios or NIH NeuroX dataset), include study=<i>studyname</i> as part of the query string. Cases and controls from the study will be returned
+        <b>Accepted values for this parameter are: ucsf, ucsfmstrios, ucsfmsfamilies,
+        ucsfepic, nihneurox, nihcoriell, mjffbiofind, mjffdatatop, oslo, besta1, besta2</b><br>
+        example:
+        <pre>curl -g -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/hla?study=nihneurox"</pre>
         <h4>Valid query string categories and values (v1)</h4>
 
         <table class="table-bordered">
