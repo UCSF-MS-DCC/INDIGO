@@ -1,3 +1,52 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 // You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).on("turbolinks:load", function(){
+  var collaborator_status_table = $('#collaborators-progress-table').DataTable({
+    "autoWidth":false,
+    "pageLength":25,
+    "bServerSide":true,
+    "bProcessing":true,
+    "bPaginate":true,
+    "ajax":'/welcome/collaborator_status.json',
+    "pagingType":"full_numbers",
+    "paging":true,
+    "lengthMenu":[10,25,50,100,250,1000],
+    "footerCallback": function ( row, data, start, end, display ) {
+        var api = this.api(), data;
+
+        // Remove the formatting to get integer data for summation
+        var intVal = function ( i ) {
+            return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                    i : 0;
+        };
+        for (var col = 2; col <= 9; col++) {
+        // Total over all pages
+        total = api
+            .column( col )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Total over this page
+        pageTotal = api
+            .column( col, { page: 'current'} )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Update footer
+        $( api.column( col ).footer() ).html(
+            // '$'+pageTotal +' ( $'+ total +' total)'
+            pageTotal
+        );
+      }
+    } //close footerCallback definition
+  });
+
+
+});

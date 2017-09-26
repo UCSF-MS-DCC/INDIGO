@@ -34,6 +34,15 @@ class WelcomeController < ApplicationController
     end
   end
 
+  def new_progress
+  end
+
+  def collaborator_status
+    respond_to do |format|
+      format.json { render json: CollaboratorStatusDatatable.new(view_context) }
+    end
+  end
+
   def samples_table
   end
 

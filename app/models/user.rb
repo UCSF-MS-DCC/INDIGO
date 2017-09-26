@@ -79,6 +79,7 @@ class User < ApplicationRecord
        "NIMH",
        "Oslo University Hospital",
        "Oxford University",
+       "Stanford",
        "UCLA",
        "UCSF",
        "University of Bonn",

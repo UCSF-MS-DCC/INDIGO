@@ -24,6 +24,8 @@ Rails.application.routes.draw do
 
   get 'welcome/dataset'
 
+  get 'welcome/collaborator_status'
+
   get 'hlas/index'
 
   get 'hlas/new'

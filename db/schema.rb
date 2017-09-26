@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170808175418) do
+ActiveRecord::Schema.define(version: 20170925231454) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -209,7 +209,9 @@ ActiveRecord::Schema.define(version: 20170808175418) do
     t.string   "sample_source"
     t.string   "date_to_stanford"
     t.string   "ngs_dataset"
+    t.integer  "collaborator_id"
     t.index ["batch_id"], name: "index_samples_on_batch_id"
+    t.index ["collaborator_id"], name: "index_samples_on_collaborator_id"
   end
 
   create_table "tags", force: :cascade do |t|
