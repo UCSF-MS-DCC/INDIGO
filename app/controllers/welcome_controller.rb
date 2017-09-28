@@ -6,35 +6,21 @@ class WelcomeController < ApplicationController
   end
 
   def progress
-    @datasets = Dataset.all
-    @collaborators = Collaborator.all.order('disease ASC')
-    @total_proposed = 0
-    @total_received = 0
-    @total_to_stanford = 0
-    @total_hla_controls = 0
-    @total_hla_cases = 0
-    @total_kir_controls = 0
-    @total_kir_cases = 0
-    Collaborator.all.each do |c|
-      if c.expected_discovery != nil
-        @total_proposed += c.expected_discovery
-      end
-      c.datasets.each do |d|
-        d.batches.each do |b|
-          @total_received += b.samples.count
-          if b.to_stanford
-            @total_to_stanford += b.samples.count
-          end
-          @total_hla_controls += b.hlas_control_male + b.hlas_control_female + b.hlas_control_gender_unknown
-          @total_hla_cases += b.hlas_case_male + b.hlas_case_female + b.hlas_case_gender_unknown
-          @total_kir_controls += b.kirs_control_male + b.kirs_control_female + b.kirs_control_gender_unknown
-          @total_kir_cases += b.kirs_case_male + b.kirs_case_female + b.kirs_case_gender_unknown
-        end
-      end
-    end
+    @collaborators = Collaborator.all
   end
 
   def new_progress
+  end
+
+  def site_samples_progress
+    if params[:collaborator]
+      collaborator = Collaborator.find_by(name:params[:collaborator]).id
+    else
+      collaborator = nil
+    end
+    respond_to do |format|
+      format.json { render json: SiteProgressDatatable.new(view_context, collaborator) }
+    end
   end
 
   def collaborator_status
@@ -49,7 +35,6 @@ class WelcomeController < ApplicationController
   def dataset
     @collaborators = Collaborator.all
     @collaborator = Collaborator.find(params[:collaborator_id])
-    @datasets = @collaborator.datasets
   end
 
   def samples_processed

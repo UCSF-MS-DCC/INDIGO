@@ -26,6 +26,8 @@ Rails.application.routes.draw do
 
   get 'welcome/collaborator_status'
 
+  get 'welcome/site_samples_progress'
+
   get 'hlas/index'
 
   get 'hlas/new'

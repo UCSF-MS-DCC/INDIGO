@@ -1,8 +1,8 @@
-<div class="container">
+<div class="container welcome-contain">
 
   <div class="row">
     <div class="col-md-9" style="border-top:1px solid #696969;">
-      <h2><%= @collaborator.name %></h2>
+      <h2><span id="collaborator-name"><%= @collaborator.name %></span></h2>
       <h4>Proposed Cases and Controls: <%= @collaborator.expected_discovery %></h2>
     </div>
     <div class="col-md-3" style="border-top:1px solid #696969;">
@@ -19,215 +19,41 @@
   </div>
   <br>
 
-  <% if @datasets.count == 0 %>
-    <div class="row">
-      <div class="col-md-12" style="margin-top:100px;">
-        <h2 class="text-center">No Samples for <%= @collaborator.name %> Have Been Received at UCSF</h2>
-      </div>
-    </div>
-  <% else %>
-    <div class="row">
-      <hr>
-      <div class="col-md-6">
-        <h4 class="text-center">Samples Received by Gender, Cases and Controls</h4>
-        <div id="pie-chart-1">
-        </div>
-      </div>
-      <div class="col-md-6">
-        <h4 class="text-center">HLA Available by Gender, Cases and Controls of Samples Sent to Stanford for Genotyping</h4>
-        <div id="pie-chart-2">
-        </div>
-      </div>
-    </div>
-  <% end %>
-
-  <%if @datasets.count > 0 %>
-    <% gwas_supers = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n'] %>
-    <% gwas_supers_counter = 0 %>
-    <% gwas_footnote = "" %>
-    <% gwas_hash = {} %>
-    <hr>
-
-    <div class="row">
-      <div class="col-md-12">
-        <table class="table table-bordered" style="border-top:1px solid #696969;">
-          <thead style="background-color:#bdbdbd;">
-            <th>Dataset</th>
-            <th>Number of Samples</th>
-            <th>Date Samples Received at UCSF</th>
-            <th>Samples To Be Sequenced For HLA, KIR, or Both</th>
+  <div class="row" style="overflow-x:scroll;">
+    <div class="col-sm-12">
+      <table id="site-samples-progress-table" class="table table-striped table-bordered" data-source="<%= welcome_site_samples_progress_path(format:"json") %>">
+        <thead>
+          <tr>
+            <th>Dateset</th>
+            <th>Samples to be sequenced for HLA, KIR, or both</th>
             <th>Cases</th>
             <th>Controls</th>
-            <th>Mixed Cases and Controls</th>
+            <th>Date Samples Received at UCSF</th>
             <th>Date Samples Sent to Stanford</th>
-            <th>N of Case & Control Samples Sent to Stanford for Sequencing</th>
-            <th>N of Case & Control Raw Data Received at UCSF For Genotype Calling (KIR only)</th>
-            <th>N of Case & Control Genotypes Finished, with Version Indicated</th>
-            <th>N of Samples Covered By GWAS</th>
-          </thead>
-          <tbody>
-            <% @datasets.each do |d| %>
-              <% d.batches.each do |b| %>
-                <tr>
-                  <td><%= d.source %></td>
-                  <td><%= number_with_delimiter(b.samples.count, :delimiter => ',') %></td>
-                  <td><%= b.date_received_from_source %></td>
-                  <td><%= @collaborator.sequence_type %></td>
-                  <% if (b.samples_case_male + b.samples_case_female + b.samples_case_gender_unknown).to_i > 0 %>
-                    <td><%= number_with_delimiter((b.samples_case_male + b.samples_case_female + b.samples_case_gender_unknown).to_i, :delimiter => ',') %></td>
-                  <% else %>
-                    <td>-</td>
-                  <% end %>
-                  <% if b.samples_control_male + b.samples_control_female + b.samples_control_gender_unknown > 0 %>
-                    <td><%= number_with_delimiter((b.samples_control_male + b.samples_control_female + b.samples_control_gender_unknown).to_i, :delimiter => ',') %></td>
-                  <% else %>
-                    <td>-</td>
-                  <% end %>
-                  <% if b.samples_unknown_disease_male + b.samples_unknown_disease_female + b.samples_unknown_disease_unknown_gender > 0 %>
-                    <td><%= number_with_delimiter((b.samples_unknown_disease_male + b.samples_unknown_disease_female + b.samples_unknown_disease_unknown_gender).to_i, :delimiter => ',') %></td>
-                  <% else %>
-                    <td>-</td>
-                  <% end %>
-                  <td><%= b.samples_sent_to_stanford %></td>
-                  <% if b.to_stanford %>
-                    <td><%= number_with_delimiter(b.samples.count, :delimiter => ',') %></td>
-                  <% else %>
-                    <td>-</td>
-                  <% end %>
-                  <td></td>
-                  <td></td>
-                  <% if b.gwas_samples_count > 0 %>
-                    <td><%= b.gwas_samples_count %>
-                      <% b.gwas.each do |g| %>
-                        <% if gwas_hash[g.name] %>
-                          <sup><%= gwas_hash[g.name] %></sup>
-                        <% else %>
-                        <sup><%= gwas_supers[gwas_supers_counter] %></sup>
-                          <!-- <% gwas_footnote += "#{gwas_supers[gwas_supers_counter]}: #{g.name}; " %> -->
-                          <% gwas_hash[g.name] = gwas_supers[gwas_supers_counter] %>
-                          <% gwas_supers_counter += 1 %>
-                        <% end %>
-                      <% end %>
-                    </td>
-                  <% else %>
-                    <td>-</td>
-                  <% end %>
-                </tr>
-              <% end %>
-            <% end %>
-          </tbody>
-        </table>
-        <h6 class="text-right" style="font-weight:bold;">
-          <% gwas_hash.each do |k, v| %>
-            <% url = Gwas.find_by(name:k).url %>
-            <%= v %>: <%= link_to k, url, :style =>"text-decoration:underline;" %>;
-          <% end %>
-        </h6>
-      </div>
+            <th>Samples Sent to Stanford for Sequencing</th>
+            <th>Samples Raw Data Received at UCSF for Genotype Calling (KIR only)</th>
+            <th>Samples with Finished Genotypes (HLA)</th>
+            <th>Samples with Finished Genotypes (KIR)</th>
+          </tr>
+        </thead>
+        <tbody>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th>Total</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </tfoot>
+      </table>
     </div>
-  <% end %>
+  </div>
 
 </div>
-
-<script>
-
-  google.charts.load('current', { 'packages':['corechart']});
-
-    var collaborator_id = window.location.href.split('=')[1];
-
-    $.get('<%= Rails.application.routes.url_helpers.welcome_dataset_stats_path %>', {collaborator_id: collaborator_id}, function(response){
-
-      var prettyPrint = {
-        samples_male_cases: "male cases",
-        samples_female_cases: "female cases",
-        samples_male_controls: "male controls",
-        samples_female_controls: "female controls",
-        samples_total: "total",
-        hla_available_male_cases: "male cases",
-        hla_available_female_cases: "female cases",
-        hla_available_male_controls: "male controls",
-        hla_available_female_controls: "female controls",
-        hla_samples_to_stanford: "to stanford"
-      }
-      var dataMatrix1 = [['Gender/Case or Control', 'Samples'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ["not received or case/control not indicated"]];
-      var dataMatrix2 = [['Gender/Case or Control', 'HLA available'], ["male cases"], ["female cases"] ,["male controls"], ["female controls"], ['sample not genotyped']];
-      for (key in response) {
-        if (key.split('_')[0] === "samples") {
-          switch(prettyPrint[key]) {
-            case 'male cases':
-              dataMatrix1[1].push(response[key])
-              break;
-            case 'female cases':
-              dataMatrix1[2].push(response[key]);
-              break;
-            case 'male controls':
-              dataMatrix1[3].push(response[key]);
-              break;
-            case 'female controls':
-              dataMatrix1[4].push(response[key]);
-              break;
-            case 'total':
-              dataMatrix1[5].push(response[key]);
-              break;
-          }
-        }
-        else {
-          switch(prettyPrint[key]) {
-            case 'male cases':
-              dataMatrix2[1].push(response[key])
-              break;
-            case 'female cases':
-              dataMatrix2[2].push(response[key]);
-              break;
-            case 'male controls':
-              dataMatrix2[3].push(response[key]);
-              break;
-            case 'female controls':
-              dataMatrix2[4].push(response[key]);
-              break;
-            case 'to stanford':
-              dataMatrix2[5].push(response[key]);
-              break;
-          }
-        }
-      }
-
-      if (dataMatrix1[5][1] < 0) {
-        dataMatrix1.pop();
-      }
-
-      function drawFirstChart() {
-        var data = google.visualization.arrayToDataTable(dataMatrix1);
-        var options = {
-          colors: ['#4c177d','#663096','#7647a2','#aa8cc5','#ccbadc'],
-          pieSliceText:'value',
-          legend: { position:'bottom', alignment:'center', textStyle: {fontSize: 12}, maxLines: '2' },
-          height: '350',
-          chartArea: {width: '100%', height: '90%', top:'5'},
-          is3D:true
-        }
-        var chart = new google.visualization.PieChart(document.getElementById('pie-chart-1'));
-        chart.draw(data, options);
-      }
-      function drawSecondChart() {
-        var data = google.visualization.arrayToDataTable(dataMatrix2);
-        var options = {
-          colors: ['#4c177d','#663096','#7647a2','#aa8cc5','#ccbadc'],
-          pieSliceText:'value',
-          legend: { position:'bottom', alignment:'center', textStyle: {fontSize: 12} },
-          height: '350',
-          chartArea: {width: '100%', height: '90%', top:'5'},
-          is3D:true
-        }
-        var chart = new google.visualization.PieChart(document.getElementById('pie-chart-2'));
-        chart.draw(data, options);
-      }
-
-        google.charts.setOnLoadCallback(drawFirstChart);
-        google.charts.setOnLoadCallback(drawSecondChart);
-
-
-
-    })
-
-</script>
