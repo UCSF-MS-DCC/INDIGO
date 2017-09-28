@@ -27,9 +27,10 @@ class CollaboratorStatusDatatable
           c.samples.where.not(date_to_stanford:nil).count,
           c.samples.where(hla_geno:true).where(disease:"HC").count,
           c.samples.where(hla_geno:true).where.not(disease:"HC").count,
+          c.samples.where(kir_raw:true).count,
           c.samples.where(kir_geno:true).where(disease:"HC").count,
-          c.samples.where(kir_geno:true).where.not(disease:"HC").count,
-          c.samples.where(kir_raw:true).count
+          c.samples.where(kir_geno:true).where.not(disease:"HC").count
+
         ]
       end
     end
