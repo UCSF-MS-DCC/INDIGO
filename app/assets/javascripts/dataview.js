@@ -15,6 +15,50 @@ $(document).on("turbolinks:load", function() {
     "bPaginate":true,
     "ajax":'/dataview/sample_status.json',
     "pagingType":"full_numbers",
+    "columns": [
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        console.log(row)
+          if (data) {
+            return '<a href='+row[12]+'>'+data+'</a>';
+          }
+          else {
+            return '-';
+          }
+      }}
+    ],
     "paging":true,
     "lengthMenu":[10,25,50,100,250,1000]
   });
@@ -27,6 +71,47 @@ $(document).on("turbolinks:load", function() {
     "bPaginate":true,
     "ajax":'/dataview/samples_index.json',
     "pagingType":"full_numbers",
+    "columns": [
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        return data;
+      }},
+      {"render": function(data, type, row, meta) {
+        console.log(row)
+          if (data) {
+            return '<a href='+row[11]+'>'+data+'</a>';
+          }
+          else {
+            return '-';
+          }
+      }}
+    ],
     "paging":true,
     "lengthMenu":[10,25,50,100,250,1000]
   });

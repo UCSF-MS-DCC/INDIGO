@@ -31,7 +31,9 @@ class SampleIndexDatatable
           sample.ethnicity,
           sample.race,
           sample.age_of_onset,
-          sample.age_at_sample
+          sample.age_at_sample,
+          sample.gwas_name,
+          sample.gwas_url
         ]
       end
     end
@@ -44,7 +46,7 @@ class SampleIndexDatatable
       samples = Sample.where(sample_source:@sample_source).order("#{sort_column} #{sort_direction}")
       samples = samples.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
       if params[:search][:value].present?
-        samples = samples.where("sample_source like :search or disease like :search", search:"%#{params[:search][:value]}%")
+        samples = samples.where("sample_source like :search or disease like :search or gwas_name like :search or race like :search or ethnicity like :search", search:"%#{params[:search][:value]}%")
       end
       samples
     end

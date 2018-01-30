@@ -30,7 +30,9 @@ class SampleDatatable
           sample.ngs_dataset,
           sample.hla_geno,
           sample.kir_geno,
-          sample.kir_raw
+          sample.kir_raw,
+          sample.gwas_name,
+          sample.gwas_url
         ]
       end
     end
@@ -43,7 +45,7 @@ class SampleDatatable
       samples = Sample.order("#{sort_column} #{sort_direction}")
       samples = samples.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
       if params[:search][:value].present?
-        samples = samples.where("sample_source like :search or disease like :search or indigo_id like :search or gender like :search or ethnicity like :search or sample_source_identifier like :search or race like :search", search:"%#{params[:search][:value]}%")
+        samples = samples.where("sample_source like :search or disease like :search or indigo_id like :search or gender like :search or ethnicity like :search or sample_source_identifier like :search or race like :search or gwas_name like :search", search:"%#{params[:search][:value]}%")
       end
       samples
     end
