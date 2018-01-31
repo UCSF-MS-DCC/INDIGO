@@ -1,6 +1,7 @@
 class Kir < ApplicationRecord
   validates :indigo_id, uniqueness: true
   belongs_to :sample
+  has_many :kir_genotype_wips
   has_paper_trail
 
   def self.to_csv

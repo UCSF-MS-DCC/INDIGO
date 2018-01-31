@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180129225414) do
+ActiveRecord::Schema.define(version: 20180130232619) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -143,6 +143,21 @@ ActiveRecord::Schema.define(version: 20180129225414) do
     t.string   "dpb1_phase_ambiguities"
     t.string   "version"
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
+  end
+
+  create_table "kir_genotype_wips", force: :cascade do |t|
+    t.integer  "kir_id"
+    t.string   "locus"
+    t.string   "status"
+    t.text     "output_directory"
+    t.text     "kir_extracted_directory"
+    t.text     "raw_data_directory"
+    t.string   "batch"
+    t.string   "method"
+    t.string   "method_version"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.index ["kir_id"], name: "index_kir_genotype_wips_on_kir_id"
   end
 
   create_table "kirs", force: :cascade do |t|
