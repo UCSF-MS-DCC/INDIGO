@@ -1,7 +1,14 @@
 <div class="container" id="main-view">
 
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-2 col-sm-offset-10">
+      <br>
+      <%= link_to "Download All Samples", dataview_download_sample_data_path(format: :csv), :class=> "btn btn-indigo" %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12" style="overflow-x:scroll;">
+      <br>
       <table id="stacy-samples-table" class="table table-striped table-bordered" data-source="<%= dataview_sample_status_url(format:"json") %>">
         <thead>
           <tr>

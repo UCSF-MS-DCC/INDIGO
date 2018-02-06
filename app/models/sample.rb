@@ -10,10 +10,20 @@ class Sample < ApplicationRecord
 
   def self.to_csv
     CSV.generate do |csv|
-      cols = %w(indigo_id sample_source_identifier disease received_date sent_date gender ethnicity)
+      cols = %w(indigo_id sample_source sample_source_identifier disease received_date sent_date gender ethnicity)
       csv << cols
       all.each do |record|
         csv << record.attributes.values_at(*cols)
+      end
+    end
+  end
+
+  def self.master_samples_table_to_csv
+    columns = %w(indigo_id sample_source sample_source_identifier disease received_date date_to_stanford ngs_dataset hla_geno kir_geno kir_raw)
+    CSV.generate do |csv|
+      csv << %w(INDIGO\ ID Source Source\ ID Disease Received\ at\ UCSD To\ Stanford NGS\ dataset HLA\ available KIR\ available KIR\ raw\ data\ at\ UCSF)
+      all.each do |sample|
+        csv << sample.attributes.values_at(*columns)
       end
     end
   end

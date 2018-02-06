@@ -1,6 +1,6 @@
 class DataviewController < ApplicationController
   before_action :authenticate_user! #Devise authentication. Resource should only be available to logged in users
-  load_and_authorize_resource :class => Sample #Cancancan enforces access on the model level. This hash prevents unauthorized users from accessing this resource by blocking this route.
+  load_and_authorize_resource :class => Sample, except: :single_kir_genotype #Cancancan enforces access on the model level. This hash prevents unauthorized users from accessing this resource by blocking this route.
 
   def index
     @samples = Sample.where(sample_source: current_user.affiliation).order("indigo_id ASC")
@@ -18,6 +18,37 @@ class DataviewController < ApplicationController
       ids = @samples.pluck(:id)
       @hlas = Hla.where(sample_id:ids).order("indigo_id ASC")
       @kirs = Kir.where(sample_id:ids).order("indigo_id ASC")
+    end
+  end
+
+  def kir_wip
+    unless current_user.has_role? :admin
+      redirect_to root_path
+    end
+  end
+
+  def single_kir_genotype
+    indigo_id = params[:id].split("_")[0]
+    locus = params[:id].split("_")[1]
+    # these @ variables are to set values in the DOM, to be read by the datatable initializer in dataview.js.erb
+    @indigo_id = indigo_id
+    @gene = locus
+    @kir_wips = KirGenotypeWip.where(indigo_id:indigo_id, locus:locus).order("locus ASC").order("method ASC")
+  end
+
+  def kir_wip_data
+    respond_to do |format|
+      format.html
+      format.json { render json: KirWipDatatable.new(view_context)}
+    end
+  end
+
+  def kw_sg_am_data
+    puts params[:indigo_id]
+    puts params[:gene]
+    respond_to do |format|
+      format.html
+      format.json { render json: KwSgAmDatatable.new(view_context, params[:indigo_id], params[:gene]) }
     end
   end
 
@@ -113,10 +144,10 @@ class DataviewController < ApplicationController
   end
 
   def download_sample_data
-    @samples = Sample.where(sample_source: current_user.affiliation)
+    @samples = Sample.all
 
     respond_to do |format|
-      format.csv { send_data @samples.to_csv }
+      format.csv { send_data @samples.master_samples_table_to_csv }
     end
   end
 
