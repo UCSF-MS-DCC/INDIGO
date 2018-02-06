@@ -10,7 +10,7 @@ class SiteProgressDatatable
     {
       sEcho: params[:sEcho].to_i,
       iTotalRecords: Collaborator.count,
-      iTotalDisplayRecords: 1,# collaborators.total_entries,
+      iTotalDisplayRecords: data.size,# collaborators.total_entries,
       aaData:data
     }
   end
@@ -18,42 +18,24 @@ class SiteProgressDatatable
   private
 
     def data
-      sample_batches = []
-      received_dates = samples.pluck(:received_date).uniq
-      to_stanford_dates = samples.pluck(:date_to_stanford).uniq
-      studies = samples.pluck(:sample_source_study).uniq
-      a = received_dates.size
-      b = to_stanford_dates.size
-      c = studies.size
-      x = 0
-      y = 0
-      z = 0
-      for x in 0...received_dates.size do
-        for y in 0...to_stanford_dates.size do
-          for z in 0...studies.size do
-            unless Sample.where(received_date:"#{received_dates[x]}").where(date_to_stanford:"#{to_stanford_dates[y]}").where(sample_source_study:"#{studies[z]}").size < 1
-              sample_batches.push(Sample.where(received_date:"#{received_dates[x]}").where(date_to_stanford:"#{to_stanford_dates[y]}").where(sample_source_study:"#{studies[z]}"))
+      dates_in = samples.pluck(:received_date).uniq
+      dates_out = samples.pluck(:date_to_stanford).uniq
+      ngs = samples.pluck(:ngs_dataset).uniq
+
+      records = []
+
+      for date_in in dates_in
+        for date_out in dates_out
+          for ngs_value in ngs
+            sams = Sample.where(received_date:date_in).where(date_to_stanford:date_out).where(ngs_dataset:ngs_value)
+            unless sams.size < 1
+              row = [sams.pluck(:sample_source_study).uniq ? sams.pluck(:sample_source_study).uniq : "-", sams.pluck(:ngs_dataset).uniq, sams.where.not(disease:"HC").count, sams.where(disease:"HC").count, date_in, date_out, sams.count, sams.where(kir_raw:true).count, sams.where(hla_geno:true).count, sams.where(kir_geno:true).count]
+              records.push(row)
             end
           end
         end
       end
-      puts "sample batches size: #{sample_batches.size}"
-
-      sample_batches.map do |b|
-
-        [
-          b.first.sample_source_study,
-          b.first.ngs_dataset,
-          b.where.not(disease:"HC").count,
-          b.where(disease:"HC").count,
-          b.first.received_date,
-          b.first.date_to_stanford,
-          b.first.date_to_stanford == "not sent yet" ? 0 : b.size,
-          b.where(kir_raw:true).count,
-          b.where(hla_geno:true).count,
-          b.where(kir_geno:true).count
-        ]
-      end
+      records
     end
 
     def samples
