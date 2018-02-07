@@ -24,7 +24,7 @@ class CollaboratorStatusDatatable
           c.disease,
           c.expected_discovery,
           c.samples.count,
-          c.samples.where.not(date_to_stanford:nil).count,
+          c.samples.where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
           c.samples.where(hla_geno:true).where(disease:"HC").count,
           c.samples.where(hla_geno:true).where.not(disease:"HC").count,
           c.samples.where(kir_raw:true).count,
