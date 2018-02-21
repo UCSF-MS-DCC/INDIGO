@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180130232619) do
+ActiveRecord::Schema.define(version: 20180221193631) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -157,6 +157,7 @@ ActiveRecord::Schema.define(version: 20180130232619) do
     t.string   "method_version"
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+    t.text     "genotype"
     t.index ["kir_id"], name: "index_kir_genotype_wips_on_kir_id"
   end
 

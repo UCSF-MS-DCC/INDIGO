@@ -23,7 +23,6 @@ class User < ApplicationRecord
     self.has_role? "superuser"
   end
 
-
   def send_welcome_message
     AdminMailer.new_user_welcome_message(self).deliver
     AdminMailer.new_user_admin_alert(self).deliver
