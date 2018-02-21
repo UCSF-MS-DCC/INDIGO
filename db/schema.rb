@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221193631) do
+ActiveRecord::Schema.define(version: 20180221200536) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20180221193631) do
     t.string   "drbo_2"
     t.string   "dpb1_phase_ambiguities"
     t.string   "version"
+    t.text     "original_data_source"
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
   end
 
