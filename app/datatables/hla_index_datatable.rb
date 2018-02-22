@@ -22,6 +22,7 @@ class HlaIndexDatatable
 
         [
           hla.indigo_id,
+          hla.original_data_source,
           hla.drb1_1,
           hla.drb1_2,
           hla.dqb1_1,
