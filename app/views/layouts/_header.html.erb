@@ -53,7 +53,7 @@
                     <% end %>
                     <% if current_user.has_role? :kir_bioinformatician %>
                       <li class="divider"></li>
-                      <li><%= link_to "Kir Genotype Work In Progress Table" %></li>
+                      <li><%= link_to "Kir Genotype Work In Progress Table", dataview_kir_genotyping_work_in_progress_path %></li>
                     <% end %>
                   </ul>
                 </li>

@@ -82,6 +82,10 @@ Rails.application.routes.draw do
 
   get 'dataview/superindex_kirs_to_json'
 
+  get 'dataview/kir_genotyping_work_in_progress'
+
+  get 'dataview/kir_wip_data'
+
   get 'profiles/show'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

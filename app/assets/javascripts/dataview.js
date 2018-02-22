@@ -176,6 +176,50 @@ $(document).on("turbolinks:load", function() {
     "lengthMenu":[10,25,50,100,250,1000]
   });
 
+  var kir_work_in_progress_table = $('#kir-work-in-progress-table').DataTable({
+      "autoWidth":false,
+      "pageLength":100,
+      "bServerSide":true,
+      "bProcessing":true,
+      "bPaginate":true,
+      "ajax":'/dataview/kir_wip_data.json',
+      "pagingType":"full_numbers",
+      "columns": [
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }}
+      ],
+      "paging":true,
+      "lengthMenu":[10,25,50,100,250,1000]
+  })
+
   var tables = {
     "samples-index-table":samples_index_table,
     "hlas-index-table":hlas_index_table,

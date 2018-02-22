@@ -21,8 +21,8 @@ class DataviewController < ApplicationController
     end
   end
 
-  def kir_wip
-    unless current_user.has_role? :admin
+  def kir_genotyping_work_in_progress
+    unless current_user.has_role? :kir_bioinformatician
       redirect_to root_path
     end
   end
