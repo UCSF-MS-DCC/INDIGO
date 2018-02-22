@@ -263,4 +263,12 @@ class HlaSerializer < ActiveModel::Serializer
     end
   end
 
+  def original_data_source
+    if object.hla[0]
+      object.hla[0]["original_data_source"]
+    else
+      nil
+    end
+  end
+
 end
