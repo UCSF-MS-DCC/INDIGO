@@ -254,7 +254,7 @@ class Api::V2Controller < ApplicationController
 
   end
 
-  def raw_kir
+  def kir_work_in_progress
 
     @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
     if !@user
@@ -262,29 +262,39 @@ class Api::V2Controller < ApplicationController
       return
     end
 
+    @sample = Sample.find_by(indigo_id:kir_work_in_progress_params[:indigo_id])
 
-    raw_kir_indigo_id = params[:sample]
-
-    @sample = Sample.find_by(indigo_id:raw_kir_indigo_id)
-
-    if @sample
-      if @sample.kir_raw == false || @sample.kir_raw == nil
-        @sample.update_attributes(kir_raw:true)
-        render json: @sample, each_serializer: SampleSerializer, status: :accepted
-      else
-        render json: @sample, each_serializer: SampleSerializer, status: :not_modified
-      end
-    else
-      render json: { "error":"no such sample" }, status: :not_found
+    if !@sample
+      render json: {"error":"no sample with this INDIGO ID found"}
+      return
     end
 
+    @kir_wip = KirGenotypeWip.find_by(sample_id:@sample.id, locus:kir_work_in_progress_params[:locus], method:kir_work_in_progress_params[:method])
+
+    if @kir_wip
+      @kir_wip.update_attributes(kir_work_in_progress_params.to_hash.to_json)
+      render json: ["#{@sample.indigo_id} #{@kir_wip.locus} updated to new version."], status: :accepted
+      return
+    else
+      @new_kir_wip = KirGenotypeWip.new(sample_id:@sample.id, genotype:kir_work_in_progress_params[:genotype], locus:kir_work_in_progress_params[:locus], method:kir_work_in_progress_params[:method], method_version:kir_work_in_progress_params[:method_version],
+                                        output_directory:kir_work_in_progress_params[:output_directory], kir_extracted_directory:kir_work_in_progress_params[:kir_extracted_directory], raw_data_directory:kir_work_in_progress_params[:raw_data_directory],
+                                        batch:kir_work_in_progress_params[:batch], status:kir_work_in_progress_params[:status])
+      if @new_kir_wip.save
+        render json: ["#{@sample.indigo_id} #{@new_kir_wip.locus} New Kir Work in Progress saved"], status: :created
+      else
+        render json: ["#{@sample.indigo_id} #{@new_kir_wip.locus} Kir Work in Progress failed to save", @new_kir_wip.errors], status: :unprocessable_entity
+      end
+
+      return
+    end
 
 
   end #close def raw_kir block
 
   private
 
-    def api_params
+    def kir_work_in_progress_params
+      params.require(:indigo_id).permit(:locus, :status, :output_directory, :kir_extracted_directory, :raw_data_directory, :batch, :method, :method_version, :genotype)
     end
 
 end
