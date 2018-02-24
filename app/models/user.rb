@@ -23,6 +23,15 @@ class User < ApplicationRecord
     self.has_role? "superuser"
   end
 
+  def is_kir_bioinformatician?
+    if self.has_role? "admin"
+      true
+    elsif self.has_role? "kir_bioinformatician"
+      true
+    else
+      false
+    end
+  end
   def send_welcome_message
     AdminMailer.new_user_welcome_message(self).deliver
     AdminMailer.new_user_admin_alert(self).deliver

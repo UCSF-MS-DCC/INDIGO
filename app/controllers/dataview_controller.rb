@@ -1,6 +1,6 @@
 class DataviewController < ApplicationController
   before_action :authenticate_user! #Devise authentication. Resource should only be available to logged in users
-  load_and_authorize_resource :class => Sample, except: :single_kir_genotype #Cancancan enforces access on the model level. This hash prevents unauthorized users from accessing this resource by blocking this route.
+   #Cancancan enforces access on the model level. This hash prevents unauthorized users from accessing this resource by blocking this route.
 
   def index
     @samples = Sample.where(sample_source: current_user.affiliation).order("indigo_id ASC")
@@ -22,7 +22,7 @@ class DataviewController < ApplicationController
   end
 
   def kir_genotyping_work_in_progress
-    unless current_user.has_role? :kir_bioinformatician
+    unless current_user.is_kir_bioinformatician?
       redirect_to root_path
     end
   end

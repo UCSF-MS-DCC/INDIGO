@@ -4,9 +4,48 @@
     <list default="true" id="6a9fd77c-42da-43d1-a008-970df9703a77" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/app/controllers/api/v2_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/api/v2_controller.rb" />
+      <change beforePath="$PROJECT_DIR$/app/controllers/dataview_controller.rb" afterPath="$PROJECT_DIR$/app/controllers/dataview_controller.rb" />
+      <change beforePath="$PROJECT_DIR$/app/datatables/kir_wip_datatable.rb" afterPath="$PROJECT_DIR$/app/datatables/kir_wip_datatable.rb" />
       <change beforePath="$PROJECT_DIR$/app/models/kir_genotype_wip.rb" afterPath="$PROJECT_DIR$/app/models/kir_genotype_wip.rb" />
-      <change beforePath="$PROJECT_DIR$/app/models/sample.rb" afterPath="$PROJECT_DIR$/app/models/sample.rb" />
-      <change beforePath="$PROJECT_DIR$/config/routes.rb" afterPath="$PROJECT_DIR$/config/routes.rb" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.rb" afterPath="$PROJECT_DIR$/app/models/user.rb" />
+      <change beforePath="$PROJECT_DIR$/db/schema.rb" afterPath="$PROJECT_DIR$/db/schema.rb" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_hla_endpoint/returns_all_sample_phenotypes_and_hla_gene_loci.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_hla_endpoint/returns_data_for_valid_loci_names_and_no_data_for_invalid_loci_names.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_hla_endpoint/returns_only_data_for_selected_criteria_and_returns_genetic_data_for_only_specified_loci.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_hla_endpoint/returns_only_data_that_meets_all_search_criteria.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_hla_endpoint/returns_only_data_that_meets_all_search_criteria.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_hla_endpoint/returns_sample_pheonotypes_and_gl_strings_for_selected_genes.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_kir_endpoint/returns_all_sample_phenotypes_and_kir_gene_loci.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_kir_endpoint/returns_data_for_valid_loci_names_and_no_data_for_invalid_loci_names.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_kir_endpoint/returns_only_data_for_selected_criteria_and_returns_genetic_data_for_only_specified_loci.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_kir_endpoint/returns_only_data_that_meets_all_search_criteria.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_kir_endpoint/returns_only_data_that_meets_all_search_criteria.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_kir_endpoint/returns_sample_pheonotypes_and_gl_strings_for_selected_genes.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/filter_api_results_by_sex.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/filter_api_results_by_sex.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/filtering_by_disease_code.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/filtering_by_disease_code.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/filtering_results_by_multiple_parameters.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/filtering_results_by_multiple_parameters.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/include_only_controls_in_the_response.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/include_only_controls_in_the_response.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/querying_dataset_with_valid_indigo_credentials.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/querying_dataset_with_valid_indigo_credentials.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/superusers_filtering_by_sample_source.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/superusers_filtering_by_sample_source.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/superusers_receive_data_for_anyall_institutions.html" afterPath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/superusers_receive_data_for_anyall_institutions.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/users_only_receive_data_for_their_own_institution's_samples.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/api_v2_sample_endpoint/users_should_only_get_controls_for_their_own_institution.html" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/doc/api/credentials/redirect_to_sign_up_on_request_with_bad_credentials.html" afterPath="$PROJECT_DIR$/doc/api/credentials/redirect_to_sign_up_on_request_with_bad_credentials.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/credentials/redirect_to_sign_up_on_request_with_missing_credentials.html" afterPath="$PROJECT_DIR$/doc/api/credentials/redirect_to_sign_up_on_request_with_missing_credentials.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/index.html" afterPath="$PROJECT_DIR$/doc/api/index.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_disease.html" afterPath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_disease.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_maximum_age_of_onset.html" afterPath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_maximum_age_of_onset.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_minimum_age_of_onset.html" afterPath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_minimum_age_of_onset.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_multiple_parameters.html" afterPath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_multiple_parameters.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_sex.html" afterPath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset,_filtered_by_sex.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset_to_retrieve_hla_data.html" afterPath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset_to_retrieve_hla_data.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset_with_valid_indigo_credentials.html" afterPath="$PROJECT_DIR$/doc/api/r_studio_data_frame_compatible_json_format__indigo.ucsf.edu/api/v1/rstudiodata/querying_dataset_with_valid_indigo_credentials.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_disease.html" afterPath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_disease.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_maximum_age_of_onset.html" afterPath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_maximum_age_of_onset.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_minimum_age_of_onset.html" afterPath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_minimum_age_of_onset.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_multiple_parameters.html" afterPath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_multiple_parameters.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_sex.html" afterPath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset,_filtered_by_sex.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset_to_retrieve_hla_data.html" afterPath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset_to_retrieve_hla_data.html" />
+      <change beforePath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset_with_valid_indigo_credentials.html" afterPath="$PROJECT_DIR$/doc/api/standard_json_format__indigo.ucsf.edu/api/v1/jsondata/querying_dataset_with_valid_indigo_credentials.html" />
+      <change beforePath="$PROJECT_DIR$/spec/acceptance/api::v2_spec.rb" afterPath="$PROJECT_DIR$/spec/acceptance/api::v2_spec.rb" />
     </list>
     <ignored path="$PROJECT_DIR$/.bundle/" />
     <ignored path="$PROJECT_DIR$/components/" />
@@ -37,101 +76,21 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="routes.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <file leaf-file-name="api::v2_spec.rb" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spec/acceptance/api::v2_spec.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="12" column="32" lean-forward="true" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+            <state relative-caret-position="1250">
+              <caret line="429" column="33" lean-forward="false" selection-start-line="429" selection-start-column="33" selection-end-line="429" selection-end-column="33" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="schema.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/db/schema.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="844">
-              <caret line="169" column="46" lean-forward="true" selection-start-line="169" selection-start-column="46" selection-end-line="169" selection-end-column="46" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sample.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/sample.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="29" lean-forward="false" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataview_controller.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/controllers/dataview_controller.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sample_datatable.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/datatables/sample_datatable.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="68" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kir_genotyping_work_in_progress.html.erb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/views/dataview/kir_genotyping_work_in_progress.html.erb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="17" selection-end-column="27" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kir_wip_datatable.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/datatables/kir_wip_datatable.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="960">
-              <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="kir_genotype_wip.rb" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/kir_genotype_wip.rb">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dataview.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/assets/javascripts/dataview.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="605">
-              <caret line="184" column="36" lean-forward="false" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="v2_controller.rb" pinned="false" current-in-tab="true">
+      <file leaf-file-name="v2_controller.rb" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/controllers/api/v2_controller.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1175">
-              <caret line="287" column="12" lean-forward="false" selection-start-line="287" selection-start-column="12" selection-end-line="287" selection-end-column="12" />
+            <state relative-caret-position="740">
+              <caret line="264" column="39" lean-forward="false" selection-start-line="264" selection-start-column="39" selection-end-line="264" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -164,21 +123,23 @@
         <option value="$PROJECT_DIR$/app/views/nmdp_apis/test_gfe.erb" />
         <option value="$PROJECT_DIR$/app/views/consensus_fastqs/index.html.erb" />
         <option value="$PROJECT_DIR$/db/seeds.rb" />
-        <option value="$PROJECT_DIR$/app/models/user.rb" />
         <option value="$PROJECT_DIR$/db/indigo_hla_import.rb" />
         <option value="$PROJECT_DIR$/app/datatables/hla_index_datatable.rb" />
         <option value="$PROJECT_DIR$/app/datatables/hla_superindex_datatable.rb" />
         <option value="$PROJECT_DIR$/app/views/dataview/superindex.html.erb" />
         <option value="$PROJECT_DIR$/app/views/dataview/index.html.erb" />
         <option value="$PROJECT_DIR$/app/serializers/hla_serializer.rb" />
-        <option value="$PROJECT_DIR$/app/controllers/dataview_controller.rb" />
         <option value="$PROJECT_DIR$/app/views/layouts/_header.html.erb" />
         <option value="$PROJECT_DIR$/app/views/dataview/kir_genotyping_work_in_progress.html.erb" />
         <option value="$PROJECT_DIR$/app/assets/javascripts/dataview.js" />
-        <option value="$PROJECT_DIR$/app/datatables/kir_wip_datatable.rb" />
-        <option value="$PROJECT_DIR$/config/routes.rb" />
-        <option value="$PROJECT_DIR$/app/models/kir_genotype_wip.rb" />
         <option value="$PROJECT_DIR$/app/models/sample.rb" />
+        <option value="$PROJECT_DIR$/app/datatables/kir_wip_datatable.rb" />
+        <option value="$PROJECT_DIR$/app/models/kir_genotype_wip.rb" />
+        <option value="$PROJECT_DIR$/app/models/user.rb" />
+        <option value="$PROJECT_DIR$/config/routes.rb" />
+        <option value="$PROJECT_DIR$/db/migrate/20180223202521_switch_reference_in_kir_genotype_wip_to_sample.rb" />
+        <option value="$PROJECT_DIR$/app/controllers/dataview_controller.rb" />
+        <option value="$PROJECT_DIR$/spec/acceptance/api::v2_spec.rb" />
         <option value="$PROJECT_DIR$/app/controllers/api/v2_controller.rb" />
       </list>
     </option>
@@ -295,6 +256,17 @@
               <item name="INDIGO" type="b2602c69:ProjectViewProjectNode" />
               <item name="INDIGO" type="462c0819:PsiDirectoryNode" />
               <item name="db" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="INDIGO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="INDIGO" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="INDIGO" type="b2602c69:ProjectViewProjectNode" />
+              <item name="INDIGO" type="462c0819:PsiDirectoryNode" />
+              <item name="spec" type="462c0819:PsiDirectoryNode" />
+              <item name="acceptance" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -631,12 +603,12 @@
       <workItem from="1490641966890" duration="11149000" />
       <workItem from="1519151314452" duration="25000" />
       <workItem from="1519151345469" duration="87000" />
-      <workItem from="1519151476186" duration="15475000" />
+      <workItem from="1519151476186" duration="27370000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26736000" />
+    <option name="totallyTimeSpent" value="38631000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1440" y="0" width="2560" height="1440" extended-state="0" />
@@ -695,28 +667,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/consensus_fastqs_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="0" lean-forward="true" selection-start-line="3" selection-start-column="2" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/environments/development.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-643">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/application.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -869,14 +819,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="24" column="2" lean-forward="false" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/db/indigo_hla_import.rb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="30">
@@ -949,42 +891,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="664">
-          <caret line="55" column="123" lean-forward="false" selection-start-line="55" selection-start-column="123" selection-end-line="55" selection-end-column="123" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/dataview/stacy.html.erb">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="34" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/datatables/sample_datatable.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="68" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/dataview/kir_genotyping_work_in_progress.html.erb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="17" selection-end-column="27" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/controllers/dataview_controller.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
           <folding />
         </state>
       </provider>
@@ -997,42 +907,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/datatables/kir_wip_datatable.rb">
+    <entry file="file://$PROJECT_DIR$/app/datatables/sample_datatable.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="0" lean-forward="true" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/dataview.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="605">
-          <caret line="184" column="36" lean-forward="false" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/config/routes.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="12" column="32" lean-forward="true" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/kir_genotype_wip.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="20" lean-forward="false" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/db/schema.rb">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="844">
-          <caret line="169" column="46" lean-forward="true" selection-start-line="169" selection-start-column="46" selection-end-line="169" selection-end-column="46" />
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="68" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -1045,10 +923,106 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/db/migrate/20180223202521_switch_reference_in_kir_genotype_wip_to_sample.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="58" lean-forward="false" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/db/schema.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="844">
+          <caret line="169" column="46" lean-forward="true" selection-start-line="169" selection-start-column="46" selection-end-line="169" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/assets/javascripts/dataview.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="605">
+          <caret line="184" column="36" lean-forward="false" selection-start-line="184" selection-start-column="36" selection-end-line="184" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/datatables/kir_wip_datatable.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="55" lean-forward="false" selection-start-line="22" selection-start-column="55" selection-end-line="22" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/kir_genotype_wip.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/dataview/kir_genotyping_work_in_progress.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="27" column="0" lean-forward="false" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="31" column="11" lean-forward="false" selection-start-line="31" selection-start-column="11" selection-end-line="31" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/dataview_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="37" lean-forward="false" selection-start-line="23" selection-start-column="37" selection-end-line="23" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/controllers/application_controller.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/config/routes.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="8" lean-forward="false" selection-start-line="12" selection-start-column="8" selection-end-line="12" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/layouts/_header.html.erb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="560">
+          <caret line="55" column="123" lean-forward="false" selection-start-line="55" selection-start-column="123" selection-end-line="55" selection-end-column="123" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/controllers/api/v2_controller.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1175">
-          <caret line="287" column="12" lean-forward="false" selection-start-line="287" selection-start-column="12" selection-end-line="287" selection-end-column="12" />
+        <state relative-caret-position="740">
+          <caret line="264" column="39" lean-forward="false" selection-start-line="264" selection-start-column="39" selection-end-line="264" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spec/acceptance/api::v2_spec.rb">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1250">
+          <caret line="429" column="33" lean-forward="false" selection-start-line="429" selection-start-column="33" selection-end-line="429" selection-end-column="33" />
           <folding />
         </state>
       </provider>

@@ -20,7 +20,7 @@ class KirWipDatatable
     kir_wips.map do |k|
 
       [
-          k.kir.indigo_id,
+          k.sample ? k.sample.indigo_id : "placeholder",
           k.locus,
           k.method,
           k.batch,

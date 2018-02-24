@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180221200536) do
+ActiveRecord::Schema.define(version: 20180223202521) do
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -147,7 +147,6 @@ ActiveRecord::Schema.define(version: 20180221200536) do
   end
 
   create_table "kir_genotype_wips", force: :cascade do |t|
-    t.integer  "kir_id"
     t.string   "locus"
     t.string   "status"
     t.text     "output_directory"
@@ -159,7 +158,8 @@ ActiveRecord::Schema.define(version: 20180221200536) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.text     "genotype"
-    t.index ["kir_id"], name: "index_kir_genotype_wips_on_kir_id"
+    t.integer  "sample_id"
+    t.index ["sample_id"], name: "index_kir_genotype_wips_on_sample_id"
   end
 
   create_table "kirs", force: :cascade do |t|
