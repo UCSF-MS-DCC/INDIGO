@@ -27,5 +27,7 @@ production:
     host: localhost
     username: <%= ENV["POSTGRES_USERNAME"] %>
     password: <%= ENV["POSTGRES_PASSWORD"] %>
-    timeout: 5000
     database: deployment
+    variables:
+      statement_timeout: 5000
+
