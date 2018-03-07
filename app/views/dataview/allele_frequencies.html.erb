@@ -1,6 +1,19 @@
 <div class="container" id="main-view">
 
   <div class="row">
+    <div class="col-sm-3 col-sm-offset-9">
+      <div class="dropdown" style="margin-top:20px;">
+        <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%"></button>
+        <ul class="dropdown-menu">
+          <% AlleleFrequency.pluck(:genotype).uniq.each do  |g| %>
+            <li><%= link_to c %><span class="caret"></span></li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
     <div class="col-sm-12" style="overflow-x:scroll;">
       <br>
       <table id="allele-frequencies-table" class="table table-striped table-bordered" >
