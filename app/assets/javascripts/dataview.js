@@ -220,6 +220,19 @@ $(document).on("turbolinks:load", function() {
       "lengthMenu":[10,25,50,100,250,1000]
   })
 
+
+    var allele_frequencies_table = $('#allele-frequencies-table').DataTable({
+        "autoWidth":false,
+        "pageLength":100,
+        "bServerSide":true,
+        "bProcessing":true,
+        "bPaginate":true,
+        "ajax":'/dataview/allele_frequencies_data.json',
+        "pagingType":"full_numbers",
+        "paging":true,
+        "lengthMenu":[10,25,50,100,250,1000]
+    });
+
   var tables = {
     "samples-index-table":samples_index_table,
     "hlas-index-table":hlas_index_table,
@@ -228,6 +241,7 @@ $(document).on("turbolinks:load", function() {
     "hlas-superindex-table":hlas_superindex_table,
     "kirs-superindex-table":kirs_superindex_table
   }
+
 
   $('.show-column-checkbox').on('change', function(){
     var table = tables[$(this).data("table-id")];

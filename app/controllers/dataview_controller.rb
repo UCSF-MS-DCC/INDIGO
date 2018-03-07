@@ -111,6 +111,18 @@ class DataviewController < ApplicationController
 
   end
 
+  def allele_frequencies
+    unless current_user.has_role? :superuser
+      redirect_to root_path
+    end
+  end
+
+  def allele_frequencies_data
+    respond_to do |format|
+      format.json { render json: AlleleFrequenciesDatatable.new(view_context) }
+    end
+  end
+
   def samples_to_json
     @samples = Sample.where(sample_source: current_user.affiliation)
     render json: @samples

@@ -86,6 +86,10 @@ Rails.application.routes.draw do
 
   get 'dataview/kir_wip_data'
 
+  get 'dataview/allele_frequencies'
+
+  get 'dataview/allele_frequencies_data'
+
   get 'profiles/show'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
