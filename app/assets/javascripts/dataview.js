@@ -117,7 +117,7 @@ $(document).on("turbolinks:load", function() {
       "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
       "buttons": [
           {
-              "extend":'csv',
+              "extend":'excel',
               "text": '<i>Download CSV</i>',
               "className": 'btn btn-indigo btn-sm'
           }
