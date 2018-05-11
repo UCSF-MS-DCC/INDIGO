@@ -113,16 +113,17 @@ $(document).on("turbolinks:load", function() {
       }}
     ],
     "paging":true,
-    "lengthMenu":[10,25,50,100,250,1000],
-      "dom": "Bfrtip",
+    "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
       "buttons": [
           {
               "extend":'csv',
-              "text": 'Download CSV'
+              "text": '<i>Download CSV</i>',
+              "className": 'btn btn-indigo btn-sm'
           }
       ]
   });
-
+//var d = "Blfrtip" <- jquery datatables dom element list
   var hlas_index_table = $('#hlas-index-table').DataTable({
     "autoWidth":false,
     "pageLength":100,
