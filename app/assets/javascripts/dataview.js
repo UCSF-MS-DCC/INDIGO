@@ -133,7 +133,15 @@ $(document).on("turbolinks:load", function() {
     "ajax":'/dataview/hla_index.json',
     "pagingType":"full_numbers",
     "paging":true,
-    "lengthMenu":[10,25,50,100,250,1000]
+      "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
+      "buttons": [
+          {
+              "extend":'csv',
+              "text": '<i>Download CSV</i>',
+              "className": 'btn btn-indigo btn-sm'
+          }
+      ]
   });
 
   var kirs_index_table = $('#kirs-index-table').DataTable({
@@ -145,7 +153,15 @@ $(document).on("turbolinks:load", function() {
     "ajax":'/dataview/kir_index.json',
     "pagingType":"full_numbers",
     "paging":true,
-    "lengthMenu":[10,25,50,100,250,1000]
+      "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
+      "buttons": [
+          {
+              "extend":'csv',
+              "text": '<i>Download CSV</i>',
+              "className": 'btn btn-indigo btn-sm'
+          }
+      ]
   });
 
   var samples_superindex_table = $('#samples-superindex-table').DataTable({
@@ -157,7 +173,15 @@ $(document).on("turbolinks:load", function() {
     "ajax":{"url":'/dataview/samples_superindex.json', "data": function(d) { d.disease = superindex_disease } },
     "pagingType":"full_numbers",
     "paging":true,
-    "lengthMenu":[10,25,50,100,250,1000]
+      "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
+      "buttons": [
+          {
+              "extend":'csv',
+              "text": '<i>Download CSV</i>',
+              "className": 'btn btn-indigo btn-sm'
+          }
+      ]
   });
 
   var hlas_superindex_table = $('#hlas-superindex-table').DataTable({
@@ -169,7 +193,15 @@ $(document).on("turbolinks:load", function() {
     "ajax":{"url":'/dataview/hla_superindex.json', "data": function(d) { d.disease = superindex_disease } },
     "pagingType":"full_numbers",
     "paging":true,
-    "lengthMenu":[10,25,50,100,250,1000]
+      "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
+      "buttons": [
+          {
+              "extend":'csv',
+              "text": '<i>Download CSV</i>',
+              "className": 'btn btn-indigo btn-sm'
+          }
+      ]
   });
 
   var kirs_superindex_table = $('#kirs-superindex-table').DataTable({
@@ -181,7 +213,15 @@ $(document).on("turbolinks:load", function() {
     "ajax":{"url":'/dataview/kir_superindex.json', "data": function(d) { d.disease = superindex_disease } },
     "pagingType":"full_numbers",
     "paging":true,
-    "lengthMenu":[10,25,50,100,250,1000]
+      "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
+      "buttons": [
+          {
+              "extend":'csv',
+              "text": '<i>Download CSV</i>',
+              "className": 'btn btn-indigo btn-sm'
+          }
+      ]
   });
 
   var kir_work_in_progress_table = $('#kir-work-in-progress-table').DataTable({
