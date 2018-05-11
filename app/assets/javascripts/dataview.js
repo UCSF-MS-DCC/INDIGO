@@ -113,7 +113,14 @@ $(document).on("turbolinks:load", function() {
       }}
     ],
     "paging":true,
-    "lengthMenu":[10,25,50,100,250,1000]
+    "lengthMenu":[10,25,50,100,250,1000],
+      "dom": "Bfrtip",
+      "buttons": [
+          {
+              "extend":'csv',
+              "text": 'Download CSV'
+          }
+      ]
   });
 
   var hlas_index_table = $('#hlas-index-table').DataTable({
@@ -229,8 +236,14 @@ $(document).on("turbolinks:load", function() {
         "bPaginate":true,
         "ajax":'/dataview/allele_frequencies_data.json',
         "pagingType":"full_numbers",
-        "paging":true,
-        "lengthMenu":[10,25,50,100,250,1000]
+        "paging":false,
+        "lengthMenu":[10,25,50,100,250,1000],
+        "scrollX":true,
+        "scrollCollapse":true,
+        "fixedColumns":{
+            "leftColumns":3,
+            "rightColumns":0
+        }
     });
 
   var tables = {
