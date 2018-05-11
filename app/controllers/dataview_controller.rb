@@ -1,7 +1,7 @@
 class DataviewController < ApplicationController
   before_action :authenticate_user! #Devise authentication. Resource should only be available to logged in users
    #Cancancan enforces access on the model level. This hash prevents unauthorized users from accessing this resource by blocking this route.
-
+  @sv = "DEFAULT"
   def index
     @samples = Sample.where(sample_source: current_user.affiliation).order("indigo_id ASC")
     @indigo_ids = Sample.where(sample_source: current_user.affiliation).distinct.pluck(:indigo_id)
@@ -56,10 +56,10 @@ class DataviewController < ApplicationController
     unless current_user.has_role? :superuser
       redirect_to root_path
     end
-    respond_to do |format|
-      format.html
-      format.json { render json: SampleDatatable.new(view_context) }
-    end
+    # respond_to do |format|
+    #   format.html
+    #   format.json { render json: SampleDatatable.new(view_context) }
+    # end
   end
 
   def sample_status
@@ -156,11 +156,11 @@ class DataviewController < ApplicationController
   end
 
   def download_sample_data
+    puts @sv
     @samples = Sample.all
-
-    respond_to do |format|
-      format.csv { send_data @samples.master_samples_table_to_csv }
-    end
+    # respond_to do |format|
+    #   format.csv { send_data @samples.master_samples_table_to_csv }
+    # end
   end
 
   def download_hla_data
