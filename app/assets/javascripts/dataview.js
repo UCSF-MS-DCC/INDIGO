@@ -119,7 +119,10 @@ $(document).on("turbolinks:load", function() {
           {
               "extend":'csv',
               "text": '<i>Download CSV</i>',
-              "className": 'btn btn-indigo btn-sm'
+              "className": 'btn btn-indigo btn-sm',
+              "exportOptions": {
+                  "columns": [0, ':visible']
+              }
           }
       ]
   });
