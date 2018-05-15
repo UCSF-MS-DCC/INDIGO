@@ -137,7 +137,7 @@ $(document).on("turbolinks:load", function() {
     "pagingType":"full_numbers",
     "paging":true,
       "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
-      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>" + "<'row'<'col-sm-12'rtip>>,
       "buttons": [
           {
               "extend":'csv',
@@ -177,7 +177,7 @@ $(document).on("turbolinks:load", function() {
     "pagingType":"full_numbers",
     "paging":true,
       "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
-      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>",
+      "dom": "<'row'<'col-sm-6'l><'col-sm-6'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>" + "<'row'<'col-sm-12'rtip>>",
       "buttons": [
           {
               "extend":'csv',
