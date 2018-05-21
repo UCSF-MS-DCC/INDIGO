@@ -164,113 +164,113 @@ class KirSerializer < ActiveModel::Serializer
   end
 
   def KIR2DL1
-    if object.kir[0]
-      object.kir[0]["KIR2DL1"]
+    if object.kir
+      object.kir["KIR2DL1"]
     else
       nil
     end
   end
   def KIR2DL2
-    if object.kir[0]
-      object.kir[0]["KIR2DL2"]
+    if object.kir
+      object.kir["KIR2DL2"]
     else
       nil
     end
   end
   def KIR2DL3
-    if object.kir[0]
-      object.kir[0]["KIR2DL3"]
+    if object.kir
+      object.kir["KIR2DL3"]
     else
       nil
     end
   end
   def KIR2DL4
-    if object.kir[0]
-      object.kir[0]["KIR2DL4"]
+    if object.kir
+      object.kir["KIR2DL4"]
     else
       nil
     end
   end
   def KIR2DL5A
-    if object.kir[0]
-      object.kir[0]["KIR2DL5A"]
+    if object.kir
+      object.kir["KIR2DL5A"]
     else
       nil
     end
   end
   def KIR2DL5B
-    if object.kir[0]
-      object.kir[0]["KIR2DL5B"]
+    if object.kir
+      object.kir["KIR2DL5B"]
     else
       nil
     end
   end
   def KIR2DP1
-    if object.kir[0]
-      object.kir[0]["KIR2DP1"]
+    if object.kir
+      object.kir["KIR2DP1"]
     else
       nil
     end
   end
   def KIR2DS1
-    if object.kir[0]
-      object.kir[0]["KIR2DS1"]
+    if object.kir
+      object.kir["KIR2DS1"]
     else
       nil
     end
   end
   def KIR2DS2
-    if object.kir[0]
-      object.kir[0]["KIR2DS2"]
+    if object.kir
+      object.kir["KIR2DS2"]
     else
       nil
     end
   end
   def KIR2DS3
-    if object.kir[0]
-      object.kir[0]["KIR2DS3"]
+    if object.kir
+      object.kir["KIR2DS3"]
     else
       nil
     end
   end
   def KIR2DS4
-    if object.kir[0]
-      object.kir[0]["KIR2DS4"]
+    if object.kir
+      object.kir["KIR2DS4"]
     else
       nil
     end
   end
   def KIR2DS5
-    if object.kir[0]
-      object.kir[0]["KIR2DS5"]
+    if object.kir
+      object.kir["KIR2DS5"]
     else
       nil
     end
   end
   def KIR3DL1
-    if object.kir[0]
-      object.kir[0]["KIR3DL1"]
+    if object.kir
+      object.kir["KIR3DL1"]
     else
       nil
     end
   end
   def KIR3DL2
-    if object.kir[0]
-      object.kir[0]["KIR3DL2"]
+    if object.kir
+      object.kir["KIR3DL2"]
     else
       nil
     end
   end
   def KIR3DL3
-    if object.kir[0]
-      object.kir[0]["KIR3DL3"]
+    if object.kir
+      object.kir["KIR3DL3"]
     else
       nil
     end
   end
   def KIR3DS1
-    if object.kir[0]
-      object.kir[0]["KIR3DS1"]
+    if object.kir
+      object.kir["KIR3DS1"]
     else
       nil
     end

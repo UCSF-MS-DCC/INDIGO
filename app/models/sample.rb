@@ -1,12 +1,13 @@
 class Sample < ApplicationRecord
   validates :indigo_id, uniqueness: true
-  has_many :hla
-  has_many :kir
+  has_one :hla
+  has_one :kir
   has_many :kir_genotype_wips
   has_many :gwas_samples
   has_many :gwas, through: :gwas_samples
   belongs_to :batch
   belongs_to :collaborator
+  before_destroy :destroy_hla_and_kir
   has_paper_trail
 
   def self.to_csv
@@ -76,6 +77,16 @@ class Sample < ApplicationRecord
         csv.add_row values
       end
     end
+  end
+
+  def destroy_hla_and_kir
+    if self.hla
+      self.hla.destroy
+    end
+    if self.kir
+      self.kir.destroy
+    end
+
   end
 
 end

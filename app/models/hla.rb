@@ -2,6 +2,9 @@ class Hla < ApplicationRecord
   validates :indigo_id, presence: true
   belongs_to :sample
   has_paper_trail
+  after_create :update_sample_hla_geno_flag
+  after_update :update_sample_hla_geno_flag
+  after_destroy :set_sample_hla_geno_flag_to_false
 
   def self.to_csv
     CSV.generate do |csv|
@@ -11,5 +14,15 @@ class Hla < ApplicationRecord
         csv << record.attributes.values_at(*cols)
       end
     end
+  end
+
+  def update_sample_hla_geno_flag
+    if !self.sample.hla_geno
+      self.sample.update_attributes(hla_geno:true)
+    end
+  end
+
+  def set_sample_hla_geno_flag_to_false
+    self.sample.update_attributes(hla_geno:false)
   end
 end

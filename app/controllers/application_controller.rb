@@ -15,6 +15,10 @@ class ApplicationController < ActionController::Base
     redirect_to main_app.root_path, :alert => "Access Denied"
   end
 
+  def set_page
+    @current_page = params[:page] ? params[:page].to_i : 1
+  end
+
 
   protected
 

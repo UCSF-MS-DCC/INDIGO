@@ -1,5 +1,5 @@
 class HlaSerializer < ActiveModel::Serializer
-  attributes  :indigo_id, :sample_source, :sample_source_study, :disease, :gender, :ethnicity, :age_at_sample, :age_of_onset, :race, :original_data_source
+  attributes  :indigo_id, :sample_source, :sample_source_study, :disease, :gender, :ethnicity, :age_at_sample, :age_of_onset, :race
 
   attribute :a_1, if: :include_a?
   attribute :a_2, if: :include_a?
@@ -112,160 +112,162 @@ class HlaSerializer < ActiveModel::Serializer
   end
 
   def a_1
-    if object.hla[0]
-      object.hla[0]["a_1"]
+    if object.hla
+      object.hla["a_1"]
     else
       nil
     end
   end
 
   def a_2
-    if object.hla[0]
-      object.hla[0]["a_2"]
+    if object.hla
+      object.hla["a_2"]
     else
       nil
     end
   end
 
   def b_1
-    if object.hla[0]
-      object.hla[0]["b_1"]
+    if object.hla
+      object.hla["b_1"]
     else
       nil
     end
   end
 
   def b_2
-    if object.hla[0]
-      object.hla[0]["b_2"]
+    if object.hla
+      object.hla["b_2"]
     else
       nil
     end
   end
 
   def c_1
-    if object.hla[0]
-      object.hla[0]["c_1"]
+    if object.hla
+      object.hla["c_1"]
     else
       nil
     end
   end
 
   def c_2
-    if object.hla[0]
-      object.hla[0]["c_2"]
+    if object.hla
+      object.hla["c_2"]
     else
       nil
     end
   end
 
   def dpa1_1
-    if object.hla[0]
-      object.hla[0]["dpa1_1"]
+    if object.hla
+      object.hla["dpa1_1"]
     else
       nil
     end
   end
 
   def dpa1_2
-    if object.hla[0]
-      object.hla[0]["dpa1_2"]
+    if object.hla
+      object.hla["dpa1_2"]
     else
       nil
     end
   end
 
   def dqa1_1
-    if object.hla[0]
-      object.hla[0]["dqa1_1"]
+    if object.hla
+      object.hla["dqa1_1"]
     else
       nil
     end
   end
 
   def dqa1_2
-    if object.hla[0]
-      object.hla[0]["dqa1_2"]
+    if object.hla
+      object.hla["dqa1_2"]
     else
       nil
     end
   end
 
   def drb1_1
-    if object.hla[0]
-      object.hla[0]["drb1_1"]
+    puts "IN DRB1"
+    if object.hla
+      puts "IN OBJECT.HLA"
+      object.hla["drb1_1"]
     else
       nil
     end
   end
 
   def drb1_2
-    if object.hla[0]
-      object.hla[0]["drb1_2"]
+    if object.hla
+      object.hla["drb1_2"]
     else
       nil
     end
   end
 
   def dqb1_1
-    if object.hla[0]
-      object.hla[0]["dqb1_1"]
+    if object.hla
+      object.hla["dqb1_1"]
     else
       nil
     end
   end
 
   def dqb1_2
-    if object.hla[0]
-      object.hla[0]["dqb1_2"]
+    if object.hla
+      object.hla["dqb1_2"]
     else
       nil
     end
   end
 
   def dpb1_1
-    if object.hla[0]
-      object.hla[0]["dpb1_1"]
+    if object.hla
+      object.hla["dpb1_1"]
     else
       nil
     end
   end
 
   def dpb1_2
-    if object.hla[0]
-      object.hla[0]["dpb1_2"]
+    if object.hla
+      object.hla["dpb1_2"]
     else
       nil
     end
   end
 
   def drbo_1
-    if object.hla[0]
-      object.hla[0]["drbo_1"]
+    if object.hla
+      object.hla["drbo_1"]
     else
       nil
     end
   end
 
   def drbo_2
-    if object.hla[0]
-      object.hla[0]["drbo_2"]
+    if object.hla
+      object.hla["drbo_2"]
     else
       nil
     end
   end
 
   def dpb1_phase_ambiguities
-    if object.hla[0]
-      object.hla[0]["dpb1_phase_ambiguities"]
+    if object.hla
+      object.hla["dpb1_phase_ambiguities"]
     else
       nil
     end
   end
 
   def original_data_source
-    if object.hla[0]
-      object.hla[0]["original_data_source"]
+    if object.hla
+      object.hla["original_data_source"]
     else
       nil
     end
