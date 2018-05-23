@@ -1,5 +1,6 @@
 class Sample < ApplicationRecord
   validates :indigo_id, uniqueness: true
+  validates :collaborator_id, presence: true
   has_one :hla
   has_one :kir
   has_many :kir_genotype_wips
@@ -7,7 +8,7 @@ class Sample < ApplicationRecord
   has_many :gwas, through: :gwas_samples
   belongs_to :batch
   belongs_to :collaborator
-  before_create :set_default_geno_flags
+  before_create :set_default_fields
   before_destroy :destroy_hla_and_kir
   has_paper_trail
 
@@ -82,10 +83,11 @@ class Sample < ApplicationRecord
 
   private
 
-  def set_default_geno_flags
+  def set_default_fields
     self.hla_geno = false
     self.kir_geno = false
     self.kir_raw = false
+    self.sample_source = self.collaborator.name
   end
 
   def destroy_hla_and_kir
