@@ -7,6 +7,7 @@ class Sample < ApplicationRecord
   has_many :gwas, through: :gwas_samples
   belongs_to :batch
   belongs_to :collaborator
+  before_create :set_default_geno_flags
   before_destroy :destroy_hla_and_kir
   has_paper_trail
 
@@ -77,6 +78,14 @@ class Sample < ApplicationRecord
         csv.add_row values
       end
     end
+  end
+
+  private
+
+  def set_default_geno_flags
+    self.hla_geno = false
+    self.kir_geno = false
+    self.kir_raw = false
   end
 
   def destroy_hla_and_kir
