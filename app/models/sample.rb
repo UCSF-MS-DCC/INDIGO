@@ -87,7 +87,7 @@ class Sample < ApplicationRecord
     self.hla_geno = false
     self.kir_geno = false
     self.kir_raw = false
-    self.sample_source = self.collaborator.name
+    self.sample_source = Collaborator.where(id:self.collaborator_id).name
   end
 
   def destroy_hla_and_kir

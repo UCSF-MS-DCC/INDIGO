@@ -59,7 +59,8 @@ $(document).on("turbolinks:load", function(){
     "bPaginate":true,
     "ajax":'/welcome/site_samples_progress.json', "ajax":{"url":'/welcome/site_samples_progress.json', "data": function(d) { d.collaborator = collaborator } },
     "pagingType":"full_numbers",
-    "paging":true,
+    "paging":false,
+      "searching":false,
     "lengthMenu":[10,25,50,100,250,1000],
     "footerCallback": function ( row, data, start, end, display ) {
         var api = this.api(), data;
@@ -71,7 +72,7 @@ $(document).on("turbolinks:load", function(){
                 typeof i === 'number' ?
                     i : 0;
         };
-        for (var col = 2; col <= 9; col++) {
+        for (var col = 3; col <= 9; col++) {
         // Total over all pages
         total = api
             .column( col )
