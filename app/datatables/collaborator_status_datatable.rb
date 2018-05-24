@@ -40,7 +40,7 @@ class CollaboratorStatusDatatable
     end
 
     def fetch_collaborators
-      collaborators = Collaborator.order("#{sort_column} #{sort_direction}")
+      collaborators = Collaborator.where.not(disease:"SCZD").order("#{sort_column} #{sort_direction}")
       collaborators = collaborators.paginate(:page => page, :per_page => per_page)
       collaborators
     end
