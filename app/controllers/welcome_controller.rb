@@ -6,7 +6,7 @@ class WelcomeController < ApplicationController
   end
 
   def progress
-    @collaborators = Collaborator.all
+    @collaborators = Collaborator.where.not(disease:"SCZD")
   end
 
   def new_progress
