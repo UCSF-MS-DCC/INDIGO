@@ -1,5 +1,5 @@
 class HlaSerializer < ActiveModel::Serializer
-  attributes  :indigo_id, :sample_source, :sample_source_study, :disease, :gender, :ethnicity, :age_at_sample, :age_of_onset, :race
+  attributes  :indigo_id, :sample_source, :sample_source_study, :disease, :gender, :age_at_sample, :age_of_onset, :race
 
   attribute :a_1, if: :include_a?
   attribute :a_2, if: :include_a?

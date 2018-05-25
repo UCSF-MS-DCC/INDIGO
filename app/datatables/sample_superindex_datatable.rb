@@ -28,7 +28,6 @@ class SampleSuperindexDatatable
           sample.sample_source_identifier,
           sample.disease,
           sample.gender,
-          sample.ethnicity,
           sample.race,
           sample.age_of_onset,
           sample.age_at_sample

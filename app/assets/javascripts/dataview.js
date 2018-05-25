@@ -100,9 +100,6 @@ $(document).on("turbolinks:load", function() {
         return data;
       }},
       {"render": function(data, type, row, meta) {
-        return data;
-      }},
-      {"render": function(data, type, row, meta) {
         console.log(row)
           if (data) {
             return '<a href='+row[11]+'>'+data+'</a>';
