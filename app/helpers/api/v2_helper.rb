@@ -2,7 +2,6 @@ module Api::V2Helper
 
   def apply_query_filters(samples, params)
     @models = samples
-    puts "LINE 5 #{@models.size} KIRS"
     valid_diagnoses = Sample.all.pluck(:disease).uniq
     valid_sexes = Sample.all.pluck(:gender).uniq
     valid_sources = Collaborator.all.pluck(:name).uniq

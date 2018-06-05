@@ -25,6 +25,7 @@ class DataviewController < ApplicationController
     unless current_user.is_kir_bioinformatician?
       redirect_to root_path
     end
+    @versions = KirGenotypeWip.pluck(:method_version).uniq
   end
 
   def single_kir_genotype
@@ -40,6 +41,21 @@ class DataviewController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: KirWipDatatable.new(view_context)}
+    end
+  end
+
+  def method_version
+    unless current_user.is_kir_bioinformatician?
+      redirect_to root_path
+    end
+    @current_version = params[:method_version]
+    @versions = KirGenotypeWip.pluck(:method_version).uniq
+  end
+
+  def method_version_data
+    respond_to do |format|
+      format.html
+      format.json { render json: MethodVersionDatatable.new(view_context, params[:method_version])}
     end
   end
 

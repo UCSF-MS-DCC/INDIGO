@@ -21,7 +21,7 @@
 //= require chartkick
 //= require bootstrap-table
 //= require trix
-
+//= require bootstrap-datepicker
 
 //spinner control
 $(document).on("turbolinks:click", function() {

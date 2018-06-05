@@ -1,27 +1,40 @@
 <div class="container" id="main-view">
 
-  <div class="row">
-    <div class="col-sm-12" style="overflow-x:scroll;">
-      <br>
-      <table id="kir-work-in-progress-table" class="table table-striped table-bordered" data-source="<%= dataview_sample_status_url(format:"json") %>">
-        <thead>
-        <tr>
-          <th>INDIGO ID</th>
-          <th>Locus</th>
-          <th>Method</th>
-          <th>Batch</th>
-          <th>Genotype</th>
-          <th>Status</th>
-          <th>Raw Data Directory</th>
-          <th>KIR Extracted Directory</th>
-          <th>Output Directory</th>
-          <th>Versions</th>
-        </tr>
-        </thead>
-        <tbody>
-        </tbody>
-      </table>
+<div class="row">
+  <div class="col-sm-3">
+    <div class="dropdown" style="margin-top:20px;">
+      <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%">Select a method version&nbsp;<span class="caret"></span></button>
+      <ul class="dropdown-menu">
+        <% @versions.each do |version| %>
+          <li><%= link_to version, dataview_method_version_path(method_version: version) %></li>
+        <% end %>
+      </ul>
     </div>
   </div>
+</div>
+<div class="row">
+  <div class="col-sm-12" style="overflow-x:scroll;">
+    <br>
+    <table id="kir-work-in-progress-table" class="table table-striped table-bordered">
+      <thead>
+      <tr>
+        <th>INDIGO ID</th>
+        <th>Locus</th>
+        <th>Method</th>
+        <th>Batch</th>
+        <th>Genotype</th>
+        <th>Status</th>
+        <th>N Versions</th>
+        <th>This Version</th>
+        <th>Raw Data Directory</th>
+        <th>KIR Extracted Directory</th>
+        <th>Output Directory</th>
+      </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
 
 </div>

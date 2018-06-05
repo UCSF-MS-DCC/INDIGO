@@ -277,12 +277,60 @@ $(document).on("turbolinks:load", function() {
               }},
           {"render": function(data, type, row, meta) {
                   return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
               }}
       ],
       "paging":true,
       "lengthMenu":[10,25,50,100,250,1000]
-  })
+  });
 
+  var method_version = $('#version-date').text();
+
+    var kir_method_version_table = $('#kir-method-version-table').DataTable({
+        "autoWidth":false,
+        "pageLength":100,
+        "bServerSide":true,
+        "bProcessing":true,
+        "bPaginate":true,
+        "ajax":{"url":'/dataview/method_version_data.json', "data": function(d) { d.method_version = method_version } },
+        "pagingType":"full_numbers",
+        "columns": [
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }}
+        ],
+        "paging":true,
+        "lengthMenu":[10,25,50,100,250,1000]
+    });
 
     var allele_frequencies_table = $('#allele-frequencies-table').DataTable({
         "autoWidth":false,

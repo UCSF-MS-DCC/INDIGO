@@ -80,42 +80,6 @@ class Api::V2Controller < ApplicationController
 
   def kir_work_in_progress
 
-    @user = User.find_by(authentication_token: params[:user_token], email:params[:user_email])
-    if !@user || !@user.is_kir_bioinformatician?
-      render json: {"error":"this user not authorized to perform this action"}, status: :forbidden
-      return
-    end
-puts "LINE 264 #{Sample.pluck(:indigo_id)}"
-puts "LINE 265 #{params.to_json.to_hash}"
-    @sample = Sample.find_by(indigo_id:params["indigo_id"])
-puts "LINE 266 #{@sample.to_json}"
-    if !@sample
-      render json: {"error":"no sample with this INDIGO ID found"}, status: :unprocessable_entity
-      return
-    end
-puts "LINE 271"
-    @kir_wip = KirGenotypeWip.find_by(sample_id:@sample.id, locus:kir_work_in_progress_params[:locus], method:kir_work_in_progress_params[:method])
-
-    if @kir_wip
-      puts "KIR WIP FOUND"
-      @kir_wip.update_attributes(kir_work_in_progress_params.except(:indigo_id))
-      render json: ["#{@sample.indigo_id} #{@kir_wip.locus} updated to new version."], status: :accepted
-      return
-    else
-      puts "KIR WIP NOT FOUND"
-      @new_kir_wip = KirGenotypeWip.new(sample_id:@sample.id, genotype:kir_work_in_progress_params[:genotype], locus:kir_work_in_progress_params[:locus], method:kir_work_in_progress_params[:method], method_version:kir_work_in_progress_params[:method_version],
-                                        output_directory:kir_work_in_progress_params[:output_directory], kir_extracted_directory:kir_work_in_progress_params[:kir_extracted_directory], raw_data_directory:kir_work_in_progress_params[:raw_data_directory],
-                                        batch:kir_work_in_progress_params[:batch], status:kir_work_in_progress_params[:status])
-      if @new_kir_wip.save
-        render json: ["#{@sample.indigo_id} #{@new_kir_wip.locus} New Kir Work-in-progress saved"], status: :created
-      else
-        render json: ["#{@sample.indigo_id} #{@new_kir_wip.locus} Kir Work-in-progress failed to save", @new_kir_wip.errors], status: :unprocessable_entity
-      end
-
-      return
-    end
-
-
   end #close def kir_work_in_progress
   private
 
