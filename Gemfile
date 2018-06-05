@@ -47,11 +47,12 @@ gem 'whenever', :require => false
 gem 'paper_trail'
 gem 'bootstrap-table-rails'
 gem 'trix'
+gem 'bootstrap-datepicker-rails'
 # Use serializers for API JSON
 gem 'active_model_serializers', '~>0.10.6'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-gem 'will_paginate'
+gem 'will_paginate', '~> 3.1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
