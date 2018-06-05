@@ -209,59 +209,55 @@ table th, table td {
           </p>
 
           <p class="explanation">
-            To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the query parameters in this format: category=value. Multiple parameters may be added, separated by an ampersand <b>&amp;</b>.
+            To append a query string to your API call, add a question mark <b>?</b> to the end of the API endpoint, followed by the query parameters in this format: category=value. Multiple parameters may be added, delimited by an ampersand <b>&amp;</b>.
           </p>
           <h4>Example:</h4>
           <p class="explanation">To retrieve sample data pertaining only to females, a curl request to the API would look like this:</p>
           <pre>
-curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/sample<b>?sex=f</b>"
+curl -X GET -H "X-User-Email:..." -H "X-User-Token:..." "https://indigo.ucsf.edu/api/v2/sample<b>?sex=f</b>"
 </pre>
           <p class="explanation">To retrieve sample data pertaining only to females with a diagnosis of multiple sclerosis, a curl request to the API would look like this:</p>
           <pre>
-curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/sample<b>?diagnosis=MS&amp;sex=f</b>"
+curl -X GET -H "X-User-Email:..." -H "X-User-Token:..." "https://indigo.ucsf.edu/api/v2/sample<b>?diagnosis=MS&amp;sex=f</b>"
 </pre>
 
         <p class="explanation">
           A category should only be used once in a query string. An API call that uses a category more than once, such as:
-          <pre>curl -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/sample?diagnosis=MS&diagnosis=PD"</pre>
+          <pre>curl -X GET -H "X-User-Email:..." -H "X-User-Token:..." "https://indigo.ucsf.edu/api/v2/sample?<b>diagnosis=MS&diagnosis=PD</b>"</pre>
           will return sample data where the diagnosis code equals PD. The first parameter of diagnosis=MS is overwritten.
         </p>
         <p class="explanation" style="text-decoration:underline;">
           <i><b>Only records for samples that meet ALL filtering criteria will be returned. If no records meet the query string criteria, no data will be returned.</b></i>.
         </p>
 
-        <h4>Valid query string categories and values (api v2 endpoints)</h4>
+        <h4>Valid INDIGO query string categories and accepted values (api v2 endpoints)</h4>
         <table class-"table-bordered">
           <thead>
-            <tr><th>endpoint</th><th>diagnosis</th><th>sex</th><th>controls<sup>1</sup></th><th>gene[]<sup>2</sup></th><th>source<sup>3</sup></th><th>study<sup>4</sup></th></tr>
+            <tr><th>endpoint</th><th>diagnosis</th><th>sex</th><th>controls<sup>1</sup></th><th>gene[]<sup>2</sup></th><th>source<sup>3</sup></th><th>page<sup>4</sup></th></tr>
           </thead>
           <tbody>
-            <tr><td>api/v2/sample</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td><i>not available for this endpoint</i></td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
-            <tr><td>api/v2/hla</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>a, b, c, dpa1, dqa1, drb1, dpb1, dqb1, drbo</td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
-            <tr><td>api/v2/kir</td><td>MS, PD, MG, NMO, SCZD, HC</td><td>f, m</td><td>t, f</td><td>2dl1, 2dl2, 2dl3, 2dl4, 2dl5a, 2dl5b, 2dp1, 2ds1, 2ds2, 2ds3, 2ds4, 2ds5, 3dl1, 3dl2, 3dl3, 3ds1</td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
+            <tr><td>api/v2/sample</td><td>MS, PD, MG, NMO, HC</td><td>f, m</td><td>t, f</td><td><i>not available for this endpoint</i></td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
+            <tr><td>api/v2/hla</td><td>MS, PD, MG, NMO, HC</td><td>f, m</td><td>t, f</td><td>a, b, c, dpa1, dqa1, drb1, dpb1, dqb1, drbo</td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
+            <tr><td>api/v2/kir</td><td>MS, PD, MG, NMO, HC</td><td>f, m</td><td>t, f</td><td>2dl1, 2dl2, 2dl3, 2dl4, 2dl5a, 2dl5b, 2dp1, 2ds1, 2ds2, 2ds3, 2ds4, 2ds5, 3dl1, 3dl2, 3dl3, 3ds1</td><td><i>Special: see below</i></td><td><i>Special: see below</i></td></tr>
           </tbody>
         </table>
         <sup>1</sup><b>controls</b>: Setting this key to 't' will cause the API to return data from healthy control subjects alongside data from disease-affected subjects. Default behavior is to not include controls.<br>
         <sup>2</sup><b>gene[]</b>: Setting gene[]= to a valid parameter (see table above) will cause the API to return data points for only this gene. Default behavior is to include data from all genes.<b> This parameter may be reused with different values within a query string to retrieve data for multiple genes (it is not overwritten as other query string parameters are). See hla and kir endpoint documentation for examples.</b><br>
-        <i>If you are using curl to query the API, you must include the -g flag if using this query parameter</i><br>
+        <i><b>NOTE:</b> If you are using curl to query the API, you must include the -g (globbing) flag if using this query parameter</i><br>
         example:
-        <pre>curl -g -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:-f6c9er-n83wqJKyyBc6" "https://indigo.ucsf.edu/api/v2/hla?disease=MS&gene[]=drb1&gene[]=dqb1"</pre>
-        <sup>3</sup><b>sample_source</b>: Returns data only for samples from a single named INDIGO contributor site. Default behavior is to return data from all sites the user is authorized for.<br>
-        <sup>4</sup><b>study</b>: To receive records <b>only</b> from a specific study (e.g UCSF MS trios or NIH NeuroX dataset), include study=<i>studyname</i> as part of the query string. Cases and controls from the study will be returned
-        <b>Accepted values for this parameter are: ucsf, ucsfmstrios, ucsfmsfamilies,
-        ucsfepic, nihneurox, nihcoriell, mjffbiofind, mjffdatatop, oslo, besta1, besta2</b><br>
-        example:
-        <pre>curl -g -X GET -H "X-User-Email:user@example.com" -H "X-User-Token:abc123" "https://indigo.ucsf.edu/api/v2/hla?study=nihneurox"</pre>
-        <h4>Valid query string categories and values (v1)</h4>
+        <pre>curl -g -X GET -H "X-User-Email:..." -H "X-User-Token:..." "https://indigo.ucsf.edu/api/v2/hla?&gene[]=drb1&gene[]=dqb1"</pre>
+        <sup>3</sup><b>source</b>: Returns data only for samples from a single named INDIGO contributor site. Default behavior is to return data from all sites the user is authorized for. Access to data from contributing sites other than a user's own is
+            subject to the discretion of the INDIGO data managers acting on behalf of the INDIGO consortium. <b>accepted values for this category are: UCSF, University of Miami, Guthy-Jackson Foundation, Mayo Clinic, University of Texas - Southwestern,
+            Oxford University, Kyushu University, Karolinska Institute, Oslo University Hospital, UCSF/Mayo Clinic, Besta Institute, MJ Fox Foundation, NIH</b><br>
 
-        <table class="table-bordered">
-          <tr><th>disease</th><th>sex</th><th>minage<sup> 1</sup></th><th>maxage<sup> 1</sup></th><th>hla<sup> 2</sup></th><th>kir<sup> 2</sup></th></tr>
-          <tr><td>PD, MS, MG, NMO, SCZD, HC</td><td>F, M</td><td>any whole number</td><td>any whole number</td><td>true, false</td><td>true, false</td></tr>
-        </table>
-        <sup>1</sup> Sets the minimum/maximum age of onset for returned samples.<br>
-        <sup>2</sup> Must set these to <i>true</i> to receive hla/kir data, otherwise only phenotypic and catalog data will be returned.
+        <sup>4</sup><b>page:</b> To ensure server reliability and speed up queries, the INDIGO API breaks up large data sets into smaller subsets of 500 records. For data sets larger than 500 records, it is necessary to make multiple calls to the API to download all records.
+            To return subsets beyond the first 500 records, attach the <b>page=</b> category to a query string along with the number of the page to return.<br>
+            example:
+            <pre>curl -g -X GET -H "X-User-Email:..." -H "X-User-Token:..." "https://indigo.ucsf.edu/api/v2/hla?disease=ms"</pre>
+            The above query will return the first 500 HLA records of INDIGO patients with MS.<br><br>
+            <pre>curl -g -X GET -H "X-User-Email:..." -H "X-User-Token:..." "https://indigo.ucsf.edu/api/v2/hla?disease=ms<b>&page=2</b>"</pre>
+            This query will return records 501-1000 of the same data set
 
-        </div>
 
         <h2>API Output</h2>
         <p class="explanation">

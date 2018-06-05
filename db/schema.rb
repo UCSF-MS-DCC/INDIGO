@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223202521) do
+ActiveRecord::Schema.define(version: 20180530235337) do
+
+  create_table "allele_frequencies", force: :cascade do |t|
+    t.string   "locus"
+    t.string   "genotype"
+    t.string   "disease"
+    t.integer  "n_of_cohort"
+    t.integer  "collaborator_id"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+    t.decimal  "frequency",       precision: 4, scale: 3
+    t.index ["collaborator_id"], name: "index_allele_frequencies_on_collaborator_id"
+  end
 
   create_table "batch_gwas", force: :cascade do |t|
     t.integer  "batch_id"
@@ -159,6 +171,7 @@ ActiveRecord::Schema.define(version: 20180223202521) do
     t.datetime "updated_at",              null: false
     t.text     "genotype"
     t.integer  "sample_id"
+    t.boolean  "most_recent"
     t.index ["sample_id"], name: "index_kir_genotype_wips_on_sample_id"
   end
 
