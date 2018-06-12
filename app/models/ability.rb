@@ -12,6 +12,12 @@ class Ability
       can [:sample, :hla, :kir], :all
       cannot :access, :rails_admin
       cannot :manage, :rails_admin
+    elsif user.has_role?(:user)
+      can [:sample, :hla, :kir], Sample, Sample.all do |sample|
+        sample.collaborator_id == Collaborator.find_by(name:user.affiliation).id
+      end
+      cannot :access, :rails_admin
+      cannot :manage, :rails_admin
     else
       can :read, :all
       cannot :access, :rails_admin
