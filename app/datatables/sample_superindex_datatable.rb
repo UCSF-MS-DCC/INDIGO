@@ -23,7 +23,7 @@ class SampleSuperindexDatatable
 
         [
           sample.indigo_id,
-          sample.sample_source,
+          sample.collaborator[:name],
           sample.sample_source_study,
           sample.sample_source_identifier,
           sample.disease,
