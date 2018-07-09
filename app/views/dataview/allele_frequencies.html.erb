@@ -6,7 +6,7 @@
         <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" style="width:100%"></button>
         <ul class="dropdown-menu">
           <% AlleleFrequency.pluck(:genotype).uniq.each do  |g| %>
-            <li><%= link_to c %><span class="caret"></span></li>
+            <li><%= link_to g %><span class="caret"></span></li>
           <% end %>
         </ul>
       </div>
