@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     get 'v2/sample'
     get 'v2/hla'
     get 'v2/kir'
-    post 'v2/kir_work_in_progress'
+    post 'v2/kir_pipeline'
   end
   get 'topics/index'
 
@@ -75,6 +75,10 @@ Rails.application.routes.draw do
   get 'dataview/hlas_to_json'
 
   get 'dataview/kirs_to_json'
+
+  get 'dataview/single_kir_genotype_version_table'
+
+  get 'dataview/single_kir_wip_versions_data'
 
   get 'dataview/superindex_samples_to_json'
 

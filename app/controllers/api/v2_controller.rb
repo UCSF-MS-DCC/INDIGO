@@ -1,9 +1,9 @@
 class Api::V2Controller < ApplicationController
   acts_as_token_authentication_handler_for User
-  before_action :authenticate_user!
+ # before_action :authenticate_user!
   before_action :set_page, except: [:kir_work_in_progress]
   protect_from_forgery with: :null_session, if: Proc.new {|c| c.request.format.json? }
-  load_and_authorize_resource :sample, :parent => false
+  #load_and_authorize_resource :sample, :parent => false
   include Api::V2Helper
   before_action only:[:sample, :hla, :kir] do
     @samples = apply_query_filters(@samples, query_string_params)
@@ -76,18 +76,43 @@ class Api::V2Controller < ApplicationController
       render json: ["No KIR":"Your request returned no matching KIR."], status: :no_content
     end
 
-  end
+  end # closes kir action definition
 
-  def kir_work_in_progress
+  def kir_pipeline
+    @sample = Sample.find_by(indigo_id:kir_pipeline_params[:indigo_id])
+    @kir_wip = @sample.kir_genotype_wips.find_by(locus:kir_pipeline_params[:locus])
+    create_params =  kir_pipeline_params.permit(params.keys).to_h
+    create_params.delete(:indigo_id)
+    if @sample && @kir_wip
+      puts "SAMPLE HAS KIR WIP FOR THIS LOCUS"
+      if @kir_wip.update_attributes(create_params)
+        render json: [@kir_wip], each_serializer: KirWipSerializer, status: :ok
+      else
+        render json: @kir_wip.errors, status: :unprocessable_entity
+      end
 
-  end #close def kir_work_in_progress
+    elsif @sample && !@kir_wip
+      puts "SAMPLE HAS NO KIR WIP FOR THIS LOCUS"
+      create_params['sample_id'] = @sample.id
+      @kw = KirGenotypeWip.new(create_params)
+      if @kw.save
+        render json: [@kw], each_serializer: KirWipSerializer, status: :ok
+      else
+        render json: [@kw_errors], status: :unprocessable_entity
+      end
+    else
+      puts "NO SAMPLE FOR THIS INDIGO ID"
+      render json: ["NOT NOW"], status: :unprocessable_entity
+    end
+
+  end #close def kir_pipeline
   private
 
     def query_string_params
       params.permit(:page, :diagnosis, :sex, :controls, :source, :gene => [])
     end
 
-    def kir_work_in_progress_params
+    def kir_pipeline_params
       params.permit("locus", "status", "output_directory", "kir_extracted_directory", "raw_data_directory", "batch", "method", "method_version", "genotype", "indigo_id")
     end
 

@@ -37,6 +37,18 @@ class DataviewController < ApplicationController
     @kir_wips = KirGenotypeWip.where(indigo_id:indigo_id, locus:locus).order("locus ASC").order("method ASC")
   end
 
+  def single_kir_genotype_version_table
+    @sample_indigo_id = params[:indigo_id]
+    @sample_locus = params[:locus]
+  end
+
+  def single_kir_wip_versions_data
+    respond_to do |format|
+      format.html
+      format.json { render json: SingleKirWipVersionsDatatable.new(view_context, params[:indigo_id], params[:locus]) }
+    end
+  end
+
   def kir_wip_data
     respond_to do |format|
       format.html
@@ -124,7 +136,11 @@ class DataviewController < ApplicationController
   end
 
   def modal_content
-
+    puts params[:indigo_id]
+    @sample_id = Sample.find_by(indigo_id:params[:indigo_id]).sample_source_identifier
+    respond_to do |format|
+      format.json { render json: {"study_id": @sample_id} }
+    end
   end
 
   def allele_frequencies

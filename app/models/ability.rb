@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
 
     if user.has_role?(:admin)
+      puts "IS ADMIN"
       can :manage, :all
       can :access, :rails_admin
       # can :dashboard

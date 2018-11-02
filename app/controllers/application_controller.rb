@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   respond_to :html
 
   # before_action :set_paper_trail_whodunnit
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :null_session
 
   # Issues with configuration with devise.
   before_action :configure_sanitized_params, if: :devise_controller?

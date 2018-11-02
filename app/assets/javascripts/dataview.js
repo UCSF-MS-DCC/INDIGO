@@ -5,8 +5,6 @@ $(document).on("turbolinks:load", function() {
 
   var superindex_disease = $('#superindex-disease').text();
 
-  console.log(superindex_disease);
-
   var stacy_table = $('#stacy-samples-table').DataTable({
     "autoWidth":false,
     "pageLength":100,
@@ -179,7 +177,7 @@ $(document).on("turbolinks:load", function() {
     "ajax":{"url":'/dataview/samples_superindex.json', "data": function(d) { d.disease = superindex_disease } },
     "pagingType":"full_numbers",
     "paging":true,
-      "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
+    "lengthMenu":[10,25,50,100,250,500,1000,2500,5000,10000],
       "dom": "<'row'<'col-sm-2'l><'col-sm-2 col-sm-offset-8'f>>" + "<'row'<'col-sm-4 col-sm-offset-5'B>>" + "<'row'<'col-sm-12'rtip>>",
       "buttons": [
           {
@@ -190,7 +188,59 @@ $(document).on("turbolinks:load", function() {
                   "columns": [0, ':visible']
               }
           }
+      ],
+      "columns": [
+          {"render": function(data, type, row, meta) {
+                  if (data) {
+                      return '<a data-toggle='+"modal"+' data-target="#sample-modal" >'+data+'</a>';
+                  }
+                  else {
+                      return '-';
+                  }
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }},
+          {"render": function(data, type, row, meta) {
+                  return data;
+              }}
       ]
+  });
+
+  $('#samples-superindex-table').on('draw.dt', function() {
+      $('[data-toggle=modal]').on('click', function(e){
+          e.preventDefault();
+          //console.log($(this).data("target"))
+           $(this).data('triggered', true);
+          //console.log($(this).data('triggered'))
+          $.get('/dataview/modal_content.json?indigo_id='+e.target.text, function(data) {
+             if ($(this).data('triggered')) {
+                 $('#modal-indigo-id').text(data.study_id);
+                 $(this).modal().data('triggered', false)
+             }
+
+          });
+
+      });
+
   });
 
   var hlas_superindex_table = $('#hlas-superindex-table').DataTable({
@@ -267,7 +317,11 @@ $(document).on("turbolinks:load", function() {
                   return data;
               }},
           {"render": function(data, type, row, meta) {
-                  return data;
+                  if (data) {
+                      return '<a href="/dataview/single_kir_genotype_version_table?indigo_id='+row[0]+'&locus='+row[1]+'">'+data+'</a>';
+                  } else {
+                      return "N/A"
+                  }
               }},
           {"render": function(data, type, row, meta) {
                   return data;
@@ -285,7 +339,51 @@ $(document).on("turbolinks:load", function() {
       "paging":true,
       "lengthMenu":[10,25,50,100,250,1000]
   });
-
+    var single_wip_version_indigo_id = $('#sample-indigo-id').text();
+    var single_wip_version_locus = $('#sample-locus').text();
+    var single_kir_work_in_progress_version_table = $('#single-kir-work-in-progress-version-table').DataTable({
+        "autoWidth":false,
+        "pageLength":100,
+        "bServerSide":true,
+        "bProcessing":true,
+        "bPaginate":true,
+        "ajax": { "url":'/dataview/single_kir_wip_versions_data.json', "data": function(d) { d.indigo_id = single_wip_version_indigo_id, d.locus = single_wip_version_locus} },
+        "pagingType":"full_numbers",
+        "columns": [
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }},
+            {"render": function(data, type, row, meta) {
+                    return data;
+                }}
+        ],
+        "paging":true,
+        "lengthMenu":[10,25,50,100,250,1000]
+    });
   var method_version = $('#version-date').text();
 
     var kir_method_version_table = $('#kir-method-version-table').DataTable({

@@ -26,7 +26,7 @@ class KirWipDatatable
           k.batch,
           k.genotype,
           k.status,
-          KirGenotypeWip.where(sample_id:k.sample.id).where(locus:k.locus).count,
+          k.versions.count > 1 ? k.versions.count - 1 : k.versions.count,
           k.method_version,
           k.raw_data_directory,
           k.kir_extracted_directory,
@@ -41,7 +41,7 @@ class KirWipDatatable
   end
 
   def fetch_kir_wips
-    kir_wips = KirGenotypeWip.latest.order("#{sort_column} #{sort_direction}")
+    kir_wips = KirGenotypeWip.order("#{sort_column} #{sort_direction}")
     kir_wips = kir_wips.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
 
     kir_wips
