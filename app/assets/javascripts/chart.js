@@ -67,7 +67,7 @@ $(document).on("turbolinks:load", function(){
         g.append("text")
             .attr("class", "y-axis-label")
             .attr("x", - (height / 2))
-            .attr("y",-40)
+            .attr("y",-70)
             .attr("font-size", "16px")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
@@ -80,7 +80,7 @@ $(document).on("turbolinks:load", function(){
     // BEGIN CHART 2
     $.get('/chart/index_panel_two_data.json', function(data) {
 
-        var margin = {left:75, right:25, bottom:50, top:50}; //position the graph within the svg using these values
+        var margin = {left:100, right:25, bottom:50, top:50}; //position the graph within the svg using these values
         var width = 500 - margin.left - margin.right; //defines the width of the visualization
         var height = 500 - margin.top - margin.bottom; //defines the height of the visualization
 
@@ -170,7 +170,7 @@ $(document).on("turbolinks:load", function(){
         g.append("text")
             .attr("class", "y-axis-label")
             .attr("x", - ((height / 2) + 30))
-            .attr("y",-40)
+            .attr("y",-70)
             .attr("font-size", "16px")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
@@ -236,7 +236,7 @@ $(document).on("turbolinks:load", function(){
     // BEGIN CHART 3
     $.get('/chart/index_panel_three_data.json', function(data) {
         console.log(data);
-        var margin = {left:75, right:25, bottom:50, top:50}; //position the graph within the svg using these values
+        var margin = {left:100, right:25, bottom:50, top:50}; //position the graph within the svg using these values
         var width = 500 - margin.left - margin.right; //defines the width of the visualization
         var height = 500 - margin.top - margin.bottom; //defines the height of the visualization
 
@@ -326,7 +326,7 @@ $(document).on("turbolinks:load", function(){
         g.append("text")
             .attr("class", "y-axis-label")
             .attr("x", - ((height / 2) + 30))
-            .attr("y",-40)
+            .attr("y",-70)
             .attr("font-size", "16px")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
