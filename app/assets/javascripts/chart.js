@@ -235,7 +235,7 @@ $(document).on("turbolinks:load", function(){
 
     // BEGIN CHART 3
     $.get('/chart/index_panel_three_data.json', function(data) {
-        console.log(data);
+
         var margin = {left:100, right:25, bottom:50, top:50}; //position the graph within the svg using these values
         var width = 500 - margin.left - margin.right; //defines the width of the visualization
         var height = 500 - margin.top - margin.bottom; //defines the height of the visualization
@@ -247,7 +247,7 @@ $(document).on("turbolinks:load", function(){
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
         var stack = d3.stack()
-            .keys(['kir_genotypes_available', 'raw_kir_data_untyped', 'no_raw_kir_data']);
+            .keys(['kir_genotypes_available', 'raw_kir_data_untyped', 'raw_kir_data_unavailable']);
         var series = stack(data);
 
         var x = d3.scaleBand()
@@ -257,7 +257,7 @@ $(document).on("turbolinks:load", function(){
             .paddingOuter(0.2)
 
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return d.kir_genotypes_available + d.raw_kir_data_untyped + d.no_raw_kir_data })])
+            .domain([0, d3.max(data, function(d) { return d.kir_genotypes_available + d.raw_kir_data_untyped + d.raw_kir_data_unavailable })])
             .range([height - 75 ,0])
 
         var color = d3.scaleOrdinal()
