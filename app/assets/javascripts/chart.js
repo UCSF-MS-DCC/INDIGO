@@ -9,7 +9,7 @@ $(document).on("turbolinks:load", function(){
         var height = 650 - margin.top - margin.bottom; //defines the height of the visualization
 
         var keys = Object.keys(data);
-        //var values = keys.map(k => +data[k]);
+        //var values = "REMOVED";
 
         var g = d3.select('#chart1')
             .append('svg')
@@ -24,10 +24,10 @@ $(document).on("turbolinks:load", function(){
             .paddingInner(0.2)
             .paddingOuter(0.2);
 
-        var maxValue = d3.max(values, function(v) { return v });
+        // var maxValue = d3.max(values, function(v) { return v });
 
         var y = d3.scaleLinear()
-            .domain([0, maxValue])
+            .domain([0, 1])
             .range([height,0]);
 
         var bars = g.selectAll("rect")
