@@ -99,6 +99,8 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    d3-rails (5.7.0)
+      railties (>= 3.1)
     debug_inspector (0.0.2)
     devise (4.2.0)
       bcrypt (~> 3.0)
@@ -371,6 +373,7 @@ DEPENDENCIES
   capistrano3-puma
   chartkick
   coffee-rails (~> 4.2)
+  d3-rails
   devise
   factory_girl_rails
   faker
@@ -414,4 +417,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.14.6
+   1.16.2

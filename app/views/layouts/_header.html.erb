@@ -31,6 +31,7 @@
                   <ul class="dropdown-menu" role="menu">
                     <li><%= link_to "Overall Status of Sample Processing", welcome_progress_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom' %></li>
                     <li><%= link_to "Processing Status of Individual Samples", dataview_stacy_path %></li>
+                    <li><%= link_to "Sample Processing Progress Graph", chart_index_path %></li>
                   </ul>
                 </li>
                 <% else %>

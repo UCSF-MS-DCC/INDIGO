@@ -12,6 +12,11 @@ Rails.application.routes.draw do
     get 'v2/kir'
     post 'v2/kir_pipeline'
   end
+  get 'chart/index'
+  get 'chart/index_panel_one_data'
+  get 'chart/index_panel_two_data'
+  get 'chart/index_panel_three_data'
+
   get 'topics/index'
 
   get 'welcome/progress'

@@ -15,13 +15,13 @@
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
 //= require turbolinks
-//= require_tree .
 //= require bootstrap
 //= require gritter
-//= require chartkick
+//= require d3
 //= require bootstrap-table
 //= require trix
 //= require bootstrap-datepicker
+//= require_tree .
 
 //spinner control
 $(document).on("turbolinks:click", function() {

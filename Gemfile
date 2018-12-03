@@ -48,6 +48,7 @@ gem 'paper_trail'
 gem 'bootstrap-table-rails'
 gem 'trix'
 gem 'bootstrap-datepicker-rails'
+gem 'd3-rails'
 # Use serializers for API JSON
 gem 'active_model_serializers', '~>0.10.6'
 # Use Capistrano for deployment

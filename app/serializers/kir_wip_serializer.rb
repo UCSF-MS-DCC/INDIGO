@@ -6,7 +6,7 @@ class KirWipSerializer < ActiveModel::Serializer
   end
 
   def genotype_versions
-    object.versions.size > 1 ? object.versions.size -1 : object.versions.size
+    object.versions.size > 1 ? object.versions.size.to_i - 1 : object.versions.size
   end
 
 end

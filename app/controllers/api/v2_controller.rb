@@ -44,7 +44,7 @@ class Api::V2Controller < ApplicationController
         render json: @samples, each_serializer: HlaSerializer, genelist:genes_to_serialize, status: :ok
       end
     else
-      render json: ["No HLA":"Your request returned no matching HLA."], status: :no_content
+      render json: ["Your request returned no matching HLA."], status: :no_content
     end
 
   end
@@ -73,26 +73,30 @@ class Api::V2Controller < ApplicationController
         render json: @samples, each_serializer: KirSerializer, genelist:genes_to_serialize, status: :ok
       end
     else
-      render json: ["No KIR":"Your request returned no matching KIR."], status: :no_content
+      render json: ["Your request returned no matching KIR."], status: :no_content
     end
 
   end # closes kir action definition
 
   def kir_pipeline
+    @user = User.find_by(email:params[:user_email])
+    if !@user.is_kir_bioinformatician?
+      render json: ["You are not authorized to use this endpoint"], status: :unauthorized
+      return
+    end
     @sample = Sample.find_by(indigo_id:kir_pipeline_params[:indigo_id])
     @kir_wip = @sample.kir_genotype_wips.find_by(locus:kir_pipeline_params[:locus])
+
     create_params =  kir_pipeline_params.permit(params.keys).to_h
     create_params.delete(:indigo_id)
+
     if @sample && @kir_wip
-      puts "SAMPLE HAS KIR WIP FOR THIS LOCUS"
       if @kir_wip.update_attributes(create_params)
         render json: [@kir_wip], each_serializer: KirWipSerializer, status: :ok
       else
-        render json: @kir_wip.errors, status: :unprocessable_entity
+        render json: [@kir_wip.errors], status: :unprocessable_entity
       end
-
     elsif @sample && !@kir_wip
-      puts "SAMPLE HAS NO KIR WIP FOR THIS LOCUS"
       create_params['sample_id'] = @sample.id
       @kw = KirGenotypeWip.new(create_params)
       if @kw.save
@@ -101,8 +105,7 @@ class Api::V2Controller < ApplicationController
         render json: [@kw_errors], status: :unprocessable_entity
       end
     else
-      puts "NO SAMPLE FOR THIS INDIGO ID"
-      render json: ["NOT NOW"], status: :unprocessable_entity
+      render json: ["No Sample with this Indigo ID"], status: :unprocessable_entity
     end
 
   end #close def kir_pipeline
