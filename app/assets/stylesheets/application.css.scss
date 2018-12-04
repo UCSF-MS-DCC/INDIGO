@@ -31,6 +31,9 @@ $light-light-grey: #FAFAFA;
 $seashell: #EEE5DE;
 $navbar-grey: #F8F8F8;
 
+body {
+  background-color: $seashell;
+}
 
 /* Typography */
 .welcome_header {
@@ -41,12 +44,24 @@ $navbar-grey: #F8F8F8;
   color:white;
   padding-top:3.5em;
 }
+
+#footer-block {
+  min-height:100px;
+  border-top:1px solid black;
+  background-color: $indigo;
+}
+#footer-spacer {
+  min-height:10px;
+  background-color: #696969;
+  border-top:2px solid black;
+  border-bottom:2px solid $navbar-grey;
+}
 .footer_header {
-  color: $indigo;
+  color: white;
   font-size: 1.3em;
 }
 .footer-link {
-  color: $indigo;
+  color: white;
 }
 .common_text {
   font-size: 1.3em;
@@ -64,36 +79,6 @@ p {
 
 .table td, th {
   text-align: center;
-}
-/* footer */
-
-footer {
-  margin-top: 45px;
-  padding-top: 5px;
-  border-top: 1px solid #eaeaea;
-  color: #777;
-}
-
-footer a {
-  color: #555;
-}
-
-footer a:hover {
-  color: #222;
-}
-
-footer small {
-  float: left;
-}
-
-footer ul {
-  float: right;
-  list-style: none;
-}
-
-footer ul li {
-  float: left;
-  margin-left: 15px;
 }
 
 /* layout */
@@ -123,7 +108,12 @@ footer ul li {
 .hide-element {
   display: none;
 }
-
+.content-body {
+  border-top:1px solid black;
+  background-color:white;
+  min-height: 100vh;
+  padding-bottom: 30px;
+}
 /* buttons */
 
 .btn-indigo {
@@ -157,16 +147,6 @@ footer ul li {
   border-radius:6px;
 }
 
-/* animation */
-
-.welcome-contain {
-  -webkit-animation-duration: .6s;
-  -webkit-animation-delay: .5s;
-  -moz-animation-duration: .6s;
-  -moz-animation-delay: .5s;
-  -ms-animation-duration: .6s;
-  -ms-animation-delay: .5s;
-}
 /* carousel */
 
 .carousel-control {
