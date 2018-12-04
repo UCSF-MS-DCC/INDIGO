@@ -91,7 +91,7 @@ $(document).on("turbolinks:load", function(){
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
         var stack = d3.stack()
-            .keys(['hla_genotypes_available', 'hla_genotypes_not_available']);
+            .keys(['HLA_genotypes_available', 'samples_sent_to_sequencing_lab']);
         var series = stack(data);
 
         var x = d3.scaleBand()
@@ -101,7 +101,7 @@ $(document).on("turbolinks:load", function(){
             .paddingOuter(0.2)
 
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return d.hla_genotypes_available + d.hla_genotypes_not_available })])
+            .domain([0, d3.max(data, function(d) { return d.HLA_genotypes_available + d.samples_sent_to_sequencing_lab })])
             .range([height - 75 ,0]);
 
         var color = d3.scaleOrdinal()
@@ -247,7 +247,7 @@ $(document).on("turbolinks:load", function(){
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
         var stack = d3.stack()
-            .keys(['kir_genotypes_available', 'raw_kir_data_untyped', 'samples_sent_to_sequencing_lab']);
+            .keys(['KIR_genotypes_available', 'KIR_raw_sequences_to_be_genotyped', 'samples_sent_to_sequencing_lab']);
         var series = stack(data);
 
         var x = d3.scaleBand()
@@ -257,7 +257,7 @@ $(document).on("turbolinks:load", function(){
             .paddingOuter(0.2)
 
         var y = d3.scaleLinear()
-            .domain([0, d3.max(data, function(d) { return d.kir_genotypes_available + d.raw_kir_data_untyped + d.samples_sent_to_sequencing_lab })])
+            .domain([0, d3.max(data, function(d) { return d.KIR_genotypes_available + d.KIR_raw_sequences_to_be_genotyped + d.samples_sent_to_sequencing_lab })])
             .range([height - 75 ,0])
 
         var color = d3.scaleOrdinal()
