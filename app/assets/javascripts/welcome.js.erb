@@ -3,7 +3,7 @@
 // You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on("turbolinks:load", function(){
   var collaborator_status_table = $('#collaborators-progress-table').DataTable({
-    "autoWidth":false,
+    "autoWidth":true,
     "pageLength":25,
     "bServerSide":true,
     "bProcessing":true,
@@ -101,5 +101,5 @@ $(document).on("turbolinks:load", function(){
     } //close footerCallback definition
   });
 
-
+  collaborator_status_table.columns.adjust().draw();
 });
