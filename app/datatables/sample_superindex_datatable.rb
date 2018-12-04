@@ -20,10 +20,11 @@ class SampleSuperindexDatatable
 
     def data
       samples.map do |sample|
+        col = sample.collaborator ? sample.collaborator.name : "-"
 
         [
           sample.indigo_id,
-          "-",
+          col,
           sample.sample_source_study,
           sample.sample_source_identifier,
           sample.disease,
