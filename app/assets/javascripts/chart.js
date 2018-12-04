@@ -428,7 +428,15 @@ $(document).on("turbolinks:load", function(){
             .attr("y", function(d,i) { return y(data[d]) })
             .attr("height",function(d,i) { return height - y(data[d]) })
             .attr("width", x.bandwidth)
-            .attr("fill", "#2B46E2");
+            .attr("fill", "#2B46E2")
+            .on("mouseover", function() { tooltip.style("display", null); })
+            .on("mouseout", function() { tooltip.style("display", "none"); })
+            .on("mousemove", function(d) {
+                var xPosition = d3.mouse(this)[0] - 30;
+                var yPosition = d3.mouse(this)[1] - 45;
+                tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                tooltip.select("text").text(data[d]);
+            });
 
         var xAxisCall = d3.axisBottom(x);
         g.append("g")
@@ -464,7 +472,24 @@ $(document).on("turbolinks:load", function(){
             .attr("font-size", "16px")
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
-            .text("Samples with KIR locus genotyped")
+            .text("Samples with KIR locus genotyped");
+        
+        var tooltip = g.append("g")
+            .attr("class", "graph-tooltip")
+            .style("display", "none");
+
+        tooltip.append("rect")
+            .attr("width", 45)
+            .attr("height", 30)
+            .attr("fill", "black");
+
+        tooltip.append("text")
+            .attr("x", 22.5)
+            .attr("dy", "1.2em")
+            .style("text-anchor", "middle")
+            .attr("font-size", "16px")
+            .attr("font-weight", "bold")
+            .attr("fill", 'white');
     }); // closes jquery get call
     // END CHART 4
 
