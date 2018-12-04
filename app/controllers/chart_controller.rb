@@ -35,15 +35,15 @@ class ChartController < ApplicationController
     diags.each do |d|
       data.push({:diagnosis => d,:kir_genotypes_available => @samples.where(disease:d).where(kir_raw:true).where(kir_geno:true).count,
                  :raw_kir_data_untyped => @samples.where(disease:d).where(kir_raw:true).where(kir_geno:false).count,
-                 :raw_kir_data_unavailable =>   @samples.where(disease:d).where(kir_raw:false).where(kir_geno:false).count })
+                 :samples_sent_to_sequencing_lab =>   @samples.where(disease:d).where(kir_raw:false).where(kir_geno:false).count })
     end
     # MS patients and controls have multiple values for diagnosis, making special query necessary
     data.push({:diagnosis => "MS",:kir_genotypes_available => @samples.where(disease:["MS", "MS - Confirmed", "MS - reported"]).where(kir_raw:true).where(kir_geno:true).count,
                :raw_kir_data_untyped => @samples.where(disease:["MS", "MS - Confirmed", "MS - reported"]).where(kir_raw:true).where(kir_geno:false).count,
-               :raw_kir_data_unavailable =>   @samples.where(disease:["MS", "MS - Confirmed", "MS - reported"]).where(kir_raw:false).where(kir_geno:false).count })
+               :samples_sent_to_sequencing_lab =>   @samples.where(disease:["MS", "MS - Confirmed", "MS - reported"]).where(kir_raw:false).where(kir_geno:false).count })
     data.push({:diagnosis => "Control",:kir_genotypes_available => @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(kir_raw:true).where(kir_geno:true).count,
                :raw_kir_data_untyped => @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(kir_raw:true).where(kir_geno:false).count,
-               :raw_kir_data_unavailable =>   @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(kir_raw:false).where(kir_geno:false).count })
+               :samples_sent_to_sequencing_lab =>   @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(kir_raw:false).where(kir_geno:false).count })
     render json: data, status: :ok
   end
 end
