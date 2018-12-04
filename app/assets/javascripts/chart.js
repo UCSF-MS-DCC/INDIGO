@@ -388,6 +388,86 @@ $(document).on("turbolinks:load", function(){
     }); // closes jquery get call
     // END CHART 3
 
+    // BEGIN CHART 4
+
+    $.get('/chart/index_panel_four_data.json', function(data) {
+        console.log(data);
+
+        var margin = {left:170, right:25, bottom:50, top:50}; //position the graph within the svg using these values
+        var width = 1000 - margin.left - margin.right; //defines the width of the visualization
+        var height = 450 - margin.top - margin.bottom; //defines the height of the visualization
+
+        var keys = Object.keys(data);
+        var values = keys.map(function(k) { return data[k]; });
+
+        var g = d3.select('#chart4')
+            .append('svg')
+            .attr("width", width + margin.left + margin.right)
+            .attr("height", height + margin.top + margin.bottom)
+            .append("g")
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
+
+        var x = d3.scaleBand()
+            .domain(keys)
+            .range([0,width])
+            .paddingInner(0.1)
+            .paddingOuter(0.2);
+
+        var maxValue = d3.max(values, function(v) { return v });
+
+        var y = d3.scaleLinear()
+            .domain([0, maxValue])
+            .range([height,0]);
+
+        var bars = g.selectAll("rect")
+            .data(keys);
+
+        bars.enter()
+            .append("rect")
+            .attr("x", function(d,i) { return x(d); })
+            .attr("y", function(d,i) { return y(data[d]) })
+            .attr("height",function(d,i) { return height - y(data[d]) })
+            .attr("width", x.bandwidth)
+            .attr("fill", "#2B46E2");
+
+        var xAxisCall = d3.axisBottom(x);
+        g.append("g")
+            .attr("class", "x-axis")
+            .attr("transform", "translate(0,"+ height + ")")
+            .call(xAxisCall)
+            .selectAll("text")
+            .attr("font-size", "10pt");
+
+        var yAxisCall = d3.axisLeft(y);
+        g.append("g")
+            .attr("class", "y-axis")
+            .call(yAxisCall)
+            .selectAll("text")
+            .attr("font-size", "10pt");
+
+        // x axis label
+
+        g.append("text")
+            .attr("class", "x-axis-label")
+            .attr("x", width / 2)
+            .attr("y", height + 40)
+            .attr("font-size", "16px")
+            .attr("text-anchor", "middle")
+            .text("KIR Locus");
+
+        // y axis label
+
+        g.append("text")
+            .attr("class", "y-axis-label")
+            .attr("x", - (height / 2))
+            .attr("y",-70)
+            .attr("font-size", "16px")
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .text("Samples with KIR locus genotyped")
+    }); // closes jquery get call
+    // END CHART 4
+
 });
 
 

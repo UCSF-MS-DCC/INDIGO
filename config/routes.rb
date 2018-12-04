@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'chart/index_panel_one_data'
   get 'chart/index_panel_two_data'
   get 'chart/index_panel_three_data'
+  get 'chart/index_panel_four_data'
 
   get 'topics/index'
 

@@ -46,4 +46,19 @@ class ChartController < ApplicationController
                :samples_sent_to_sequencing_lab =>   @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(kir_raw:false).where(kir_geno:false).count })
     render json: data, status: :ok
   end
+
+  def index_panel_four_data
+    loci = []
+    data = {}
+    Kir.column_names.each do |colname|
+      if colname.match(/^KIR/)
+        loci.push(colname)
+      end
+    end
+    loci.each do |locus|
+      data[locus.split("R")[1]] = Kir.where.not(locus.to_sym => nil).count
+    end
+
+    render json: data, status: :ok
+  end
 end
