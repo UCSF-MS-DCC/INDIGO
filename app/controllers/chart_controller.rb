@@ -59,7 +59,7 @@ class ChartController < ApplicationController
     loci.each do |locus|
       #data[locus.split("R")[1]] = Kir.where.not(locus.to_sym => nil).count
       data.push({:locus => locus.split("R")[1], :Parkinsons_Disease => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease = ?","PD").count,
-                 :Multiple_Sclerosis => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease = ? OR ? OR ?","MS", "MS - Confirmed", "MS - reported").count,
+                 :Multiple_Sclerosis => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease = ? OR samples.disease = ? OR samples.disease = ?","MS", "MS - Confirmed", "MS - reported").count,
                  :Myasthenia_Gravis => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease = ?","MG").count,
                  :Amyotrophic_Lateral_Sclerosis => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease = ?","ALS").count,
                  :Control => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease = ?","HC").count
