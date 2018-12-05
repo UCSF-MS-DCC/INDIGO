@@ -391,14 +391,10 @@ $(document).on("turbolinks:load", function(){
     // BEGIN CHART 4
 
     $.get('/chart/index_panel_four_data.json', function(data) {
-        console.log(data);
-
-        var margin = {left:170, right:25, bottom:50, top:50}; //position the graph within the svg using these values
+        console.log(data)
+        var margin = {left:170, right:25, bottom:50, top:150}; //position the graph within the svg using these values
         var width = 1000 - margin.left - margin.right; //defines the width of the visualization
         var height = 450 - margin.top - margin.bottom; //defines the height of the visualization
-
-        var keys = Object.keys(data);
-        var values = keys.map(function(k) { return data[k]; });
 
         var g = d3.select('#chart4')
             .append('svg')
@@ -407,35 +403,56 @@ $(document).on("turbolinks:load", function(){
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
 
+        var stack = d3.stack()
+            .keys(['Parkinsons_Disease', 'Multiple_Sclerosis', 'Myasthenia_Gravis', 'Amyotrophic_Lateral_Sclerosis', 'Control']);
+        var series = stack(data);
+console.log(series)
         var x = d3.scaleBand()
-            .domain(keys)
+            .domain(data.map(function(d) { return d.locus }))
             .range([0,width])
             .paddingInner(0.1)
             .paddingOuter(0.2);
 
-        var maxValue = d3.max(values, function(v) { return v });
+        // var maxValue = d3.max(values, function(v) { return v });
 
         var y = d3.scaleLinear()
-            .domain([0, maxValue])
+            .domain([0, d3.max(data, function(d) { return d.Parkinsons_Disease + d.Multiple_Sclerosis + d.Myasthenia_Gravis + d.Amyotrophic_Lateral_Sclerosis + d.Control } )])
             .range([height,0]);
 
-        var bars = g.selectAll("rect")
-            .data(keys);
+        var color = d3.scaleOrdinal()
+            .domain(['Parkinsons_Disease', 'Multiple_Sclerosis', 'Myasthenia_Gravis', 'Amyotrophic_Lateral_Sclerosis', 'Control'])
+            .range(["#2B46E2","#A5A3FF", "#7F7DFF", "#625bc4", "#1a32bd"]);
 
-        bars.enter()
-            .append("rect")
-            .attr("x", function(d,i) { return x(d); })
-            .attr("y", function(d,i) { return y(data[d]) })
-            .attr("height",function(d,i) { return height - y(data[d]) })
-            .attr("width", x.bandwidth)
-            .attr("fill", "#2B46E2")
+        g.append("g")
+            .selectAll("g")
+            .data(series)
+            .enter().append("g")
+            .attr("fill", function(d) {
+                return color(d.key)
+            })
+            .selectAll("rect")
+            .data(function(d) {
+                return d;
+            })
+            .enter().append("rect")
+            .attr("x", function(d) {
+                console.log(d)
+                return x(d.data.locus)
+            })
+            .attr("y", function(d) {
+                return y(d[1])
+            })
+            .attr("height", function(d) {
+                return y(d[0]) - y(d[1]);
+            })
+            .attr("width", x.bandwidth())
             .on("mouseover", function() { tooltip.style("display", null); })
             .on("mouseout", function() { tooltip.style("display", "none"); })
             .on("mousemove", function(d) {
                 var xPosition = d3.mouse(this)[0] - 30;
                 var yPosition = d3.mouse(this)[1] - 45;
                 tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
-                tooltip.select("text").text(data[d]);
+                tooltip.select("text").text((d[1] - d[0]) );
             });
 
         var xAxisCall = d3.axisBottom(x);
@@ -473,7 +490,35 @@ $(document).on("turbolinks:load", function(){
             .attr("text-anchor", "middle")
             .attr("transform", "rotate(-90)")
             .text("Samples with KIR locus genotyped");
-        
+
+        // legend
+
+        var legend = g.append("g")
+            .attr("font-size", "12px")
+            .attr("text-anchor", "start")
+            .selectAll("g")
+            .data(series.reverse())
+            .enter().append("g")
+            .attr("transform", function(d, i) {
+                return "translate("+ -750  + ","+ ( -125 + (i * 22)) + ")";
+            });
+        legend.append("rect")
+            .attr("x", width - 50)
+            .attr("width", 19)
+            .attr("height", 19)
+            .attr("fill", function(d) {
+                return color(d.key)
+            });
+
+        legend.append("text")
+            .attr("x", width - 24)
+            .attr("y", 15)
+            .text(function(d) {
+                var str = d.key.split("_").join(" ");
+                return str
+            })
+            .attr("font-size", "14px");;
+
         var tooltip = g.append("g")
             .attr("class", "graph-tooltip")
             .style("display", "none");

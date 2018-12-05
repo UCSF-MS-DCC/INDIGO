@@ -48,15 +48,22 @@ class ChartController < ApplicationController
   end
 
   def index_panel_four_data
+    # for stacked bar chart data package sb :locus , :pd_count, :ms_count, :mg_count, :als_count, :control_count
     loci = []
-    data = {}
+    data = []
     Kir.column_names.each do |colname|
       if colname.match(/^KIR/)
         loci.push(colname)
       end
     end
     loci.each do |locus|
-      data[locus.split("R")[1]] = Kir.where.not(locus.to_sym => nil).count
+      #data[locus.split("R")[1]] = Kir.where.not(locus.to_sym => nil).count
+      data.push({:locus => locus.split("R")[1], :Parkinsons_Disease => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease == ?","PD").count,
+                 :Multiple_Sclerosis => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease == ? OR ? OR ?","MS", "MS - Confirmed", "MS - reported").count,
+                 :Myasthenia_Gravis => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease == ?","MG").count,
+                 :Amyotrophic_Lateral_Sclerosis => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease == ?","ALS").count,
+                 :Control => Kir.joins(:sample).where.not(locus.to_sym => nil).where("samples.disease == ?","HC").count
+      });
     end
 
     render json: data, status: :ok
