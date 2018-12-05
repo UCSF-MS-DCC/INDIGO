@@ -185,19 +185,19 @@ $(document).on("turbolinks:load", function(){
             .data(series.reverse())
             .enter().append("g")
             .attr("transform", function(d, i) {
-                return "translate("+ -325 + ","+ (i * 25) + ")";
+                return "translate("+ -325 + ","+ (i * 18) + ")";
             });
         legend.append("rect")
             .attr("x", width - 50)
-            .attr("width", 19)
-            .attr("height", 19)
+            .attr("width", 12)
+            .attr("height", 12)
             .attr("fill", function(d) {
                 return color(d.key)
             });
 
         legend.append("text")
-            .attr("x", width - 24)
-            .attr("y", 15)
+            .attr("x", width - 30)
+            .attr("y", 12)
             .text(function(d) {
                 var str = d.key.split("_").join(" ");
                 return str
@@ -341,19 +341,19 @@ $(document).on("turbolinks:load", function(){
             .data(series.reverse())
             .enter().append("g")
             .attr("transform", function(d, i) {
-                return "translate("+ -325 + ","+ (i * 22) + ")";
+                return "translate("+ -325 + ","+ (i * 18) + ")";
             });
         legend.append("rect")
             .attr("x", width - 50)
-            .attr("width", 19)
-            .attr("height", 19)
+            .attr("width", 12)
+            .attr("height", 12)
             .attr("fill", function(d) {
                 return color(d.key)
             });
 
         legend.append("text")
-            .attr("x", width - 24)
-            .attr("y", 15)
+            .attr("x", width - 30)
+            .attr("y", 12)
             .text(function(d) {
                 var str = d.key.split("_").join(" ");
                 return str
@@ -391,7 +391,7 @@ $(document).on("turbolinks:load", function(){
     // BEGIN CHART 4
 
     $.get('/chart/index_panel_four_data.json', function(data) {
-        console.log(data)
+
         var margin = {left:170, right:25, bottom:50, top:150}; //position the graph within the svg using these values
         var width = 1000 - margin.left - margin.right; //defines the width of the visualization
         var height = 450 - margin.top - margin.bottom; //defines the height of the visualization
@@ -406,7 +406,7 @@ $(document).on("turbolinks:load", function(){
         var stack = d3.stack()
             .keys(['Parkinsons_Disease', 'Multiple_Sclerosis', 'Myasthenia_Gravis', 'Amyotrophic_Lateral_Sclerosis', 'Control']);
         var series = stack(data);
-console.log(series)
+
         var x = d3.scaleBand()
             .domain(data.map(function(d) { return d.locus }))
             .range([0,width])
