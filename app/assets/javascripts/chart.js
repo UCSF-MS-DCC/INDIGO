@@ -97,7 +97,7 @@ $(document).on("turbolinks:load", function(){
         var x = d3.scaleBand()
             .domain(data.map(function(d) { return d.diagnosis }))
             .range([0,width])
-            .paddingInner(0.3)
+            .paddingInner(0.1)
             .paddingOuter(0.2)
 
         var y = d3.scaleLinear()
@@ -253,7 +253,7 @@ $(document).on("turbolinks:load", function(){
         var x = d3.scaleBand()
             .domain(data.map(function(d) { return d.diagnosis }))
             .range([0,width])
-            .paddingInner(0.3)
+            .paddingInner(0.1)
             .paddingOuter(0.2)
 
         var y = d3.scaleLinear()
@@ -478,7 +478,7 @@ console.log(series)
             .attr("y", height + 40)
             .attr("font-size", "16px")
             .attr("text-anchor", "middle")
-            .text("KIR Locus");
+            .text("KIR gene");
 
         // y axis label
 
@@ -500,24 +500,33 @@ console.log(series)
             .data(series.reverse())
             .enter().append("g")
             .attr("transform", function(d, i) {
-                return "translate("+ -750  + ","+ ( -125 + (i * 22)) + ")";
+                return "translate("+ -730  + ","+ ( -115 + (i * 18)) + ")";
             });
         legend.append("rect")
             .attr("x", width - 50)
-            .attr("width", 19)
-            .attr("height", 19)
+            .attr("width", 12)
+            .attr("height", 12)
             .attr("fill", function(d) {
                 return color(d.key)
             });
 
         legend.append("text")
-            .attr("x", width - 24)
-            .attr("y", 15)
+            .attr("x", width - 30)
+            .attr("y", 12)
             .text(function(d) {
                 var str = d.key.split("_").join(" ");
                 return str
             })
             .attr("font-size", "14px");;
+
+        g.append("text")
+            .attr("class", "chart4-title")
+            .attr("x", width / 2)
+            .attr("y", -130)
+            .attr("font-size", "20px")
+            .attr("text-anchor", "middle")
+            .text("KIR genotyping");
+
 
         var tooltip = g.append("g")
             .attr("class", "graph-tooltip")
