@@ -214,24 +214,6 @@ $(document).on("turbolinks:load", function() {
       ]
   });
 
-  $('#samples-superindex-table').on('draw.dt', function() {
-      $('[data-toggle=modal]').on('click', function(e){
-          e.preventDefault();
-          //console.log($(this).data("target"))
-           $(this).data('triggered', true);
-          //console.log($(this).data('triggered'))
-          $.get('/dataview/modal_content.json?indigo_id='+e.target.text, function(data) {
-             if ($(this).data('triggered')) {
-                 $('#modal-indigo-id').text(data.study_id);
-                 $(this).modal().data('triggered', false)
-             }
-
-          });
-
-      });
-
-  });
-
   var hlas_superindex_table = $('#hlas-superindex-table').DataTable({
     "autoWidth":false,
     "pageLength":100,
