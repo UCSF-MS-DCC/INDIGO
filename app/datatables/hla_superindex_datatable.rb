@@ -56,7 +56,7 @@ class HlaSuperindexDatatable
       hlas = Hla.where(sample_id:samples).order("#{sort_column} #{sort_direction}")
       hlas = hlas.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
       term = params[:search][:value]
-      term = term.downcase
+      term = term.to_s.downcase
       if params[:search][:value].present?
         hlas = hlas.where("lower(indigo_id) like :search or lower(drb1_1) like :search or lower(drb1_2) like :search or lower(dqb1_1) like :search or lower(dqb1_2) like :search or lower(dpb1_1) like :search or lower(dpb1_2) like :search or lower(a_1) like :search or lower(a_2) like :search
 or lower(b_1) like :search or lower(b_2) like :search or lower(c_1) like :search or lower(c_2) like :search or lower(dpa1_1) like :search or lower(dpa1_2) like :search or lower(dqa1_1) like :search or lower(dqa1_2) like :search or lower(drbo_1) like :search or lower(drbo_2) like :search
