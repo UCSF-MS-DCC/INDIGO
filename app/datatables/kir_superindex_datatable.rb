@@ -52,8 +52,11 @@ class KirSuperindexDatatable
       samples = Sample.where(disease:@disease).pluck(:id)
       kirs = Kir.where(sample_id:samples).order("#{sort_column} #{sort_direction}")
       kirs = kirs.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
+      term = params[:search][:value]
+      term = term.downcase
       if params[:search][:value].present?
-        kirs = kirs.where("indigo_id like :search", search:"%#{params[:search][:value]}%")
+        kirs = kirs.where("lower(indigo_id) like :search or lower(KIR2DL1) like :search or lower(KIR2DL2) like :search or lower(KIR2DL3) like :search or lower(KIR2DL4) like :search or lower(KIR2DL5A) like :search or lower(KIR2DL5B) like :search or lower(KIR2DP1) like :search
+or lower(KIR2DS1) like :search or lower(KIR2DS2) like :search or lower(KIR2DS3) like :search or lower(KIR2DS4) like :search or lower(KIR2DS5) like :search or lower(KIR3DL1) like :search or lower(KIR3DL2) like :search or lower(KIR3DL3) like :search or lower(KIR3DS1) like :search", search:"%#{term}%")
       end
       kirs
     end
