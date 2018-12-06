@@ -19,10 +19,11 @@ class HlaSuperindexDatatable
 
     def data
       hlas.map do |hla|
-
+        sample = hla.sample ? hla.sample : nil
+        source = sample.collaborator ? sample.collaborator.name : "-"
         [
           hla.indigo_id,
-          hla.original_data_source,
+          source,
           hla.drb1_1,
           hla.drb1_2,
           hla.dqb1_1,

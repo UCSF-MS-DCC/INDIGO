@@ -45,12 +45,14 @@
                     <li><%= link_to "#{current_user.affiliation} Data", dataview_index_path, :'data-toggle' => "tooltip", :'data-placement' => 'bottom', :'title' => "View Your Institution's Indigo Data" %></li>
                     <% if current_user.is_super? %>
                       <li class="divider"></li>
+                      <li><%= link_to "amyotrophic lateral sclerosis", dataview_superindex_path(disease:"ALS") %></li>
                       <li><%= link_to "multiple sclerosis", dataview_superindex_path(disease:"MS") %></li>
-                      <li><%= link_to "Parkinson's disease", dataview_superindex_path(disease:"PD") %></li>
                       <li><%= link_to "myasthenia gravis", dataview_superindex_path(disease:"MG") %></li>
                       <li><%= link_to "neuromyelitis optica", dataview_superindex_path(disease:"NMO") %></li>
+                      <li><%= link_to "Parkinson's disease", dataview_superindex_path(disease:"PD") %></li>
                       <li><%= link_to "schizophrenia", dataview_superindex_path(disease:"SCZD") %></li>
-                      <li><%= link_to "control", dataview_superindex_path(disease:"HC") %></li>
+                      <li class="divider"></li>
+                      <li><%= link_to "unaffected control", dataview_superindex_path(disease:"HC") %></li>
                       <li class="divider"></li>
                       <li><%= link_to "allele frequencies", dataview_allele_frequencies_path %></li>
                     <% end %>

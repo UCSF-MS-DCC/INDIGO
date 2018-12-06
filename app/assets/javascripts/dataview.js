@@ -3,7 +3,7 @@
 // // # You can use CoffeeScript in this file: http://coffeescript.org/
 $(document).on("turbolinks:load", function() {
 
-  var superindex_disease = $('#superindex-disease').text();
+  var superindex_disease = $('#disease-selector').text();
 
   var stacy_table = $('#stacy-samples-table').DataTable({
     "autoWidth":false,
@@ -70,9 +70,6 @@ $(document).on("turbolinks:load", function() {
     "ajax":'/dataview/samples_index.json',
     "pagingType":"full_numbers",
     "columns": [
-      {"render": function(data, type, row, meta) {
-        return data;
-      }},
       {"render": function(data, type, row, meta) {
         return data;
       }},
@@ -190,14 +187,6 @@ $(document).on("turbolinks:load", function() {
           }
       ],
       "columns": [
-          {"render": function(data, type, row, meta) {
-                  if (data) {
-                      return '<a data-toggle='+"modal"+' data-target="#sample-modal" >'+data+'</a>';
-                  }
-                  else {
-                      return '-';
-                  }
-              }},
           {"render": function(data, type, row, meta) {
                   return data;
               }},
@@ -455,13 +444,22 @@ $(document).on("turbolinks:load", function() {
     "samples-superindex-table":samples_superindex_table,
     "hlas-superindex-table":hlas_superindex_table,
     "kirs-superindex-table":kirs_superindex_table
-  }
+  };
 
 
   $('.show-column-checkbox').on('change', function(){
     var table = tables[$(this).data("table-id")];
     var col = $(this).data("column");
     var checked = $(this).prop("checked");
-    table.columns(col).visible(checked);
-  })
+    var isMultiCol = new RegExp(",");
+    if (isMultiCol.test(col)) {
+        var cols = col.split(",");
+        cols.forEach(function(c) {
+            table.columns(c).visible(checked);
+        })
+    } else {
+        table.columns(col).visible(checked);
+    }
+
+  });
 });

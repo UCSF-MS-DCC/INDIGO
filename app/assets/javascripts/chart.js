@@ -1,80 +1,80 @@
 
 
 $(document).on("turbolinks:load", function(){
-    // BEGIN CHART 1
-    $.get('/chart/index_panel_one_data.json', function(data){
-
-        var margin = {left:75, right:25, bottom:50, top:50}; //position the graph within the svg using these values
-        var width = 500 - margin.left - margin.right; //defines the width of the visualization
-        var height = 650 - margin.top - margin.bottom; //defines the height of the visualization
-
-        var keys = Object.keys(data);
-        //var values = "REMOVED";
-
-        var g = d3.select('#chart1')
-            .append('svg')
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
-
-        var x = d3.scaleBand()
-            .domain(keys)
-            .range([0,width])
-            .paddingInner(0.2)
-            .paddingOuter(0.2);
-
-        // var maxValue = d3.max(values, function(v) { return v });
-
-        var y = d3.scaleLinear()
-            .domain([0, 1])
-            .range([height,0]);
-
-        var bars = g.selectAll("rect")
-            .data(keys);
-
-        bars.enter()
-            .append("rect")
-            .attr("x", function(d,i) { return x(d); })
-            .attr("y", function(d,i) { return y(data[d]) })
-            .attr("height",function(d,i) { return height - y(data[d]) })
-            .attr("width", x.bandwidth)
-            .attr("fill", "blue");
-
-        var xAxisCall = d3.axisBottom(x);
-        g.append("g")
-            .attr("class", "x-axis")
-            .attr("transform", "translate(0,"+ height + ")")
-            .call(xAxisCall);
-
-        var yAxisCall = d3.axisLeft(y);
-        g.append("g")
-            .attr("class", "y-axis")
-            .call(yAxisCall);
-
-        // x axis label
-
-        g.append("text")
-            .attr("class", "x-axis-label")
-            .attr("x", width / 2)
-            .attr("y", height + 40)
-            .attr("font-size", "16px")
-            .attr("text-anchor", "middle")
-            .text("Diagnosis")
-
-        // y axis label
-
-        g.append("text")
-            .attr("class", "y-axis-label")
-            .attr("x", - (height / 2))
-            .attr("y",-70)
-            .attr("font-size", "16px")
-            .attr("text-anchor", "middle")
-            .attr("transform", "rotate(-90)")
-            .text("Samples Received by UCSF")
-
-
-    }); // closes jquery get call
+//     // BEGIN CHART 1
+//     $.get('/chart/index_panel_one_data.json', function(data){
+//
+//         var margin = {left:75, right:25, bottom:50, top:50}; //position the graph within the svg using these values
+//         var width = 500 - margin.left - margin.right; //defines the width of the visualization
+//         var height = 650 - margin.top - margin.bottom; //defines the height of the visualization
+//
+//         var keys = Object.keys(data);
+//         //var values = "REMOVED";
+//
+//         var g = d3.select('#chart1')
+//             .append('svg')
+//             .attr("width", width + margin.left + margin.right)
+//             .attr("height", height + margin.top + margin.bottom)
+//             .append("g")
+//             .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
+//
+//         var x = d3.scaleBand()
+//             .domain(keys)
+//             .range([0,width])
+//             .paddingInner(0.2)
+//             .paddingOuter(0.2);
+//
+//         // var maxValue = d3.max(values, function(v) { return v });
+//
+//         var y = d3.scaleLinear()
+//             .domain([0, 1])
+//             .range([height,0]);
+//
+//         var bars = g.selectAll("rect")
+//             .data(keys);
+//
+//         bars.enter()
+//             .append("rect")
+//             .attr("x", function(d,i) { return x(d); })
+//             .attr("y", function(d,i) { return y(data[d]) })
+//             .attr("height",function(d,i) { return height - y(data[d]) })
+//             .attr("width", x.bandwidth)
+//             .attr("fill", "blue");
+//
+//         var xAxisCall = d3.axisBottom(x);
+//         g.append("g")
+//             .attr("class", "x-axis")
+//             .attr("transform", "translate(0,"+ height + ")")
+//             .call(xAxisCall);
+//
+//         var yAxisCall = d3.axisLeft(y);
+//         g.append("g")
+//             .attr("class", "y-axis")
+//             .call(yAxisCall);
+//
+//         // x axis label
+//
+//         g.append("text")
+//             .attr("class", "x-axis-label")
+//             .attr("x", width / 2)
+//             .attr("y", height + 40)
+//             .attr("font-size", "16px")
+//             .attr("text-anchor", "middle")
+//             .text("Diagnosis")
+//
+//         // y axis label
+//
+//         g.append("text")
+//             .attr("class", "y-axis-label")
+//             .attr("x", - (height / 2))
+//             .attr("y",-70)
+//             .attr("font-size", "16px")
+//             .attr("text-anchor", "middle")
+//             .attr("transform", "rotate(-90)")
+//             .text("Samples Received by UCSF")
+//
+//
+//     }); // closes jquery get call
     // END CHART 1
 
     // BEGIN CHART 2
@@ -212,7 +212,6 @@ $(document).on("turbolinks:load", function(){
             .attr("text-anchor", "middle")
             .text("HLA processing");
 
-
         var tooltip = g.append("g")
             .attr("class", "graph-tooltip")
             .style("display", "none");
@@ -246,6 +245,7 @@ $(document).on("turbolinks:load", function(){
             .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")"); // translate moves the x,y coordinates by the values supplied as arguments
+
         var stack = d3.stack()
             .keys(['KIR_genotypes_available', 'KIR_raw_sequences_to_be_genotyped', 'samples_sent_to_sequencing_lab']);
         var series = stack(data);
@@ -436,7 +436,6 @@ $(document).on("turbolinks:load", function(){
             })
             .enter().append("rect")
             .attr("x", function(d) {
-                console.log(d)
                 return x(d.data.locus)
             })
             .attr("y", function(d) {
@@ -517,7 +516,7 @@ $(document).on("turbolinks:load", function(){
                 var str = d.key.split("_").join(" ");
                 return str
             })
-            .attr("font-size", "14px");;
+            .attr("font-size", "14px");
 
         g.append("text")
             .attr("class", "chart4-title")
@@ -526,7 +525,6 @@ $(document).on("turbolinks:load", function(){
             .attr("font-size", "20px")
             .attr("text-anchor", "middle")
             .text("KIR genotyping");
-
 
         var tooltip = g.append("g")
             .attr("class", "graph-tooltip")

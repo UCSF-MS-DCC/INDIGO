@@ -1,4 +1,10 @@
 <div class="container content-body">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 id="superindex-disease"><%= @header_content %></h1>
+      <span id="disease-selector" style="display:none;"><%= @disease %></span>
+    </div>
+  </div>
   <!-- nav tabs -->
   <div class="row">
 
@@ -13,25 +19,41 @@
   <div class="tab-content">
 
     <div class="tab-pane fade in active" id="sample">
-      <div class="row" style="border:1px solid #ededed;border-top:none;border-bottom:none;background-color:#fdfdfd;padding-bottom:10px;">
-        <div class="col-sm-12">
-          <h3><span id="superindex-disease"><%= @disease %></span>&nbsp;Samples</h3>
-        </div>
-      </div>
       <div class="row" style="border:1px solid #ededed;border-top:none;background-color:#fdfdfd;padding-bottom:10px;">
         <div class="col-sm-12">
           <br>
           <div class="row">
             <div class="col-sm-12">
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="samples-superindex-table" checked=true>INDIGO ID</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="samples-superindex-table" checked=true>Source</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="samples-superindex-table" checked=true>Source Study</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="samples-superindex-table" checked=true>Site ID</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="samples-superindex-table" checked=true>Disease</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="samples-superindex-table" checked=true>Sex</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="samples-superindex-table" checked=true>Race</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="samples-superindex-table" checked=true>Age of Onset</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=8 data-table-id="samples-superindex-table" checked=true>Age at Sample</label>
+              <table id="sample-table-checkbox">
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="samples-superindex-table" checked=true>INDIGO ID</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="samples-superindex-table" checked=true>Source</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="samples-superindex-table" checked=true>Site ID</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="samples-superindex-table" checked=true>Disease</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="samples-superindex-table" checked=true>Sex</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="samples-superindex-table" checked=true>Race</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="samples-superindex-table" checked=true>Age of Onset</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="samples-superindex-table" checked=true>Age at Sample</label>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
           <br>
@@ -40,7 +62,6 @@
               <tr>
                 <th>INDIGO ID</th>
                 <th>Source</th>
-                <th>Source Study</th>
                 <th>Site ID</th>
                 <th>Disease</th>
                 <th>Sex</th>
@@ -57,37 +78,55 @@
     </div>
 
     <div class="tab-pane fade" id="hla">
-      <div class="row" style="border:1px solid #ededed;border-top:none;border-bottom:none;background-color:#fdfdfd;padding-bottom:10px;">
-        <div class="col-sm-12">
-          <h3><%= @disease %>&nbsp;HLA</h3>
-        </div>
-      </div>
       <div class="row" style="border:1px solid #ededed;border-top:none;background-color:#fdfdfd;padding-bottom:10px;overflow-x:scroll;">
         <div class="col-sm-12">
           <br>
           <div class="row">
             <div class="col-sm-12">
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="hlas-superindex-table" checked=true>INDIGO ID</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="hlas-superindex-table" checked=true>Data Source</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="hlas-superindex-table" checked=true>DRB1/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="hlas-superindex-table" checked=true>DRB1/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="hlas-superindex-table" checked=true>DQB1/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="hlas-superindex-table" checked=true>DQB1/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="hlas-superindex-table" checked=true>DPB1/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="hlas-superindex-table" checked=true>DPB1/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=8 data-table-id="hlas-superindex-table" checked=true>A/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=9 data-table-id="hlas-superindex-table" checked=true>A/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=10 data-table-id="hlas-superindex-table" checked=true>B/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=11 data-table-id="hlas-superindex-table" checked=true>B/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=12 data-table-id="hlas-superindex-table" checked=true>C/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=13 data-table-id="hlas-superindex-table" checked=true>C/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=14 data-table-id="hlas-superindex-table" checked=true>DPA1/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=15 data-table-id="hlas-superindex-table" checked=true>DPA1/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=16 data-table-id="hlas-superindex-table" checked=true>DQA1/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=17 data-table-id="hlas-superindex-table" checked=true>DQA1/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=18 data-table-id="hlas-superindex-table" checked=true>DRBo/1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=19 data-table-id="hlas-superindex-table" checked=true>DRBo/2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=20 data-table-id="hlas-superindex-table" checked=true>DPB1 phase ambiguities</label>
+              <table id="hla-table-checkbox">
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="hlas-superindex-table" checked=true>INDIGO ID</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="hlas-superindex-table" checked=true>Source</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="2,3" data-table-id="hlas-superindex-table" checked=true>DRB1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="4,5" data-table-id="hlas-superindex-table" checked=true>DQB1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="6,7" data-table-id="hlas-superindex-table" checked=true>DPB1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="8,9" data-table-id="hlas-superindex-table" checked=true>A</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="10,11" data-table-id="hlas-superindex-table" checked=true>B</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="12,13" data-table-id="hlas-superindex-table" checked=true>C</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="14,15" data-table-id="hlas-superindex-table" checked=true>DPA1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="16,17" data-table-id="hlas-superindex-table" checked=true>DQA1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column="18,19" data-table-id="hlas-superindex-table" checked=true>DRBo</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=20 data-table-id="hlas-superindex-table" checked=true>DPB1 phase ambiguities</label>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
           <br>
@@ -125,33 +164,74 @@
     </div>
 
     <div class="tab-pane fade" id="kir">
-      <div class="row" style="border:1px solid #ededed;border-top:none;border-bottom:none;background-color:#fdfdfd;padding-bottom:10px;">
-        <div class="col-sm-12">
-          <h3><span id="superindex-disease"><%= @disease %></span>&nbsp;KIR</h3>
-        </div>
-      </div>
       <div class="row" style="border:1px solid #ededed;border-top:none;background-color:#fdfdfd;padding-bottom:10px;overflow-x:scroll;">
         <div class="col-sm-12">
           <br>
           <div class="row">
             <div class="col-sm-12">
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="kirs-superindex-table" checked=true>INDIGO ID</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="kirs-superindex-table" checked=true>2DL1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="kirs-superindex-table" checked=true>2DL2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="kirs-superindex-table" checked=true>2DL3</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="kirs-superindex-table" checked=true>2DL4</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="kirs-superindex-table" checked=true>2DL5A</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="kirs-superindex-table" checked=true>2DL5B</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="kirs-superindex-table" checked=true>2DP1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=8 data-table-id="kirs-superindex-table" checked=true>2DS1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=9 data-table-id="kirs-superindex-table" checked=true>2DS2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=10 data-table-id="kirs-superindex-table" checked=true>2DS3</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=11 data-table-id="kirs-superindex-table" checked=true>2DS4</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=12 data-table-id="kirs-superindex-table" checked=true>2DS5</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=13 data-table-id="kirs-superindex-table" checked=true>3DL1</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=14 data-table-id="kirs-superindex-table" checked=true>3DL2</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=15 data-table-id="kirs-superindex-table" checked=true>3DL3</label>
-              <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=16 data-table-id="kirs-superindex-table" checked=true>3DS1</label>
+              <table id="kir-table-checkbox">
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=0 data-table-id="kirs-superindex-table" checked=true>INDIGO ID</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=1 data-table-id="kirs-superindex-table" checked=true>2DL1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=2 data-table-id="kirs-superindex-table" checked=true>2DL2</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=3 data-table-id="kirs-superindex-table" checked=true>2DL3</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=4 data-table-id="kirs-superindex-table" checked=true>2DL4</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=5 data-table-id="kirs-superindex-table" checked=true>2DL5A</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=6 data-table-id="kirs-superindex-table" checked=true>2DL5B</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=7 data-table-id="kirs-superindex-table" checked=true>2DP1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=8 data-table-id="kirs-superindex-table" checked=true>2DS1</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=9 data-table-id="kirs-superindex-table" checked=true>2DS2</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=10 data-table-id="kirs-superindex-table" checked=true>2DS3</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=11 data-table-id="kirs-superindex-table" checked=true>2DS4</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=12 data-table-id="kirs-superindex-table" checked=true>2DS5</label>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=13 data-table-id="kirs-superindex-table" checked=true>3DL1</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=14 data-table-id="kirs-superindex-table" checked=true>3DL2</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=15 data-table-id="kirs-superindex-table" checked=true>3DL3</label>
+                  </td>
+                  <td>
+                    <label class="checkbox-inline"><input type="checkbox" value="" class="show-column-checkbox" data-column=16 data-table-id="kirs-superindex-table" checked=true>3DS1</label>
+                  </td>
+                </tr>
+              </table>
             </div>
           </div>
           <br>

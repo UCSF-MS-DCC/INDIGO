@@ -18,6 +18,8 @@ class DataviewController < ApplicationController
       ids = @samples.pluck(:id)
       @hlas = Hla.where(sample_id:ids).order("indigo_id ASC")
       @kirs = Kir.where(sample_id:ids).order("indigo_id ASC")
+      longform_names = { :PD => "Parkinson's Disease", :MS => "Multiple Sclerosis", :MG => "Myasthenia Gravis", :NMO => "Neuromyelitis Optica", :ALS => "Amyotrophic Lateral Sclerosis", :HC => "Unaffected Controls", :SCZD => "Schizophrenia" }
+      @header_content = longform_names[@disease.to_sym]
     end
   end
 
