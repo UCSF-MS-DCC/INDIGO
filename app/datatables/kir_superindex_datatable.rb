@@ -19,9 +19,11 @@ class KirSuperindexDatatable
 
     def data
       kirs.map do |kir|
-
+        sample = kir.sample ? kir.sample : nil
+        source = sample.collaborator ? sample.collaborator.name : "-"
         [
           kir.indigo_id,
+          source,
           kir.KIR2DL1,
           kir.KIR2DL2,
           kir.KIR2DL3,

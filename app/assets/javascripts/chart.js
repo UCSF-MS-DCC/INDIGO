@@ -106,7 +106,7 @@ $(document).on("turbolinks:load", function(){
 
         var color = d3.scaleOrdinal()
             .domain(data.map(function(d) { return d.key }))
-            .range(["#A5A3FF", "#2B46E2"]);
+            .range(['#e52a6f','#5f0f4e','#675682','#67aeca',"#2B46E2"]); //["#A5A3FF", "#2B46E2"]
 
         g.append("g")
             .selectAll("g")
@@ -262,7 +262,7 @@ $(document).on("turbolinks:load", function(){
 
         var color = d3.scaleOrdinal()
             .domain(data.map(function(d) { return d.key }))
-            .range(["#A5A3FF","#2B46E2", "#7F7DFF"]);
+            .range(['#e52a6f','#5f0f4e','#675682','#67aeca',"#2B46E2"]); // ["#A5A3FF","#2B46E2", "#7F7DFF"]
 
         g.append("g")
             .selectAll("g")
@@ -421,7 +421,7 @@ $(document).on("turbolinks:load", function(){
 
         var color = d3.scaleOrdinal()
             .domain(['Parkinsons_Disease', 'Multiple_Sclerosis', 'Myasthenia_Gravis', 'Amyotrophic_Lateral_Sclerosis', 'Control'])
-            .range(["#2B46E2","#A5A3FF", "#7F7DFF", "#625bc4", "#1a32bd"]);
+            .range(['#e52a6f','#5f0f4e','#675682','#67aeca',"#2B46E2"]); // ["#2B46E2","#A5A3FF", "#7F7DFF", "#625bc4", "#1a32bd"] ['#99d3df','#88bbd6','#cdcdcd','#e9e9e9',"#A5A3FF"] ['#494e6b','#99878f','#985e6d','#192231',"#625bc4"]
 
         g.append("g")
             .selectAll("g")
