@@ -43,7 +43,7 @@ class SampleSuperindexDatatable
       samples = samples.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
       if params[:search][:value].present?
         term = params[:search][:value]
-        term = term.downcase
+        term = term.to_s.downcase
         samples = samples.where("lower(sample_source) like :search or lower(disease) like :search or lower(indigo_id) like :search or lower(gender) like :search or lower(ethnicity) like :search or lower(sample_source_identifier) like :search or lower(race) like :search or lower(sample_source_study) like :search or cast(age_of_onset as text) like :search or cast(age_at_sample as text) like :search", search:"%#{term}%")
       end
       samples
