@@ -39,6 +39,9 @@ class SampleSuperindexDatatable
     end
 
     def fetch_samples
+      if /,/.match(@disease)
+        @disease = @disease.split(",")
+      end
       samples = Sample.where(disease:@disease).order("#{sort_column} #{sort_direction}")
       samples = samples.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
       if params[:search][:value].present?

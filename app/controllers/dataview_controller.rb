@@ -13,13 +13,19 @@ class DataviewController < ApplicationController
     if !current_user.has_role? :superuser
       redirect_to '/dataview#index'
     else
-      @disease = dataview_params[:disease]
+      longform_names = { :PD => "Parkinson's Disease", :MS => "Multiple Sclerosis", :MG => "Myasthenia Gravis", :NMO => "Neuromyelitis Optica", :ALS => "Amyotrophic Lateral Sclerosis", :HC => "Unaffected Controls", :SCZD => "Schizophrenia", :'Not MS - Unaffected - Related' => "Unaffected MS-related", :PANS => "Pediatric Acute-onset Neuropsychiatric Syndrome" }
+      if dataview_params[:disease].size == 1
+        @disease = dataview_params[:disease][0]
+        @header_content = longform_names[@disease.to_sym]
+      else
+        @disease = dataview_params[:disease].join(",")
+        @disease_sym = dataview_params[:disease][0]
+        @header_content = longform_names[@disease_sym.to_sym]
+      end
       @samples = Sample.where(disease:@disease).order("indigo_id ASC")
       ids = @samples.pluck(:id)
       @hlas = Hla.where(sample_id:ids).order("indigo_id ASC")
       @kirs = Kir.where(sample_id:ids).order("indigo_id ASC")
-      longform_names = { :PD => "Parkinson's Disease", :MS => "Multiple Sclerosis", :MG => "Myasthenia Gravis", :NMO => "Neuromyelitis Optica", :ALS => "Amyotrophic Lateral Sclerosis", :HC => "Unaffected Controls", :SCZD => "Schizophrenia" }
-      @header_content = longform_names[@disease.to_sym]
     end
   end
 
@@ -235,7 +241,7 @@ class DataviewController < ApplicationController
   private
 
     def dataview_params
-      params.permit(:disease)
+      params.permit(:disease => [])
     end
 
 

@@ -29,7 +29,8 @@ class SiteProgressDatatable
           for ngs_value in ngs
             sams = Sample.where(received_date:date_in).where(date_to_stanford:date_out).where(ngs_dataset:ngs_value)
             unless sams.size < 1
-              row = [date_in, date_out, sams.pluck(:ngs_dataset).uniq, sams.where.not(disease:"HC").count, sams.where(disease:"HC").count, sams.count, sams.where(kir_raw:true).count, sams.where(hla_geno:true).count, sams.where(kir_geno:true).count, sams.where.not(gwas_name:nil).count]
+              phenos_count = sams.where('race is not null or ethnicity is not null or gender is not null').count
+              row = [date_in, date_out, sams.pluck(:ngs_dataset).uniq, sams.where.not(disease:"HC").count, sams.where(disease:"HC").count, phenos_count, sams.count, sams.where(kir_raw:true).count, sams.where(hla_geno:true).count, sams.where(kir_geno:true).count, sams.where.not(gwas_name:nil).count]
               records.push(row)
             end
           end
