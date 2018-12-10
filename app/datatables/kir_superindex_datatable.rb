@@ -49,6 +49,9 @@ class KirSuperindexDatatable
     end
 
     def fetch_kirs
+      if /,/.match(@disease)
+        @disease = @disease.split(",")
+      end
       samples = Sample.where(disease:@disease).pluck(:id)
       kirs = Kir.where(sample_id:samples).order("#{sort_column} #{sort_direction}")
       kirs = kirs.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset

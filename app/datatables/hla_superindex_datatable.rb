@@ -52,6 +52,9 @@ class HlaSuperindexDatatable
     end
 
     def fetch_hlas
+      if /,/.match(@disease)
+        @disease = @disease.split(",")
+      end
       samples = Sample.where(disease:@disease).pluck(:id)
       hlas = Hla.where(sample_id:samples).order("#{sort_column} #{sort_direction}")
       hlas = hlas.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
