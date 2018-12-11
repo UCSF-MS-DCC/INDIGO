@@ -20,7 +20,7 @@
   <br>
 
   <div class="row">
-
+    <div class="table-container">
       <table id="collaborators-progress-table" class="table table-striped table-bordered" data-source="<%= welcome_collaborator_status_url(format:"json") %>">
         <thead>
           <tr>
@@ -28,6 +28,7 @@
             <th>Diagnosis</th>
             <th>Proposed Cases and Controls</th>
             <th>Samples Received at UCSF</th>
+            <th>Samples with Demographic Data Received at UCSF</th>
             <th>Samples Sent to Sequencing Lab</th>
             <th>HLA genotypes available - controls</th>
             <th>HLA genotypes available - cases</th>
@@ -50,10 +51,11 @@
             <th></th>
             <th></th>
             <th></th>
+            <th></th>
           </tr>
         </tfoot>
       </table>
-
+    </div>
   </div>
 
 </div>

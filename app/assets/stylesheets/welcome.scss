@@ -16,9 +16,9 @@
 .table-tab > a {
   font-size:12pt;
 }
-#collaborators-progress-table {
-  overflow-x:scroll;
-}
 #chart4 {
   overflow-x:scroll;
+}
+.table-container {
+  overflow-x:auto;
 }

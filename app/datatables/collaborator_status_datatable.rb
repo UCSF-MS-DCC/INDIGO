@@ -19,11 +19,12 @@ class CollaboratorStatusDatatable
     def data
       collaborators.map do |c|
 
-        [
+       arr = [
           c.name,
           c.disease,
           c.expected_discovery,
           c.samples.count,
+          c.samples.where("gender is not null or race is not null or ethnicity is not null").count,
           c.samples.where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
           c.samples.where(hla_geno:true).where(disease:"HC").count,
           c.samples.where(hla_geno:true).where.not(disease:"HC").count,
@@ -32,6 +33,7 @@ class CollaboratorStatusDatatable
           c.samples.where(kir_geno:true).where.not(disease:"HC").count
 
         ]
+        arr
       end
     end
 
