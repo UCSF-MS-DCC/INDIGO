@@ -29,6 +29,51 @@ class DataviewController < ApplicationController
     end
   end
 
+  def superindex_race_graph
+    @dis = /,/.match(dataview_params[:disease][0]) ? dataview_params[:disease][0].split(",") : dataview_params[:disease]
+    races = Sample.where(disease:@dis).where.not(race:nil).pluck(:race).uniq
+    output = races.map { |r|
+      {:race => r, :samples => Sample.where(disease:@dis).where(race:r).count}
+    }
+    output.sort_by { |hsh| hsh[:race] }
+    if Sample.where(disease:@dis).where(race:nil).count > 0
+      output.push({:race => 'NA', :samples => Sample.where(disease:@dis).where(race:nil).count})
+    end
+    render json: output, status: :ok
+  end
+
+  def superindex_sex_graph
+    @dis = /,/.match(dataview_params[:disease][0]) ? dataview_params[:disease][0].split(",") : dataview_params[:disease]
+    longform_names = {:F => "Female", :M => "Male"}
+    sexes = Sample.where(disease:@dis).where.not(gender:nil).pluck(:gender).uniq
+    output = sexes.map { |s|
+        {:sex => longform_names[s.to_sym], :samples => Sample.where(disease:@dis).where(gender:s).count}
+    }
+    if Sample.where(disease:@dis).where(gender:nil).count > 0
+      output.push({:sex => 'NA', :samples => Sample.where(disease:@dis).where(gender:nil).count})
+    end
+    render json: output, status: :ok
+  end
+
+  def superindex_age_graph
+    @dis = /,/.match(dataview_params[:disease][0]) ? dataview_params[:disease][0].split(",") : dataview_params[:disease]
+    set_min = Sample.where(disease:@dis).where.not(age_of_onset:nil).pluck(:age_of_onset).uniq.min
+    set_max = Sample.where(disease:@dis).where.not(age_of_onset:nil).pluck(:age_of_onset).uniq.max
+    min_age = set_min
+    max_age = min_age % 5 == 0 ? min_age + 5 : min_age + (5 - (min_age % 5))
+
+    output = []
+    while min_age < set_max
+      output.push({:range => "#{min_age} - #{max_age}", :samples => Sample.where(disease:@dis).where("age_of_onset >= ?", min_age).where("age_of_onset <= ?", max_age).count })
+      min_age = max_age + 1
+      max_age = max_age + 5
+    end
+    if Sample.where(disease:@dis).where(age_of_onset:nil).count > 0
+      output.push({:range => "NA", :samples => Sample.where(disease:@dis).where(age_of_onset:nil).count})
+    end
+    render json: output, status: :ok
+  end
+
   def kir_genotyping_work_in_progress
     unless current_user.is_kir_bioinformatician?
       redirect_to root_path

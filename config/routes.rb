@@ -44,6 +44,10 @@ Rails.application.routes.draw do
 
   get 'dataview/superindex'
 
+  get '/dataview/superindex_race_graph'
+  get '/dataview/superindex_sex_graph'
+  get '/dataview/superindex_age_graph'
+
   get 'dataview/stacy'
 
   get 'dataview/sample_status'

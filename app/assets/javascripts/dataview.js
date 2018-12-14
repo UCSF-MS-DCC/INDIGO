@@ -1,6 +1,19 @@
 // // # Place all the behaviors and hooks related to the matching controller here.
 // // # All this logic will automatically be available in application.js.
 // // # You can use CoffeeScript in this file: http://coffeescript.org/
+function capitalize(str) {
+    arr = str.split(" ")
+    arr.forEach(function(s, idx) {
+        s = s.split("")
+        s[0] = s[0].toUpperCase();
+        arr[idx] = s.join("")
+    });
+    return arr.join(" ")
+}
+function removeSpace(str) {
+    newStr = str.split(' ').join("");
+    return newStr;
+}
 $(document).on("turbolinks:load", function() {
 
   var superindex_disease = $('#disease-selector').text();
@@ -444,4 +457,357 @@ $(document).on("turbolinks:load", function() {
     }
 
   });
+  // DATAVIEW/SUPERINDEX RACE CHART
+  // only do run when the user is accessing the superindex charts
+  if(window.location.pathname == '/dataview/superindex') {
+      $.get('/dataview/superindex_race_graph.json'+'?disease[]='+superindex_disease, function(data) {
+
+          var margin = {left:25, right:25, top:25, bottom:25}
+          var width = 350 - margin.left - margin.right;
+          var height = 350 - margin.top - margin.bottom;
+
+          var radius = Math.min(width, height) / 2 - 50;
+          var g = d3.select("#race-graph")
+              .append("svg")
+              .attr("width", width)
+              .attr("height", height)
+              //.attr("style", "border:1px solid green")
+              .append("g")
+              .attr("transform", "translate(" + (radius + margin.left * 4) + "," + (height / 1.8) + ")");
+
+          var colors = d3.scaleOrdinal()
+              .domain(data.map(function(d) { return d.race } ))
+              .range(["#333399", "#6a58b1","#9880ca","#ad95d7","#c2abe4","#d7c1f1","#ebd8ff"]);
+
+          var arc = d3.arc()
+              .innerRadius(0)
+              .outerRadius(radius);
+
+          var pie = d3.pie()
+              .sort(null)
+              .value(function (d) {
+                  return d.samples;
+              });
+
+          var pie = g.selectAll(".arc")
+              .data(pie(data));
+
+          pie.enter().append("path")
+              .attr("class", "arc")
+              .attr("d", arc)
+              .style("fill", function (d, i) {
+                  return colors(d.data.race);
+              })
+              .attr("stroke", "white")
+              .attr("stroke-width", "1px")
+              .on("mouseover", function(d) {
+                  tooltip.style("display", null);
+                  $('#legend-race-'+ removeSpace(d.data.race)).addClass("underlineText");})
+              .on("mouseout", function(d) {
+                  tooltip.style("display", "none");
+                  $('#legend-race-'+ removeSpace(d.data.race)).removeClass("underlineText");})
+              .on("mousemove", function(d) {
+                  var xPosition = d3.mouse(this)[0] - 30;
+                  var yPosition = d3.mouse(this)[1] - 45;
+                  tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                  tooltip.select("text").text(d.data.samples);
+              });
+
+          // legend
+
+          var legend = g.append("g")
+              .attr("font-size", "12px")
+              .attr("text-anchor", "start")
+              .selectAll("g")
+              .data(data.map(function(d) { return d.race }))
+              .enter().append("g")
+              .attr("transform", function(d, i) {
+                  return "translate("+ -450 + ","+ ((i * 18) - 125) + ")";
+              });
+
+          legend.append("rect")
+              .attr("x", width - 50)
+              .attr("width", 12)
+              .attr("height", 12)
+              .attr("fill", function(d, i) {
+                  return colors(d);
+              });
+
+          legend.append("text")
+              .attr("x", width - 30)
+              .attr("y", 12)
+              .attr("id", function(d) { return "legend-race-" + removeSpace(d); })
+              .text(function(d) {
+                  return capitalize(d);
+              })
+              .attr("font-size", "14px");
+
+          // tooltip
+
+          var tooltip = g.append("g")
+              .attr("class", "graph-tooltip")
+              .style("display", "none");
+
+          tooltip.append("rect")
+              .attr("width", 45)
+              .attr("height", 30)
+              .attr("fill", "black");
+
+          tooltip.append("text")
+              .attr("x", 22.5)
+              .attr("dy", "1.2em")
+              .style("text-anchor", "middle")
+              .attr("font-size", "16px")
+              .attr("font-weight", "bold")
+              .attr("fill", 'white');
+
+          // title
+
+          g.append("text")
+              .attr("class", "race-chart-title")
+              .attr("x", -50)
+              .attr("y", -150)
+              .attr("font-size", "20px")
+              .attr("text-anchor", "middle")
+              .text("Ancestry");
+
+
+      }); //closes GET dataview/superindex_race_graph callback
+  } //closes if window location == dataview/superindex
+
+    // DATAVIEW/SUPERINDEX SEX CHART
+    if(window.location.pathname == '/dataview/superindex') {
+        $.get('/dataview/superindex_sex_graph.json'+'?disease[]='+superindex_disease, function(data) {
+
+            var margin = {left:25, right:25, top:25, bottom:25}
+            var width = 350 - margin.left - margin.right;
+            var height = 350 - margin.top - margin.bottom;
+
+            var radius = Math.min(width, height) / 2 - 50;
+            var g = d3.select("#sex-graph")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                //.attr("style", "border:1px solid green")
+                .append("g")
+                .attr("transform", "translate(" + (radius + margin.left * 4 - 15) + "," + (height / 1.8) + ")");
+
+            var colors = d3.scaleOrdinal()
+                .domain(data.map(function(d) { return d.sex } ))
+                .range(["#333399", "#6a58b1","#9880ca","#ad95d7","#c2abe4","#d7c1f1","#ebd8ff"]);
+
+            var arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+
+            var pie = d3.pie()
+                .sort(null)
+                .value(function (d) {
+                    return d.samples;
+                });
+
+            var pie = g.selectAll(".arc")
+                .data(pie(data));
+
+            pie.enter().append("path")
+                .attr("class", "arc")
+                .attr("d", arc)
+                .style("fill", function (d, i) {
+                    return colors(d.data.sex);
+                })
+                .attr("stroke", "white")
+                .attr("stroke-width", "1px")
+                .on("mouseover", function(d) {
+                    tooltip.style("display", null);
+                    $('#legend-sex-'+ removeSpace(d.data.sex)).addClass("underlineText");
+                })
+                .on("mouseout", function(d) {
+                    tooltip.style("display", "none");
+                    $('#legend-sex-'+ removeSpace(d.data.sex)).removeClass("underlineText");
+                })
+                .on("mousemove", function(d) {
+                    var xPosition = d3.mouse(this)[0] - 30;
+                    var yPosition = d3.mouse(this)[1] - 45;
+                    tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                    tooltip.select("text").text(d.data.samples);
+                });
+
+
+            // legend
+
+            var legend = g.append("g")
+                .attr("font-size", "12px")
+                .attr("text-anchor", "start")
+                .selectAll("g")
+                .data(data.map(function(d) { return d.sex }))
+                .enter().append("g")
+                .attr("transform", function(d, i) {
+                    return "translate("+ -435 + ","+ ((i * 18) - 125) + ")";
+                });
+
+            legend.append("rect")
+                .attr("x", width - 50)
+                .attr("width", 12)
+                .attr("height", 12)
+                .attr("fill", function(d, i) {
+                    return colors(d);
+                });
+
+            legend.append("text")
+                .attr("x", width - 30)
+                .attr("y", 12)
+                .attr("id", function(d) { return "legend-sex-" + removeSpace(d); })
+                .text(function(d) {
+                    return capitalize(d);
+                })
+                .attr("font-size", "14px");
+
+            // tooltip
+
+            var tooltip = g.append("g")
+                .attr("class", "graph-tooltip")
+                .style("display", "none");
+
+            tooltip.append("rect")
+                .attr("width", 45)
+                .attr("height", 30)
+                .attr("fill", "black");
+
+            tooltip.append("text")
+                .attr("x", 22.5)
+                .attr("dy", "1.2em")
+                .style("text-anchor", "middle")
+                .attr("font-size", "16px")
+                .attr("font-weight", "bold")
+                .attr("fill", 'white');
+
+            // title
+
+            g.append("text")
+                .attr("class", "race-chart-title")
+                .attr("x", -50)
+                .attr("y", -150)
+                .attr("font-size", "20px")
+                .attr("text-anchor", "middle")
+                .text("Gender");
+
+        }); //closes GET dataview/superindex_sex_graph callback
+    } //closes if window location == dataview/superindex
+
+    // DATAVIEW/SUPERINDEX age graph
+    if(window.location.pathname == '/dataview/superindex') {
+        $.get('/dataview/superindex_age_graph.json'+'?disease[]='+superindex_disease, function(data) {
+
+            var margin = {left:45, right:0, top:25, bottom:25}
+            var width = 350 - margin.left - margin.right;
+            var height = 350 - margin.top - margin.bottom;
+
+            var radius = Math.min(width, height) / 2 - 50;
+            var g = d3.select("#age-graph")
+                .append("svg")
+                .attr("width", width)
+                .attr("height", height)
+                //.attr("style", "border:1px solid green")
+                .append("g")
+                .attr("transform", "translate(" + (radius + margin.left * 2 + 10) + "," + (height / 1.8) + ")");
+
+            var colors = d3.scaleOrdinal()
+                .domain(data.map(function(d) { return d.range } ))
+                .range(["1e1c47","25266b","#333399", "#6a58b1","#9880ca","#ad95d7","#c2abe4","#d7c1f1","#ebd8ff"]);
+
+            var arc = d3.arc()
+                .innerRadius(0)
+                .outerRadius(radius);
+
+            var pie = d3.pie()
+                .sort(null)
+                .value(function (d) {
+                    return d.samples;
+                });
+
+            var pie = g.selectAll(".arc")
+                .data(pie(data));
+
+            pie.enter().append("path")
+                .attr("class", "arc")
+                .attr("id", function(d) { return "pie-" + d.data.range })
+                .attr("d", arc)
+                .style("fill", function (d, i) {
+                    return colors(d.data.range); //d.data.range
+                })
+                .attr("stroke", "white")
+                .attr("stroke-width", "1px")
+                .on("mouseover", function(d) {
+                    tooltip.style("display", null);
+                    $('#legend-aoo-'+ removeSpace(d.data.range)).addClass("underlineText");})
+                .on("mouseout", function(d) {
+                    tooltip.style("display", "none");
+                    $('#legend-aoo-'+ removeSpace(d.data.range)).removeClass("underlineText");})
+                .on("mousemove", function(d) {
+                    var xPosition = d3.mouse(this)[0] - 30;
+                    var yPosition = d3.mouse(this)[1] - 45;
+                    tooltip.attr("transform", "translate(" + xPosition + "," + yPosition + ")");
+                    tooltip.select("text").text(d.data.samples);
+                });
+
+            // legend
+
+            var legend = g.append("g")
+                .attr("font-size", "12px")
+                .attr("text-anchor", "start")
+                .selectAll("g")
+                .data(data.map(function(d) { return d.range }))
+                .enter().append("g")
+                .attr("transform", function(d, i) {
+                    return "translate("+ -450 + ","+ ((i * 18) - 125) + ")";
+                });
+
+            legend.append("rect")
+                .attr("x", width - 50)
+                .attr("width", 12)
+                .attr("height", 12)
+                .attr("fill", function(d, i) {
+                    return colors(d);
+                });
+
+            legend.append("text")
+                .attr("x", width - 30)
+                .attr("y", 12)
+                .attr("id", function(d) { return "legend-aoo-" + removeSpace(d); })
+                .text(function(d) {
+                    return d;
+                })
+                .attr("font-size", "14px");
+
+            // tooltip
+
+            var tooltip = g.append("g")
+                .attr("class", "graph-tooltip")
+                .style("display", "none");
+
+            tooltip.append("rect")
+                .attr("width", 45)
+                .attr("height", 30)
+                .attr("fill", "black");
+
+            tooltip.append("text")
+                .attr("x", 22.5)
+                .attr("dy", "1.2em")
+                .style("text-anchor", "middle")
+                .attr("font-size", "16px")
+                .attr("font-weight", "bold")
+                .attr("fill", 'white');
+
+            // title
+
+            g.append("text")
+                .attr("class", "race-chart-title")
+                .attr("x", -50)
+                .attr("y", -150)
+                .attr("font-size", "20px")
+                .attr("text-anchor", "middle")
+                .text("Age of Onset (range)");
+
+        }); //closes GET dataview/superindex_sex_graph callback
+    } //closes if window location == dataview/superindex
 });

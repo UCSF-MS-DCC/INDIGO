@@ -421,7 +421,7 @@ $(document).on("turbolinks:load", function(){
 
         var color = d3.scaleOrdinal()
             .domain(['Parkinsons_Disease', 'Multiple_Sclerosis', 'Myasthenia_Gravis', 'Amyotrophic_Lateral_Sclerosis', 'Control'])
-            .range(["#333399", "#6a58b1","#9880ca","#ad95d7","#c2abe4","#d7c1f1","#ebd8ff"]); //
+            .range(["#333399", "#6a58b1","#9880ca","#ad95d7","#c2abe4","#d7c1f1","#ebd8ff"]);
 
         g.append("g")
             .selectAll("g")
@@ -518,6 +518,8 @@ $(document).on("turbolinks:load", function(){
             })
             .attr("font-size", "14px");
 
+        // title
+
         g.append("text")
             .attr("class", "chart4-title")
             .attr("x", width / 2)
@@ -525,6 +527,8 @@ $(document).on("turbolinks:load", function(){
             .attr("font-size", "20px")
             .attr("text-anchor", "middle")
             .text("KIR genotyping");
+
+        //tooltip
 
         var tooltip = g.append("g")
             .attr("class", "graph-tooltip")
