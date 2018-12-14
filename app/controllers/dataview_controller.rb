@@ -60,13 +60,13 @@ class DataviewController < ApplicationController
     set_min = Sample.where(disease:@dis).where.not(age_of_onset:nil).pluck(:age_of_onset).uniq.min
     set_max = Sample.where(disease:@dis).where.not(age_of_onset:nil).pluck(:age_of_onset).uniq.max
     min_age = set_min
-    max_age = min_age % 5 == 0 ? min_age + 5 : min_age + (5 - (min_age % 5))
+    max_age = min_age % 10 == 0 ? min_age + 10 : min_age + (10 - (min_age % 10))
 
     output = []
     while min_age < set_max
       output.push({:range => "#{min_age} - #{max_age}", :samples => Sample.where(disease:@dis).where("age_of_onset >= ?", min_age).where("age_of_onset <= ?", max_age).count })
       min_age = max_age + 1
-      max_age = max_age + 5
+      max_age = max_age + 10
     end
     if Sample.where(disease:@dis).where(age_of_onset:nil).count > 0
       output.push({:range => "NA", :samples => Sample.where(disease:@dis).where(age_of_onset:nil).count})
