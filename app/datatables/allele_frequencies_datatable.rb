@@ -20,12 +20,11 @@ class AlleleFrequenciesDatatable
     allele_frequencies.map do |f|
 
       [
+          f.collaborator.name,
+          f.disease,
           f.locus,
           f.genotype,
-          f.frequency,
-          f.disease,
-          f.collaborator.name
-
+          f.frequency
       ]
     end
   end
