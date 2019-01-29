@@ -3,6 +3,7 @@ class Sample < ApplicationRecord
   validates :collaborator_id, presence: true
   has_one :hla
   has_one :kir
+  has_one :nmo_clinical
   has_many :kir_genotype_wips
   has_many :gwas_samples
   has_many :gwas, through: :gwas_samples
@@ -10,6 +11,7 @@ class Sample < ApplicationRecord
   belongs_to :collaborator
   before_create :set_default_fields
   before_destroy :destroy_hla_and_kir
+  before_destroy :destroy_clinical_models
   has_paper_trail
 
   def self.to_csv
@@ -98,6 +100,12 @@ class Sample < ApplicationRecord
       self.kir.destroy
     end
 
+  end
+
+  def destroy_clinical_models
+    if self.nmo_clinical
+      self.nmo_clinical.destroy
+    end
   end
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180530235337) do
+ActiveRecord::Schema.define(version: 20190129174046) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -197,6 +197,14 @@ ActiveRecord::Schema.define(version: 20180530235337) do
     t.text     "KIR2DP1"
     t.text     "KIR3DL3"
     t.date     "raw_data_at_ucsf"
+  end
+
+  create_table "nmo_clinicals", force: :cascade do |t|
+    t.integer  "sample_id"
+    t.string   "anti_aqp4_antibodies"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.index ["sample_id"], name: "index_nmo_clinicals_on_sample_id"
   end
 
   create_table "notes", force: :cascade do |t|

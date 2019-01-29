@@ -198,33 +198,33 @@ $(document).on("turbolinks:load", function() {
                   "columns": [0, ':visible']
               }
           }
-      ],
-      "columns": [
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }},
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }},
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }},
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }},
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }},
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }},
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }},
-          {"render": function(data, type, row, meta) {
-                  return data;
-              }}
       ]
+      // "columns": [
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }},
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }},
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }},
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }},
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }},
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }},
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }},
+      //     {"render": function(data, type, row, meta) {
+      //             return data;
+      //         }}
+      // ]
   });
 
   var hlas_superindex_table = $('#hlas-superindex-table').DataTable({

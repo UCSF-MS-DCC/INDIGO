@@ -21,7 +21,7 @@ class SampleSuperindexDatatable
     def data
       samples.map do |sample|
         source = sample.collaborator ? sample.collaborator.name : "-"
-        [
+        entry = [
           sample.indigo_id,
           source,
           sample.sample_source_identifier,
@@ -31,6 +31,12 @@ class SampleSuperindexDatatable
           sample.age_of_onset,
           sample.age_at_sample
         ]
+        if @disease == 'NMO' && sample.nmo_clinical
+          entry.push(sample.nmo_clinical.anti_aqp4_antibodies)
+        elsif @disease == 'NMO'
+          entry.push('NA')
+        end
+        entry
       end
     end
 
