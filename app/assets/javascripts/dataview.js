@@ -199,32 +199,6 @@ $(document).on("turbolinks:load", function() {
               }
           }
       ]
-      // "columns": [
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }},
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }},
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }},
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }},
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }},
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }},
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }},
-      //     {"render": function(data, type, row, meta) {
-      //             return data;
-      //         }}
-      // ]
   });
 
   var hlas_superindex_table = $('#hlas-superindex-table').DataTable({
@@ -461,7 +435,7 @@ $(document).on("turbolinks:load", function() {
   if(window.location.pathname == '/dataview/superindex') {
       $.get('/dataview/superindex_race_graph.json'+'?disease[]='+superindex_disease, function(data) {
           console.log("DATA:", data);
-          var margin = {left:0, right:25, top:0, bottom:25}
+          var margin = {left:0, right:25, top:0, bottom:25};
           var width = 475 - margin.left - margin.right;
           var height = 350 - margin.top - margin.bottom;
 

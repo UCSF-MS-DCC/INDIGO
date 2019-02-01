@@ -46,6 +46,8 @@ class DataviewController < ApplicationController
     @dis = /,/.match(dataview_params[:disease][0]) ? dataview_params[:disease][0].split(",") : dataview_params[:disease]
     longform_names = {:F => "Female", :M => "Male"}
     sexes = Sample.where(disease:@dis).where.not(gender:nil).pluck(:gender).uniq
+    sexes = sexes.map(&:downcase)
+    sexes.uniq!
     output = sexes.map { |s|
         {:sex => longform_names[s.to_sym], :samples => Sample.where(disease:@dis).where(gender:s).count}
     }
