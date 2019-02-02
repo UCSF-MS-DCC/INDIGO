@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190129174046) do
+ActiveRecord::Schema.define(version: 20190202004259) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -204,6 +204,8 @@ ActiveRecord::Schema.define(version: 20190129174046) do
     t.string   "anti_aqp4_antibodies"
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+    t.string   "anti_mog_igg_ab"
+    t.text     "notes"
     t.index ["sample_id"], name: "index_nmo_clinicals_on_sample_id"
   end
 

@@ -39,6 +39,7 @@ class DataviewController < ApplicationController
     if Sample.where(disease:@dis).where(race:nil).count > 0
       output.push({:race => 'NA', :samples => Sample.where(disease:@dis).where(race:nil).count})
     end
+    puts output
     render json: output, status: :ok
   end
 
