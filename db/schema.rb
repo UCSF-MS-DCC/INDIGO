@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190202004259) do
+ActiveRecord::Schema.define(version: 20190206222338) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -155,6 +155,8 @@ ActiveRecord::Schema.define(version: 20190202004259) do
     t.string   "dpb1_phase_ambiguities"
     t.string   "version"
     t.text     "original_data_source"
+    t.string   "drb345_1"
+    t.string   "drb345_2"
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
   end
 
