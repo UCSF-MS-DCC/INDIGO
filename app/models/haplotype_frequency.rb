@@ -1,0 +1,2 @@
+class HaplotypeFrequency < ApplicationRecord
+end

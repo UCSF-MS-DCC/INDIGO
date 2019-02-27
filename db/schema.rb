@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190206222338) do
+ActiveRecord::Schema.define(version: 20190227232215) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -126,6 +126,24 @@ ActiveRecord::Schema.define(version: 20190206222338) do
     t.datetime "updated_at", null: false
     t.integer  "sample_id"
     t.integer  "gwas_id"
+  end
+
+  create_table "haplotype_frequencies", force: :cascade do |t|
+    t.string   "allele1"
+    t.string   "allele2"
+    t.string   "allele3"
+    t.string   "allele4"
+    t.string   "allele5"
+    t.string   "allele6"
+    t.decimal  "frequency",  precision: 6, scale: 3
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.string   "source"
+    t.string   "pmid_ref"
+    t.string   "race"
+    t.string   "ethnicity"
+    t.string   "disease"
+    t.integer  "total_n"
   end
 
   create_table "hlas", force: :cascade do |t|
