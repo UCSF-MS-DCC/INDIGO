@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190301211934) do
+ActiveRecord::Schema.define(version: 20190301220313) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -244,6 +244,7 @@ ActiveRecord::Schema.define(version: 20190301211934) do
     t.string   "histological_dx_hyperplasic_thymus"
     t.string   "histological_dx_thymoma"
     t.string   "mg_type"
+    t.string   "thymectomy_new"
     t.index ["sample_id"], name: "index_mg_clinicals_on_sample_id"
   end
 
