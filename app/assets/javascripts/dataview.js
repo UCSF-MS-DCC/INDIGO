@@ -406,6 +406,24 @@ $(document).on("turbolinks:load", function() {
         }
     });
 
+    var haplotype_frequencies_table = $('#haplotype-frequencies-table').DataTable({
+        "autoWidth":false,
+        "pageLength":100,
+        "bServerSide":true,
+        "bProcessing":true,
+        "bPaginate":true,
+        "ajax":{"url":'/dataview/haplotype_frequencies_data.json', "data": function(d) { d.disease = superindex_disease } },
+        "pagingType":"full_numbers",
+        "paging":false,
+        "lengthMenu":[10,25,50,100,250,1000],
+        "scrollX":true,
+        "scrollCollapse":true,
+        "fixedColumns":{
+            "leftColumns":3,
+            "rightColumns":0
+        }
+    });
+
   var tables = {
     "samples-index-table":samples_index_table,
     "hlas-index-table":hlas_index_table,

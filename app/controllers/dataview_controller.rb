@@ -211,6 +211,14 @@ class DataviewController < ApplicationController
     end
   end
 
+  def haplotype_frequencies
+
+  end
+
+  def haplotype_frequencies_data
+# pass the haplotype scope as a second parameter to the Datatable instantiation
+  end
+
   def samples_to_json
     @samples = Sample.where(sample_source: current_user.affiliation)
     render json: @samples

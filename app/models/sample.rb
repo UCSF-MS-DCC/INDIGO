@@ -4,6 +4,7 @@ class Sample < ApplicationRecord
   has_one :hla
   has_one :kir
   has_one :nmo_clinical
+  has_one :mg_clinical
   has_many :kir_genotype_wips
   has_many :gwas_samples
   has_many :gwas, through: :gwas_samples

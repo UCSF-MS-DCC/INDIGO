@@ -108,6 +108,10 @@ Rails.application.routes.draw do
 
   get 'dataview/allele_frequencies_data'
 
+  get 'dataview/haplotype_frequencies'
+
+  get 'dataview/haplotype_frequecies_data'
+
   get 'profiles/show'
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'

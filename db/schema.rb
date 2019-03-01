@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190227232215) do
+ActiveRecord::Schema.define(version: 20190301172609) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -217,6 +217,34 @@ ActiveRecord::Schema.define(version: 20190227232215) do
     t.text     "KIR2DP1"
     t.text     "KIR3DL3"
     t.date     "raw_data_at_ucsf"
+  end
+
+  create_table "mg_clinicals", force: :cascade do |t|
+      t.string   "achr"
+    t.string   "musk"
+    t.string   "lrp4"
+    t.string   "agrin"
+    t.string   "titin"
+    t.string   "netrin_1"
+    t.string   "caspr2"
+    t.string   "seronegative"
+    t.string   "anti_ache"
+    t.string   "steroid"
+    t.string   "immunosuppresant"
+    t.string   "biologicals"
+    t.string   "last_obs_anti_ache"
+    t.string   "last_obs_steroid"
+    t.string   "last_obs_immunosuppressant"
+    t.string   "last_obs_biologicals"
+    t.boolean  "thymectomy"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.integer  "sample_id"
+    t.string   "histological_dx_involuted_thymus"
+    t.string   "histological_dx_hyperplasic_thymus"
+    t.string   "histological_dx_thymoma"
+    t.string   "mg_type"
+    t.index ["sample_id"], name: "index_mg_clinicals_on_sample_id"
   end
 
   create_table "nmo_clinicals", force: :cascade do |t|

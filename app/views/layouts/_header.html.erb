@@ -57,6 +57,7 @@
                       <li><%= link_to "unaffected ms-related", dataview_superindex_path(disease:["Not MS - Unaffected - Related","Not MS - unaffected - related"]) %></li>
                       <li class="divider"></li>
                       <li><%= link_to "allele frequencies", dataview_allele_frequencies_path %></li>
+                      <li><%= link_to "haplotype frequencies", dataview_haplotype_frequencies_path %></li>
                     <% end %>
                     <% if current_user.has_role? :kir_bioinformatician %>
                       <li class="divider"></li>
