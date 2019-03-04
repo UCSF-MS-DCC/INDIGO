@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190301220313) do
+ActiveRecord::Schema.define(version: 20190304180032) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -236,7 +236,6 @@ ActiveRecord::Schema.define(version: 20190301220313) do
     t.string   "last_obs_steroid"
     t.string   "last_obs_immunosuppressant"
     t.string   "last_obs_biologicals"
-    t.string   "thymectomy"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.integer  "sample_id"
