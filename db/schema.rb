@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190304180650) do
+ActiveRecord::Schema.define(version: 20190305005050) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -300,6 +300,8 @@ ActiveRecord::Schema.define(version: 20190304180650) do
     t.integer  "collaborator_id"
     t.string   "gwas_name"
     t.text     "gwas_url"
+    t.text     "notes"
+    t.boolean  "exclude"
     t.index ["batch_id"], name: "index_samples_on_batch_id"
     t.index ["collaborator_id"], name: "index_samples_on_collaborator_id"
   end
