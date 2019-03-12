@@ -24,13 +24,13 @@ class CollaboratorStatusDatatable
           c.disease,
           c.expected_discovery,
           c.samples.count,
-          c.samples.where("gender is not null or race is not null or ethnicity is not null").count,
+          c.samples.where("gender is not null or race is not null or ethnicity is not null or age_of_onset is not null or disease is not null").count,
           c.samples.where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
-          c.samples.where(hla_geno:true).where(disease:"HC").count,
-          c.samples.where(hla_geno:true).where.not(disease:"HC").count,
+          c.samples.where(hla_geno:true).where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count,
+          c.samples.where(hla_geno:true).where.not(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count,
           c.samples.where(kir_raw:true).count,
-          c.samples.where(kir_geno:true).where(disease:"HC").count,
-          c.samples.where(kir_geno:true).where.not(disease:"HC").count
+          c.samples.where(kir_geno:true).where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count,
+          c.samples.where(kir_geno:true).where.not(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count
 
         ]
         arr
