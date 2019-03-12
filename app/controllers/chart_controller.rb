@@ -24,7 +24,7 @@ class ChartController < ApplicationController
     data.push({:diagnosis => "MS", :HLA_genotypes_available => @samples.where(disease:["MS", "MS - Confirmed", "MS - reported"]).where(hla_geno: true).count,
               :samples_sent_to_sequencing_lab => @samples.where(disease:["MS", "MS - Confirmed", "MS - reported"]).where(hla_geno: false).count})
     data.push({:diagnosis => "Control", :HLA_genotypes_available => @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(hla_geno: true).count,
-              :samples_sent_to_sequencing_lab => @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(hla_geno: true).count})
+              :samples_sent_to_sequencing_lab => @samples.where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse", "Not MS"]).where(hla_geno: false).count})
     render json: data, status: :ok
   end
 
