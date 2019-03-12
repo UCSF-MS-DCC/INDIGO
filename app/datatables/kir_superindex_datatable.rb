@@ -56,7 +56,7 @@ class KirSuperindexDatatable
       kirs = Kir.where(sample_id:samples).order("#{sort_column} #{sort_direction}")
       kirs = kirs.paginate(:page => page, :per_page => per_page) #per_page == limit(value) page == offset
       term = params[:search][:value]
-      term = term.to_s.downcase
+      term = term.to_s
       if params[:search][:value].present?
         kirs = kirs.where('indigo_id like :search or "KIR2DL1" like :search or "KIR2DL2" like :search or "KIR2DL3" like :search or "KIR2DL4" like :search or "KIR2DL5A" like :search or "KIR2DL5B" like :search or "KIR2DP1" like :search or "KIR2DS1" like :search or "KIR2DS2" like :search or "KIR2DS3" like :search or "KIR2DS4" like :search or "KIR2DS5" like :search or "KIR3DL1" like :search or "KIR3DL2" like :search or "KIR3DL3" like :search or "KIR3DS1" like :search', search:"%#{term}%")
       end
