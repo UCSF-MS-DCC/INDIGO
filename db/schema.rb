@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190305005050) do
+ActiveRecord::Schema.define(version: 20190321184959) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -176,6 +176,29 @@ ActiveRecord::Schema.define(version: 20190305005050) do
     t.string   "drb345_1"
     t.string   "drb345_2"
     t.index ["sample_id"], name: "index_hlas_on_sample_id"
+  end
+
+  create_table "kir2019s", force: :cascade do |t|
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "sample_id"
+    t.string   "indigo_id"
+    t.string   "kir2dl4_1"
+    t.string   "kir2dl4_2"
+    t.string   "kir2dl4_status"
+    t.string   "kir2dl23_1"
+    t.string   "kir2dl23_2"
+    t.string   "kir2dl23_status"
+    t.string   "kir3dl1s1_1"
+    t.string   "kir3dl1s1_2"
+    t.string   "kir3dl1s1_status"
+    t.string   "kir3dl2_1"
+    t.string   "kir3dl2_2"
+    t.string   "kir3dl2_status"
+    t.string   "kir3dl3_1"
+    t.string   "kir3dl3_2"
+    t.string   "kir3dl3_status"
+    t.index ["sample_id"], name: "index_kir2019s_on_sample_id"
   end
 
   create_table "kir_genotype_wips", force: :cascade do |t|

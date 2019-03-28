@@ -3,6 +3,7 @@ class Sample < ApplicationRecord
   validates :collaborator_id, presence: true
   has_one :hla
   has_one :kir
+  has_one :kir2019
   has_one :nmo_clinical
   has_one :mg_clinical
   has_many :kir_genotype_wips
@@ -100,12 +101,18 @@ class Sample < ApplicationRecord
     if self.kir
       self.kir.destroy
     end
+    if self.kir2019
+      self.kir2019.destroy
+    end
 
   end
 
   def destroy_clinical_models
     if self.nmo_clinical
       self.nmo_clinical.destroy
+    end
+    if self.mg_clinical
+      self.mg_clinical.destroy
     end
   end
 
