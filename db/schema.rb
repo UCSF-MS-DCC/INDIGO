@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190321184959) do
+ActiveRecord::Schema.define(version: 20190328205511) do
 
   create_table "allele_frequencies", force: :cascade do |t|
     t.string   "locus"
@@ -315,7 +315,7 @@ ActiveRecord::Schema.define(version: 20190321184959) do
     t.integer  "batch_id"
     t.integer  "age_of_onset"
     t.boolean  "hla_geno"
-    t.boolean  "kir_geno"
+    t.boolean  "pre_2019_kir_geno"
     t.boolean  "kir_raw"
     t.string   "sample_source"
     t.string   "date_to_stanford"
