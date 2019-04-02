@@ -187,7 +187,7 @@ class DataviewController < ApplicationController
   def kir_superindex
     disease = params[:disease]
     respond_to do |format|
-      format.json { render json: KirSuperindexDatatable.new(view_context, disease) }
+      format.json { render json: KirV2SuperindexDatatable.new(view_context, disease) }
     end
   end
 
