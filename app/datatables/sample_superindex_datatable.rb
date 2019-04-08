@@ -40,7 +40,7 @@ class SampleSuperindexDatatable
         entry
       end
     end
-sfe
+
     def samples
       @samples ||= fetch_samples
     end
