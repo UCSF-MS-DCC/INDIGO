@@ -29,7 +29,8 @@ class SampleSuperindexDatatable
           sample.gender,
           sample.race,
           sample.age_of_onset,
-          sample.age_at_sample
+          sample.age_at_sample,
+          sample.pre_2019_kir_geno
         ]
         if @disease == 'NMO' && sample.nmo_clinical
           entry.push(sample.nmo_clinical.anti_aqp4_antibodies)
@@ -39,7 +40,7 @@ class SampleSuperindexDatatable
         entry
       end
     end
-
+sfe
     def samples
       @samples ||= fetch_samples
     end
