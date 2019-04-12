@@ -85,6 +85,23 @@ class Sample < ApplicationRecord
     end
   end
 
+  def update_hla_geno_status
+    if self.hla && self.hla_geno == false
+      self.update_attributes(hla_geno:true)
+    end
+    if !self.hla && self.hla_geno == true
+      self.update_attributes(hla_geno:false)
+    end
+  end
+
+  def update_kir_geno_status
+    if self.kir2019 && self.kir_geno == false
+      self.update_attributes(kir_geno:true)
+    end
+    if !self.kir2019 && self.kir_geno == true
+      self.update_attributes(kir_geno:false)
+    end
+  end
   private
 
   def set_default_fields
@@ -115,5 +132,6 @@ class Sample < ApplicationRecord
       self.mg_clinical.destroy
     end
   end
+
 
 end
