@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass', '~> 3.3.6'
-gem 'devise'
+gem 'devise', '>= 4.6.0'
 gem 'cancancan'
 gem 'rolify'
 gem 'rails_admin', '>= 1.3.0'
