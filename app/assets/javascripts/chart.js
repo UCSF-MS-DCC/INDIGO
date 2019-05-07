@@ -76,7 +76,7 @@ $(document).on("turbolinks:load", function(){
 //
 //     }); // closes jquery get call
     // END CHART 1
-
+if (window.location.pathname === '/chart/processing') {
     // BEGIN CHART 2
     $.get('/chart/index_panel_two_data.json', function(data) {
 
@@ -229,7 +229,7 @@ $(document).on("turbolinks:load", function(){
             .attr("font-weight", "bold")
             .attr("fill", 'white');
 
-    }); // closes jquery get call
+    }); // closes ajax callback function
     // END CHART 2
 
     // BEGIN CHART 3
@@ -385,7 +385,7 @@ $(document).on("turbolinks:load", function(){
             .attr("font-weight", "bold")
             .attr("fill", 'white');
 
-    }); // closes jquery get call
+    }); // closes ajax callback function
     // END CHART 3
 
     // BEGIN CHART 4
@@ -546,9 +546,9 @@ $(document).on("turbolinks:load", function(){
             .attr("font-size", "16px")
             .attr("font-weight", "bold")
             .attr("fill", 'white');
-    }); // closes jquery get call
+    }); // closes ajax callback function
     // END CHART 4
-
+}
 });
 
 

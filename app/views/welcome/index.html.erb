@@ -1,79 +1,47 @@
 
-<div>
-<div id="myCarousel" class="carousel slide" data-ride="carousel">
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" role="listbox">
-    <div class="item active">
-      <div class ="container">
-        <br>
-        <p class='text-justify common_text'>
-          The overall goal of the The Immunogenetics of Neurological DIseases working GrOup (INDIGO) is to understand the  determinants of disease risk in neurological diseases such as multiple sclerosis, Parkinson's disease, schizophrenia, neuromyelitis optica, and myasthenia gravis. We will use next generation sequencing (NGS) along with a massive sample collection to characterize the HLA and KIR genes and alleles that make an individual susceptible to these central nervous system diseases.
-        </p>
-        <br>
-        <p class='text-justify common_text'>
-          To achieve our goals, we have assembled a multi-disciplinary international team that brings together complementary expertise (immuno- and neuro-genetics, clinical, and computational) and a remarkable track record of productivity to carry out a study of broad scope and depth. Through this collaboration, we will leverage rich and informative datasets exceeding 15,000 study participants (cases) and connect genetics with CNS disease utilizing advanced molecular and bio-informatics tools.
-        </p>
-        <br>
-        <p class='text-justify common_text'>
-           We believe the isolation of definite HLA-KIR associations with the risk of neuroinflammation and neurodegeneration could be transformative by revealing fundamental insights about primary disease mechanisms.
-        </p>
-        <br>
-        <h5 class="text-center footer_header">This project has been made possible by the National Institute of Health (1 U19 AI119350-01, HLA and KIR Region Genomics in Immune-Mediated Diseases - UCSF & Stanford University).</h5>
-      </div>
+<div class="container animated fadeIn welcome-contain content-body">
+  <div class="row">
+    <div class="col-md-12" style="border-top:1px solid #696969;">
+      <ul style="list-style:none;padding-top: 5px;">
+        <li style="float:right;padding-left:10px;"><%= link_to "Abstract", welcome_abstract_path %></li>
+        <li style="float:right;padding-left:10px;"><%= link_to "About", root_path, :style => "font-weight:bold; color:#320b59;" %></li>
+      </ul>
     </div>
-
-    <div class="item">
-      <div class="container">
-        <br>
-        <div class="row">
-          <div id="myPieChart" class="col-sm-6"></div>
-          <div id="myPieChart2" class="col-sm-6"></div>
-        </div>
-      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <br>
+      <div style="display:inline;float:right; margin-left:20px;padding:5px;background-color:white;border:1px solid #bdbdbd" id="EurPieChart"></div>
+      <p class='text-justify common_text'>
+        &nbsp;&nbsp;&nbsp;The overall goal of the <strong>The Immunogenetics of Neurological DIseases working GrOup (INDIGO)</strong> is to understand the determinants of disease risk in neurological diseases such as multiple sclerosis, 
+        Parkinson's disease, schizophrenia, neuromyelitis optica, and myasthenia gravis. We will use next generation sequencing (NGS) along with a massive sample collection to characterize the HLA and KIR genes and alleles 
+        that make an individual susceptible to these central nervous system diseases.
+      </p>
+      <br>
+      <p class='text-justify common_text'>
+        &nbsp;&nbsp;To achieve our goals, we have assembled a multi-disciplinary international team that brings together complementary expertise (immuno- and neuro-genetics, clinical, and computational) and a remarkable track record 
+        of productivity to carry out a study of broad scope and depth. Through this collaboration, we will leverage rich and informative datasets exceeding 15,000 study participants (cases) and connect genetics with CNS disease 
+        utilizing advanced molecular and bio-informatics tools.
+      </p>
+      <div style="display:inline;float:left;margin-right:20px;padding:5px; background-color:white;border:1px solid #bdbdbd" id="NonEurPieChart"></div>
+      <br>
+      <p class='text-justify common_text'>
+         &nbsp;&nbsp;&nbsp;We believe the isolation of definite HLA-KIR associations with the risk of neuroinflammation and neurodegeneration could be transformative by revealing fundamental insights about primary disease mechanisms.
+      </p>
+      <br>
+      <h5 class="text-justify grant-credit">This project has been made possible by the National Institute of Health (1 U19 AI119350-01, HLA and KIR Region Genomics in Immune-Mediated Diseases - UCSF & Stanford University).</h5>
     </div>
-
-    <div class="item">
-      <div class="container">
-        </br>
-        <div class="row">
-          <div class="col-md-4 col-xs-2"></div>
-          <div id="sankeybasic" class="col-md-4 col-xs-8"></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="item">
-      <div class="container">
-        </br>
-        <div class="row">
-          <div id="world_map"></div>
-        </div>
-      </div>
-    </div>
-
-  <!-- Left and right controls -->
-  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
+  </div>
 </div>
+<script>
 
 
-<script type="text/javascript">
 
-  google.charts.load('current', {packages: ['corechart', 'sankey', 'geochart']});
+  google.charts.load('current', {packages: ['corechart']});
 
   google.charts.setOnLoadCallback(drawEurPieChart);
 
   google.charts.setOnLoadCallback(drawNonEurPieChart);
-
-  google.charts.setOnLoadCallback(drawSankeyChart);
-
-  google.charts.setOnLoadCallback(drawUSMap);
 
   function drawEurPieChart() {
     // Define the chart to be drawn.
@@ -81,32 +49,31 @@
     data.addColumn('string', 'Element');
     data.addColumn('number', 'Percentage');
     data.addRows([
-      ["Parkinson's Disease", 3300],
       ["Schizophrenia", 5050],
       ["Neuromyelitis Optica", 1025],
-      ["Myasthenia Gravis", 950],
       ["Multiple Sclerosis", 2000],
-      ["Healthy Control", 1000]
+      ["Healthy Control", 1000],
+      ["Parkinson's Disease", 3300],
+      ["Myasthenia Gravis", 950],
+      ["Amyotrophic Lateral Sclerosis", 1852]
     ]);
 
     var options = {
-      title: "European Study Participants",
+      backgroundColor: 'white',
+      title: "Proposed European Study Participants",
       is3D: true,
-      pieSliceText: "none",
-      colors:['#EE1289','#2E37FE','#B0171F','#24D330','#320b59','orange'],
-      pieStartAngle: '30',
-      chartArea:{left:0,top:50,width:'100%',height:'100%'},
-      height:'400',
+      pieSliceText: "value",
+      pieStartAngle: '0',
+      chartArea:{left:0,top:20,width:'100%',height:'100%'},
       width:'500',
-      legend: {position:'labeled', textStyle: {fontSize:16}},
-      titleTextStyle: {fontSize:20}
+      height:'300',
+      legend: {position:'labeled', textStyle: {fontSize:12}},
+      titleTextStyle: {fontSize:14}
     }
     // Instantiate and draw the chart.
-    var chart = new google.visualization.PieChart(document.getElementById('myPieChart'));
+    var chart = new google.visualization.PieChart(document.getElementById('EurPieChart'));
     chart.draw(data, options);
   }
-
-
 
   function drawNonEurPieChart() {
     // Define the chart to be drawn.
@@ -121,94 +88,20 @@
     ]);
 
     var options = {
-      title: "Non-European Study Participants",
+      title: "Proposed non-European Participants",
       is3D: true,
-      pieSliceText: "none",
-      pieSliceTextStyle: {color:'black', size:'16'},
-      colors:['#2E37FE','#B0171F','#320b59','orange'],
-      pieStartAngle: '30',
-      chartArea:{left:0,top:50,width:'100%',height:'100%'},
-      height:'400',
+      pieSliceText: "value",
+      pieSliceTextStyle: {color:'white', size:'20'},
+      pieStartAngle: '0',
+      chartArea:{left:0,top:20,width:'100%',height:'100%'},
       width:'500',
-      legend: {position:'labeled', textStyle: {fontSize:16, color:'black'}},
-      titleTextStyle: {fontSize:20}
+      height:'300',
+      legend: {position:'labeled', textStyle: {fontSize:12, color:'black'}},
+      titleTextStyle: {fontSize:14}
     }
     // Instantiate and draw the chart.
-    var chart = new google.visualization.PieChart(document.getElementById('myPieChart2'));
+    var chart = new google.visualization.PieChart(document.getElementById('NonEurPieChart'));
     chart.draw(data, options);
   }
 
-  function drawSankeyChart() {
-    var data = new google.visualization.DataTable();
-    data.addColumn('string', 'From');
-    data.addColumn('string', 'To');
-    data.addColumn('number', 'Weight');
-    data.addRows([
-      [ 'KIR2DL1', 'HLA-C', 5 ],
-      [ 'KIR2DL2/3', 'HLA-C', 5 ],
-      [ 'KIR2DL2/3', 'HLA-B', 5 ],
-      [ 'KIR2DS1', 'HLA-C', 5 ],
-      [ 'KIR2DS2', 'HLA-C', 5 ],
-      [ 'KIR2DS2', 'HLA-B', 5 ],
-      [ 'KIR2DS2', 'HLA-A', 5 ],
-      [ 'KIR3DL1/S1', 'HLA-B', 5 ],
-      [ 'KIR3DL1/S1', 'HLA-A', 5],
-      [ 'KIR2DS4', 'HLA-C', 5],
-      [ 'KIR2DS4', 'HLA-A', 5],
-      [ 'KIR3DL2', 'HLA-A', 5]
-    ]);
-
-    var colors = ['#a6cee3', '#b2df8a', '#fb9a99', '#fdbf6f',
-              '#cab2d6', '#ffff99', '#1f78b4', '#33a02c'];
-
-    // Sets chart options.
-    var options = {
-      width: '400',
-      height: '400',
-      sankey: {
-        node: {
-          colors: colors,
-          nodePadding: '10',
-          labelPadding: '0'
-        },
-        link: {
-          colorMode: 'gradient',
-          colors: colors
-        }
-      },
-      tooltip:null
-    };
-
-    // Instantiates and draws our chart, passing in some options.
-    var sankeychart = new google.visualization.Sankey(document.getElementById('sankeybasic'));
-    sankeychart.draw(data, options);
-  }
-
-  // google.charts.load('upcoming', {packages:['geochart']});
-  // google.charts.setOnLoadCallback(drawUSMap);
-
-  function drawUSMap() {
-
-    var data = google.visualization.arrayToDataTable([
-      ['City', 'Participants'],
-      ['UCSF', 3900],
-      ['Michael J Fox Foundation, New York, NY', 1500],
-      ['University of Miami', 500],
-      ['Guthy-Jackson Foundation, San Diego, CA', 600],
-      ['Mayo Clinic, Rochester, MN', 380],
-      ['National Institute of Mental Health, Rockville, MD', 1500],
-      ['University of Texas-Southwestern, Dallas, TX', 200]
-    ]);
-
-    var options = {
-      region: 'US',
-      displayMode: 'markers',
-      colorAxis: {colors: ['red', 'blue']},
-      height: '400'
-    };
-
-    var usmapchart = new google.visualization.GeoChart(document.getElementById('world_map'));
-    usmapchart.draw(data, options);
-  }
 </script>
-</div>

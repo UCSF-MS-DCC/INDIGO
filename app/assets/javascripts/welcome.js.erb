@@ -51,7 +51,6 @@ $(document).on("turbolinks:load", function(){
   });
 
   var collaborator = $('#collaborator-name').text();
-  // console.log(collaborator)
 
   var site_sample_status_table = $('#site-samples-progress-table').DataTable({
     "autoWidth":false,
@@ -100,7 +99,11 @@ $(document).on("turbolinks:load", function(){
       }
     } //close footerCallback definition
   });
+  if (window.location.pathname === '/welcome/progress') {
+    collaborator_status_table.columns.adjust().draw();
+  }
+  if (window.location.pathname === '/welcome/dataset') {
+    site_sample_status_table.columns.adjust().draw();
+  }
 
-  collaborator_status_table.columns.adjust().draw();
-  site_sample_status_table.columns.adjust().draw();
 });

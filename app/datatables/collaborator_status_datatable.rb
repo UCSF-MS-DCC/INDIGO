@@ -38,13 +38,13 @@ class CollaboratorStatusDatatable
     end
 
     def collaborators
-      @collaborators ||= fetch_collaborators
+      collaborators ||= fetch_collaborators
     end
 
     def fetch_collaborators
-      collaborators = Collaborator.where.not(disease:"SCZD").order("#{sort_column} #{sort_direction}")
-      collaborators = collaborators.paginate(:page => page, :per_page => per_page)
-      collaborators
+      collabs = Collaborator.where.not(disease:"SCZD").order("#{sort_column} #{sort_direction}")
+      collabs = collabs.paginate(:page => page, :per_page => per_page)
+      collabs
     end
 
     def page

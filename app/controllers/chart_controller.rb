@@ -1,5 +1,5 @@
 class ChartController < ApplicationController
-  def index
+  def processing
     if !current_user
       redirect_to root_path
     end

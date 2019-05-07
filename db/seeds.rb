@@ -11,78 +11,80 @@
 # # KirGenotypeWip.create({"status": "pending incorporation with results from other methods", "method": "PING_haplocaller", "kir_extracted_directory": "/home/common_arse/INDIGO/2_KIR_runs_extracted/indigo_plates1-4_extracted_8-5-17/", "genotype": "KIR3DL1*002+KIR3DL1*0040101", "raw_data_directory": "/home/common_arse/INDIGO/1_INDIGO_plates1-4_KIR_runs/INDIGO_1/IND00001-30675053/Data/Intensities/BaseCalls/", "output_directory": "/home/common_arse/INDIGO/3_PING_output/ping_haplo_validation/", "method_version": "v1.0", "batch": "ping_haplo_validation", "locus": "3DL1"})
 # # KirGenotypeWip.create({"status": "pending incorporation with results from other methods", "method": "PING", "kir_extracted_directory": "/home/common_arse/INDIGO/2_KIR_runs_extracted/indigo_plates1-4_extracted_8-5-17/", "genotype": "KIR3DL1*00401+KIR3DL1*002", "raw_data_directory": "/home/common_arse/INDIGO/1_INDIGO_plates1-4_KIR_runs/INDIGO_1/IND00001-30675053/Data/Intensities/BaseCalls/", "output_directory": "/home/common_arse/INDIGO/3_PING_output/indigo_plates1-4_Results_8-5-17/caller_results_9-26-17/KIRcaller/", "method_version": "v1.0", "batch": "indigo_plates1-4", "locus": "3DL1"})
 #
-# sites = [Faker::StarWars.specie, Faker::StarWars.specie, Faker::StarWars.specie]
-# sites.each do |site_name|
-#   Collaborator.create(name:site_name, location:Faker::StarWars.planet)
-# end
-#
-# 200.times do
-#   id = "INDIGO#{Faker::Number.between(10000,99999)}"
-#   study_no = Faker::Number.between(0,2)
-#
-#   @sample = Sample.new(indigo_id:id,
-#                        sample_source_study: sites[study_no],
-#                        sample_source_identifier: "#{sites[study_no]}#{Faker::Number.between(10000,99999)}",
-#                        received_date: Faker::Date.between(4.years.ago, 1.years.ago),
-#                        disease:["HC", "HC", "HC", "MS", "PD", "MG", "NMO"][Faker::Number.between(0,6)],
-#                        gender:["F","M"][Faker::Number.between(0,1)],
-#                        age_at_sample:Faker::Number.between(25,70),
-#                        age_of_onset:Faker::Number.between(18,55),
-#                        date_to_stanford:Faker::Date.between(3.years.ago, Date.today),
-#                        race:["white", "african american", "asian", "native"][Faker::Number.between(0,3)],
-#                        collaborator_id:study_no,
-#                        hla_geno:true,
-#                        kir_geno:true,
-#                        kir_raw:true
-#                        )
-#   @sample.build_hla(indigo_id:id,
-#                    drb1_1:"DRB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    drb1_2:"DRB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dqb1_1:"DQB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dqb1_2:"DQB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dpb1_1:"DPB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dpb1_2:"DPB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    a_1:"A*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    a_2:"A*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    b_1:"B*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    b_2:"B*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    c_1:"C*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    c_2:"C*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dpa1_1:"DPA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dpa1_2:"DPA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dqa1_1:"DQA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    dqa1_2:"DQA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    drbo_1:"DRB4*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
-#                    drbo_2:"DRB3*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}")
-#
-#    @sample.build_kir(indigo_id:id,
-#                    KIR3DL2:"KIR3DL2*00#{Faker::Number.between(1,9)}",
-#                      KIR2DS5:"KIR2DS5*00#{Faker::Number.between(1,9)}",
-#                      KIR2DL4:"KIR2DL4*00#{Faker::Number.between(1,9)}",
-#                      KIR3DL1:"KIR3DL1*00#{Faker::Number.between(1,9)}",
-#                      KIR3DS1:"KIR3DS1*00#{Faker::Number.between(1,9)}",
-#                      KIR2DL1:"KIR2DL1*00#{Faker::Number.between(1,9)}",
-#                      KIR2DL2:"KIR2DL2*00#{Faker::Number.between(1,9)}",
-#                      KIR2DL3:"KIR2DL3*00#{Faker::Number.between(1,9)}",
-#                      KIR2DL5A:"KIR2DL5A*00#{Faker::Number.between(1,9)}",
-#                      KIR2DL5B:"KIR2DL5B*00#{Faker::Number.between(1,9)}",
-#                      KIR2DS1:"KIR2DS1*00#{Faker::Number.between(1,9)}",
-#                      KIR2DS2:"KIR2DS2*00#{Faker::Number.between(1,9)}",
-#                      KIR2DS3:"KIR2DS3*00#{Faker::Number.between(1,9)}",
-#                      KIR2DS4:"KIR2DS4*00#{Faker::Number.between(1,9)}",
-#                      KIR2DP1:"KIR2DP1*00#{Faker::Number.between(1,9)}",
-#                      KIR3DL3:"KIR3DL3*00#{Faker::Number.between(1,9)}",
-#                      raw_data_at_ucsf:true
-#                      )
-#   @sample.save
-#
-# end
-# samples = Sample.all.limit(10)
-# locus = "KIR2DL1"
-# method_versions = [Faker::Date.between(5.years.ago,4.years.ago),Faker::Date.between(4.years.ago,3.years.ago),Faker::Date.between(3.years.ago,2.years.ago)]
-#
-# samples.each do |sample|
-#   method_versions.each do |v|
-#     KirGenotypeWip.create(sample_id:sample.id,method_version:v,method:"PING",genotype:"#{locus}*#{Faker::Number.between(100,999)}",locus:locus, output_directory:"-", raw_data_directory:"-",kir_extracted_directory:"-")
-#   end
-# end
+# sites = [Faker::Ancient.titan, Faker::Ancient.titan, Faker::StarWars.specie]
+5.times do 
+  Collaborator.create(name:Faker::Ancient.titan, location:Faker::StarWars.planet)
+end
+
+1000.times do
+  id = "INDIGO#{Faker::Number.between(10000,99999)}"
+  study_no = Faker::Number.between(1,5)
+  ngs = ["HLA only", "HLA and KIR", "KIR only"][Faker::Number.between(0,2)]
+  has_hla = (Faker::Number.between(1,8) >= 2 && ngs != "KIR only") ? true : false
+  has_kir = (Faker::Number.between(1,8) >= 3 && ngs != "HLA only") ? true : false
+
+  @sample = Sample.new(indigo_id:id,
+                       sample_source_study: Collaborator.find(study_no).name,
+                       sample_source_identifier: "#{Collaborator.find(study_no).name}#{Faker::Number.between(100000,999999)}",
+                       received_date: Faker::Date.between(4.years.ago, 3.months.ago),
+                       disease:["HC", "MS", "PD", "MG", "NMO", "ALS"][Faker::Number.between(0,6)],
+                       gender:["F","M"][Faker::Number.between(0,1)],
+                       age_at_sample:Faker::Number.between(25,70),
+                       age_of_onset:Faker::Number.between(18,55),
+                       date_to_stanford:Faker::Date.between(3.years.ago, Date.today),
+                       race:["white", "african american", "asian", "native"][Faker::Number.between(0,3)],
+                       collaborator_id:study_no,
+                       ngs_dataset:ngs,
+                       hla_geno:has_hla,
+                       kir_geno:has_kir,
+                       kir_raw:has_kir
+                       )
+
+  if has_hla
+    @sample.build_hla(indigo_id:id,
+                    drb1_1:"DRB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    drb1_2:"DRB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dqb1_1:"DQB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dqb1_2:"DQB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dpb1_1:"DPB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dpb1_2:"DPB1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    a_1:"A*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    a_2:"A*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    b_1:"B*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    b_2:"B*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    c_1:"C*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    c_2:"C*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dpa1_1:"DPA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dpa1_2:"DPA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dqa1_1:"DQA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    dqa1_2:"DQA1*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    drbo_1:"DRB4*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    drbo_2:"DRB3*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    drb345_1:"DRB#{Faker::Number.between(3,5)}*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}",
+                    drb345_2:"DRB#{Faker::Number.between(3,5)}*#{Faker::Number.between(1,60)}:0#{Faker::Number.between(1,9)}"
+                    )
+
+    end
+    if has_kir
+      @sample.build_kir2019(indigo_id:id,
+                    kir2dl4_1:"KIR2DL4*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir2dl4_2:"KIR2DL4*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir2dl4_status:"resolved",
+                    kir2dl23_1:"KIR2DL23*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir2dl23_2:"KIR2DL23*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir2dl23_status:"resolved",
+                    kir3dl1s1_1:"KIR3DL1*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir3dl1s1_2:"KIR3DS1*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir3dl1s1_status:"resolved",
+                    kir3dl2_1:"KIR3DL2*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir3dl2_2:"KIR3DL2*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir3dl2_status:"resolved",
+                    kir3dl3_1:"KIR3DL3*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir3dl3_2:"KIR3DL3*00#{Faker::Number.between(1,5)}#{Faker::Number.between(0,3)}#{Faker::Number.between(1,9)}",
+                    kir3dl3_status:"resolved"
+                    )
+    end
+  @sample.save(validate:false)
+
+end
+

@@ -2,10 +2,10 @@ source 'https://rubygems.org'
 ruby "2.3.1"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
+gem 'rails', '5.0.0.1'
 # Use sqlite3 as the database for Active Record
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma', '>= 3.10.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'bootstrap-sass', '~> 3.3.6'
+gem 'bootstrap-sass', ' 3.3.7'
 gem 'devise', '>= 4.6.0'
 gem 'cancancan'
 gem 'rolify'
@@ -43,6 +43,7 @@ gem 'rspec_api_documentation'
 gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'whenever', :require => false
 gem 'paper_trail'
+gem 'paper_trail-association_tracking'
 gem 'bootstrap-table-rails'
 gem 'trix'
 gem 'bootstrap-datepicker-rails'

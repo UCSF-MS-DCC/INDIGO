@@ -6,7 +6,8 @@ class WelcomeController < ApplicationController
   end
 
   def progress
-    @collaborators = Collaborator.where.not(disease:"SCZD")
+    @collabs = Collaborator.where.not(disease:"SCZD")
+    puts @collabs.count
   end
 
   def new_progress
@@ -14,12 +15,13 @@ class WelcomeController < ApplicationController
 
   def site_samples_progress
     if params[:collaborator]
-      collaborator = Collaborator.find_by(name:params[:collaborator]).id
+      @collaborator_id = Collaborator.find_by(name:params[:collaborator]).id
     else
-      collaborator = nil
+      @collaborator_id = nil
     end
     respond_to do |format|
-      format.json { render json: SiteProgressDatatable.new(view_context, collaborator) }
+      format.json { render json: SiteProgressDatatable.new(view_context, @collaborator_id) }
+      puts "HI"
     end
   end
 

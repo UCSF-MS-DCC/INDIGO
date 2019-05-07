@@ -18,17 +18,7 @@
 //= require bootstrap
 //= require gritter
 //= require d3
-//= require bootstrap-table
+//
 //= require trix
 //= require bootstrap-datepicker
 //= require_tree .
-
-//spinner control
-$(document).on("turbolinks:click", function() {
-  $('.spinner').removeClass("hide-element");
-  $('.tab-content').addClass("hide-element");
-});
-$(document).on("turbolinks:load", function() {
-  $('.spinner').addClass("hide-element");
-  $('.tab-content').removeClass("hide-element");
-});
