@@ -22,10 +22,6 @@ class DataviewController < ApplicationController
         @disease_sym = dataview_params[:disease][0]
         @header_content = longform_names[@disease_sym.to_sym]
       end
-      # @samples = Sample.where(disease:@disease).order("indigo_id ASC")
-      # ids = @samples.pluck(:id)
-      # @hlas = Hla.where(sample_id:ids).order("indigo_id ASC")
-      # @kirs = Kir.where(sample_id:ids).order("indigo_id ASC")
     end
   end
 
@@ -136,14 +132,10 @@ class DataviewController < ApplicationController
     end
   end
 
-  def stacy
+  def sample_processing_status
     unless current_user.has_role? :superuser
       redirect_to root_path
     end
-    # respond_to do |format|
-    #   format.html
-    #   format.json { render json: SampleDatatable.new(view_context) }
-    # end
   end
 
   def sample_status
