@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby "2.3.1"
+ruby "2.3.3"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.0.1'
@@ -25,7 +25,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'bootstrap-sass', ' 3.3.7'
+gem 'bootstrap-sass', '3.4.1'
 gem 'devise', '>= 4.6.0'
 gem 'cancancan'
 gem 'rolify'
