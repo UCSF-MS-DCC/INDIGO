@@ -12,6 +12,8 @@ class DataviewController < ApplicationController
   def superindex
     if !current_user.has_role? :superuser
       redirect_to '/dataview#index'
+    elsif !dataview_params || !dataview_params[:disease]
+      @target = "unknown"
     else
       longform_names = { :PD => "Parkinson's Disease", :MS => "Multiple Sclerosis", :MG => "Myasthenia Gravis", :NMO => "Neuromyelitis Optica", :ALS => "Amyotrophic Lateral Sclerosis", :HC => "Unaffected Controls", :SCZD => "Schizophrenia", :'Not MS - Unaffected - Related' => "Unaffected MS-related", :PANS => "Pediatric Acute-onset Neuropsychiatric Syndrome" }
       if dataview_params[:disease].size == 1

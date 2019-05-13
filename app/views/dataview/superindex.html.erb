@@ -1,8 +1,25 @@
 <div class="container content-body">
+<% if @target == 'unknown'%>
   <div class="row">
-    <div class="col-lg-12">
+    <div class="col-lg-10">
+      <h1 class="center">Choose disease dataset</h1>
+    </div>
+        <div class="col-lg-2">
+      <div style="padding-top:20px;padding-bottom:20px;">
+        <%= render 'dataview/partials/disease_selector_menu'%>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="row">
+    <div class="col-lg-10">
       <h1 id="superindex-disease"><%= @header_content %></h1>
       <span id="disease-selector" style="display:none;"><%= @disease %></span>
+    </div>
+    <div class="col-lg-2">
+      <div style="padding-top:20px;padding-bottom:20px;">
+        <%= render 'dataview/partials/disease_selector_menu'%>
+      </div>
     </div>
   </div>
   <!-- nav tabs -->
@@ -20,5 +37,5 @@
     <%= render 'dataview/partials/hla_datatable' %>
     <%= render 'dataview/partials/kir_v2_datatable' %>
   </div> <!-- closes tab-content -->
-
+<% end %>
 </div> <!-- closes container -->

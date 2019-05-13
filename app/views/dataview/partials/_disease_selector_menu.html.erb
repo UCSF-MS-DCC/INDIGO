@@ -1,0 +1,20 @@
+<div class="dropdown">
+    <button class="btn btn-default dropdown-toggle" type="button" id="disease-dropdown-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="width:100%;">
+        Select disease
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="disease-dropdown-menu">
+        <li><%= link_to "amyotrophic lateral sclerosis", dataview_superindex_path(disease:["ALS"]) %></li>
+        <li><%= link_to "multiple sclerosis", dataview_superindex_path(disease:["MS"]) %></li>
+        <li><%= link_to "myasthenia gravis", dataview_superindex_path(disease:["MG"]) %></li>
+        <li><%= link_to "neuromyelitis optica", dataview_superindex_path(disease:["NMO"]) %></li>
+        <li><%= link_to "Parkinson's disease", dataview_superindex_path(disease:["PD"]) %></li>
+        <li><%= link_to "pediatric acute-onset neuropsychiatric syndrome", dataview_superindex_path(disease:["PANS"]) %></li>
+        <li class="divider"></li>
+        <li><%= link_to "unaffected control", dataview_superindex_path(disease:["HC","Not MS - Unaffected - Unrelated - Spouse"]) %></li>
+        <li><%= link_to "unaffected ms-related", dataview_superindex_path(disease:["Not MS - Unaffected - Related","Not MS - unaffected - related"]) %></li>
+        <li class="divider"></li>
+        <li><%= link_to "allele frequencies", dataview_allele_frequencies_path %></li>
+        <%# <li><%= link_to "haplotype frequencies", dataview_haplotype_frequencies_path </li> %>
+    </ul>
+</div>

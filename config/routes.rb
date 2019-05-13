@@ -87,5 +87,6 @@ Rails.application.routes.draw do
   # resources 'dataview', only: [:index]
 
   get 'nmdp_apis/test_gfe'
-
+  
+  get '*path', to: 'error#error_404', via: :all, as: 'error'
 end
