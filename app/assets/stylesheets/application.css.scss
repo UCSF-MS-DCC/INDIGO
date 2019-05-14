@@ -25,7 +25,7 @@
 /* to use, include as values to CSS properties */
 /* Google material design color palettes : https://material.google.com/style/color.html#color-color-palette */
 
-$indigo: #330099;  /* alternate: #320b59;  */
+$indigo: #320b59;  /* alternate: #320b59;  */
 $light-light-grey: #FAFAFA;
 $seashell: #EEE5DE;
 $navbar-grey: #F8F8F8;
@@ -52,10 +52,9 @@ body {
   background-color: $indigo;
 }
 #footer-spacer {
-  min-height:10px;
+  min-height:5px;
   background-color: #696969;
-  border-top:2px solid black;
-  border-bottom:2px solid $navbar-grey;
+  border-top:1px solid black;
 }
 .footer_header {
   color: white;
