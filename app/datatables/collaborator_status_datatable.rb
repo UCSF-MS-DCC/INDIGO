@@ -17,24 +17,30 @@ class CollaboratorStatusDatatable
   private
 
     def data
-      collaborators.map do |c|
-
-       arr = [
-          c.name,
-          c.disease,
-          c.expected_discovery,
-          c.samples.count,
-          c.samples.where("gender is not null or race is not null or ethnicity is not null or age_of_onset is not null or disease is not null").count,
-          c.samples.where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
-          c.samples.where(hla_geno:true).where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count,
-          c.samples.where(hla_geno:true).where.not(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count,
-          c.samples.where(kir_raw:true).count,
-          c.samples.where(kir_geno:true).where(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count,
-          c.samples.where(kir_geno:true).where.not(disease:["HC", "Not MS - Unaffected - Unrelated - Spouse"]).count
-
-        ]
-        arr
+      collection = []
+      collaborators.each do |c|
+      diags = c.samples.pluck(:disease).uniq 
+      sample_ids = c.samples.pluck(:id).uniq
+      diags.each do |d|
+        row = [
+            c.name,
+            d,
+            c.sequence_type,
+            c.samples.where(disease:d).count,
+            c.samples.where(disease:d).where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
+            c.samples.where(uploaded_to_immport:true).count,
+            c.samples.where(disease:d).where(hla_geno:true).count,
+            Hla.where(sample_id:sample_ids).where(uploaded_to_immport:true).count,
+            c.sequence_type == 'KIR only' ? 0 : c.samples.where(disease:d).where(hla_geno:false).count,
+            c.sequence_type == 'HLA only' ? 0 : c.samples.where(disease:d).where(kir_raw:true).count,
+            c.samples.where(disease:d).where(kir_geno:true).count,
+            Kir2019.where(sample_id:sample_ids).where(uploaded_to_immport:true).count,
+            c.samples.where(disease:d).where(kir_geno:false).where(kir_raw:true).count
+          ]
+          collection.push(row)
+        end
       end
+      collection
     end
 
     def collaborators

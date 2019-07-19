@@ -7,27 +7,30 @@ class WelcomeController < ApplicationController
 
   def progress
     @collabs = Collaborator.where.not(disease:"SCZD")
-    puts @collabs.count
   end
 
   def new_progress
   end
 
   def site_samples_progress
-    if params[:collaborator]
-      @collaborator_id = Collaborator.find_by(name:params[:collaborator]).id
-    else
-      @collaborator_id = nil
-    end
+    @collaborator_id = Collaborator.find_by(name:params[:collaborator]).id
     respond_to do |format|
       format.json { render json: SiteProgressDatatable.new(view_context, @collaborator_id) }
-      puts "HI"
     end
   end
 
   def collaborator_status
     respond_to do |format|
       format.json { render json: CollaboratorStatusDatatable.new(view_context) }
+    end
+  end
+
+  def immport
+  end
+
+  def immport_status_table_data
+    respond_to do |format|
+      format.json { render json: ImmportStatusDatatable.new(view_context) }
     end
   end
 

@@ -16,13 +16,13 @@ Rails.application.routes.draw do
     post 'v2/kir_pipeline'
   end
 
-  namespace :chart do
-    get 'processing'
-    get 'index_panel_one_data'
-    get 'index_panel_two_data'
-    get 'index_panel_three_data'
-    get 'index_panel_four_data'
-  end
+  # namespace :chart do
+  #   get 'processing'
+  #   get 'index_panel_one_data'
+  #   get 'index_panel_two_data'
+  #   get 'index_panel_three_data'
+  #   get 'index_panel_four_data'
+  # end
 
   get 'topics/index'
 
@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     get 'abstract'
     get 'progress'
     get 'samples_processed'
+    get 'immport'
+    get 'immport_status_table_data'
   end
 
   namespace :dataview do

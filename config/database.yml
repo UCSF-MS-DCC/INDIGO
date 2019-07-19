@@ -9,8 +9,8 @@ development:
   adapter: postgresql
   pool: 5
   timeout: 5000
-  database: indigo_dev
-  username: arenschen
+  database: indigo_dev_db
+  username: indigo_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

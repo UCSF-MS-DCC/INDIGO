@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190411221035) do
+ActiveRecord::Schema.define(version: 20190711174120) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -178,12 +178,14 @@ ActiveRecord::Schema.define(version: 20190411221035) do
     t.text     "original_data_source"
     t.string   "drb345_1"
     t.string   "drb345_2"
+    t.boolean  "uploaded_to_immport"
+    t.date     "immport_upload_date"
     t.index ["sample_id"], name: "index_hlas_on_sample_id", using: :btree
   end
 
   create_table "kir2019s", force: :cascade do |t|
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.integer  "sample_id"
     t.string   "indigo_id"
     t.string   "kir2dl4_1"
@@ -201,6 +203,8 @@ ActiveRecord::Schema.define(version: 20190411221035) do
     t.string   "kir3dl3_1"
     t.string   "kir3dl3_2"
     t.string   "kir3dl3_status"
+    t.boolean  "uploaded_to_immport"
+    t.date     "immport_upload_date"
     t.index ["sample_id"], name: "index_kir2019s_on_sample_id", using: :btree
   end
 
@@ -226,8 +230,8 @@ ActiveRecord::Schema.define(version: 20190411221035) do
     t.string   "KIR3DL2"
     t.string   "KIR2DS5"
     t.string   "KIR2DL4"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
     t.text     "KIR3DL1"
     t.text     "KIR3DS1"
     t.integer  "sample_id"
@@ -243,6 +247,8 @@ ActiveRecord::Schema.define(version: 20190411221035) do
     t.text     "KIR2DP1"
     t.text     "KIR3DL3"
     t.date     "raw_data_at_ucsf"
+    t.boolean  "uploaded_to_immport"
+    t.date     "immport_upload_date"
   end
 
   create_table "mg_clinicals", force: :cascade do |t|
@@ -329,6 +335,8 @@ ActiveRecord::Schema.define(version: 20190411221035) do
     t.string   "notes"
     t.boolean  "exclude"
     t.boolean  "kir_geno"
+    t.boolean  "uploaded_to_immport"
+    t.date     "immport_upload_date"
     t.index ["batch_id"], name: "index_samples_on_batch_id", using: :btree
     t.index ["collaborator_id"], name: "index_samples_on_collaborator_id", using: :btree
   end

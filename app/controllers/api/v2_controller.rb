@@ -3,13 +3,15 @@ class Api::V2Controller < ApplicationController
  # before_action :authenticate_user!
   before_action :set_page, except: [:kir_work_in_progress]
   protect_from_forgery with: :null_session, if: Proc.new {|c| c.request.format.json? }
-  #load_and_authorize_resource :sample, :parent => false
+  # load_and_authorize_resource :sample
   include Api::V2Helper
   before_action only:[:sample, :hla, :kir] do
     @samples = apply_query_filters(@samples, query_string_params)
   end
 
   def sample
+    @samples = Sample.all
+    @samples = apply_query_filters(@samples, query_string_params)
 
     if @samples && @samples.count > 0
       @samples = @samples.paginate(page:@current_page, per_page:500)
@@ -21,7 +23,8 @@ class Api::V2Controller < ApplicationController
   end
 
   def hla
-
+    @samples = Sample.all
+    @samples = apply_query_filters(@samples, query_string_params)
     genes = %w(a b c drb1 dqb1 dpb1 dpa1 dqa1 drbo)
     genes_to_serialize = {"a":false, "b":false, "c":false, "dpa1":false, "dqa1":false, "drb1":false, "dqb1":false, "dpb1":false, "drbo":false}
     serialize_all = true
@@ -50,7 +53,8 @@ class Api::V2Controller < ApplicationController
   end
 
   def kir
-
+    @samples = Sample.all
+    @samples = apply_query_filters(@samples, query_string_params)
     genes = %w(2dl1 2dl2 2dl3 2dl4 2dl5a 2dl5b 2dp1 2ds1 2ds2 2ds3 2ds4 2ds5 3dl1 3dl2 3dl3 3ds1)
     genes_to_serialize = {"kir_2DL1":false, "kir_2DL2":false, "kir_2DL3":false, "kir_2DL4":false, "kir_2DL5A":false, "kir_2DL5B":false, "kir_2DP1":false, "kir_2DS1":false, "kir_2DS2":false, "kir_2DS3":false, "kir_2DS4":false, "kir_2DS5":false, "kir_3DL1":false, "kir_3DL2":false, "kir_3DL3":false, "kir_3DS1":false}
     serialize_all = true

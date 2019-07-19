@@ -23,7 +23,7 @@ $(document).on("turbolinks:load", function(){
                 typeof i === 'number' ?
                     i : 0;
         };
-        for (var col = 3; col <= 10; col++) {
+        for (var col = 3; col <= 12; col++) {
         // Total over all pages
         total = api
             .column( col )
@@ -58,11 +58,11 @@ $(document).on("turbolinks:load", function(){
     "bServerSide":true,
     "bProcessing":true,
     "bPaginate":true,
-      "bInfo":false,
-    "ajax":'/welcome/site_samples_progress.json', "ajax":{"url":'/welcome/site_samples_progress.json', "data": function(d) { d.collaborator = collaborator } },
+    "bInfo":false,
+    "ajax":{"url":'/welcome/site_samples_progress.json', "data": function(d) { d.collaborator = collaborator } },
     "pagingType":"full_numbers",
     "paging":false,
-      "searching":false,
+    "searching":false,
     "lengthMenu":[10,25,50,100,250,1000],
     "footerCallback": function ( row, data, start, end, display ) {
         var api = this.api(), data;
@@ -74,7 +74,7 @@ $(document).on("turbolinks:load", function(){
                 typeof i === 'number' ?
                     i : 0;
         };
-        for (var col = 3; col <= 10; col++) {
+        for (var col = 3; col <= 11; col++) {
         // Total over all pages
         total = api
             .column( col )
@@ -99,11 +99,62 @@ $(document).on("turbolinks:load", function(){
       }
     } //close footerCallback definition
   });
+
+  var immport_status_table = $('#immport-status-table').DataTable({
+    "autoWidth":true,
+    "pageLength":25,
+    "bServerSide":true,
+    "bProcessing":true,
+    "bPaginate":true,
+      "bInfo":false,
+    "ajax":'/welcome/immport_status_table_data.json',
+    "pagingType":"full_numbers",
+    "paging":false,
+      "searching":false,
+    "lengthMenu":[10,25,50,100,250,1000],
+    "footerCallback": function ( row, data, start, end, display ) {
+        var api = this.api(), data;
+        // Remove the formatting to get integer data for summation
+        var intVal = function ( i ) {
+            return typeof i === 'string' ?
+                i.replace(/[\$,]/g, '')*1 :
+                typeof i === 'number' ?
+                    i : 0;
+        };
+        for (var col = 3; col <= 5; col++) {
+        // Total over all pages
+        total = api
+            .column( col )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Total over this page
+        pageTotal = api
+            .column( col, { page: 'current'} )
+            .data()
+            .reduce( function (a, b) {
+                return intVal(a) + intVal(b);
+            }, 0 );
+
+        // Update footer
+        $( api.column( col ).footer() ).html(
+            // '$'+pageTotal +' ( $'+ total +' total)'
+            pageTotal
+        );
+      }
+    } //close footerCallback definition
+
+  });
   if (window.location.pathname === '/welcome/progress') {
     collaborator_status_table.columns.adjust().draw();
   }
   if (window.location.pathname === '/welcome/dataset') {
     site_sample_status_table.columns.adjust().draw();
   }
+  <%# if (window.location.pathname === '/welcome/immport') {
+    immport_status_table.columns.adjust().draw();
+  } %>
 
 });

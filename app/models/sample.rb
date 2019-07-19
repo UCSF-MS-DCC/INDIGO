@@ -1,9 +1,9 @@
 class Sample < ApplicationRecord
   validates :indigo_id, uniqueness: true
   validates :collaborator_id, presence: true
-  has_one :hla
-  has_one :kir
-  has_one :kir2019
+  has_many :hla
+  has_many :kir
+  has_many :kir2019
   has_one :nmo_clinical
   has_one :mg_clinical
   has_many :kir_genotype_wips
