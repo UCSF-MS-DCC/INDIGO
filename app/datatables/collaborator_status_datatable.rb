@@ -28,7 +28,7 @@ class CollaboratorStatusDatatable
             c.sequence_type,
             c.samples.where(disease:d).count,
             c.samples.where(disease:d).where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
-            c.samples.where(uploaded_to_immport:true).count,
+            c.samples.where(uploaded_to_immport:true).where(disease:d).count,
             c.samples.where(disease:d).where(hla_geno:true).count,
             Hla.where(sample_id:sample_ids).where(uploaded_to_immport:true).count,
             c.sequence_type == 'KIR only' ? 0 : c.samples.where(disease:d).where(hla_geno:false).count,
