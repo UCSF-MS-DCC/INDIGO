@@ -38,7 +38,7 @@ class WelcomeController < ApplicationController
   end
 
   def dataset
-    @collaborators = Collaborator.all
+    @collaborators = Collaborator.all.reject { |c| c.samples.count < 1 }
     @collaborator = Collaborator.find(params[:collaborator_id])
   end
 
