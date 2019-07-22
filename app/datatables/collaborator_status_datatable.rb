@@ -22,6 +22,7 @@ class CollaboratorStatusDatatable
       diags = c.samples.pluck(:disease).uniq 
       sample_ids = c.samples.pluck(:id).uniq
       diags.each do |d|
+        @samples = c.samples.where(disease:d)
         row = [
             c.name,
             d,
@@ -30,11 +31,11 @@ class CollaboratorStatusDatatable
             c.samples.where(disease:d).where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
             c.samples.where(uploaded_to_immport:true).where(disease:d).count,
             c.samples.where(disease:d).where(hla_geno:true).count,
-            Hla.where(sample_id:sample_ids).where(uploaded_to_immport:true).count,
+            Hla.where(sample_id:@samples.pluck(:id)).where(uploaded_to_immport:true).count,
             c.sequence_type == 'KIR only' ? 0 : c.samples.where(disease:d).where(hla_geno:false).count,
             c.sequence_type == 'HLA only' ? 0 : c.samples.where(disease:d).where(kir_raw:true).count,
             c.samples.where(disease:d).where(kir_geno:true).count,
-            Kir2019.where(sample_id:sample_ids).where(uploaded_to_immport:true).count,
+            Kir2019.where(sample_id:@samples.pluck(:id)).where(uploaded_to_immport:true).count,
             c.samples.where(disease:d).where(kir_geno:false).where(kir_raw:true).count
           ]
           collection.push(row)
