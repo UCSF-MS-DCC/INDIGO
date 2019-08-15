@@ -30,5 +30,5 @@ production:
     password: <%= ENV["POSTGRES_PASSWORD"] %>
     database: deployment
     variables:
-      statement_timeout: 30000
+      statement_timeout: 60000
 
