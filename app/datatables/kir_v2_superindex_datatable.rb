@@ -29,18 +29,22 @@ class KirV2SuperindexDatatable
           kir.kir2dl4_1,
           kir.kir2dl4_2,
           kir.kir2dl4_status,
+          kir.v_ping_kir2dl4,
           kir.kir2dl23_1,
           kir.kir2dl23_2,
           kir.kir2dl23_status,
+          kir.v_ping_kir2dl23,
           kir.kir3dl1s1_1,
           kir.kir3dl1s1_2,
           kir.kir3dl1s1_status,
+          kir.v_ping_kir3dl1s1,
           kir.kir3dl2_1,
           kir.kir3dl2_2,
           kir.kir3dl2_status,
           kir.kir3dl3_1,
           kir.kir3dl3_2,
-          kir.kir3dl3_status
+          kir.kir3dl3_status,
+          kir.v_ping_kir3dl3
       ]
     end
   end
@@ -60,7 +64,8 @@ class KirV2SuperindexDatatable
     term = term.to_s
     if params[:search][:value].present?
       kirs = kirs.where('indigo_id like :search or "kir2dl4_1" like :search or "kir2dl4_2" like :search or "kir2dl4_status" like :search or "kir2dl23_1" like :search or "kir2dl23_2" like :search or "kir2dl23_status" like :search or "kir3dl1s1_1" like :search or "kir3dl1s1_2" like :search or "kir3dl1s1_status" like :search
-         or "kir3dl2_1" like :search or "kir3dl2_2" like :search or "kir3dl2_status" like :search or "kir3dl3_1" like :search or "kir3dl3_2" like :search or "kir3dl3_status" like :search', search:"%#{term}%")
+         or "kir3dl2_1" like :search or "kir3dl2_2" like :search or "kir3dl2_status" like :search or "kir3dl3_1" like :search or "kir3dl3_2" like :search or "kir3dl3_status" like :search or "v_ping_kir2dl4" like :search or "v_ping_kir2dl23" like :search or "v_ping_kir3dl1s1"
+         like :search or "v_ping_kir3dl3" like :search' , search:"%#{term}%")
     end
     kirs
   end

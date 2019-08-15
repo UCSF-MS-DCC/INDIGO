@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190711174120) do
+ActiveRecord::Schema.define(version: 20190815210446) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -205,6 +205,14 @@ ActiveRecord::Schema.define(version: 20190711174120) do
     t.string   "kir3dl3_status"
     t.boolean  "uploaded_to_immport"
     t.date     "immport_upload_date"
+    t.string   "v_ping_kir3dl1s1"
+    t.string   "v_ping_kir2dl23"
+    t.string   "v_ping_kir3dl3"
+    t.string   "v_ping_kir2ds35"
+    t.string   "v_ping_kir2dl5"
+    t.string   "v_ping_kir2dl4"
+    t.string   "v_ping_kir2dl1"
+    t.string   "v_ping_kir2ds4"
     t.index ["sample_id"], name: "index_kir2019s_on_sample_id", using: :btree
   end
 
