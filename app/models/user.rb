@@ -12,9 +12,9 @@ class User < ApplicationRecord
 
   before_validation :set_default_sent_approval_email, on: :create
 
-  after_create :send_welcome_message, :assign_default_role
+  after_create :assign_default_role
 
-  after_update :send_approved_message, if: :approved_and_not_notified?
+  after_update if: :approved_and_not_notified?
 
   has_many :notes
 

@@ -26,6 +26,9 @@ class KirV2SuperindexDatatable
       [
           kir.indigo_id,
           source,
+          kir.kir2dl1_1,
+          kir.kir2dl1_2,
+          kir.kir2dl1_status,
           kir.kir2dl4_1,
           kir.kir2dl4_2,
           kir.kir2dl4_status,

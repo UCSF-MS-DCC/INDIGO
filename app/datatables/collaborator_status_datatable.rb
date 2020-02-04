@@ -25,7 +25,6 @@ class CollaboratorStatusDatatable
         @samples = c.samples.where(disease:d)
         row = [
             c.name,
-            d,
             c.sequence_type,
             c.samples.where(disease:d).count,
             c.samples.where(disease:d).where.not(date_to_stanford:nil).where.not(date_to_stanford:"not sent yet").count,
