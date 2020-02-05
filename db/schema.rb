@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191022160221) do
+ActiveRecord::Schema.define(version: 20200205174558) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,52 +25,6 @@ ActiveRecord::Schema.define(version: 20191022160221) do
     t.datetime "updated_at",                              null: false
     t.decimal  "frequency",       precision: 4, scale: 3
     t.index ["collaborator_id"], name: "index_allele_frequencies_on_collaborator_id", using: :btree
-  end
-
-  create_table "batch_gwas", force: :cascade do |t|
-    t.integer  "batch_id"
-    t.integer  "gwas_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "batches", force: :cascade do |t|
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-    t.string   "disease"
-    t.string   "date_received_from_source"
-    t.string   "samples_sent_to_stanford"
-    t.integer  "dataset_id"
-    t.boolean  "to_stanford"
-    t.integer  "samples_control_male"
-    t.integer  "samples_control_female"
-    t.integer  "samples_control_gender_unknown"
-    t.integer  "samples_case_male"
-    t.integer  "samples_case_female"
-    t.integer  "samples_case_gender_unknown"
-    t.integer  "hlas_control_male"
-    t.integer  "hlas_control_female"
-    t.integer  "hlas_control_gender_unknown"
-    t.integer  "hlas_case_male"
-    t.integer  "hlas_case_female"
-    t.integer  "hlas_case_gender_unknown"
-    t.integer  "kirs_case_male"
-    t.integer  "kirs_case_female"
-    t.integer  "kirs_case_gender_unknown"
-    t.integer  "kirs_control_male"
-    t.integer  "kirs_control_female"
-    t.integer  "kirs_control_gender_unknown"
-    t.integer  "samples_unknown_disease_male"
-    t.integer  "samples_unknown_disease_female"
-    t.integer  "samples_unknown_disease_unknown_gender"
-    t.integer  "hlas_unknown_disease_male"
-    t.integer  "hlas_unknown_disease_female"
-    t.integer  "hlas_unknown_disease_unknown_gender"
-    t.integer  "kirs_unknown_disease_male"
-    t.integer  "kirs_unknown_disease_female"
-    t.integer  "kirs_unknown_disease_unknown_gender"
-    t.integer  "gwas_samples_count"
-    t.index ["dataset_id"], name: "index_batches_on_dataset_id", using: :btree
   end
 
   create_table "collaborators", force: :cascade do |t|
@@ -90,31 +44,6 @@ ActiveRecord::Schema.define(version: 20191022160221) do
     t.text     "fastq"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "datasets", force: :cascade do |t|
-    t.string   "source"
-    t.integer  "expected_discovery"
-    t.string   "disease"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.integer  "collaborator_id"
-    t.string   "population"
-    t.integer  "total_samples_male"
-    t.integer  "total_samples_female"
-    t.integer  "samples_male_cases"
-    t.integer  "samples_female_cases"
-    t.integer  "samples_male_controls"
-    t.integer  "samples_female_controls"
-    t.integer  "hla_available_male_controls"
-    t.integer  "hla_available_female_controls"
-    t.integer  "kir_available_male"
-    t.integer  "kir_available_female"
-    t.integer  "hla_available_male_cases"
-    t.integer  "hla_available_female_cases"
-    t.integer  "total_samples_sent_to_stanford"
-    t.integer  "total_samples"
-    t.index ["collaborator_id"], name: "index_datasets_on_collaborator_id", using: :btree
   end
 
   create_table "gwas", force: :cascade do |t|
@@ -332,7 +261,6 @@ ActiveRecord::Schema.define(version: 20191022160221) do
     t.datetime "updated_at",               null: false
     t.integer  "age_at_sample"
     t.string   "race"
-    t.integer  "batch_id"
     t.integer  "age_of_onset"
     t.boolean  "hla_geno"
     t.boolean  "pre_2019_kir_geno"
@@ -348,7 +276,7 @@ ActiveRecord::Schema.define(version: 20191022160221) do
     t.boolean  "kir_geno"
     t.boolean  "uploaded_to_immport"
     t.date     "immport_upload_date"
-    t.index ["batch_id"], name: "index_samples_on_batch_id", using: :btree
+    t.string   "aao_range"
     t.index ["collaborator_id"], name: "index_samples_on_collaborator_id", using: :btree
   end
 
@@ -417,14 +345,11 @@ ActiveRecord::Schema.define(version: 20191022160221) do
   end
 
   add_foreign_key "allele_frequencies", "collaborators"
-  add_foreign_key "batches", "datasets"
-  add_foreign_key "datasets", "collaborators"
   add_foreign_key "hlas", "samples"
   add_foreign_key "kir2019s", "samples"
   add_foreign_key "mg_clinicals", "samples"
   add_foreign_key "nmo_clinicals", "samples"
   add_foreign_key "notes", "users"
-  add_foreign_key "samples", "batches"
   add_foreign_key "tags", "notes"
   add_foreign_key "tags", "topics"
 end
